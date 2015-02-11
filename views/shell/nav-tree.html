@@ -1,0 +1,36 @@
+<div class="panel panel-default" ng-controller="pxShellNavTreeController">
+
+	<div class="panel-heading clearfix">
+
+        <div class="input-group input-group-xs">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                    <em class="glyphicon glyphicon-chevron-left"></em>
+                </button>
+            </span>
+            <input type="text" class="form-control" placeholder="Search menu...">
+            <!-- <span class="input-group-btn">
+                <button class="btn btn-default" type="button">
+                    <em class="glyphicon glyphicon-search"></em>
+                </button>
+            </span> -->
+        </div>
+	</div>
+
+        <abn-tree 
+        	tree-data="navigation_data" 
+        	expand-level="3"
+        	initial-selection="Kitchensink">
+        </abn-tree>
+	
+</div>
+<!-- <abn-tree 
+    tree-data         = "my_treedata"
+    tree-control      = "my_tree"
+    icon-leaf         = "icon-file"
+    icon-expand       = "icon-plus-sign"
+    icon-collapse     = "icon-minus-sign"
+    on-select         = "my_tree_handler(branch)"
+    expand-level      = "2"
+    initial-selection = "Vegetable">      
+></abn-tree> -->

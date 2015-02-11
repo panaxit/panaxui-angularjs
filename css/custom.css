@@ -1,0 +1,47 @@
+/**
+ * AngularUI Bootstrap
+ * CSS Initialization
+ * http://angular-ui.github.io/bootstrap/
+ */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+
+/** 
+ * Boostrap Input: XS size
+ * http://stackoverflow.com/questions/22920589/bootstrap-3-input-xs-smaller-than-sm 
+ */
+.input-xs {
+	height: 22px;
+	padding: 5px 5px;
+	font-size: 12px;
+	line-height: 1.5;
+	border-radius: 3px;
+}
+
+.input-group-xs>.form-control,
+.input-group-xs>.input-group-addon,
+.input-group-xs>.input-group-btn>.btn {
+    height: 22px;
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/**
+ * Panax Override
+ * Bootstrap Breadcrumb: 
+ *  - No margin-bottom
+ *  - Transparent BG
+ */
+.px-breadcrumb {
+	margin-bottom: 0;
+	background-color: transparent;
+}
+
+/**
+ * UI Grid dimensions
+ */
+.px-ui-grid {
+	width: 100%;
+	min-height: 400px;
+}
