@@ -13,28 +13,31 @@ angular
     // 'ngAnimate',
     'ngCookies',
     'ngResource',
-    'ngRoute',
     'ngSanitize',
     'ngTouch',
+    'ui.router',
     'ui.bootstrap',
     'angularBootstrapNavTree',
     'ui.grid.autoResize',
     'ui.grid.pagination'
   ])
-  .config(function ($routeProvider) {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+  .config(function ($stateProvider, $urlRouterProvider) {
+
+    $urlRouterProvider.otherwise('/');
+    
+    $stateProvider
+      .state('home', {
+          url: '/',
+          templateUrl: 'views/main.html',
+          controller: 'MainCtrl'
       })
-      .when('/login', {
-        templateUrl: 'views/login.html',
-        controller: 'LoginCtrl'
+      .state('login', { //logout?
+          url: '/login',
+          templateUrl: 'views/login.html',
+          controller: 'LoginCtrl'
       })
-      .when('/logout', {
-        controller: 'LogoutCtrl'
-      })
-      .otherwise({
-        redirectTo: '/'
+      .state('about', {
+          // we'll get to this in a bit       
       });
+      
   });
