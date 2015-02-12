@@ -1,21 +1,29 @@
 /**
+ * Yeoman Angular Defaults
+ */
+
+body {
+  padding: 0;
+  background-color: #eee;
+}
+
+/**
  * AngularUI Bootstrap
  * CSS Initialization
  * http://angular-ui.github.io/bootstrap/
  */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
-
 /** 
  * Boostrap Input: XS size
  * http://stackoverflow.com/questions/22920589/bootstrap-3-input-xs-smaller-than-sm 
  */
 .input-xs {
-	height: 22px;
-	padding: 5px 5px;
-	font-size: 12px;
-	line-height: 1.5;
-	border-radius: 3px;
+  height: 22px;
+  padding: 5px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
 }
 
 .input-group-xs>.form-control,
@@ -28,20 +36,39 @@
 }
 
 /**
+ * Search input clear
+ * http://stackoverflow.com/questions/20062218/how-do-i-clear-a-search-box-with-an-x-in-bootstrap-3
+ */
+/**#searchinput {
+    width: 180px;
+}**/
+#searchclear {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    bottom: 0;
+    height: 14px;
+    margin: auto;
+    font-size: 14px;
+    cursor: pointer;
+    color: #ccc;
+}
+
+/**
  * Panax Override
  * Bootstrap Breadcrumb: 
  *  - No margin-bottom
  *  - Transparent BG
  */
 .px-breadcrumb {
-	margin-bottom: 0;
-	background-color: transparent;
+  margin-bottom: 0;
+  background-color: transparent;
 }
 
 /**
  * UI Grid dimensions
  */
 .px-ui-grid {
-	width: 100%;
-	min-height: 400px;
+  width: 100%;
+  min-height: 400px;
 }
