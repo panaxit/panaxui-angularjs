@@ -8,7 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('MainCtrl', function($scope) {
+	.controller('MainCtrl', function MainCtrl($scope) {
 		$scope.menu = [{
 			label: 'SINCO',
 			children: [{
