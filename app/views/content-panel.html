@@ -1,7 +1,7 @@
 <div class="panel panel-primary">
 
 	<div class="panel-heading clearfix">
-		<h3 class="panel-title pull-left">Simple Grid</h3>
+		<h3 class="panel-title pull-left">Content Panel Title</h3>
 
 		<div class="btn-group btn-group-xs pull-right">
 			<button class="btn btn-primary" type="button"> <em class="glyphicon glyphicon-star-empty"></em>
@@ -19,56 +19,8 @@
 
 	<div class="panel-body">
 		
-		<tabset>
-
-			<tab heading="Tab 1">
-
-				<div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pagination class="px-ui-grid"></div>
-
-				<div class="text-center">
-
-					<div class="btn-group btn-group-md pagination">
-						<button class="btn btn-default" type="button"
-							ng-click="gridApi.pagination.seek(1)">
-							<em class="glyphicon glyphicon-step-backward"></em>
-							First
-						</button>
-						<button class="btn btn-default" type="button"
-							ng-click="gridApi.pagination.previousPage()">
-							<em class="glyphicon glyphicon-triangle-left"></em>
-							Prev
-						</button>
-						<button class="btn btn-default" type="button"
-							ng-repeat="p in getPage(gridApi.pagination.getTotalPages()) track by $index"
-							ng-click="gridApi.pagination.seek($index+1)"
-							ng-class="{ active : gridApi.pagination.getPage() == $index+1 }">
-							{{$index+1}}
-						</button>
-						<button class="btn btn-default" type="button"
-							ng-click="gridApi.pagination.nextPage()">
-							Next
-							<em class="glyphicon glyphicon-triangle-right"></em>
-						</button>
-						<button class="btn btn-default" type="button"
-							ng-click="gridApi.pagination.seek(gridApi.pagination.getTotalPages())">
-							<em class="glyphicon glyphicon-step-forward"></em>
-							Last
-						</button>
-					</div>
-					
-				</div>
-
-			</tab>
-
-			<tab heading="Tab 2">
-				<p>Howdy, I'm in Section 2.</p>
-			</tab>
-
-		</tabset>
-
-		<alert type="danger">
-			Warning! Better check yourself, you're not looking too good.
-		</alert>
+	    <!-- ui.router view -->
+	    <div ui-view></div>
 
 	</div>
 	<div class="panel-footer clearfix">

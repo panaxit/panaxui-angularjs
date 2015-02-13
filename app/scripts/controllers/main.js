@@ -8,31 +8,50 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('MainCtrl', function MainCtrl($scope) {
+	.controller('MainCtrl', function MainCtrl($scope, $state) {
+
+		$scope.showMenu = true;
+
 		$scope.menu = [{
-			label: 'SINCO',
-			children: [{
-				label: 'Catalogs'
-			}]
-		}, {
-			label: 'Kitchensink',
+			label: 'Kitchen Sink',
 			children: [{
 				label: 'Grids',
 				children: [{
-					label: 'Simple Grid'
+					label: 'Simple',
+					data: {
+						controlType: 'grid'
+					}
 				}]
 			}, {
 				label: 'Forms',
 				children: [{
-					label: 'Form: Basic Controls'
+					label: 'Basic Controls',
+					data: {
+						controlType: 'form'
+					}
 				}, {
-					label: 'Form: Advanced Controls'
+					label: 'Advanced Controls',
+					data: {
+						controlType: 'form'
+					}
+				}]
+			}, {
+				label: 'Relations',
+				children: [{
+					label: 'One-to-One: Nested Form',
+					data: {
+						controlType: 'form'
+					}
 				}, {
-					label: 'Form: Nested Grid (1-N)'
+					label: 'One-to-Many: Nested Grid',
+					data: {
+						controlType: 'form'
+					}
 				}, {
-					label: 'Form: Nested Form (1-1)'
-				}, {
-					label: 'Form: Cascaded Comboboxes'
+					label: 'Cascaded: Comboboxes',
+					data: {
+						controlType: 'form'
+					}
 				}]
 			}]
 		}];
@@ -42,109 +61,18 @@ angular.module('panaxuiApp')
 			children: $scope.menu
 		}];
 
-		$scope.gridOptions = {
-			paginationPageSizes: [5, 10, 25],
-			paginationPageSize: 5
-		};
+		$scope.currentNavBranch = 'Home';
 
-		$scope.gridOptions.onRegisterApi = function(gridApi) {
-			$scope.gridApi = gridApi;
-		};
+		$scope.treeHandler = function treeHandler(branch) {
+			$scope.currentNavBranch = branch;
 
-		$scope.getPage = function(num) {
-			return new Array(num);
+			if(branch.level === 1) {
+				$state.go('home');
+			} else if (branch.children && branch.children.length > 0) {
+				$state.go('home.category'); //todo Params name
+			} else {
+				$state.go('home.' + branch.data.controlType);
+			}
 		};
-
-		$scope.gridOptions.data = [{
-			'firstName': 'Cox',
-			'lastName': 'Carney',
-			'company': 'Enormo',
-			'employed': true
-		}, {
-			'firstName': 'Lorraine',
-			'lastName': 'Wise',
-			'company': 'Comveyer',
-			'employed': false
-		}, {
-			'firstName': 'Nancy',
-			'lastName': 'Waters',
-			'company': 'Fuelton',
-			'employed': false
-		}, {
-			'firstName': 'Cox',
-			'lastName': 'Carney',
-			'company': 'Enormo',
-			'employed': true
-		}, {
-			'firstName': 'Lorraine',
-			'lastName': 'Wise',
-			'company': 'Comveyer',
-			'employed': false
-		}, {
-			'firstName': 'Nancy',
-			'lastName': 'Waters',
-			'company': 'Fuelton',
-			'employed': false
-		}, {
-			'firstName': 'Cox',
-			'lastName': 'Carney',
-			'company': 'Enormo',
-			'employed': true
-		}, {
-			'firstName': 'Lorraine',
-			'lastName': 'Wise',
-			'company': 'Comveyer',
-			'employed': false
-		}, {
-			'firstName': 'Nancy',
-			'lastName': 'Waters',
-			'company': 'Fuelton',
-			'employed': false
-		}, {
-			'firstName': 'Cox',
-			'lastName': 'Carney',
-			'company': 'Enormo',
-			'employed': true
-		}, {
-			'firstName': 'Lorraine',
-			'lastName': 'Wise',
-			'company': 'Comveyer',
-			'employed': false
-		}, {
-			'firstName': 'Nancy',
-			'lastName': 'Waters',
-			'company': 'Fuelton',
-			'employed': false
-		}, {
-			'firstName': 'Cox',
-			'lastName': 'Carney',
-			'company': 'Enormo',
-			'employed': true
-		}, {
-			'firstName': 'Lorraine',
-			'lastName': 'Wise',
-			'company': 'Comveyer',
-			'employed': false
-		}, {
-			'firstName': 'Nancy',
-			'lastName': 'Waters',
-			'company': 'Fuelton',
-			'employed': false
-		}, {
-			'firstName': 'Cox',
-			'lastName': 'Carney',
-			'company': 'Enormo',
-			'employed': true
-		}, {
-			'firstName': 'Lorraine',
-			'lastName': 'Wise',
-			'company': 'Comveyer',
-			'employed': false
-		}, {
-			'firstName': 'Nancy',
-			'lastName': 'Waters',
-			'company': 'Fuelton',
-			'employed': false
-		}];
 
 	});

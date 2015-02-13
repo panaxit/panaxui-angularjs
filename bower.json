@@ -20,7 +20,8 @@
     "angular-bootstrap": "~0.12.0",
     "angular-bootstrap-nav-tree-nif": "*",
     "angular-ui-grid": "~3.0.0-rc.16",
-    "angular-ui-router": "~0.2.13"
+    "angular-ui-router": "~0.2.13",
+    "angular-breadcrumb": "~0.3.3"
   },
   "devDependencies": {
     "angular-mocks": "^1.3.0"

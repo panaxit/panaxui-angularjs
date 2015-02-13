@@ -4,7 +4,7 @@
 
         <div class="input-group">
             <span class="input-group-btn">
-                <button class="btn btn-default" type="button">
+                <button class="btn btn-default" type="button" ng-click="showMenu=false">
                     <em class="glyphicon glyphicon-chevron-left"></em>
                 </button>
             </span>
@@ -21,7 +21,8 @@
     <abn-tree 
     	tree-data="navigationData" 
     	expand-level="4"
-    	initial-selection="Kitchensink">
+        on-select = "treeHandler(branch)"
+    	initial-selection="Home">
     </abn-tree>
 	
 </div>

@@ -31,6 +31,7 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap-nav-tree-nif/dist/abn_tree_directive.js',
       'bower_components/angular-ui-grid/ui-grid.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
+      'bower_components/angular-breadcrumb/release/angular-breadcrumb.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
