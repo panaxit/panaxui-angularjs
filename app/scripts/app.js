@@ -22,14 +22,18 @@ angular
     'ui.grid.autoResize',
     'ui.grid.pagination'
   ])
+
   .config(function config($stateProvider, $urlRouterProvider, $breadcrumbProvider) {
 
+    // Fallback URL Route
     $urlRouterProvider.otherwise('/');
     
+    // Always show 'Home' root in breadcrumb
     $breadcrumbProvider.setOptions({
       prefixStateName: 'home'
     });
 
+    // Set up states
     $stateProvider
 
       .state('login', { //logout?
@@ -48,7 +52,7 @@ angular
       })
 
       .state('home.category', {
-          url: 'category',
+          url: 'category/{name}',
           templateUrl: 'views/category.html',
           controller: 'CategoryCtrl',
           ncyBreadcrumb: {
@@ -57,7 +61,7 @@ angular
       })
 
       .state('home.grid', {
-          url: 'grid',
+          url: 'grid/{catalogName}/{mode}',
           templateUrl: 'views/grid.html',
           controller: 'GridCtrl',
           ncyBreadcrumb: {
@@ -66,7 +70,7 @@ angular
       })
 
       .state('home.form', {
-          url: 'form',
+          url: 'form/{catalogName}/{mode}',
           templateUrl: 'views/form.html',
           controller: 'FormCtrl',
           ncyBreadcrumb: {
