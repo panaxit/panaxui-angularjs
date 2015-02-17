@@ -16,11 +16,9 @@ angular.module('panaxuiApp')
 			$scope.navMenu = NavMenu;
 			$scope.navMenuControl = {};
 
-			$scope.currentNavBranch = NavMenu.data;
-
 			$scope.goToRoute = function goToRoute(branch) {
+
 				$scope.navMenuControl.select_branch(branch);
-				$scope.currentNavBranch = branch;
 
 				if (branch.level === 1) {
 					$state.go('home');
@@ -29,7 +27,7 @@ angular.module('panaxuiApp')
 						name: urlify(branch.label)
 					});
 				} else {
-					$state.go('home.' + branch.data.controlType, branch.data);
+					$state.go('home.panel.' + branch.data.controlType, branch.data);
 				}
 			};
 
@@ -39,7 +37,7 @@ angular.module('panaxuiApp')
 					controller: 'DebugCtrl',
 					resolve: {
 						currentNavBranch: function() {
-							return $scope.currentNavBranch;
+							return $scope.navMenuControl.get_selected_branch();
 						}
 					}
 				});

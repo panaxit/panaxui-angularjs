@@ -57,27 +57,33 @@ angular
       .state('home.category', {
           url: 'category/{name}',
           templateUrl: 'views/shell/category.html',
-          //controller: 'CategoryCtrl',
           ncyBreadcrumb: {
-            label: 'Category: {{currentNavBranch.label}}'
+            label: '{{navMenuControl.get_selected_branch().label}}'
           }
       })
 
-      .state('home.grid', {
+      .state('home.panel', {
+          templateUrl: 'views/shell/panel.html',
+          ncyBreadcrumb: {
+            label: '{{navMenuControl.get_parent_branch(navMenuControl.get_selected_branch()).label}}'
+          }
+      })
+
+      .state('home.panel.grid', {
           url: 'grid/{catalogName}/{mode}',
           templateUrl: 'views/grid.html',
           controller: 'GridCtrl',
           ncyBreadcrumb: {
-            label: 'Grid: {{currentNavBranch.label}}'
+            label: '{{navMenuControl.get_selected_branch().label}}'
           }
       })
 
-      .state('home.form', {
+      .state('home.panel.form', {
           url: 'form/{catalogName}/{mode}',
           templateUrl: 'views/form.html',
           controller: 'FormCtrl',
           ncyBreadcrumb: {
-            label: 'Form: {{currentNavBranch.label}}'
+            label: '{{navMenuControl.get_selected_branch().label}}'
           }
       })
     ;

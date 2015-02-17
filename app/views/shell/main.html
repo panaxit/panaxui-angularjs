@@ -12,10 +12,12 @@
     <div class="main" ng-class="{'col-sm-9 col-md-10': showMenu, 'col-sm-12 col-md-12': !showMenu}">
 
     	<!-- Directive: breadcrumb -->
-      	<div breadcrumb ng-show="!showMenu"></div>
+      <div breadcrumb ng-show="!showMenu"></div>
 
-    	<!-- Directive: content-panel -->
-     	<div content-panel></div>
+      <!-- ui.router view -->
+      <div ui-view>
+        <ng-include src="'views/shell/home.html'"></ng-include>
+      </div>
 
     </div>
   </div>
