@@ -16,8 +16,11 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <!-- custom:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css" />
+    <link rel="stylesheet" href="bower_components/rainbow/themes/github.css" />
     <link rel="stylesheet" href="styles/login.css"> <!-- ToDo: @include css in main.css -->
+    <!-- endcustom -->
   </head>
   <body ng-app="panaxuiApp">
     <!--[if lt IE 7]>
@@ -57,7 +60,10 @@
     <script src="bower_components/angular-urlify/angular-urlify-filter.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
+    <!-- custom:css -->
+    <script src="bower_components/rainbow/js/rainbow.min.js"></script>
+    <script src="bower_components/rainbow/js/language/javascript.js"></script>
+    <!-- endcustom -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
@@ -71,6 +77,7 @@
         <script src="scripts/controllers/form.js"></script>
         <script src="scripts/controllers/category.js"></script>
         <script src="scripts/services/navmenu.js"></script>
+        <script src="scripts/controllers/debug.js"></script>
         <!-- endbuild -->
 </body>
 </html>
