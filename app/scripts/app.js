@@ -10,17 +10,20 @@
  */
 angular
   .module('panaxuiApp', [
-    // 'ngAnimate',
     'ngCookies',
     'ngResource',
     'ngSanitize',
     'ngTouch',
+    // 'ngAnimate',
     'ui.router',
+
     'ui.bootstrap',
     'angularBootstrapNavTree',
     'ncy-angular-breadcrumb',
     'ui.grid.autoResize',
-    'ui.grid.pagination'
+    'ui.grid.pagination',
+
+    'ngUrlify'
   ])
 
   .config(function config($stateProvider, $urlRouterProvider, $breadcrumbProvider) {
@@ -38,7 +41,7 @@ angular
 
       .state('login', { //logout?
           url: '/login',
-          templateUrl: 'views/login.html',
+          templateUrl: 'views/shell/login.html',
           controller: 'LoginCtrl'
       })
 
@@ -47,14 +50,14 @@ angular
           ncyBreadcrumb: {
             label: 'Home'
           },
-          templateUrl: 'views/main.html',
+          templateUrl: 'views/shell/main.html',
           controller: 'MainCtrl'
       })
 
       .state('home.category', {
           url: 'category/{name}',
-          templateUrl: 'views/category.html',
-          controller: 'CategoryCtrl',
+          templateUrl: 'views/shell/category.html',
+          //controller: 'CategoryCtrl',
           ncyBreadcrumb: {
             label: 'Category: {{currentNavBranch.label}}'
           }

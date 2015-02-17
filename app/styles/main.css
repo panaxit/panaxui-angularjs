@@ -72,3 +72,12 @@ body {
   width: 100%;
   min-height: 400px;
 }
+
+/**
+ * Thumbnails
+ */
+.px-thumbnail-icon {
+  height: 72px;
+  width: 72px;
+  cursor: pointer;
+}

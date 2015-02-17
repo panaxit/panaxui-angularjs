@@ -9,6 +9,6 @@
 angular.module('panaxuiApp')
 	.directive('header', function() {
 		return {
-			templateUrl: 'views/header.html'
+			templateUrl: 'views/shell/header.html'
 		};
 	});

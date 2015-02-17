@@ -9,6 +9,6 @@
 angular.module('panaxuiApp')
 	.directive('breadcrumb', function() {
 		return {
-			templateUrl: 'views/breadcrumb.html'
+			templateUrl: 'views/shell/breadcrumb.html'
 		};
 	});

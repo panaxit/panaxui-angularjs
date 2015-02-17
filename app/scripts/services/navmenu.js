@@ -2,22 +2,22 @@
 
 /**
  * @ngdoc service
- * @name panaxuiApp.navMenu
+ * @name panaxuiApp.NavMenu
  * @description
- * # navMenu
+ * # NavMenu
  * Service in the panaxuiApp.
  */
 angular.module('panaxuiApp')
-	.service('navMenu', function() {
+	.service('NavMenu', function() {
 		// AngularJS will instantiate a singleton by calling "new" on this function
-		var navMenu = this;
+		var NavMenu = this;
 
 		var menu = [{
 			label: 'Kitchen Sink',
 			children: [{
 				label: 'Grids',
 				children: [{
-					label: 'Simple',
+					label: 'Grid: Simple',
 					data: {
 						controlType: 'grid',
 						catalogName: 'dbo.Simple',
@@ -27,14 +27,14 @@ angular.module('panaxuiApp')
 			}, {
 				label: 'Forms',
 				children: [{
-					label: 'Basic Controls',
+					label: 'Form: Basic Controls',
 					data: {
 						controlType: 'form',
 						catalogName: 'dbo.Simple',
 						mode: 'edit'
 					}
 				}, {
-					label: 'Advanced Controls',
+					label: 'Form: Advanced Controls',
 					data: {
 						controlType: 'form',
 						catalogName: 'dbo.Advanced',
@@ -68,7 +68,7 @@ angular.module('panaxuiApp')
 			}]
 		}];
 
-		navMenu.data = [{
+		NavMenu.data = [{
 			label: 'Home',
 			children: menu
 		}];

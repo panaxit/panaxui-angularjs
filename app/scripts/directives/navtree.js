@@ -9,6 +9,6 @@
 angular.module('panaxuiApp')
 	.directive('navTree', function() {
 		return {
-			templateUrl: 'views/nav-tree.html'
+			templateUrl: 'views/shell/nav-tree.html'
 		};
 	});
