@@ -20,8 +20,9 @@
 
     <abn-tree 
     	tree-data="navMenu.data" 
+        tree-control="navMenuControl"
     	expand-level="4"
-        on-select = "treeHandler(branch)"
+        on-select = "goToRoute(branch)"
     	initial-selection="Home">
     </abn-tree>
 	

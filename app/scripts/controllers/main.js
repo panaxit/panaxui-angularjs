@@ -14,15 +14,14 @@ angular.module('panaxuiApp')
 			$scope.showMenu = true;
 
 			$scope.navMenu = NavMenu;
+			$scope.navMenuControl = {};
 
 			$scope.currentNavBranch = NavMenu.data;
 
-			$scope.treeHandler = function treeHandler(branch) {
-				$scope.currentNavBranch = branch;
-				$scope.goToRoute(branch);
-			};
-
 			$scope.goToRoute = function goToRoute(branch) {
+				$scope.navMenuControl.select_branch(branch);
+				$scope.currentNavBranch = branch;
+
 				if (branch.level === 1) {
 					$state.go('home');
 				} else if (branch.children && branch.children.length > 0) {
@@ -32,12 +31,9 @@ angular.module('panaxuiApp')
 				} else {
 					$state.go('home.' + branch.data.controlType, branch.data);
 				}
-
-				//branch.selected = true;
 			};
 
 			$scope.openDebugModal = function () {
-
 				var debugModalInstance = $modal.open({
 					templateUrl: 'views/shell/debug.html',
 					controller: 'DebugCtrl',
