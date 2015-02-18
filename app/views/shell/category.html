@@ -8,22 +8,18 @@
 
 </div>
 
-<div class="well well-lg">
-
-  <div class="row">
-    <div class="col-md-{{(navMenuControl.get_selected_branch().children.length<=12)?(12/navMenuControl.get_selected_branch().children.length):1}}" 
-          class="col-md-2" ng-repeat="child in navMenuControl.get_selected_branch().children">
-      <div class="thumbnail">
-        <a ng-click="goToRoute(child)">
-          <img ng-src="images/thumbnails/{{child.data.controlType || 'cards'}}.png" alt="{{child.label}}" class="px-thumbnail-icon">
-        </a>
-        <div class="caption text-center">
-          <button type="button" class="btn btn-default btn-md" ng-click="goToRoute(child)">
-            {{ child.label }}
-          </button>
-        </div>
+<div class="row">
+  <div class="col-md-{{(navMenuControl.get_selected_branch().children.length<=12)?(12/navMenuControl.get_selected_branch().children.length):1}}" 
+        class="col-md-2" ng-repeat="child in navMenuControl.get_selected_branch().children">
+    <div class="thumbnail">
+      <a ng-click="goToRoute(child)">
+        <img ng-src="images/thumbnails/{{child.data.controlType || 'cards'}}.png" alt="{{child.label}}" class="px-thumbnail-icon">
+      </a>
+      <div class="caption text-center">
+        <button type="button" class="btn btn-default btn-md" ng-click="goToRoute(child)">
+          {{ child.label }}
+        </button>
       </div>
     </div>
   </div>
-
 </div>
