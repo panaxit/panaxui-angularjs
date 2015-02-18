@@ -31,7 +31,7 @@ angular.module('panaxuiApp')
 				}
 			};
 
-			$scope.openDebugModal = function () {
+			$scope.openDebugModal = function openDebugModal() {
 				var debugModalInstance = $modal.open({
 					templateUrl: 'views/shell/debug.html',
 					controller: 'DebugCtrl',
@@ -42,9 +42,7 @@ angular.module('panaxuiApp')
 					}
 				});
 
-				debugModalInstance.result.then(function(/*selectedItem*/) {
-					//$scope.selected = selectedItem;
-				}, function() {
+				debugModalInstance.result.then(function() {
 					$log.info('Debug Modal dismissed at: ' + new Date());
 				});
 

@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: navMenu', function () {
+describe('Service: NavMenu', function () {
 
   // load the service's module
   beforeEach(module('panaxuiApp'));
 
   // instantiate service
-  var navMenu;
-  beforeEach(inject(function (_navMenu_) {
-    navMenu = _navMenu_;
+  var NavMenu;
+  beforeEach(inject(function (_NavMenu_) {
+    NavMenu = _NavMenu_;
   }));
 
-  it('should do something', function () {
-    expect(!!navMenu).toBe(true);
+  it('should get NavMenu', function () {
+    expect(!!NavMenu).toBe(true);
   });
 
 });
