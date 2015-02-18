@@ -8,19 +8,14 @@
  * Factory in the panaxuiApp.
  */
 angular.module('panaxuiApp')
-	.factory('NavMenu', ['$q', '$http', function($q, $http) {
-		// Service logic
-		var getData = function() {
-			var deferred = $q.defer();
-			$http.get("dummy/menu.json").then(function(response) {
-				deferred.resolve(response.data);
-			});
+	.factory('NavMenu', ['$resource', function($resource) {
 
-			return deferred.promise;
-		};
+		return $resource('dummy/menu.json', {}, {
+			query: {
+				method: 'GET',
+				params: {},
+				isArray: true
+			}
+		});
 
-		// Public API here
-		return {
-			getData: getData
-		};
 	}]);

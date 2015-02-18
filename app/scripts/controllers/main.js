@@ -20,13 +20,8 @@ angular.module('panaxuiApp')
 			// abn-tree data array
 			$scope.navMenuData = [{
 				label: 'Home',
-				children: []
+				children: NavMenu.query()
 			}];
-
-			// NavMenu service (factory) promise
-			NavMenu.getData().then(function(data) {
-				$scope.navMenuData[0].children = data;
-			});
 
 			// Change route (state) function
 			$scope.goToRoute = function goToRoute(branch) {
