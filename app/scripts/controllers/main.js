@@ -11,13 +11,25 @@ angular.module('panaxuiApp')
 	.controller('MainCtrl', ['$scope', '$state', '$log', '$modal', 'urlifyFilter', 'NavMenu',
 		function MainCtrl($scope, $state, $log, $modal, urlify, NavMenu) {
 
+			// Show menu toggle
 			$scope.showMenu = true;
 
-			$scope.navMenu = NavMenu;
+			// abn-tree control api object
 			$scope.navMenuControl = {};
 
-			$scope.goToRoute = function goToRoute(branch) {
+			// abn-tree data array
+			$scope.navMenuData = [{
+				label: 'Home',
+				children: []
+			}];
 
+			// NavMenu service (factory) promise
+			NavMenu.getData().then(function(data) {
+				$scope.navMenuData[0].children = data;
+			});
+
+			// Change route (state) function
+			$scope.goToRoute = function goToRoute(branch) {
 				$scope.navMenuControl.select_branch(branch);
 
 				if (branch.level === 1) {
@@ -31,6 +43,7 @@ angular.module('panaxuiApp')
 				}
 			};
 
+			// Debug modal "window"
 			$scope.openDebugModal = function openDebugModal() {
 				var debugModalInstance = $modal.open({
 					templateUrl: 'views/shell/debug.html',
@@ -45,8 +58,6 @@ angular.module('panaxuiApp')
 				debugModalInstance.result.then(function() {
 					$log.info('Debug Modal dismissed at: ' + new Date());
 				});
-
 			};
-
 		}
 	]);
