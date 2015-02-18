@@ -1,5 +1,8 @@
 # ToDo PanaxUI GUI - AngularJS
 
-# Nvigation
+# Navigation
 
-- angular-bootstrap-nav-tree should reflect (selected node) routing state
+- Breadcrumb should work well with Nav tree
+	- https://github.com/ncuillery/angular-breadcrumb/wiki/API-Reference#state-options
+		- parent
+		- url params

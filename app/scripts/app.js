@@ -65,7 +65,8 @@ angular
       .state('home.panel', {
           templateUrl: 'views/shell/panel.html',
           ncyBreadcrumb: {
-            label: '{{navMenuControl.get_parent_branch(navMenuControl.get_selected_branch()).label}}'
+            //label: '{{navMenuControl.get_parent_branch(navMenuControl.get_selected_branch()).label}}'
+            skip: true
           }
       })
 
