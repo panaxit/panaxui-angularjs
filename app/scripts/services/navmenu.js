@@ -66,6 +66,60 @@ angular.module('panaxuiApp')
 					}
 				}]
 			}]
+		}, {
+			label: 'Human Talent',
+			children: [{
+				label: 'Business Partners',
+				children: [{
+					label: 'Employees',
+					data: {
+						controlType: 'grid',
+						catalogName: 'HT.BP.Employee',
+						mode: 'edit'
+					}
+				}]
+			}, {
+				label: 'H.R. Management',
+				children: [{
+					label: 'Profiles',
+					data: {
+						controlType: 'grid',
+						catalogName: 'HT.HRM.Profiles',
+						mode: 'edit'
+					}
+				}, {
+					label: 'Logs',
+					data: {
+						controlType: 'grid',
+						catalogName: 'HT.HRM.Logs',
+						mode: 'edit'
+					}
+				}]
+			}, {
+				label: 'Reference Data',
+				children: [{
+					label: 'Cities',
+					data: {
+						controlType: 'grid',
+						catalogName: 'HT.RD.Cities',
+						mode: 'edit'
+					}
+				}, {
+					label: 'States',
+					data: {
+						controlType: 'grid',
+						catalogName: 'HT.RD.States',
+						mode: 'edit'
+					}
+				}, {
+					label: 'Countries',
+					data: {
+						controlType: 'grid',
+						catalogName: 'HT.RD.Countries',
+						mode: 'edit'
+					}
+				}]
+			}]
 		}];
 
 		NavMenu.data = [{
