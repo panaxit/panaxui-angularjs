@@ -33,6 +33,7 @@ module.exports = function(config) {
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-breadcrumb/release/angular-breadcrumb.js',
       'bower_components/angular-urlify/angular-urlify-filter.js',
+      'bower_components/angular-md5/angular-md5.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

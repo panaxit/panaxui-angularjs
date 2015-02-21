@@ -23,7 +23,8 @@ angular
     'ui.grid.autoResize',
     'ui.grid.pagination',
 
-    'ngUrlify'
+    'ngUrlify',
+    'angular-md5'
   ])
 
   .config(function config($httpProvider, $stateProvider, $urlRouterProvider, $breadcrumbProvider) {

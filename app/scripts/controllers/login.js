@@ -8,8 +8,8 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('LoginCtrl', ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService',
-		function LoginCtrl($scope, $rootScope, AUTH_EVENTS, AuthService) {
+	.controller('LoginCtrl', ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', 'md5',
+		function LoginCtrl($scope, $rootScope, AUTH_EVENTS, AuthService, md5) {
 
 			$scope.credentials = {
 				username: '',
@@ -17,7 +17,10 @@ angular.module('panaxuiApp')
 			};
 
 			$scope.login = function login(credentials) {
-				AuthService.login(credentials).then(function(user) {
+				AuthService.login({
+					username: credentials.username,
+					password: md5.createHash(credentials.password)
+				}).then(function(user) {
 					$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
 					$scope.setCurrentUser(user.data);
 				//}, function() {
