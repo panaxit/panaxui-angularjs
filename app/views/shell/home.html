@@ -1,8 +1,7 @@
 <div class="well well-lg">
 
 	<div class="page-header text-center">
-		<h1>Welcome to <strong>PanaxUI</strong>!</h1>
-		<h2> <strong>AngularJS</strong> flavor</h2>
+		<h1>Welcome to <strong>Panax</strong>!</h1>
 	</div>
 	<pre>
 		<strong>System information</strong>
@@ -15,10 +14,10 @@
 		<strong>User</strong>: sa
 		<br/>
 		<strong><u>PanaxUI</u></strong>
-		<strong>Host</strong>: 127.0.0.1:3000
-		<strong>API Version</strong>: panaxui-nodejs-0.0.1
-		<strong>GUI Version</strong>: panaxui-angularjs-0.0.1
-		<strong>User</strong>: webmaster
+		<strong>Host</strong>: 127.0.0.1:3000 {{currentUser.host}}
+		<strong>API</strong>: panaxui-nodejs-0.0.1 {{currentUser.api}}
+		<strong>GUI</strong>: panaxui-angularjs-0.0.1 {{currentUser.gui}}
+		<strong>User</strong>: {{currentUser.username}}
 	</pre>
 
 </div>

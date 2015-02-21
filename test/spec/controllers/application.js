@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: LoginCtrl', function () {
+describe('Controller: ApplicationCtrl', function () {
 
   // load the controller's module
   beforeEach(module('panaxuiApp'));
 
-  var LoginCtrl,
+  var ApplicationCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    LoginCtrl = $controller('LoginCtrl', {
+    ApplicationCtrl = $controller('ApplicationCtrl', {
       $scope: scope
     });
   }));

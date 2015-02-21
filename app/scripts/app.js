@@ -26,7 +26,15 @@ angular
     'ngUrlify'
   ])
 
-  .config(function config($stateProvider, $urlRouterProvider, $breadcrumbProvider) {
+  .config(function config($httpProvider, $stateProvider, $urlRouterProvider, $breadcrumbProvider) {
+
+    // Authentication interceptor
+    $httpProvider.interceptors.push([
+      '$injector',
+      function ($injector) {
+        return $injector.get('AuthInterceptor');
+      }
+    ]);
 
     // Fallback URL Route
     $urlRouterProvider.otherwise('/');
@@ -39,7 +47,7 @@ angular
     // Set up states
     $stateProvider
 
-      .state('login', { //logout?
+      .state('login', { //ToDo: logout route?
           url: '/login',
           templateUrl: 'views/shell/login.html',
           controller: 'LoginCtrl'
@@ -47,11 +55,14 @@ angular
 
       .state('home', {
           url: '/',
+          templateUrl: 'views/shell/main.html',
+          controller: 'MainCtrl',
+          data: {
+            authRequired: true
+          },
           ncyBreadcrumb: {
             label: 'Home'
-          },
-          templateUrl: 'views/shell/main.html',
-          controller: 'MainCtrl'
+          }
       })
 
       .state('home.category', {
@@ -88,5 +99,50 @@ angular
           }
       })
     ;
+  })
+
+  .constant('AUTH_EVENTS', {
+    loginSuccess: 'auth-login-success',
+    //loginFailed: 'auth-login-failed',
+    sessionTimeout: 'auth-session-timeout',
+    notAuthenticated: 'auth-not-authenticated',
+    logoutSuccess: 'auth-logout-success'
+  })
+  
+  .run(function ($rootScope, $state, AUTH_EVENTS, AuthService) {
+
+    $rootScope.$on('$stateChangeStart', function (event, next) {
+      if(next.data && next.data.authRequired) {
+        if (!AuthService.isAuthenticated()) {
+          event.preventDefault();
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+        }
+      }
+    });
+
+    $rootScope.$on('auth-login-success', function (event, next) {
+      console.info("#EVENT: auth-login-success");
+      $state.go("home");
+    });
+
+    //$rootScope.$on('auth-login-failed', function (event, next) {
+    //  console.info("#EVENT: auth-login-failed");
+    //});
+
+    $rootScope.$on('auth-session-timeout', function (event, next) {
+      console.info("#EVENT: auth-session-timeout");
+      $state.go("login");
+    });
+
+    $rootScope.$on('auth-not-authenticated', function (event, next) {
+      console.info("#EVENT: auth-not-authenticated");
+      $state.go("login");
+    });
+
+    $rootScope.$on('auth-logout-success', function (event, next) {
+      console.info("#EVENT: auth-logout-success");
+      $state.go("login");
+    });
+
   })
 ;

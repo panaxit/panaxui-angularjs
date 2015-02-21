@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="styles/login.css"> <!-- ToDo: @include css in main.css -->
     <!-- endcustom -->
   </head>
-  <body ng-app="panaxuiApp">
+  <body ng-app="panaxuiApp"  ng-controller="ApplicationCtrl">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -66,17 +66,20 @@
     <!-- endcustom -->
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/application.js"></script>
         <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/directives/header.js"></script>
-        <script src="scripts/directives/breadcrumb.js"></script>
-        <script src="scripts/directives/navtree.js"></script>
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/logout.js"></script>
+        <script src="scripts/controllers/debug.js"></script>
         <script src="scripts/controllers/grid.js"></script>
         <script src="scripts/controllers/form.js"></script>
         <script src="scripts/controllers/category.js"></script>
-        <script src="scripts/services/navmenu.js"></script>
-        <script src="scripts/controllers/debug.js"></script>
+        <script src="scripts/services/session.js"></script>
+        <script src="scripts/services/authservice.js"></script>
+        <script src="scripts/services/authinterceptor.js"></script>
+        <script src="scripts/directives/header.js"></script>
+        <script src="scripts/directives/breadcrumb.js"></script>
+        <script src="scripts/directives/navtree.js"></script>
         <!-- endbuild -->
 </body>
 </html>

@@ -8,8 +8,8 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('MainCtrl', ['$scope', '$state', '$log', '$modal', 'urlifyFilter', 'NavMenu',
-		function MainCtrl($scope, $state, $log, $modal, urlify, NavMenu) {
+	.controller('MainCtrl', ['$scope', '$state', '$log', '$modal', 'urlifyFilter', 'AuthService',
+		function MainCtrl($scope, $state, $log, $modal, urlify, AuthService) {
 
 			// Show menu toggle
 			$scope.showMenu = true;
@@ -20,12 +20,12 @@ angular.module('panaxuiApp')
 			// abn-tree data array
 			$scope.navMenuData = [{
 				label: 'Home',
-				children: NavMenu.query()
+				children: AuthService.sitemap().query()
 			}];
 
 			// Change route (state) function
-			$scope.goToRoute = function goToRoute(branch) {
-				$scope.navMenuControl.select_branch(branch);
+			$scope.goToRoute = function (branch) {
+				$scope.navMenuControl.select_branch(branch); // ToDo: Should be in routeChanged event
 
 				if (branch.level === 1) {
 					$state.go('home');
@@ -39,7 +39,7 @@ angular.module('panaxuiApp')
 			};
 
 			// Debug modal "window"
-			$scope.openDebugModal = function openDebugModal() {
+			$scope.openDebugModal = function () {
 				var debugModalInstance = $modal.open({
 					templateUrl: 'views/shell/debug.html',
 					controller: 'DebugCtrl',

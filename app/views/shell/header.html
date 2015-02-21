@@ -21,15 +21,14 @@
 
 			<ul class="nav navbar-nav navbar-right">
 
-				<li>
+				<!-- <li>
+			     <a href="#">Other</a>
+				</li> -->
 
-			      <a ui-sref="login">Logout</a>
-					
-				</li>
 			    <li dropdown is-open="status.isopen">
 
 			      <a href="#" class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-			        Username <span class="caret"></span>
+			        {{currentUser.username}} <span class="caret"></span>
 			      </a>
 			      <ul class="dropdown-menu" role="menu">
 						<li>
@@ -43,7 +42,7 @@
 						</li>
 						<li class="divider"></li>
 						<li>
-							<a href="#">Logout</a>
+							<a ng-click="logout()">Logout</a>
 						</li>
 			      </ul>
 			    </li>
