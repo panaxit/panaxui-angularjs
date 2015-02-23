@@ -6,18 +6,18 @@
 	<pre>
 		<strong>System information</strong>
 		<br/>
-		<strong><u>PanaxDB</u></strong>
-		<strong>Vendor</strong>: SQL Server 2012 11.0.5058
-		<strong>Host</strong>: BENOROR-PC:1433
-		<strong>Version</strong>: Beta_12
-		<strong>Database</strong>: Demo12_6_feb2015
-		<strong>User</strong>: sa
-		<br/>
 		<strong><u>PanaxUI</u></strong>
-		<strong>Host</strong>: 127.0.0.1:3000 {{currentUser.host}}
-		<strong>API</strong>: panaxui-nodejs-0.0.1 {{currentUser.api}}
-		<strong>GUI</strong>: panaxui-angularjs-0.0.1 {{currentUser.gui}}
+		<strong>Host</strong>: 127.0.0.1:3000
+		<strong>API</strong>: panaxui-nodejs-{{currentUser.api_version}}
+		<strong>GUI</strong>: panaxui-angularjs-0.0.1
 		<strong>User</strong>: {{currentUser.username}}
+		<br/>
+		<strong><u>PanaxDB</u></strong>
+		<strong>Server</strong>: {{currentUser.db.server}}
+		<strong>Vendor</strong>: {{currentUser.db.vendor}}
+		<strong>Version</strong>: {{currentUser.db.version}}
+		<strong>Database</strong>: {{currentUser.db.database}}
+		<strong>User</strong>: {{currentUser.db.user}}
 	</pre>
 
 </div>
