@@ -3,8 +3,95 @@
 		<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Debug info
 	</div>
 	<div class="panel-body">
-		<h4>currentNavBranch.data</h4>
-		<pre><code data-language="javascript">{{currentNavBranch.data | json}}</code></pre>
+
+		<accordion>
+			<accordion-group>
+
+        <accordion-heading>
+        		<em class="glyphicon glyphicon-info-sign"></em>
+            Session Info
+        </accordion-heading>
+
+        <table class="table table-bordered table-condensed">
+        	<tr>
+        		<th colspan="2">
+        			<strong>PanaxUI</strong>
+        		</th>
+        	</tr>
+				  <tr>
+				    <td>Host</td>
+				    <td>
+				    	<code>127.0.0.1:3000</code>
+				    </td> 
+				  </tr>
+				  <tr>
+				    <td>API</td>
+				    <td>
+				    	<code>panaxui-nodejs-{{currentUser.api_version}}</code>
+				    </td> 
+				  </tr>
+				  <tr>
+				    <td>GUI</td>
+				    <td>
+				    	<code>panaxui-angularjs-0.0.1</code>
+				    </td> 
+				  </tr>
+				  <tr>
+				    <td>User</td>
+				    <td>
+				    	<code>{{currentUser.username}}</code>
+				    </td> 
+				  </tr>
+        	<tr>
+        		<th colspan="2">
+        			<strong>PanaxDB</strong>
+        		</th>
+        	</tr>
+				  <tr>
+				    <td>Server</td>
+				    <td>
+				    	<code>{{currentUser.db.server}}</code>
+				    </td> 
+				  </tr>
+				  <tr>
+				    <td>Vendor</td>
+				    <td>
+				    	<code>{{currentUser.db.vendor}}</code>
+				    </td> 
+				  </tr>
+				  <tr>
+				    <td>Version</td>
+				    <td>
+				    	<code>{{currentUser.db.version}}</code>
+				    </td> 
+				  </tr>
+				  <tr>
+				    <td>Database</td>
+				    <td>
+				    	<code>{{currentUser.db.database}}</code>
+				    </td> 
+				  </tr>
+				  <tr>
+				    <td>User</td>
+				    <td>
+				    	<code>{{currentUser.db.user}}</code>
+				    </td> 
+				  </tr>
+				</table>
+
+			</accordion-group>
+			<accordion-group>
+
+        <accordion-heading>
+        		<em class="glyphicon glyphicon-leaf"></em>
+            currentNavBranch.data
+        </accordion-heading>
+
+        <pre><code data-language="javascript">{{currentNavBranch.data | json}}</code></pre>
+
+			</accordion-group>
+		</accordion>
+
 	</div>
 	<div class="panel-footer">
 		<button class="btn btn-primary" ng-click="ok()">OK</button>

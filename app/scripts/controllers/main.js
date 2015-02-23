@@ -48,6 +48,9 @@ angular.module('panaxuiApp')
 					templateUrl: 'views/shell/debug.html',
 					controller: 'DebugCtrl',
 					resolve: {
+						currentUser: function() {
+							return $scope.currentUser;
+						},
 						currentNavBranch: function() {
 							return $scope.navMenuControl.get_selected_branch();
 						}

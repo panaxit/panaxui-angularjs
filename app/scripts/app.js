@@ -48,7 +48,7 @@ angular
     // Set up states
     $stateProvider
 
-      .state('login', { //ToDo: logout route?
+      .state('login', {
           url: '/login',
           templateUrl: 'views/shell/login.html',
           controller: 'LoginCtrl'

@@ -1,14 +1,13 @@
 <div class="well well-lg" ng-hide="navMenuControl.get_selected_branch().level===1">
-
   <div class="text-center">
     <div class="page-header">
       <h1>{{navMenuControl.get_selected_branch().label}}</h1>
     </div>
   </div>
-
 </div>
 
-<div class="row">
+navMenuControl.get_selected_branch().children.length: {{navMenuControl.get_selected_branch().children.length}}
+<div class="row clearfix">
   <div class="col-md-{{(navMenuControl.get_selected_branch().children.length<=12)?(12/navMenuControl.get_selected_branch().children.length):1}}" 
         class="col-md-2" ng-repeat="child in navMenuControl.get_selected_branch().children">
     <div class="thumbnail">
@@ -22,4 +21,13 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="pull-right">
+	<div class="btn-group btn-group-md">
+		<button class="btn btn-info" type="button" ng-click="openDebugModal()">
+			<em class="glyphicon glyphicon-eye-open"></em>
+			Debug
+		</button>
+	</div>
 </div>

@@ -8,8 +8,9 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('DebugCtrl', function($scope, $modalInstance, currentNavBranch) {
+	.controller('DebugCtrl', function($scope, $modalInstance, currentNavBranch, currentUser) {
 
+		$scope.currentUser = currentUser;
 		$scope.currentNavBranch = currentNavBranch;
 
 		$scope.ok = function() {
