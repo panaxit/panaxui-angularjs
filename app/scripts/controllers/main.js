@@ -20,8 +20,12 @@ angular.module('panaxuiApp')
 			// abn-tree data array
 			$scope.navMenuData = [{
 				label: 'Home',
-				children: AuthService.sitemap().query()
+				children: []
 			}];
+
+			AuthService.sitemap().then(function (res) {
+				$scope.navMenuData[0].children = res.data;
+			});
 
 			// Change route (state) function
 			$scope.goToRoute = function (branch) {

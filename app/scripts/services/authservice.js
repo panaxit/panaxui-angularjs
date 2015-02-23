@@ -8,7 +8,7 @@
  * Factory in the panaxuiApp.
  */
 angular.module('panaxuiApp')
-	.factory('AuthService', ['$http', '$resource', 'Session', function($http, $resource, Session) {
+	.factory('AuthService', ['$http', '$q', 'Session', function($http, $q, Session) {
 		var authService = {};
 
 		authService.login = function(credentials) {
@@ -29,15 +29,19 @@ angular.module('panaxuiApp')
 		};
 
 		authService.sitemap = function() {
-			return $resource('dummy/menu.json', {}, { ///api/session/sitemap
-				query: {
-					method: 'GET',
-					params: {
-						gui: 'ng'
-					},
-					isArray: true
-				}
-			});
+	    var deferred = $q.defer();
+
+	    $http
+		    .get("/api/session/sitemap", {
+		    	params: {
+		    		gui: 'ng'
+		    	}
+		    })
+		    .then(function (response) {
+		      deferred.resolve(response.data);
+		    });
+
+	    return deferred.promise;
 		};
 
 		return authService;
