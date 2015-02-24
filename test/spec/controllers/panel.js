@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: CategoryCtrl', function () {
+describe('Controller: PanelCtrl', function () {
 
   // load the controller's module
   beforeEach(module('panaxuiApp'));
 
-  var CategoryCtrl,
+  var PanelCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    CategoryCtrl = $controller('CategoryCtrl', {
+    PanelCtrl = $controller('PanelCtrl', {
       $scope: scope
     });
   }));

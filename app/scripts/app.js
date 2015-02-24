@@ -42,7 +42,7 @@ angular
     
     // Always show 'Home' root in breadcrumb
     $breadcrumbProvider.setOptions({
-      prefixStateName: 'home'
+      prefixStateName: 'main'
     });
 
     // Set up states
@@ -54,8 +54,8 @@ angular
           controller: 'LoginCtrl'
       })
 
-      .state('home', {
-          url: '/',
+      .state('main', {
+          abstract: true,
           templateUrl: 'views/shell/main.html',
           controller: 'MainCtrl',
           data: {
@@ -66,37 +66,43 @@ angular
           }
       })
 
-      .state('home.category', {
+      .state('main.home', {
+          url: '/',
+          templateUrl: 'views/shell/home.html'
+      })
+
+      .state('main.category', {
           url: 'category/{name}',
           templateUrl: 'views/shell/category.html',
+          controller: 'CategoryCtrl',
           ncyBreadcrumb: {
-            label: '{{navMenuControl.get_selected_branch().label}}'
+            label: '{{currentBranch.label}}'
           }
       })
 
-      .state('home.panel', {
+      .state('main.panel', {
           templateUrl: 'views/shell/panel.html',
+          controller: 'PanelCtrl',
           ncyBreadcrumb: {
-            //label: '{{navMenuControl.get_parent_branch(navMenuControl.get_selected_branch()).label}}'
             skip: true
           }
       })
 
-      .state('home.panel.grid', {
+      .state('main.panel.grid', {
           url: 'grid/{catalogName}/{mode}',
           templateUrl: 'views/grid.html',
           controller: 'GridCtrl',
           ncyBreadcrumb: {
-            label: '{{navMenuControl.get_selected_branch().label}}'
+            label: '{{currentBranch.label}}'
           }
       })
 
-      .state('home.panel.form', {
+      .state('main.panel.form', {
           url: 'form/{catalogName}/{mode}',
           templateUrl: 'views/form.html',
           controller: 'FormCtrl',
           ncyBreadcrumb: {
-            label: '{{navMenuControl.get_selected_branch().label}}'
+            label: '{{currentBranch.label}}'
           }
       })
     ;
@@ -123,7 +129,7 @@ angular
 
     $rootScope.$on('auth-login-success', function (event, next) {
       console.info("#EVENT: auth-login-success");
-      $state.go("home");
+      $state.go("main.home");
     });
 
     //$rootScope.$on('auth-login-failed', function (event, next) {

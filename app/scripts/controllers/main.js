@@ -14,9 +14,6 @@ angular.module('panaxuiApp')
 			// Show menu toggle
 			$scope.showMenu = true;
 
-			// abn-tree control api object
-			$scope.navMenuControl = {};
-
 			// abn-tree data array
 			$scope.navMenuData = [{
 				label: 'Home',
@@ -27,18 +24,21 @@ angular.module('panaxuiApp')
 				$scope.navMenuData[0].children = res.data;
 			});
 
+			// abn-tree control api object
+			$scope.navMenuControl = {};
+
 			// Change route (state) function
 			$scope.goToRoute = function (branch) {
 				$scope.navMenuControl.select_branch(branch); // ToDo: Should be in routeChanged event
 
 				if (branch.level === 1) {
-					$state.go('home');
+					$state.go('main.home');
 				} else if (branch.children && branch.children.length > 0) {
-					$state.go('home.category', {
+					$state.go('main.category', {
 						name: urlify(branch.label)
 					});
 				} else {
-					$state.go('home.panel.' + branch.data.controlType, branch.data);
+					$state.go('main.panel.' + branch.data.controlType, branch.data);
 				}
 			};
 

@@ -15,9 +15,17 @@
       <div breadcrumb ng-show="!showMenu"></div>
 
       <!-- ui.router view -->
-      <div ui-view>
-        <ng-include src="'views/shell/home.html'"></ng-include>
-      </div>
+      <div ui-view></div>
+
+      <!-- Debug -->
+			<div class="pull-right">
+				<div class="btn-group btn-group-md">
+					<button class="btn btn-info" type="button" ng-click="openDebugModal()">
+						<em class="glyphicon glyphicon-eye-open"></em>
+						Debug
+					</button>
+				</div>
+			</div>
 
     </div>
   </div>
