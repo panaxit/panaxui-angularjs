@@ -14,3 +14,8 @@
 
 - Pretty urls (sans #)
 	- Scotch.io article?
+
+# AUTH
+
+- Login form + password managers issue
+	- https://medium.com/opinionated-angularjs/techniques-for-authentication-in-angularjs-applications-7bbf0346acec?source=tw-b8af63a425f1-1424737797183
