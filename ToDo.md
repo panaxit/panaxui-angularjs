@@ -9,6 +9,8 @@
 - Breadcrumb should work well with Nav tree
 	- Should select navTree node and vice-verza
 		- select_branch() should be in an routeChanged event?
+		- ui-sref-active
+			- https://github.com/angular-ui/ui-router/wiki/Quick-Reference#ui-sref-active
 		- https://github.com/ncuillery/angular-breadcrumb/wiki/API-Reference#state-options
 			- parent
 			- url params

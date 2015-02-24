@@ -14,9 +14,9 @@
         <img ng-src="images/thumbnails/{{child.data.controlType || 'category'}}.png" alt="{{child.label}}" class="px-thumbnail-icon">
       </a>
       <div class="caption text-center">
-        <button type="button" class="btn btn-default btn-md" ng-click="goToRoute(child)">
+        <a ui-sref="{{ getRouteSRef(child) }}">
           {{ child.label }}
-        </button>
+        </a>
       </div>
     </div>
   </div>

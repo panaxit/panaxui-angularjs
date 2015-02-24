@@ -27,19 +27,28 @@ angular.module('panaxuiApp')
 			// abn-tree control api object
 			$scope.navMenuControl = {};
 
-			// Change route (state) function
+			// Get route (state)
+			$scope.getRoute = function (branch) {
+				if (branch.level === 1)
+					return ['main.home'];
+				else if (branch.children && branch.children.length)
+					return ['main.category', {
+						name: urlify(branch.label)
+					}];
+				else
+					return ['main.panel.' + branch.data.controlType, branch.data];
+			};
+
+			// Get Route SRef string
+			$scope.getRouteSRef = function (branch) {
+				var route = $scope.getRoute(branch);
+				return route[0] + '(' + JSON.stringify(route[1] || '') + ')';
+			};
+
+			// Change route (state)
 			$scope.goToRoute = function (branch) {
 				$scope.navMenuControl.select_branch(branch); // ToDo: Should be in routeChanged event
-
-				if (branch.level === 1) {
-					$state.go('main.home');
-				} else if (branch.children && branch.children.length > 0) {
-					$state.go('main.category', {
-						name: urlify(branch.label)
-					});
-				} else {
-					$state.go('main.panel.' + branch.data.controlType, branch.data);
-				}
+				$state.go.apply(this, $scope.getRoute(branch));
 			};
 
 			// Debug modal "window"
