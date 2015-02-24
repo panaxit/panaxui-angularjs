@@ -105,6 +105,15 @@ angular
             label: '{{currentBranch.label}}'
           }
       })
+
+      .state('main.panel.cards', {
+          url: 'cards/{catalogName}/{mode}',
+          templateUrl: 'views/cards.html',
+          //controller: 'CardsCtrl',
+          ncyBreadcrumb: {
+            label: '{{currentBranch.label}}'
+          }
+      })
     ;
   })
 
