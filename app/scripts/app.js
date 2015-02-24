@@ -50,8 +50,7 @@ angular
 
       .state('login', {
           url: '/login',
-          templateUrl: 'views/shell/login.html',
-          controller: 'LoginCtrl'
+          templateUrl: 'views/shell/login.html'
       })
 
       .state('main', {
@@ -125,40 +124,45 @@ angular
     logoutSuccess: 'auth-logout-success'
   })
   
+  // Try to see if it's already logged in by getting session info
   .run(function ($rootScope, $state, AUTH_EVENTS, AuthService) {
+    AuthService.sessionInfo().then(function () {
+      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+      $state.go("main.home"); // redundant?
+    });
+  })
 
+  // State change listener
+  .run(function ($rootScope, $state, AUTH_EVENTS, AuthService) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
       if(next.data && next.data.authRequired) {
         if (!AuthService.isAuthenticated()) {
           event.preventDefault();
-          $rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+          //$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated); // redundant
         }
+      } else if (AuthService.isAuthenticated()) {
+        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+        $state.go("main.home"); // redundant?
       }
     });
-
     $rootScope.$on('auth-login-success', function (event, next) {
       console.info("#EVENT: auth-login-success");
       $state.go("main.home");
     });
-
     //$rootScope.$on('auth-login-failed', function (event, next) {
     //  console.info("#EVENT: auth-login-failed");
     //});
-
     $rootScope.$on('auth-session-timeout', function (event, next) {
       console.info("#EVENT: auth-session-timeout");
       $state.go("login");
     });
-
     $rootScope.$on('auth-not-authenticated', function (event, next) {
       console.info("#EVENT: auth-not-authenticated");
       $state.go("login");
     });
-
     $rootScope.$on('auth-logout-success', function (event, next) {
       console.info("#EVENT: auth-logout-success");
       $state.go("login");
     });
-
   })
 ;
