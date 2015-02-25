@@ -21,6 +21,10 @@
 - Pretty urls (sans #)
 	- Scotch.io article? search it!
 
+# UI
+
+- Validation error messages directive: https://teamgaslight.com/blog/how-to-create-a-configurable-angularjs-directive
+
 # AUTH
 
 * SHOW MODAL form auth messages
