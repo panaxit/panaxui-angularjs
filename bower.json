@@ -1,11 +1,8 @@
 {
   "name": "panaxui",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "authors": [
     "Benjamin Orozco <benoror@gmail.com>"
-  ],
-  "moduleType": [
-    "es6"
   ],
   "license": "Pending",
   "private": true,
