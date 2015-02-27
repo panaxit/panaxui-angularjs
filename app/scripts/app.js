@@ -40,7 +40,12 @@ angular
     ]);
 
     // Fallback URL Route
-    $urlRouterProvider.otherwise('/');
+    // Bug Fix: https://github.com/angular-ui/ui-router/issues/1022
+    //$urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise(function($injector) {
+      var $state = $injector.get('$state');
+      $state.go('main.home');
+    });
     
     // Always show 'Home' root in breadcrumb
     $breadcrumbProvider.setOptions({
