@@ -27,6 +27,11 @@ angular.module('panaxuiApp')
 			// abn-tree control api object
 			$scope.navMenuControl = {};
 
+			// Current selected branch
+			$scope.currentBranch = function () {
+				return $scope.navMenuControl.get_selected_branch();
+			};
+
 			// Get route (state)
 			$scope.getRoute = function (branch) {
 				if (branch.level === 1)
@@ -47,7 +52,8 @@ angular.module('panaxuiApp')
 
 			// Change route (state)
 			$scope.goToRoute = function (branch) {
-				$scope.navMenuControl.select_branch(branch); // ToDo: Should be in routeChanged event
+				console.log('#GoToRoute')
+				//$scope.navMenuControl.select_branch(branch); // ToDo: Should be in routeChanged event
 				$state.go.apply(this, $scope.getRoute(branch));
 			};
 

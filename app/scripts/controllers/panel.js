@@ -10,6 +10,4 @@
 angular.module('panaxuiApp')
   .controller('PanelCtrl', function ($scope) {
 
-  	$scope.currentBranch = $scope.navMenuControl.get_selected_branch();
-
   });

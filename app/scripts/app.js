@@ -41,7 +41,7 @@ angular
 
     // Fallback URL Route
     // Bug Fix: https://github.com/angular-ui/ui-router/issues/1022
-    //$urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/');
     $urlRouterProvider.otherwise(function($injector) {
       var $state = $injector.get('$state');
       $state.go('main.home');
@@ -78,7 +78,7 @@ angular
       })
 
       .state('main.category', {
-          url: 'category/{name}',
+          url: '/category/{name}',
           templateUrl: 'views/shell/category.html',
           controller: 'CategoryCtrl',
           ncyBreadcrumb: {
@@ -87,6 +87,7 @@ angular
       })
 
       .state('main.panel', {
+          abstract: true,
           templateUrl: 'views/shell/panel.html',
           controller: 'PanelCtrl',
           ncyBreadcrumb: {
@@ -95,7 +96,7 @@ angular
       })
 
       .state('main.panel.grid', {
-          url: 'grid/{catalogName}/{mode}',
+          url: '/grid/{catalogName}/{mode}',
           templateUrl: 'views/grid.html',
           controller: 'GridCtrl',
           ncyBreadcrumb: {
@@ -104,7 +105,7 @@ angular
       })
 
       .state('main.panel.form', {
-          url: 'form/{catalogName}/{mode}',
+          url: '/form/{catalogName}/{mode}',
           templateUrl: 'views/form.html',
           controller: 'FormCtrl',
           ncyBreadcrumb: {
@@ -113,7 +114,7 @@ angular
       })
 
       .state('main.panel.cards', {
-          url: 'cards/{catalogName}/{mode}',
+          url: '/cards/{catalogName}/{mode}',
           templateUrl: 'views/cards.html',
           //controller: 'CardsCtrl',
           ncyBreadcrumb: {
@@ -132,28 +133,33 @@ angular
   })
   
   // Try to see if it's already logged in by getting session info
-  .run(function ($rootScope, $state, AUTH_EVENTS, AuthService) {
+  .run(function ($rootScope, $state, $location, AUTH_EVENTS, AuthService) {
     AuthService.sessionInfo().then(function () {
-      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-      $state.go("main.home"); // redundant?
+      console.info("#EVENT: sessionInfo");
+      console.log($location)
+      //$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+      //$state.go("main.home"); // redundant?
     });
   })
 
   // State change listener
-  .run(function ($rootScope, $state, AUTH_EVENTS, AuthService) {
+  .run(function ($rootScope, $state, $location, AUTH_EVENTS, AuthService) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
-      if(next.data && next.data.authRequired) {
+      if(next.data && next.data.authRequired) { // Auth required state
         if (!AuthService.isAuthenticated()) {
-          event.preventDefault();
+          //event.preventDefault();
+          console.info("#EVENT: !isAuthenticated");
           //$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated); // redundant
         }
-      } else if (AuthService.isAuthenticated()) {
+      } else if (AuthService.isAuthenticated()) { // If not Auth required state BUT is authenticated
         $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+        console.info("#EVENT: auth-login-success. Go HOME");
         $state.go("main.home"); // redundant?
       }
     });
     $rootScope.$on('auth-login-success', function (event, next) {
       console.info("#EVENT: auth-login-success");
+      console.log($location)
       $state.go("main.home");
     });
     //$rootScope.$on('auth-login-failed', function (event, next) {
