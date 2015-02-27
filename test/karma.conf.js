@@ -34,6 +34,10 @@ module.exports = function(config) {
       'bower_components/angular-breadcrumb/release/angular-breadcrumb.js',
       'bower_components/angular-urlify/angular-urlify-filter.js',
       'bower_components/angular-md5/angular-md5.js',
+      'bower_components/tv4/tv4.js',
+      'bower_components/objectpath/lib/ObjectPath.js',
+      'bower_components/angular-schema-form/dist/schema-form.js',
+      'bower_components/angular-schema-form/dist/bootstrap-decorator.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

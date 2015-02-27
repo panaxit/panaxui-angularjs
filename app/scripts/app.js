@@ -24,7 +24,9 @@ angular
     'ui.grid.pagination',
 
     'ngUrlify',
-    'angular-md5'
+    'angular-md5',
+
+    'schemaForm'
   ])
 
   .config(function config($httpProvider, $stateProvider, $urlRouterProvider, $breadcrumbProvider) {
