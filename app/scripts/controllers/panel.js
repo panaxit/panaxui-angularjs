@@ -12,4 +12,8 @@ angular.module('panaxuiApp')
 
   	$scope.currentBranch = $scope.navMenuControl.get_selected_branch();
 
+  	$scope.reloadClick = function() {
+  		$scope.$broadcast('reloadSchemaForm');
+  	};
+
   });

@@ -10,18 +10,29 @@
 angular.module('panaxuiApp')
 	.controller('FormCtrl', function($scope, CRUDService) {
 
-		$scope.schema = {};
-
-		$scope.form = [
-			"*"
-		];
-
-		$scope.model = {};
-
 		var currentBranch = $scope.navMenuControl.get_selected_branch();
 
-		CRUDService.read(currentBranch.data).then(function (res) {
-			console.log(currentBranch.data)
-			$scope.schema = res.data.schema;
+		// Schema
+		$scope.schema = {};
+
+		// Form
+		$scope.form = [];
+
+		// Model
+		$scope.model = {};
+
+		// Load everything
+		$scope.loadSchemaForm = function() {
+			CRUDService.read(currentBranch.data).then(function (res) {
+				$scope.schema = res.data.schema;
+				$scope.form = res.data.form;
+			});
+		};
+
+		$scope.loadSchemaForm();
+
+		// Reload listener
+		$scope.$on('reloadSchemaForm', function (event, next) {
+			$scope.loadSchemaForm();
 		});
 	});

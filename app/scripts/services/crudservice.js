@@ -19,7 +19,9 @@ angular.module('panaxuiApp')
 		    		gui: 'ng',
 		    		output: 'json',
 		    		catalogName: data.catalogName,
-		    		controlType: data.controlType
+		    		controlType: data.controlType,
+		    		getData: "1",
+		    		getStructure: "1"
 		    	}
 		    })
 		    .then(function (response) {
