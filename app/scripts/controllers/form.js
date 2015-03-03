@@ -25,7 +25,8 @@ angular.module('panaxuiApp')
 		$scope.loadSchemaForm = function() {
 			CRUDService.read(currentBranch.data).then(function (res) {
 				$scope.schema = res.data.schema;
-				$scope.form = res.data.form;
+				$scope.form = res.data.form || ['*'];
+				$scope.model = res.data.model[0] || {};
 			});
 		};
 
