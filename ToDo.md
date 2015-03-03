@@ -23,6 +23,7 @@
 
 # UI
 
+- Refactor Debug Modal as a service (or is it provider?) for controllers that use it (ex. category, panel>form, panel>grid, ... etc)
 - Validation error messages directive: https://teamgaslight.com/blog/how-to-create-a-configurable-angularjs-directive
 
 # AUTH

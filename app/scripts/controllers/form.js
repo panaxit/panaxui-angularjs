@@ -19,7 +19,7 @@ angular.module('panaxuiApp')
 		// Model
 		$scope.model = {};
 
-		// Load everything
+		// Load schema, form and model into form
 		$scope.loadSchemaForm = function() {
 			CRUDService.read($scope.currentNavBranch.data).then(function (res) {
 				$scope.schema = res.data.schema;
@@ -27,7 +27,6 @@ angular.module('panaxuiApp')
 				$scope.model = res.data.model[0] || {};
 			});
 		};
-
 		$scope.loadSchemaForm();
 
 		// Reload listener
@@ -35,11 +34,12 @@ angular.module('panaxuiApp')
 			$scope.loadSchemaForm();
 		});
 
-		// Debug modal "window"
+		// open Debug Modal and resolve `form-specific` objects
 		$scope.$on('openDebugModal', function (event, next) {
 			var debugModalInstance = $modal.open({
 				templateUrl: 'views/shell/debug.html',
 				controller: 'DebugCtrl',
+				size: 'lg',
 				resolve: {
 					currentUser: function() {
 						return $scope.currentUser;
@@ -58,9 +58,8 @@ angular.module('panaxuiApp')
 					}
 				}
 			});
-
 			debugModalInstance.result.then(function() {
-				$log.info('Debug Modal dismissed at: ' + new Date());
+				//$log.info('Debug Modal dismissed at: ' + new Date());
 			});
 		});
 	});

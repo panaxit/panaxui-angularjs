@@ -10,14 +10,16 @@
 angular.module('panaxuiApp')
 	.controller('DebugCtrl', function($scope, $modalInstance, currentNavBranch, currentUser, schema, form, model) {
 
+		// Set providers
 		$scope.currentUser = currentUser;
 		$scope.currentNavBranch = currentNavBranch;
 		$scope.schema = schema;
 		$scope.form = form;
 		$scope.model = model;
 
-		$scope.ok = function() {
-			$modalInstance.close();
+		// Ok  clicked
+		$scope.okClick = function() {
+			$modalInstance.close(); // promise fulfilled
 		};
 
 	});

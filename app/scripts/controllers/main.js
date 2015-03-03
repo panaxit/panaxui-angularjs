@@ -8,8 +8,8 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('MainCtrl', ['$scope', '$state', '$log', 'urlifyFilter', 'AuthService',
-		function MainCtrl($scope, $state, $log, urlify, AuthService) {
+	.controller('MainCtrl', ['$scope', '$state', 'urlifyFilter', 'AuthService',
+		function MainCtrl($scope, $state, urlify, AuthService) {
 
 			// Show menu toggle
 			$scope.showMenu = true;
