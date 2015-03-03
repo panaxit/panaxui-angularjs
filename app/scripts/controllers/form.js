@@ -38,7 +38,7 @@ angular.module('panaxuiApp')
 		$scope.loadSchemaForm();
 
 		// Reload listener
-		$scope.$on('reloadSchemaForm', function (event, next) {
+		$scope.$on('reloadData', function (event, next) {
 			$scope.loadSchemaForm();
 		});
 

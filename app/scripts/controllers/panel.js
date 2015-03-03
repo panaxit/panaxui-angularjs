@@ -14,7 +14,7 @@ angular.module('panaxuiApp')
   	Broadcast events to children scopes: form, grid, cards, ...
   	 */
   	$scope.reloadClick = function() {
-  		$scope.$broadcast('reloadSchemaForm'); // ToDo: Rename to general term: reloadPanelContentView ...?
+  		$scope.$broadcast('reloadData');
   	};
   	$scope.debugClick = function() {
   		$scope.$broadcast('openDebugModal');
