@@ -10,6 +10,9 @@
 angular.module('panaxuiApp')
 	.controller('FormCtrl', function($scope, $modal, CRUDService) {
 
+		// get currently selected navigation branch
+		$scope.currentNavBranch = $scope.navMenuControl.get_selected_branch();
+
 		// Schema
 		$scope.schema = {};
 

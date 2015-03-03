@@ -9,6 +9,11 @@
  */
 angular.module('panaxuiApp')
 	.controller('GridCtrl', function($scope) {
+
+		// get currently selected navigation branch
+		$scope.currentNavBranch = $scope.navMenuControl.get_selected_branch();
+
+		// Grid options
 		$scope.gridOptions = {
 			paginationPageSizes: [5, 10, 25],
 			paginationPageSize: 5
