@@ -24,7 +24,12 @@ angular.module('panaxuiApp')
 
 		// Load schema, form and model into form
 		$scope.loadSchemaForm = function() {
-			CRUDService.read($scope.currentNavBranch.data).then(function (res) {
+			CRUDService.read({
+				catalogName: $scope.currentNavBranch.data.catalogName,
+				controlType: $scope.currentNavBranch.data.controlType,
+				getData: "1",
+				getStructure: "1"
+			}).then(function (res) {
 				$scope.schema = res.data.schema;
 				$scope.form = res.data.form || ['*'];
 				$scope.model = res.data.model[0] || {};
