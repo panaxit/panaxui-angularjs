@@ -8,8 +8,8 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('MainCtrl', ['$scope', '$state', '$log', '$modal', 'urlifyFilter', 'AuthService',
-		function MainCtrl($scope, $state, $log, $modal, urlify, AuthService) {
+	.controller('MainCtrl', ['$scope', '$state', '$log', 'urlifyFilter', 'AuthService',
+		function MainCtrl($scope, $state, $log, urlify, AuthService) {
 
 			// Show menu toggle
 			$scope.showMenu = true;
@@ -49,26 +49,6 @@ angular.module('panaxuiApp')
 			$scope.goToRoute = function (branch) {
 				$scope.navMenuControl.select_branch(branch); // ToDo: Should be in routeChanged event
 				$state.go.apply(this, $scope.getRoute(branch));
-			};
-
-			// Debug modal "window"
-			$scope.openDebugModal = function () {
-				var debugModalInstance = $modal.open({
-					templateUrl: 'views/shell/debug.html',
-					controller: 'DebugCtrl',
-					resolve: {
-						currentUser: function() {
-							return $scope.currentUser;
-						},
-						currentNavBranch: function() {
-							return $scope.navMenuControl.get_selected_branch();
-						}
-					}
-				});
-
-				debugModalInstance.result.then(function() {
-					$log.info('Debug Modal dismissed at: ' + new Date());
-				});
 			};
 		}
 	]);

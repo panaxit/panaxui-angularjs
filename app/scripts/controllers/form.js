@@ -8,7 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('FormCtrl', function($scope, CRUDService) {
+	.controller('FormCtrl', function($scope, $modal, CRUDService) {
 
 		var currentBranch = $scope.navMenuControl.get_selected_branch();
 
@@ -35,5 +35,34 @@ angular.module('panaxuiApp')
 		// Reload listener
 		$scope.$on('reloadSchemaForm', function (event, next) {
 			$scope.loadSchemaForm();
+		});
+
+		// Debug modal "window"
+		$scope.$on('openDebugModal', function (event, next) {
+			var debugModalInstance = $modal.open({
+				templateUrl: 'views/shell/debug.html',
+				controller: 'DebugCtrl',
+				resolve: {
+					currentUser: function() {
+						return $scope.currentUser;
+					},
+					currentNavBranch: function() {
+						return $scope.navMenuControl.get_selected_branch();
+					},
+					schema: function() {
+						return $scope.schema;
+					},
+					form: function() {
+						return $scope.form;
+					},
+					model: function() {
+						return $scope.model;
+					}
+				}
+			});
+
+			debugModalInstance.result.then(function() {
+				$log.info('Debug Modal dismissed at: ' + new Date());
+			});
 		});
 	});

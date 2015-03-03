@@ -5,10 +5,10 @@
 	<div class="panel-body">
 
 		<accordion>
-			<accordion-group>
+			<accordion-group ng-show="currentUser">
 
         <accordion-heading>
-        		<em class="glyphicon glyphicon-info-sign"></em>
+        		<em class="glyphicon glyphicon-user"></em>
             Session Info
         </accordion-heading>
 
@@ -78,9 +78,8 @@
 				    </td> 
 				  </tr>
 				</table>
-
 			</accordion-group>
-			<accordion-group>
+			<accordion-group ng-show="currentNavBranch">
 
         <accordion-heading>
         		<em class="glyphicon glyphicon-leaf"></em>
@@ -88,7 +87,33 @@
         </accordion-heading>
 
         <pre><code data-language="javascript">{{currentNavBranch.data | json}}</code></pre>
+			</accordion-group>
+			<accordion-group ng-show="schema">
 
+        <accordion-heading>
+        		<em class="glyphicon glyphicon-info-sign"></em>
+            schema
+        </accordion-heading>
+
+        <pre><code data-language="javascript">{{schema | json}}</code></pre>
+			</accordion-group>
+			<accordion-group ng-show="form">
+
+        <accordion-heading>
+        		<em class="glyphicon glyphicon-tasks"></em>
+            form
+        </accordion-heading>
+
+        <pre><code data-language="javascript">{{form | json}}</code></pre>
+			</accordion-group>
+			<accordion-group ng-show="model">
+
+        <accordion-heading>
+        		<em class="glyphicon glyphicon-download-alt"></em>
+            model
+        </accordion-heading>
+
+        <pre><code data-language="javascript">{{model | json}}</code></pre>
 			</accordion-group>
 		</accordion>
 

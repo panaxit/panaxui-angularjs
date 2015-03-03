@@ -13,7 +13,11 @@ angular.module('panaxuiApp')
   	$scope.currentBranch = $scope.navMenuControl.get_selected_branch();
 
   	$scope.reloadClick = function() {
-  		$scope.$broadcast('reloadSchemaForm');
+  		$scope.$broadcast('reloadSchemaForm'); // ToDo: Rename to general term: reloadPanelContentView ...?
+  	};
+
+  	$scope.debugClick = function() {
+  		$scope.$broadcast('openDebugModal');
   	};
 
   });
