@@ -10,7 +10,7 @@
 angular.module('panaxuiApp')
   .controller('PanelCtrl', function ($scope) {
 
-  	$scope.currentBranch = $scope.navMenuControl.get_selected_branch();
+  	$scope.currentNavBranch = $scope.navMenuControl.get_selected_branch();
 
   	$scope.reloadClick = function() {
   		$scope.$broadcast('reloadSchemaForm'); // ToDo: Rename to general term: reloadPanelContentView ...?

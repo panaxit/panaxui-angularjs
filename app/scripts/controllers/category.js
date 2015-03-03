@@ -10,9 +10,9 @@
 angular.module('panaxuiApp')
 	.controller('CategoryCtrl', function($scope, $modal) {
 
-		$scope.currentBranch = $scope.navMenuControl.get_selected_branch();
+		$scope.currentNavBranch = $scope.navMenuControl.get_selected_branch();
 
-		$scope.columnSize = ($scope.currentBranch.children.length <= 12) ? Math.floor(12 / $scope.currentBranch.children.length) : 1
+		$scope.columnSize = ($scope.currentNavBranch.children.length <= 12) ? Math.floor(12 / $scope.currentNavBranch.children.length) : 1
 
   	$scope.debugClick = function() {
 			var debugModalInstance = $modal.open({
@@ -23,7 +23,7 @@ angular.module('panaxuiApp')
 						return $scope.currentUser;
 					},
 					currentNavBranch: function() {
-						return $scope.navMenuControl.get_selected_branch();
+						return $scope.currentNavBranch;
 					},
 					schema: null,
 					form: null,

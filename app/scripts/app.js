@@ -82,7 +82,7 @@ angular
           templateUrl: 'views/shell/category.html',
           controller: 'CategoryCtrl',
           ncyBreadcrumb: {
-            label: '{{currentBranch.label}}'
+            label: '{{currentNavBranch.label}}'
           }
       })
 
@@ -99,7 +99,7 @@ angular
           templateUrl: 'views/grid.html',
           controller: 'GridCtrl',
           ncyBreadcrumb: {
-            label: '{{currentBranch.label}}'
+            label: '{{currentNavBranch.label}}'
           }
       })
 
@@ -108,7 +108,7 @@ angular
           templateUrl: 'views/form.html',
           controller: 'FormCtrl',
           ncyBreadcrumb: {
-            label: '{{currentBranch.label}}'
+            label: '{{currentNavBranch.label}}'
           }
       })
 
@@ -117,7 +117,7 @@ angular
           templateUrl: 'views/cards.html',
           //controller: 'CardsCtrl',
           ncyBreadcrumb: {
-            label: '{{currentBranch.label}}'
+            label: '{{currentNavBranch.label}}'
           }
       })
     ;

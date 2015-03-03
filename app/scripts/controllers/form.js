@@ -10,8 +10,6 @@
 angular.module('panaxuiApp')
 	.controller('FormCtrl', function($scope, $modal, CRUDService) {
 
-		var currentBranch = $scope.navMenuControl.get_selected_branch();
-
 		// Schema
 		$scope.schema = {};
 
@@ -23,7 +21,7 @@ angular.module('panaxuiApp')
 
 		// Load everything
 		$scope.loadSchemaForm = function() {
-			CRUDService.read(currentBranch.data).then(function (res) {
+			CRUDService.read($scope.currentNavBranch.data).then(function (res) {
 				$scope.schema = res.data.schema;
 				$scope.form = res.data.form || ['*'];
 				$scope.model = res.data.model[0] || {};
@@ -47,7 +45,7 @@ angular.module('panaxuiApp')
 						return $scope.currentUser;
 					},
 					currentNavBranch: function() {
-						return $scope.navMenuControl.get_selected_branch();
+						return $scope.currentNavBranch;
 					},
 					schema: function() {
 						return $scope.schema;
