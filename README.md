@@ -1,4 +1,6 @@
-# PanaxUI GUI - AngularJS
+# PanaxUI - GUI Frontend - AngularJS
+
+Main mirror: https://bitbucket.org/panaxit/panaxui-angularjs
 
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
 version 0.11.1.
