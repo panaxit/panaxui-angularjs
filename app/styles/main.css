@@ -81,3 +81,10 @@ body {
   width: 72px;
   cursor: pointer;
 }
+
+/**
+ * Alerts
+ */
+.px-alert {
+	  margin-bottom: 0px;
+}

@@ -140,7 +140,7 @@ angular
   })
 
   // State change listener
-  .run(function ($rootScope, $state, AUTH_EVENTS, AuthService) {
+  .run(function ($rootScope, $state, AUTH_EVENTS, AuthService, AlertService) {
     $rootScope.$on('$stateChangeStart', function (event, next) {
       if(next.data && next.data.authRequired) {
         if (!AuthService.isAuthenticated()) {
@@ -165,6 +165,7 @@ angular
     });
     $rootScope.$on('auth-not-authenticated', function (event, next) {
       console.info("#EVENT: auth-not-authenticated");
+      AlertService.show('warning', 'Authentication', next.data.message);
       $state.go("login");
     });
     $rootScope.$on('auth-logout-success', function (event, next) {
