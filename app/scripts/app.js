@@ -31,13 +31,15 @@ angular
 
   .config(function config($httpProvider, $stateProvider, $urlRouterProvider, $breadcrumbProvider) {
 
-    // Authentication interceptor
-    $httpProvider.interceptors.push([
-      '$injector',
-      function ($injector) {
-        return $injector.get('AuthInterceptor');
-      }
-    ]);
+    /**
+     * HTTP Interceptors
+     */
+    $httpProvider.interceptors.push('ErrorInterceptor');
+    $httpProvider.interceptors.push('AuthInterceptor');
+
+    /**
+     * UI Router
+     */
 
     // Fallback URL Route
     // Bug Fix: https://github.com/angular-ui/ui-router/issues/1022
@@ -123,6 +125,10 @@ angular
     ;
   })
 
+  .constant('ERROR_EVENTS', {
+    internalServer: 'error-internal-server'
+  })
+
   .constant('AUTH_EVENTS', {
     loginSuccess: 'auth-login-success',
     //loginFailed: 'auth-login-failed',
@@ -139,8 +145,12 @@ angular
     });
   })
 
-  // State change listener
   .run(function ($rootScope, $state, AUTH_EVENTS, AuthService, AlertService) {
+
+    /**
+     * State change listener
+     */
+    
     $rootScope.$on('$stateChangeStart', function (event, next) {
       if(next.data && next.data.authRequired) {
         if (!AuthService.isAuthenticated()) {
@@ -152,6 +162,20 @@ angular
         $state.go("main.home"); // redundant?
       }
     });
+    
+    /**
+     * Error Events listeners
+     */
+    
+    $rootScope.$on('error-internal-server', function (event, next) {
+      console.info("#EVENT: error-internal-server");
+      AlertService.show('danger', 'Error', next.data.message);
+    });
+    
+    /**
+     * Authentication Events listeners
+     */
+    
     $rootScope.$on('auth-login-success', function (event, next) {
       console.info("#EVENT: auth-login-success");
       $state.go("main.home");
