@@ -6,7 +6,7 @@
 
 # Navigation
 
-- Breadcrumb should work well with Nav tree
+- (branch:´navtree_routing_consolidation_fix´): Breadcrumb should work well with Nav tree
 	- Should select navTree node and vice-verza
 		- select_branch() should be in an routeChanged event?
 		- ui-sref-active
