@@ -17,7 +17,7 @@ angular.module('panaxuiApp')
 		$scope.columnSize = ($scope.currentNavBranch.children.length <= 12) ? Math.floor(12 / $scope.currentNavBranch.children.length) : 1
 
 		// open Debug Modal and resolve `category-specific` objects
-  	$scope.debugClick = function() {
+		$scope.$on('openDebugModal', function (event, next) {
 			var debugModalInstance = $modal.open({
 				templateUrl: 'views/shell/debug.html',
 				controller: 'DebugCtrl',
@@ -37,6 +37,6 @@ angular.module('panaxuiApp')
 			debugModalInstance.result.then(function() {
 				//$log.info('Debug Modal dismissed at: ' + new Date());
 			});
-  	};
+  	});
 
 	});

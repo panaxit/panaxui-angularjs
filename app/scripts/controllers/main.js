@@ -50,5 +50,12 @@ angular.module('panaxuiApp')
 				$scope.navMenuControl.select_branch(branch); // ToDo: Should be in routeChanged event
 				$state.go.apply(this, $scope.getRoute(branch));
 			};
+			
+	  	/*
+	  	Broadcast events to children scopes: form, grid, cards, ...
+	  	 */
+	  	$scope.debugClick = function() {
+	  		$scope.$broadcast('openDebugModal');
+	  	};
 		}
 	]);
