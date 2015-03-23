@@ -38,6 +38,12 @@ module.exports = function(config) {
       'bower_components/objectpath/lib/ObjectPath.js',
       'bower_components/angular-schema-form/dist/schema-form.js',
       'bower_components/angular-schema-form/dist/bootstrap-decorator.js',
+      'bower_components/angular-ui-select/dist/select.js',
+      'bower_components/angular-translate/angular-translate.js',
+      'bower_components/underscore/underscore.js',
+      'bower_components/angular-schema-form-ui-select/ui-sortable.js',
+      'bower_components/angular-schema-form-ui-select/angular-underscore.js',
+      'bower_components/angular-schema-form-ui-select/bootstrap-ui-select.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

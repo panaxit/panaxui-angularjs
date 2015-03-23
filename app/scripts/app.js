@@ -26,7 +26,8 @@ angular
     'ngUrlify',
     'angular-md5',
 
-    'schemaForm'
+    'schemaForm',
+    'ui.select'
   ])
 
   .config(function config($httpProvider, $stateProvider, $urlRouterProvider, $breadcrumbProvider) {
