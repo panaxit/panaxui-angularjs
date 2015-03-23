@@ -44,7 +44,6 @@ module.exports = function(config) {
       'bower_components/angular-schema-form-ui-select/ui-sortable.js',
       'bower_components/angular-schema-form-ui-select/angular-underscore.js',
       'bower_components/angular-schema-form-ui-select/bootstrap-ui-select.min.js',
-      'bower_components/select2/select2.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

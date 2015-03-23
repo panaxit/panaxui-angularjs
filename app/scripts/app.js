@@ -35,19 +35,13 @@ angular
     'ui.sortable'
   ])
 
-  .config(function config($httpProvider, uiSelectConfig, $stateProvider, $urlRouterProvider, $breadcrumbProvider) {
+  .config(function config($httpProvider, $stateProvider, $urlRouterProvider, $breadcrumbProvider) {
 
     /**
      * HTTP Interceptors
      */
     $httpProvider.interceptors.push('ErrorInterceptor');
     $httpProvider.interceptors.push('AuthInterceptor');
-
-    /**
-     * UI-Select config
-     * https://github.com/angular-ui/ui-select/wiki/ui-select#themes
-     */
-    uiSelectConfig.theme = 'select2';
 
     /**
      * UI Router
