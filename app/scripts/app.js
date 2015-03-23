@@ -27,7 +27,12 @@ angular
     'angular-md5',
 
     'schemaForm',
-    'ui.select'
+
+    // https://github.com/networknt/angular-schema-form-ui-select
+    'ui.select',
+    'pascalprecht.translate',
+    'angular-underscore/filters',
+    'ui.sortable'
   ])
 
   .config(function config($httpProvider, uiSelectConfig, $stateProvider, $urlRouterProvider, $breadcrumbProvider) {
