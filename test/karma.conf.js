@@ -44,6 +44,10 @@ module.exports = function(config) {
       'bower_components/angular-schema-form-ui-select/ui-sortable.js',
       'bower_components/angular-schema-form-ui-select/angular-underscore.js',
       'bower_components/angular-schema-form-ui-select/bootstrap-ui-select.min.js',
+      'bower_components/pickadate/lib/picker.js',
+      'bower_components/pickadate/lib/picker.date.js',
+      'bower_components/pickadate/lib/picker.time.js',
+      'bower_components/angular-schema-form-datepicker/bootstrap-datepicker.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',
