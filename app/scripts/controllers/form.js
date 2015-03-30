@@ -22,14 +22,19 @@ angular.module('panaxuiApp')
 		// Model
 		$scope.model = {};
 
+		// Set API params
+		var params = {};
+		params.getData = '1';
+		params.getStructure = '1';
+		params.mode = $scope.currentNavBranch.data.mode;
+		params.catalogName = $scope.currentNavBranch.data.catalogName;
+		params.controlType = $scope.currentNavBranch.data.controlType;
+		if($scope.currentNavBranch.data.id)
+			params.filters = '\'id=' + $scope.currentNavBranch.data.id + '\''; // ToDo: Arbitriary Identity Key Name
+
 		// Load schema, form and model into form
 		$scope.loadSchemaForm = function() {
-			CRUDService.read({
-				catalogName: $scope.currentNavBranch.data.catalogName,
-				controlType: $scope.currentNavBranch.data.controlType,
-				getData: "1",
-				getStructure: "1"
-			}).then(function (res) {
+			CRUDService.read(params).then(function (res) {
 				$scope.schema = res.data.schema;
 				$scope.form = res.data.form || ['*'];
 				$scope.model = res.data.model[0] || {};

@@ -11,19 +11,14 @@ angular.module('panaxuiApp')
   .factory('CRUDService', function ($http, $q) {
   	var CRUDService = {};
 
-  	CRUDService.read = function(args) {
+  	CRUDService.read = function(params) {
 	    var deferred = $q.defer();
+
+	    params.gui = 'ng';
+	    params.output = 'json';
+
 	    $http
-		    .get("/api/read", {
-		    	params: {
-		    		gui: 'ng',
-		    		output: 'json',
-		    		catalogName: args.catalogName,
-		    		controlType: args.controlType,
-		    		getData: args.getData,
-		    		getStructure: args.getStructure
-		    	}
-		    })
+		    .get("/api/read", {params: params})
 		    .then(function (response) {
 		      deferred.resolve(response.data);
 		    });

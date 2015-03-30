@@ -33,6 +33,7 @@ angular.module('panaxuiApp')
 		// Load grid's data
 		$scope.loadGridData = function() {
 			CRUDService.read({
+				mode: $scope.currentNavBranch.data.mode,
 				catalogName: $scope.currentNavBranch.data.catalogName,
 				controlType: $scope.currentNavBranch.data.controlType,
 				getData: "1",

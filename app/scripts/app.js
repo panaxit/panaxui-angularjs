@@ -102,7 +102,7 @@ angular
           }
       })
 
-      .state('main.panel.grid', {
+      .state('main.panel.gridView', {
           url: 'grid/{catalogName}/{mode}',
           templateUrl: 'views/grid.html',
           controller: 'GridCtrl',
@@ -111,8 +111,8 @@ angular
           }
       })
 
-      .state('main.panel.form', {
-          url: 'form/{catalogName}/{mode}',
+      .state('main.panel.formView', {
+          url: 'form/{catalogName}/{mode}/{id}',
           templateUrl: 'views/form.html',
           controller: 'FormCtrl',
           ncyBreadcrumb: {
@@ -120,7 +120,7 @@ angular
           }
       })
 
-      .state('main.panel.cards', {
+      .state('main.panel.cardsView', {
           url: 'cards/{catalogName}/{mode}',
           templateUrl: 'views/cards.html',
           //controller: 'CardsCtrl',
