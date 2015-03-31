@@ -1,34 +1,54 @@
-<div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pagination class="px-ui-grid"></div>
-
-<div class="text-center">
-
-	<div class="btn-group btn-group-md pagination">
-		<button class="btn btn-default" type="button"
-			ng-click="gridApi.pagination.seek(1)">
-			<em class="glyphicon glyphicon-step-backward"></em>
-			First
-		</button>
-		<button class="btn btn-default" type="button"
-			ng-click="gridApi.pagination.previousPage()">
-			<em class="glyphicon glyphicon-triangle-left"></em>
-			Prev
-		</button>
-		<button class="btn btn-default" type="button"
-			ng-repeat="p in getPage(gridApi.pagination.getTotalPages()) track by $index"
-			ng-click="gridApi.pagination.seek($index+1)"
-			ng-class="{ active : gridApi.pagination.getPage() == $index+1 }">
-			{{$index+1}}
-		</button>
-		<button class="btn btn-default" type="button"
-			ng-click="gridApi.pagination.nextPage()">
-			Next
-			<em class="glyphicon glyphicon-triangle-right"></em>
-		</button>
-		<button class="btn btn-default" type="button"
-			ng-click="gridApi.pagination.seek(gridApi.pagination.getTotalPages())">
-			<em class="glyphicon glyphicon-step-forward"></em>
-			Last
-		</button>
-	</div>
+<div class="panel-body">
 	
+	<div ui-grid="gridOptions" ui-grid-auto-resize ui-grid-pagination class="px-ui-grid"></div>
+
+	<div class="text-center">
+
+		<div class="btn-group btn-group-md pagination">
+			<button class="btn btn-default" type="button"
+				ng-click="gridApi.pagination.seek(1)">
+				<em class="glyphicon glyphicon-step-backward"></em>
+				First
+			</button>
+			<button class="btn btn-default" type="button"
+				ng-click="gridApi.pagination.previousPage()">
+				<em class="glyphicon glyphicon-triangle-left"></em>
+				Prev
+			</button>
+			<button class="btn btn-default" type="button"
+				ng-repeat="p in getPage(gridApi.pagination.getTotalPages()) track by $index"
+				ng-click="gridApi.pagination.seek($index+1)"
+				ng-class="{ active : gridApi.pagination.getPage() == $index+1 }">
+				{{$index+1}}
+			</button>
+			<button class="btn btn-default" type="button"
+				ng-click="gridApi.pagination.nextPage()">
+				Next
+				<em class="glyphicon glyphicon-triangle-right"></em>
+			</button>
+			<button class="btn btn-default" type="button"
+				ng-click="gridApi.pagination.seek(gridApi.pagination.getTotalPages())">
+				<em class="glyphicon glyphicon-step-forward"></em>
+				Last
+			</button>
+		</div>
+		
+	</div>
+
+</div>
+<div class="panel-footer clearfix">
+
+	<div class="pull-right">
+
+		<div class="btn-group btn-group-md">
+			<button class="btn btn-default" type="button">
+				<em class="glyphicon glyphicon-ban-circle"></em>
+				Cancel
+			</button>
+			<button class="btn btn-primary" type="button">
+				<em class="glyphicon glyphicon-ok-sign"></em>
+				Save
+			</button>
+		</div>
+	</div>
 </div>
