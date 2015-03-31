@@ -1,20 +1,22 @@
-<form name="schema-form" ng-submit="onSubmit(schema-form)">
+<form name="pxForm"
+	sf-schema="schema" sf-form="form" sf-model="model"
+	ng-submit="onSubmit(pxForm)">
 
-	<div class="panel-body" sf-schema="schema" sf-form="form" sf-model="model"></div>
-
-	<div class="panel-footer clearfix">
-		<div class="pull-right">
+		<!-- <div class="pull-right">
 			<div class="btn-group btn-group-md">
 				<button class="btn btn-default" type="button" ng-click="onCancel()">
 					<em class="glyphicon glyphicon-ban-circle"></em>
 					Cancel
+				</button>
+				<button class="btn btn-info" type="button" ng-click="onReset(pxForm)">
+					<em class="glyphicon glyphicon-retweet"></em>
+					Reset
 				</button>
 				<button class="btn btn-primary" type="submit">
 					<em class="glyphicon glyphicon-ok-sign"></em>
 					Save
 				</button>
 			</div>
-		</div>
-	</div>
+		</div> -->
 
 </form>
