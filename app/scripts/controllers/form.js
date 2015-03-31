@@ -37,24 +37,24 @@ angular.module('panaxuiApp')
 			CRUDService.read(params).then(function (res) {
 				$scope.schema = res.data.schema;
 				$scope.form = res.data.form || ['*'];
-				$scope.form.push({
-					type: "actions",
-					style: "pull-right",
-					items: [
-				    { 
-				    	type: 'submit', 
-				    	title: 'Save',
-				    	style: 'btn-primary', 
-				    	icon: 'glyphicon glyphicon-ok-sign'
-				    }, { 
-				    	type: 'button', 
-				    	title: 'Cancel', 
-				    	onClick: "onCancel()",
-				    	style: 'btn-default', 
-				    	icon: 'glyphicon glyphicon-ban-circle'
-				    }
-					]
-				});
+				// $scope.form.push({
+				// 	type: "actions",
+				// 	style: "pull-right",
+				// 	items: [
+				//     { 
+				//     	type: 'submit', 
+				//     	title: 'Save',
+				//     	style: 'btn-primary', 
+				//     	icon: 'glyphicon glyphicon-ok-sign'
+				//     }, { 
+				//     	type: 'button', 
+				//     	title: 'Cancel', 
+				//     	onClick: "onCancel()",
+				//     	style: 'btn-default', 
+				//     	icon: 'glyphicon glyphicon-ban-circle'
+				//     }
+				// 	]
+				// });
 				$scope.model = res.data.model[0] || {};
 			});
 		};
