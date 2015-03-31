@@ -37,36 +37,43 @@ angular.module('panaxuiApp')
 			CRUDService.read(params).then(function (res) {
 				$scope.schema = res.data.schema;
 				$scope.form = res.data.form || ['*'];
-				// $scope.form.push({
-				// 	type: "actions",
-				// 	style: "pull-right",
-				// 	items: [
-				//     { 
-				//     	type: 'submit', 
-				//     	title: 'Save',
-				//     	style: 'btn-primary', 
-				//     	icon: 'glyphicon glyphicon-ok-sign'
-				//     }, { 
-				//     	type: 'button', 
-				//     	title: 'Cancel', 
-				//     	onClick: "onCancel()",
-				//     	style: 'btn-default', 
-				//     	icon: 'glyphicon glyphicon-ban-circle'
-				//     }
-				// 	]
-				// });
+				$scope.form.push({
+					type: "actions",
+					style: "pull-right",
+					items: [
+				    { 
+				    	type: 'submit', 
+				    	title: 'Save',
+				    	style: 'btn-primary', 
+				    	icon: 'glyphicon glyphicon-ok-sign'
+				    }, { 
+				    	type: 'button', 
+				    	title: 'Reset', 
+				    	onClick: "onReset(pxForm)",
+				    	style: 'btn-info',
+				    	icon: 'glyphicon glyphicon-retweet'
+				    }, {
+				    	type: 'button', 
+				    	title: 'Cancel', 
+				    	onClick: "onCancel()",
+				    	style: 'btn-default', 
+				    	icon: 'glyphicon glyphicon-ban-circle'
+				    }
+					]
+				});
 				$scope.model = res.data.model[0] || {};
 			});
 		};
 		$scope.loadSchemaForm();
 
 		// Submit handler
-		$scope.onSubmit = function(form) {
+		$scope.onSubmit = function(pxForm) {
+			console.dir(pxForm)
 			// First we broadcast an event so all fields validate themselves
 			$scope.$broadcast('schemaFormValidate');
 
 			// Then we check if the form is valid
-			if (form.$valid) {
+			if (pxForm.$valid) {
 				// ... do whatever you need to do with your data.
 				console.log('FORM VALID')
 			} else {
@@ -75,8 +82,20 @@ angular.module('panaxuiApp')
 		}
 
 		// Cancel handler
+		$scope.onReset = function(pxForm) {
+			console.dir(pxForm)
+			// ToDo: Confirm
+	    if (pxForm) {
+	      pxForm.$setPristine();
+	      pxForm.$setUntouched();
+	      $scope.model = {};
+	    }
+		}
+
+		// Cancel handler
 		$scope.onCancel = function() {
-			// ToDo: Alert of unsaved dirty form otherwise/then Go Back
+			// ToDo: Confirm of unsaved dirty form otherwise/then Go Back
+			console.log("CANCEL")
 		}
 
 		// Reload listener
