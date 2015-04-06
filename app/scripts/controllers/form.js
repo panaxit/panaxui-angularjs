@@ -8,7 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('FormCtrl', function($scope, $modal, CRUDService) {
+	.controller('FormCtrl', function($scope, $state, $modal, CRUDService, AlertService) {
 
 		// get currently selected navigation branch
 		$scope.currentNavBranch = $scope.navMenuControl.get_selected_branch();
@@ -74,7 +74,39 @@ angular.module('panaxuiApp')
 			$scope.$broadcast('schemaFormValidate');
 
 			if (pxForm.$valid) {
+				var payload = {
+			  	tableName: $scope.catalog.catalogName,
+			  	primaryKey: $scope.catalog.primaryKey,
+			  	identityKey: $scope.catalog.identityKey,
+			  	dataRows: [$scope.model]
+				};
 
+				if($scope.catalog.mode === 'insert') {
+					CRUDService.create(payload).then(function (res) {
+						if(res.success === true) {
+							if(res.data[0].status === 'error') {
+								AlertService.show('danger', 'Error', 
+									res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
+							} else if(res.data[0].status === 'success') {
+								AlertService.show('success', 'Saved', 
+									'Record successfully saved');
+
+								// ToDo: 
+								// Redirect ($state.go) is correct, but UI-Router bugs prevent it from working
+								// Fix it along with bugs in nav-tree, breadcrumb & thumbnails:
+								// https://www.pivotaltracker.com/story/show/91147234
+								// https://www.pivotaltracker.com/story/show/91128952
+								$state.go('main.panel.formView', {
+									catalogName: res.data[0].dataTable,
+									mode: 'edit',
+									id: res.data[0].primaryValue || res.data[0].identityValue
+								});
+							}
+						}
+					});
+				} else if($scope.catalog.mode === 'edit') {
+					// ToDo: https://www.pivotaltracker.com/story/show/91148306
+				}
 			} else {
 				console.log('INVALID FORM');
 			}

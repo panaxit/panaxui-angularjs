@@ -11,9 +11,11 @@ angular.module('panaxuiApp')
   .factory('CRUDService', function ($http, $q) {
   	var CRUDService = {};
 
+    /**
+     * GET /api/read
+     */
   	CRUDService.read = function(params) {
 	    var deferred = $q.defer();
-
 	    params.gui = 'ng';
 	    params.output = 'json';
 
@@ -23,6 +25,34 @@ angular.module('panaxuiApp')
 		      deferred.resolve(response.data);
 		    });
 	    return deferred.promise;
+		};
+
+    /**
+     * POST /api/create
+     */
+  	CRUDService.create = function(payload) {
+	    var deferred = $q.defer();
+
+	    $http
+	    	.post("/api/create", payload)
+		    .then(function (response) {
+		      deferred.resolve(response.data);
+		    });
+	    return deferred.promise;
+		};
+
+    /**
+     * PUT /api/update
+     */
+  	CRUDService.update = function(payload) {
+
+		};
+
+    /**
+     * DELETE /api/delete
+     */
+  	CRUDService.delete = function(payload) {
+
 		};
 
     return CRUDService;
