@@ -22,18 +22,19 @@ angular.module('panaxuiApp')
 		// Model
 		$scope.model = {};
 
-		// Set API params
-		var params = {};
-		params.getData = '1';
-		params.getStructure = '1';
-		params.mode = $scope.currentNavBranch.data.mode;
-		params.catalogName = $scope.currentNavBranch.data.catalogName;
-		params.controlType = $scope.currentNavBranch.data.controlType;
-		if($scope.currentNavBranch.data.id)
-			params.filters = '\'id=' + $scope.currentNavBranch.data.id + '\''; // ToDo: Arbitriary Identity Key Name
-
 		// Load schema, form and model into form
 		$scope.loadSchemaForm = function() {
+			// Set API params
+			var params = {
+				getData: '1',
+				getStructure: '1',
+				mode: $scope.currentNavBranch.data.mode,
+				catalogName: $scope.currentNavBranch.data.catalogName,
+				controlType: $scope.currentNavBranch.data.controlType
+			};
+			if($scope.currentNavBranch.data.id)
+				params.filters = '\'id=' + $scope.currentNavBranch.data.id + '\''; // ToDo: Arbitriary Identity Key Name
+
 			CRUDService.read(params).then(function (res) {
 				$scope.schema = res.data.schema;
 				$scope.form = res.data.form || ['*'];
@@ -68,7 +69,6 @@ angular.module('panaxuiApp')
 
 		// Submit handler
 		$scope.onSubmit = function(pxForm) {
-			console.dir(pxForm)
 			// First we broadcast an event so all fields validate themselves
 			$scope.$broadcast('schemaFormValidate');
 
@@ -83,7 +83,6 @@ angular.module('panaxuiApp')
 
 		// Cancel handler
 		$scope.onReset = function(pxForm) {
-			console.dir(pxForm)
 			// ToDo: Confirm
 	    if (pxForm) {
 	      pxForm.$setPristine();
