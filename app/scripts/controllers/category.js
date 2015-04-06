@@ -29,6 +29,7 @@ angular.module('panaxuiApp')
 					currentNavBranch: function() {
 						return $scope.currentNavBranch;
 					},
+					catalog: null,
 					schema: null,
 					form: null,
 					model: null

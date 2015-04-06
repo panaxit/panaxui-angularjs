@@ -8,12 +8,14 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('DebugCtrl', function($scope, $modalInstance, currentNavBranch, currentUser, schema, form, model) {
+	.controller('DebugCtrl', function($scope, $modalInstance,
+		currentNavBranch, currentUser, catalog, schema, form, model) {
 
 		// Set providers
 		$scope.currentUser = currentUser;
 		$scope.currentNavBranch = currentNavBranch;
 		$scope.schema = schema;
+		$scope.catalog = catalog;
 		$scope.form = form;
 		$scope.model = model;
 

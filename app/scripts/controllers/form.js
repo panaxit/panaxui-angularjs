@@ -36,7 +36,8 @@ angular.module('panaxuiApp')
 				params.filters = '\'id=' + $scope.currentNavBranch.data.id + '\''; // ToDo: Arbitriary Identity Key Name
 
 			CRUDService.read(params).then(function (res) {
-				$scope.schema = res.data.schema;
+				$scope.catalog = res.data.catalog;
+				$scope.schema = res.data.schema || {};
 				$scope.form = res.data.form || ['*'];
 				$scope.form.push({
 					type: "actions",
@@ -72,12 +73,10 @@ angular.module('panaxuiApp')
 			// First we broadcast an event so all fields validate themselves
 			$scope.$broadcast('schemaFormValidate');
 
-			// Then we check if the form is valid
 			if (pxForm.$valid) {
-				// ... do whatever you need to do with your data.
-				console.log('FORM VALID')
+
 			} else {
-				console.log('INVALID FORM NOT GOOD')
+				console.log('INVALID FORM');
 			}
 		}
 
@@ -114,6 +113,9 @@ angular.module('panaxuiApp')
 					},
 					currentNavBranch: function() {
 						return $scope.currentNavBranch;
+					},
+					catalog: function() {
+						return $scope.catalog;
 					},
 					schema: function() {
 						return $scope.schema;
