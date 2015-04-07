@@ -59,7 +59,19 @@ angular.module('panaxuiApp')
      * DELETE /api/delete
      */
   	CRUDService.delete = function(payload) {
+	    var deferred = $q.defer();
 
+	    // http://stackoverflow.com/questions/24829933/angularjs-delete-with-data-sets-wrong-content-type-header
+      $http({
+      	url: "/api/delete", 
+      	method: 'DELETE', 
+      	data: payload, 
+      	headers: {'Content-Type': 'application/json'}
+      })
+		    .then(function (response) {
+		      deferred.resolve(response.data);
+		    });
+	    return deferred.promise;
 		};
 
     return CRUDService;

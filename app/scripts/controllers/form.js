@@ -75,7 +75,7 @@ angular.module('panaxuiApp')
 					actions.items.splice(actions.items.length-1, 0, {
 			    	type: 'button', 
 			    	title: 'Delete', 
-			    	onClick: "onDelete()",
+			    	onClick: "onSubmit(pxForm, true)",
 			    	style: 'btn-danger',
 			    	icon: 'glyphicon glyphicon-remove-circle'
 					});
@@ -85,85 +85,123 @@ angular.module('panaxuiApp')
 		$scope.loadSchemaForm();
 
 		// Submit handler
-		$scope.onSubmit = function(pxForm) {
+		$scope.onSubmit = function(pxForm, deletion) {
 			// First we broadcast an event so all fields validate themselves
 			$scope.$broadcast('schemaFormValidate');
 
 			if (pxForm.$valid) {
-				/**
-				 * Copy only dirty fields
-				 */
-				var dirty_model = {};
-				angular.forEach($scope.model, function(value, key) {
-					// ToDo: Bug
-					// Some controls won't appear in FormController
-					// https://www.pivotaltracker.com/story/show/91149432
-				  //if(!pxForm[key] || pxForm[key].$dirty) 
-				  if(pxForm[key] && pxForm[key].$dirty) 
-				  	dirty_model[key] = $scope.model[key];
-				});
-
 				/**
 				 * Create payload to be sent
 				 */
 				var payload = {
 			  	tableName: $scope.catalog.catalogName,
 			  	primaryKey: $scope.catalog.primaryKey,
-			  	identityKey: $scope.catalog.identityKey,
-			  	dataRows: [dirty_model]
+			  	identityKey: $scope.catalog.identityKey
 				};
 
 				/**
 				 * CRUDService calls
 				 */
-				if($scope.catalog.mode === 'insert') {
+				if(deletion === true) {
 					/**
-					 * mode = INSERT
+					 * DELETE
 					 */
-					CRUDService.create(payload).then(function (res) {
-						if(res.success === true) {
-							if(res.data[0].status === 'error') {
-								AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
-							} else if(res.data[0].status === 'success') {
-								AlertService.show('success', 'Saved', 'Record successfully saved');
-								// ToDo: 
-								// Redirect ($state.go) is correct, but UI-Router bugs prevent it from working
-								// Fix it along with bugs in nav-tree, breadcrumb & thumbnails:
-								// https://www.pivotaltracker.com/story/show/91147234
-								// https://www.pivotaltracker.com/story/show/91128952
-								$state.go('main.panel.formView', {
-									catalogName: res.data[0].dataTable,
-									mode: 'edit',
-									id: res.data[0].primaryValue || res.data[0].identityValue
-								});
-							}
-						} else {
-							// Do nothing. HTTP 500 responses handled by ErrorInterceptor
-						}
-					});
-				} else if($scope.catalog.mode === 'edit' && pxForm.$dirty) {
-					/**
-					 * mode = EDIT
-					 */
-					// Set primaryKey and/or identityKey as DataField with current value
-					if(payload.primaryKey)
-						payload.dataRows[0][payload.primaryKey] = $scope.currentNavBranch.data.id;
-					if(payload.identityKey)
-						payload.dataRows[0][payload.identityKey] = $scope.currentNavBranch.data.id;
+					if(confirm("Are your sure to Delete record?")) {
+						// Set DeleteRows
+						payload.deleteRows = [{}];
 
-					CRUDService.update(payload).then(function (res) {
-						if(res.success === true) {
-							if(res.data[0].status === 'error') {
-								AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
-							} else if(res.data[0].status === 'success') {
-								AlertService.show('success', 'Saved', 'Record successfully saved');
+						// Set primaryKey and/or identityKey as DeleteRow with current value
+						if(payload.primaryKey)
+							payload.deleteRows[0][payload.primaryKey] = $scope.currentNavBranch.data.id;
+						if(payload.identityKey)
+							payload.deleteRows[0][payload.identityKey] = $scope.currentNavBranch.data.id;
+
+						CRUDService.delete(payload).then(function (res) {
+							if(res.success === true) {
+								if(res.data[0].status === 'error') {
+									AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
+								} else if(res.data[0].status === 'success') {
+									AlertService.show('success', 'Deleted', 'Record successfully deleted');
+									// ToDo: 
+									// Redirect ($state.go) is correct, but UI-Router bugs prevent it from working
+									// Fix it along with bugs in nav-tree, breadcrumb & thumbnails:
+									// https://www.pivotaltracker.com/story/show/91147234
+									// https://www.pivotaltracker.com/story/show/91128952
+									$state.go('main.panel.gridView', {
+										catalogName: res.data[0].dataTable,
+										mode: 'edit'
+									});
+								}
+							} else {
+								// Do nothing. HTTP 500 responses handled by ErrorInterceptor
 							}
-						} else {
-							// Do nothing. HTTP 500 responses handled by ErrorInterceptor
-						}
-					});
+						});
+					}
 				} else {
-					AlertService.show('info', 'Info', 'No changes');
+					/**
+					 * Copy only dirty fields
+					 */
+					var dirty_model = {};
+					angular.forEach($scope.model, function(value, key) {
+						// ToDo: Bug
+						// Some controls won't appear in FormController
+						// https://www.pivotaltracker.com/story/show/91149432
+					  //if(!pxForm[key] || pxForm[key].$dirty) 
+					  if(pxForm[key] && pxForm[key].$dirty) 
+					  	dirty_model[key] = $scope.model[key];
+					});
+					// Set DataRows
+					payload.dataRows = [dirty_model];
+
+					if($scope.catalog.mode === 'insert') {
+						/**
+						 * mode = INSERT
+						 */
+						CRUDService.create(payload).then(function (res) {
+							if(res.success === true) {
+								if(res.data[0].status === 'error') {
+									AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
+								} else if(res.data[0].status === 'success') {
+									AlertService.show('success', 'Saved', 'Record successfully saved');
+									// ToDo: 
+									// Redirect ($state.go) is correct, but UI-Router bugs prevent it from working
+									// Fix it along with bugs in nav-tree, breadcrumb & thumbnails:
+									// https://www.pivotaltracker.com/story/show/91147234
+									// https://www.pivotaltracker.com/story/show/91128952
+									$state.go('main.panel.formView', {
+										catalogName: res.data[0].dataTable,
+										mode: 'edit',
+										id: res.data[0].primaryValue || res.data[0].identityValue
+									});
+								}
+							} else {
+								// Do nothing. HTTP 500 responses handled by ErrorInterceptor
+							}
+						});
+					} else if($scope.catalog.mode === 'edit' && pxForm.$dirty) {
+						/**
+						 * mode = EDIT
+						 */
+						// Set primaryKey and/or identityKey as DataRow with current value
+						if(payload.primaryKey)
+							payload.dataRows[0][payload.primaryKey] = $scope.currentNavBranch.data.id;
+						if(payload.identityKey)
+							payload.dataRows[0][payload.identityKey] = $scope.currentNavBranch.data.id;
+
+						CRUDService.update(payload).then(function (res) {
+							if(res.success === true) {
+								if(res.data[0].status === 'error') {
+									AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
+								} else if(res.data[0].status === 'success') {
+									AlertService.show('success', 'Saved', 'Record successfully saved');
+								}
+							} else {
+								// Do nothing. HTTP 500 responses handled by ErrorInterceptor
+							}
+						});
+					} else {
+						AlertService.show('info', 'Info', 'No changes');
+					}
 				}
 			} else {
 				AlertService.show('warning', 'Warning', 'Invalid form');
@@ -178,12 +216,6 @@ angular.module('panaxuiApp')
 	      pxForm.$setUntouched();
 	      $scope.model = {};
 	    }
-		}
-
-		// Delete handler
-		$scope.onDelete = function() {
-			// ToDo: Confirm of deletion and call CRUDService.delete
-			console.log("DELETE")
 		}
 
 		// Cancel handler
