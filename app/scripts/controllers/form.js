@@ -36,10 +36,18 @@ angular.module('panaxuiApp')
 				params.filters = '\'id=' + $scope.currentNavBranch.data.id + '\''; // ToDo: Arbitriary Identity Key Name
 
 			CRUDService.read(params).then(function (res) {
+				// Catalog
 				$scope.catalog = res.data.catalog;
+
+				// ASF Model
+				$scope.model = res.data.model[0] || {};
+
+				// ASF Schema
 				$scope.schema = res.data.schema || {};
+
+				// ASF Form
 				$scope.form = res.data.form || ['*'];
-				$scope.form.push({
+				var actions = {
 					type: "actions",
 					style: "pull-right",
 					items: [
@@ -62,8 +70,16 @@ angular.module('panaxuiApp')
 				    	icon: 'glyphicon glyphicon-ban-circle'
 				    }
 					]
-				});
-				$scope.model = res.data.model[0] || {};
+				};
+				if($scope.catalog.mode === 'edit')
+					actions.items.splice(actions.items.length-1, 0, {
+			    	type: 'button', 
+			    	title: 'Delete', 
+			    	onClick: "onDelete()",
+			    	style: 'btn-danger',
+			    	icon: 'glyphicon glyphicon-remove-circle'
+					});
+				$scope.form.push(actions);
 			});
 		};
 		$scope.loadSchemaForm();
@@ -162,6 +178,12 @@ angular.module('panaxuiApp')
 	      pxForm.$setUntouched();
 	      $scope.model = {};
 	    }
+		}
+
+		// Delete handler
+		$scope.onDelete = function() {
+			// ToDo: Confirm of deletion and call CRUDService.delete
+			console.log("DELETE")
 		}
 
 		// Cancel handler
