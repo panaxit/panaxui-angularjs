@@ -74,23 +74,42 @@ angular.module('panaxuiApp')
 			$scope.$broadcast('schemaFormValidate');
 
 			if (pxForm.$valid) {
+				/**
+				 * Copy only dirty fields
+				 */
+				var dirty_model = {};
+				angular.forEach($scope.model, function(value, key) {
+					// ToDo: Bug
+					// Some controls won't appear in FormController
+					// https://www.pivotaltracker.com/story/show/91149432
+				  //if(!pxForm[key] || pxForm[key].$dirty) 
+				  if(pxForm[key] && pxForm[key].$dirty) 
+				  	dirty_model[key] = $scope.model[key];
+				});
+
+				/**
+				 * Create payload to be sent
+				 */
 				var payload = {
 			  	tableName: $scope.catalog.catalogName,
 			  	primaryKey: $scope.catalog.primaryKey,
 			  	identityKey: $scope.catalog.identityKey,
-			  	dataRows: [$scope.model]
+			  	dataRows: [dirty_model]
 				};
 
+				/**
+				 * CRUDService calls
+				 */
 				if($scope.catalog.mode === 'insert') {
+					/**
+					 * mode = INSERT
+					 */
 					CRUDService.create(payload).then(function (res) {
 						if(res.success === true) {
 							if(res.data[0].status === 'error') {
-								AlertService.show('danger', 'Error', 
-									res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
+								AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
 							} else if(res.data[0].status === 'success') {
-								AlertService.show('success', 'Saved', 
-									'Record successfully saved');
-
+								AlertService.show('success', 'Saved', 'Record successfully saved');
 								// ToDo: 
 								// Redirect ($state.go) is correct, but UI-Router bugs prevent it from working
 								// Fix it along with bugs in nav-tree, breadcrumb & thumbnails:
@@ -104,11 +123,16 @@ angular.module('panaxuiApp')
 							}
 						}
 					});
-				} else if($scope.catalog.mode === 'edit') {
+				} else if($scope.catalog.mode === 'edit' && pxForm.$dirty) {
+					/**
+					 * mode = EDIT
+					 */
 					// ToDo: https://www.pivotaltracker.com/story/show/91148306
+				} else {
+					AlertService.show('info', 'Info', 'No changes');
 				}
 			} else {
-				console.log('INVALID FORM');
+				AlertService.show('warning', 'Warning', 'Invalid form');
 			}
 		}
 
