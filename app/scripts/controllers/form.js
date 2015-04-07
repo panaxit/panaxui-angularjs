@@ -121,13 +121,31 @@ angular.module('panaxuiApp')
 									id: res.data[0].primaryValue || res.data[0].identityValue
 								});
 							}
+						} else {
+							// Do nothing. HTTP 500 responses handled by ErrorInterceptor
 						}
 					});
 				} else if($scope.catalog.mode === 'edit' && pxForm.$dirty) {
 					/**
 					 * mode = EDIT
 					 */
-					// ToDo: https://www.pivotaltracker.com/story/show/91148306
+					// Set primaryKey and/or identityKey as DataField with current value
+					if(payload.primaryKey)
+						payload.dataRows[0][payload.primaryKey] = $scope.currentNavBranch.data.id;
+					if(payload.identityKey)
+						payload.dataRows[0][payload.identityKey] = $scope.currentNavBranch.data.id;
+
+					CRUDService.update(payload).then(function (res) {
+						if(res.success === true) {
+							if(res.data[0].status === 'error') {
+								AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
+							} else if(res.data[0].status === 'success') {
+								AlertService.show('success', 'Saved', 'Record successfully saved');
+							}
+						} else {
+							// Do nothing. HTTP 500 responses handled by ErrorInterceptor
+						}
+					});
 				} else {
 					AlertService.show('info', 'Info', 'No changes');
 				}

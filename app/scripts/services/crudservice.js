@@ -45,7 +45,14 @@ angular.module('panaxuiApp')
      * PUT /api/update
      */
   	CRUDService.update = function(payload) {
+	    var deferred = $q.defer();
 
+	    $http
+	    	.put("/api/update", payload)
+		    .then(function (response) {
+		      deferred.resolve(response.data);
+		    });
+	    return deferred.promise;
 		};
 
     /**
