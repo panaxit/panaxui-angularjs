@@ -8,7 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('GridCtrl', function($scope, $modal, CRUDService) {
+	.controller('GridCtrl', function($scope, $state, $modal, CRUDService) {
 
 		// get currently selected navigation branch
 		$scope.currentNavBranch = $scope.navMenuControl.get_selected_branch();
@@ -55,6 +55,21 @@ angular.module('panaxuiApp')
 			// ToDo: Redraw (re-render) grid. Ex.: when hiding, showing columns
 			$scope.loadGridData();
 		});
+
+		// New handler
+		$scope.onNew = function() {
+
+		};
+
+		// Edit handler
+		$scope.onEdit = function() {
+
+		};
+
+		// Delete handler
+		$scope.onDelete = function() {
+
+		};
 
 		// open Debug Modal and resolve `form-specific` objects
 		$scope.$on('openDebugModal', function (event, next) {

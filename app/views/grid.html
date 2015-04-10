@@ -1,11 +1,14 @@
 <div class="btn-toolbar">
 	<div class="pull-left">
 		<div class="btn-group btn-group-md">
-			<button class="btn btn-primary" type="submit">
+			<button class="btn btn-primary" type="submit"
+				ng-click="onNew()">
 				<em class="glyphicon glyphicon-ok-sign"></em>
 				New
 			</button>
-			<button class="btn btn-success" type="submit" ng-disabled="!gridApi.grid.selection.selectedCount">
+			<button class="btn btn-success" type="submit"
+				ng-click="onEdit()"
+				ng-disabled="!gridApi.grid.selection.selectedCount">
 				<em class="glyphicon glyphicon-edit"></em>
 				Edit
 			</button>
@@ -14,7 +17,9 @@
 
 	<div class="pull-right">
 		<div class="btn-group btn-group-md">
-			<button class="btn btn-danger" type="submit" ng-disabled="!gridApi.grid.selection.selectedCount">
+			<button class="btn btn-danger" type="submit" 
+				ng-click="onDelete()"
+				ng-disabled="!gridApi.grid.selection.selectedCount">
 				<em class="glyphicon glyphicon-remove-circle"></em>
 				Delete
 			</button>
