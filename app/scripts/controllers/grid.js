@@ -44,6 +44,7 @@ angular.module('panaxuiApp')
 				getData: "1",
 				getStructure: "0"
 			}).then(function (res) {
+				$scope.catalog = res.data.catalog;
 				$scope.schema = res.data.schema;
 				$scope.gridOptions.data = res.data.model || [];
 			});
@@ -83,6 +84,9 @@ angular.module('panaxuiApp')
 					},
 					currentNavBranch: function() {
 						return $scope.currentNavBranch;
+					},
+					catalog: function() {
+						return $scope.catalog;
 					},
 					schema: function() {
 						return $scope.schema;
