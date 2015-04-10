@@ -22,6 +22,7 @@ angular
     'ncy-angular-breadcrumb',
     'ui.grid.autoResize',
     'ui.grid.pagination',
+    'ui.grid.selection',
 
     'ngUrlify',
     'angular-md5',
