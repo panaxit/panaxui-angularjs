@@ -1,28 +1,20 @@
 <div class="btn-toolbar">
 	<div class="pull-left">
 		<div class="btn-group btn-group-md">
-			<button class="btn btn-primary" type="submit" ng-disabled="pxForm.$invalid">
+			<button class="btn btn-primary" type="submit">
 				<em class="glyphicon glyphicon-ok-sign"></em>
 				New
 			</button>
-			<button class="btn btn-success" type="submit" ng-disabled="pxForm.$invalid">
+			<button class="btn btn-success" type="submit" ng-disabled="!gridApi.grid.selection.selectedCount">
 				<em class="glyphicon glyphicon-edit"></em>
 				Edit
 			</button>
-			<!-- <button class="btn btn-default" type="button" ng-click="onCancel()">
-				<em class="glyphicon glyphicon-ban-circle"></em>
-				Cancel
-			</button> -->
 		</div>
 	</div>
 
 	<div class="pull-right">
 		<div class="btn-group btn-group-md">
-			<!-- <button class="btn btn-info" type="button" ng-click="onReset(pxForm)">
-				<em class="glyphicon glyphicon-retweet"></em>
-				Reset
-			</button> -->
-			<button class="btn btn-danger" type="submit" ng-disabled="pxForm.$invalid">
+			<button class="btn btn-danger" type="submit" ng-disabled="!gridApi.grid.selection.selectedCount">
 				<em class="glyphicon glyphicon-remove-circle"></em>
 				Delete
 			</button>
