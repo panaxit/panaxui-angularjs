@@ -105,8 +105,16 @@ angular
 
       .state('main.panel.gridView', {
           url: 'grid/{catalogName}/{mode}',
-          templateUrl: 'views/grid.html',
-          controller: 'GridCtrl',
+          views: {
+            'main': {
+              controller: 'GridCtrl',
+              templateUrl: 'views/grid.html'
+            },
+            'footer': {
+              controller: 'GridCtrl',
+              templateUrl: 'views/grid.footer.html'
+            }
+          },
           ncyBreadcrumb: {
             label: '{{currentNavBranch.label}}'
           }
@@ -114,8 +122,16 @@ angular
 
       .state('main.panel.formView', {
           url: 'form/{catalogName}/{mode}/{id}',
-          templateUrl: 'views/form.html',
-          controller: 'FormCtrl',
+          views: {
+            'main': {
+              controller: 'FormCtrl',
+              templateUrl: 'views/form.html'
+            },
+            'footer': {
+              controller: 'FormCtrl',
+              templateUrl: 'views/form.footer.html'
+            }
+          },
           ncyBreadcrumb: {
             label: '{{currentNavBranch.label}}'
           }
@@ -129,6 +145,18 @@ angular
             label: '{{currentNavBranch.label}}'
           }
       })
+
+      // filters: https://github.com/angular-ui/ui-router/wiki/Multiple-Named-Views
+      // .state('main.panel.filtersView', {
+      //     url: 'filters/{catalogName}/{mode}',
+      //     views: {
+      //       'filters':
+      //       'results':
+      //     }
+      //     ncyBreadcrumb: {
+      //       label: '{{currentNavBranch.label}}'
+      //     }
+      // })
     ;
   })
 

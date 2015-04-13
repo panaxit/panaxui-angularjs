@@ -57,16 +57,6 @@ angular.module('panaxuiApp')
 			$scope.loadGridData();
 		});
 
-		// New handler
-		$scope.onNew = function() {
-
-		};
-
-		// Edit handler
-		$scope.onEdit = function() {
-
-		};
-
 		// Delete handler
 		$scope.onDelete = function() {
 
