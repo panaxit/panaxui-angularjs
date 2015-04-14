@@ -5,11 +5,11 @@
 	<div class="panel-body">
 
 		<accordion>
-			<accordion-group ng-show="currentUser">
+			<accordion-group ng-show="debugInfo.currentUser">
 
         <accordion-heading>
         		<em class="glyphicon glyphicon-user"></em>
-            Session Info
+            Session
         </accordion-heading>
 
         <table class="table table-bordered table-condensed">
@@ -27,7 +27,7 @@
 				  <tr>
 				    <td>API</td>
 				    <td>
-				    	<code>panaxui-nodejs-{{currentUser.api_version}}</code>
+				    	<code>panaxui-nodejs-{{debugInfo.currentUser.api_version}}</code>
 				    </td> 
 				  </tr>
 				  <tr>
@@ -39,7 +39,7 @@
 				  <tr>
 				    <td>User</td>
 				    <td>
-				    	<code>{{currentUser.username}}</code>
+				    	<code>{{debugInfo.currentUser.username}}</code>
 				    </td> 
 				  </tr>
         	<tr>
@@ -50,79 +50,79 @@
 				  <tr>
 				    <td>Server</td>
 				    <td>
-				    	<code>{{currentUser.db.server}}</code>
+				    	<code>{{debugInfo.currentUser.db.server}}</code>
 				    </td> 
 				  </tr>
 				  <tr>
 				    <td>Vendor</td>
 				    <td>
-				    	<code>{{currentUser.db.vendor}}</code>
+				    	<code>{{debugInfo.currentUser.db.vendor}}</code>
 				    </td> 
 				  </tr>
 				  <tr>
 				    <td>Version</td>
 				    <td>
-				    	<code>{{currentUser.db.version}}</code>
+				    	<code>{{debugInfo.currentUser.db.version}}</code>
 				    </td> 
 				  </tr>
 				  <tr>
 				    <td>Database</td>
 				    <td>
-				    	<code>{{currentUser.db.database}}</code>
+				    	<code>{{debugInfo.currentUser.db.database}}</code>
 				    </td> 
 				  </tr>
 				  <tr>
 				    <td>User</td>
 				    <td>
-				    	<code>{{currentUser.db.user}}</code>
+				    	<code>{{debugInfo.currentUser.db.user}}</code>
 				    </td> 
 				  </tr>
 				</table>
 			</accordion-group>
-			<accordion-group ng-show="stateParams">
+			<accordion-group ng-show="debugInfo.stateParams">
 
         <accordion-heading>
         		<em class="glyphicon glyphicon-leaf"></em>
-            stateParams
+            State
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{stateParams | json}}</code></pre>
+        <pre><code data-language="javascript">{{debugInfo.stateParams | json}}</code></pre>
 			</accordion-group>
-			<accordion-group ng-show="catalog">
+			<accordion-group ng-show="debugInfo.catalog">
 
         <accordion-heading>
         		<em class="glyphicon glyphicon-book"></em>
-            catalog
+            Catalog
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{catalog | json}}</code></pre>
+        <pre><code data-language="javascript">{{debugInfo.catalog | json}}</code></pre>
 			</accordion-group>
-			<accordion-group ng-show="schema">
+			<accordion-group ng-show="debugInfo.schema">
 
         <accordion-heading>
         		<em class="glyphicon glyphicon-info-sign"></em>
-            schema
+            Schema
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{schema | json}}</code></pre>
+        <pre><code data-language="javascript">{{debugInfo.schema | json}}</code></pre>
 			</accordion-group>
-			<accordion-group ng-show="form">
+			<accordion-group ng-show="debugInfo.form">
 
         <accordion-heading>
         		<em class="glyphicon glyphicon-tasks"></em>
-            form
+            Form
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{form | json}}</code></pre>
+        <pre><code data-language="javascript">{{debugInfo.form | json}}</code></pre>
 			</accordion-group>
-			<accordion-group ng-show="model">
+			<accordion-group ng-show="debugInfo.model">
 
         <accordion-heading>
         		<em class="glyphicon glyphicon-download-alt"></em>
-            model
+            Model
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{model | json}}</code></pre>
+        <pre><code data-language="javascript">{{debugInfo.model | json}}</code></pre>
 			</accordion-group>
 		</accordion>
 

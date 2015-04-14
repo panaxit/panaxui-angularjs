@@ -20,16 +20,12 @@ angular.module('panaxuiApp')
 				controller: 'DebugCtrl',
 				size: 'lg',
 				resolve: {
-					currentUser: function() {
-						return $scope.currentUser;
-					},
-					stateParams: function() {
-						return $stateParams;
-					},
-					catalog: null,
-					schema: null,
-					form: null,
-					model: null
+					debugInfo: function() {
+						return {
+							currentUser: $scope.currentUser,
+							stateParams: $stateParams
+						};
+					}
 				}
 			});
 			debugModalInstance.result.then(function() {

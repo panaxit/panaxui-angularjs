@@ -84,22 +84,15 @@ angular.module('panaxuiApp')
 				controller: 'DebugCtrl',
 				size: 'lg',
 				resolve: {
-					currentUser: function() {
-						return $scope.currentUser;
-					},
-					stateParams: function() {
-						return $stateParams;
-					},
-					catalog: function() {
-						return $scope.catalog;
-					},
-					schema: function() {
-						return $scope.schema;
-					},
-					model: function() {
-						return $scope.gridOptions.data;
-					},
-					form: null
+					debugInfo: function() {
+						return {
+							currentUser: $scope.currentUser,
+							stateParams: $stateParams,
+							catalog: $scope.catalog,
+							schema: $scope.schema,
+							model: $scope.gridOptions.data
+						};
+					}
 				}
 			});
 			debugModalInstance.result.then(function() {

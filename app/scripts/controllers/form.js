@@ -223,23 +223,15 @@ angular.module('panaxuiApp')
 				controller: 'DebugCtrl',
 				size: 'lg',
 				resolve: {
-					currentUser: function() {
-						return $scope.currentUser;
-					},
-					stateParams: function() {
-						return $stateParams;
-					},
-					catalog: function() {
-						return $scope.catalog;
-					},
-					schema: function() {
-						return $scope.schema;
-					},
-					form: function() {
-						return $scope.form;
-					},
-					model: function() {
-						return $scope.model;
+					debugInfo: function() {
+						return {
+							currentUser: $scope.currentUser,
+							stateParams: $stateParams,
+							catalog: $scope.catalog,
+							schema: $scope.schema,
+							form: $scope.form,
+							model: $scope.model
+						};
 					}
 				}
 			});

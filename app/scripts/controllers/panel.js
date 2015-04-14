@@ -16,8 +16,5 @@ angular.module('panaxuiApp')
   	$scope.reloadClick = function() {
   		$scope.$broadcast('reloadData');
   	};
-  	// $scope.debugClick = function() {
-  	// 	$scope.$broadcast('openDebugModal');
-  	// };
 
   });

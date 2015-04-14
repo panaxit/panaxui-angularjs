@@ -8,16 +8,10 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('DebugCtrl', function($scope, $modalInstance,
-		stateParams, currentUser, catalog, schema, form, model) {
+	.controller('DebugCtrl', function($scope, $modalInstance, debugInfo) {
 
 		// Set providers
-		$scope.currentUser = currentUser;
-		$scope.stateParams = stateParams;
-		$scope.schema = schema;
-		$scope.catalog = catalog;
-		$scope.form = form;
-		$scope.model = model;
+		$scope.debugInfo = debugInfo;
 
 		// Ok  clicked
 		$scope.okClick = function() {
