@@ -7,8 +7,7 @@
 </div>
 
 <div class="row clearfix">
-  <div class="col-md-{{columnSize}}" 
-        class="col-md-2" ng-repeat="branch in currentNavBranch.children">
+  <div class="col-md-3 col-sm-6" ng-repeat="branch in currentNavBranch.children">
     <div class="thumbnail">
       <a ng-click="navMenuControl.select_branch(branch)">
         <img ng-src="images/thumbnails/{{branch.data.controlType || 'category'}}.png" alt="{{branch.label}}" class="px-thumbnail-icon">

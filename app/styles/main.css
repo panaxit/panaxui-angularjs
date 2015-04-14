@@ -86,6 +86,9 @@ a.navbar-brand {
   width: 72px;
   cursor: pointer;
 }
+.thumbnail > .caption > a {
+	cursor: pointer;
+}
 
 /**
  * Alerts

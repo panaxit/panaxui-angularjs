@@ -13,9 +13,6 @@ angular.module('panaxuiApp')
   	// get currently selected navigation branch
 		$scope.currentNavBranch = $scope.navMenuControl.get_selected_branch();
 
-		// calculate column size for thumbnail;s
-		$scope.columnSize = ($scope.currentNavBranch.children.length <= 12) ? Math.floor(12 / $scope.currentNavBranch.children.length) : 1
-
 		// open Debug Modal and resolve `category-specific` objects
 		$scope.$on('openDebugModal', function (event, next) {
 			var debugModalInstance = $modal.open({
