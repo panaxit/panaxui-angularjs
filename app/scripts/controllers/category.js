@@ -8,7 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('CategoryCtrl', function($scope, $modal) {
+	.controller('CategoryCtrl', function($scope, $stateParams, $modal) {
 
   	// get currently selected navigation branch
 		$scope.currentNavBranch = $scope.navMenuControl.get_selected_branch();
@@ -23,8 +23,8 @@ angular.module('panaxuiApp')
 					currentUser: function() {
 						return $scope.currentUser;
 					},
-					currentNavBranch: function() {
-						return $scope.currentNavBranch;
+					stateParams: function() {
+						return $stateParams;
 					},
 					catalog: null,
 					schema: null,

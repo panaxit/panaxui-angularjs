@@ -79,14 +79,14 @@
 				  </tr>
 				</table>
 			</accordion-group>
-			<accordion-group ng-show="currentNavBranch">
+			<accordion-group ng-show="stateParams">
 
         <accordion-heading>
         		<em class="glyphicon glyphicon-leaf"></em>
-            currentNavBranch.data
+            stateParams
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{currentNavBranch.data | json}}</code></pre>
+        <pre><code data-language="javascript">{{stateParams | json}}</code></pre>
 			</accordion-group>
 			<accordion-group ng-show="catalog">
 

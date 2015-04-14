@@ -9,11 +9,11 @@
  */
 angular.module('panaxuiApp')
 	.controller('DebugCtrl', function($scope, $modalInstance,
-		currentNavBranch, currentUser, catalog, schema, form, model) {
+		stateParams, currentUser, catalog, schema, form, model) {
 
 		// Set providers
 		$scope.currentUser = currentUser;
-		$scope.currentNavBranch = currentNavBranch;
+		$scope.stateParams = stateParams;
 		$scope.schema = schema;
 		$scope.catalog = catalog;
 		$scope.form = form;

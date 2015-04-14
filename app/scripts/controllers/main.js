@@ -11,6 +11,10 @@ angular.module('panaxuiApp')
 	.controller('MainCtrl', ['$scope', '$state', 'urlifyFilter', 'AuthService',
 		function MainCtrl($scope, $state, urlify, AuthService) {
 
+			/**
+			 * Nav-Tree & Sitemap
+			 */
+			
 			// Show menu toggle
 			$scope.showMenu = true;
 
@@ -20,6 +24,7 @@ angular.module('panaxuiApp')
 				children: []
 			}];
 
+			// Populate nav-tree with sitemap data
 			AuthService.sitemap().then(function (res) {
 				$scope.navMenuData[0].children = res.data;
 			});
@@ -27,23 +32,36 @@ angular.module('panaxuiApp')
 			// abn-tree control api object
 			$scope.navMenuControl = {};
 
-			/*
-			Listed for events from children scopes: form, grid, cards, ...
+			/**
+			 * Listen for events from children scopes: form, grid, cards, ...
 			 */
-			$scope.$on('goToBranchRoute', function (event, branch) {
+			
+			// Go to arbitriary state
+			$scope.goToState = function(state, catalog) {
+				$state.go(state, catalog);
+			};
+			// Go to arbitriary state and unselect nav-tree
+			$scope.$on('goToState', function (event, state, catalog) {
+				$scope.goToState(state, catalog);
+				$scope.navMenuControl.select_branch(null);
+			});
+			// Go to state of selected branch (nav-tree)
+			$scope.$on('goToBranch', function (event, branch) {
 				if (branch.level === 1)
-					$state.go('main.home');
+					$scope.goToState('main.home')
 				else if (branch.children && branch.children.length)
-					$state.go('main.category', {
+					$scope.goToState('main.category', {
 						name: urlify(branch.label)
 					});
 				else
-					$state.go('main.panel.' + branch.data.controlType, branch.data);
+					$scope.goToState('main.panel.' + branch.data.controlType, branch.data);
 			});
 			
 	  	/*
 	  	Broadcast events to children scopes: form, grid, cards, ...
 	  	 */
+	  	
+	  	// Open debug modal
 	  	$scope.debugClick = function() {
 	  		$scope.$broadcast('openDebugModal');
 	  	};

@@ -8,10 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('FormCtrl', function($scope, $state, $modal, CRUDService, AlertService) {
-
-		// get currently selected navigation branch
-		$scope.currentNavBranch = $scope.navMenuControl.get_selected_branch();
+	.controller('FormCtrl', function($scope, $stateParams, $modal, CRUDService, AlertService) {
 
 		// Schema
 		$scope.schema = {};
@@ -26,14 +23,14 @@ angular.module('panaxuiApp')
 		$scope.loadSchemaForm = function() {
 			// Set API params
 			var params = {
+				mode: $stateParams.mode,
+				catalogName: $stateParams.catalogName,
+				controlType: 'formView',
 				getData: '1',
-				getStructure: '1',
-				mode: $scope.currentNavBranch.data.mode,
-				catalogName: $scope.currentNavBranch.data.catalogName,
-				controlType: $scope.currentNavBranch.data.controlType
+				getStructure: '1'
 			};
-			if($scope.currentNavBranch.data.id)
-				params.filters = '\'id=' + $scope.currentNavBranch.data.id + '\''; // ToDo: Arbitriary Identity Key Name
+			if($stateParams.id)
+				params.filters = '\'id=' + $stateParams.id + '\''; // ToDo: Arbitriary Identity Key Name
 
 			CRUDService.read(params).then(function (res) {
 				// Catalog
@@ -112,9 +109,9 @@ angular.module('panaxuiApp')
 
 						// Set primaryKey and/or identityKey as DeleteRow with current value
 						if(payload.primaryKey)
-							payload.deleteRows[0][payload.primaryKey] = $scope.currentNavBranch.data.id;
+							payload.deleteRows[0][payload.primaryKey] = $stateParams.id;
 						if(payload.identityKey)
-							payload.deleteRows[0][payload.identityKey] = $scope.currentNavBranch.data.id;
+							payload.deleteRows[0][payload.identityKey] = $stateParams.id;
 
 						CRUDService.delete(payload).then(function (res) {
 							if(res.success === true) {
@@ -122,12 +119,7 @@ angular.module('panaxuiApp')
 									AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
 								} else if(res.data[0].status === 'success') {
 									AlertService.show('success', 'Deleted', 'Record successfully deleted');
-									// ToDo: 
-									// Redirect ($state.go) is correct, but UI-Router bugs prevent it from working
-									// Fix it along with bugs in nav-tree, breadcrumb & thumbnails:
-									// https://www.pivotaltracker.com/story/show/91147234
-									// https://www.pivotaltracker.com/story/show/91128952
-									$state.go('main.panel.gridView', {
+									$scope.$emit('goToState', 'main.panel.gridView', {
 										catalogName: res.data[0].dataTable,
 										mode: 'edit'
 									});
@@ -163,12 +155,7 @@ angular.module('panaxuiApp')
 									AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
 								} else if(res.data[0].status === 'success') {
 									AlertService.show('success', 'Saved', 'Record successfully saved');
-									// ToDo: 
-									// Redirect ($state.go) is correct, but UI-Router bugs prevent it from working
-									// Fix it along with bugs in nav-tree, breadcrumb & thumbnails:
-									// https://www.pivotaltracker.com/story/show/91147234
-									// https://www.pivotaltracker.com/story/show/91128952
-									$state.go('main.panel.formView', {
+									$scope.$emit('goToState', 'main.panel.formView', {
 										catalogName: res.data[0].dataTable,
 										mode: 'edit',
 										id: res.data[0].primaryValue || res.data[0].identityValue
@@ -184,9 +171,9 @@ angular.module('panaxuiApp')
 						 */
 						// Set primaryKey and/or identityKey as DataRow with current value
 						if(payload.primaryKey)
-							payload.dataRows[0][payload.primaryKey] = $scope.currentNavBranch.data.id;
+							payload.dataRows[0][payload.primaryKey] = $stateParams.id;
 						if(payload.identityKey)
-							payload.dataRows[0][payload.identityKey] = $scope.currentNavBranch.data.id;
+							payload.dataRows[0][payload.identityKey] = $stateParams.id;
 
 						CRUDService.update(payload).then(function (res) {
 							if(res.success === true) {
@@ -239,8 +226,8 @@ angular.module('panaxuiApp')
 					currentUser: function() {
 						return $scope.currentUser;
 					},
-					currentNavBranch: function() {
-						return $scope.currentNavBranch;
+					stateParams: function() {
+						return $stateParams;
 					},
 					catalog: function() {
 						return $scope.catalog;

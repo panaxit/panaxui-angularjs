@@ -8,10 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('GridCtrl', function($scope, $state, $modal, CRUDService) {
-
-		// get currently selected navigation branch
-		$scope.currentNavBranch = $scope.navMenuControl.get_selected_branch();
+	.controller('GridCtrl', function($scope, $stateParams, $modal, CRUDService) {
 
 		// Grid options
 		$scope.gridOptions = {
@@ -38,9 +35,9 @@ angular.module('panaxuiApp')
 		// Load grid's data
 		$scope.loadGridData = function() {
 			CRUDService.read({
-				mode: $scope.currentNavBranch.data.mode,
-				catalogName: $scope.currentNavBranch.data.catalogName,
-				controlType: $scope.currentNavBranch.data.controlType,
+				mode: $stateParams.mode,
+				catalogName: $stateParams.catalogName,
+				controlType: 'gridView',
 				getData: "1",
 				getStructure: "0"
 			}).then(function (res) {
@@ -57,6 +54,24 @@ angular.module('panaxuiApp')
 			$scope.loadGridData();
 		});
 
+		//New handler
+		$scope.onNew = function() {
+			$scope.$emit('goToState', 'main.panel.formView', {
+				catalogName: $scope.catalog.catalogName,
+				mode: 'insert',
+				id: undefined
+			});
+		};
+
+		// Edit handler
+		// $scope.onEdit = function() {
+		// 	$state.go('main.panel.formView', {
+		// 		catalogName: $scope.catalog.catalogName,
+		// 		mode: 'insert',
+		// 		id: //
+		// 	});
+		// };
+
 		// Delete handler
 		$scope.onDelete = function() {
 
@@ -72,8 +87,8 @@ angular.module('panaxuiApp')
 					currentUser: function() {
 						return $scope.currentUser;
 					},
-					currentNavBranch: function() {
-						return $scope.currentNavBranch;
+					stateParams: function() {
+						return $stateParams;
 					},
 					catalog: function() {
 						return $scope.catalog;
