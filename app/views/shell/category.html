@@ -8,14 +8,14 @@
 
 <div class="row clearfix">
   <div class="col-md-{{columnSize}}" 
-        class="col-md-2" ng-repeat="child in currentNavBranch.children">
+        class="col-md-2" ng-repeat="branch in currentNavBranch.children">
     <div class="thumbnail">
-      <a ng-click="goToRoute(child)">
-        <img ng-src="images/thumbnails/{{child.data.controlType || 'category'}}.png" alt="{{child.label}}" class="px-thumbnail-icon">
+      <a ng-click="navMenuControl.select_branch(branch)">
+        <img ng-src="images/thumbnails/{{branch.data.controlType || 'category'}}.png" alt="{{branch.label}}" class="px-thumbnail-icon">
       </a>
       <div class="caption text-center">
-        <a ui-sref="{{ getRouteSRef(child) }}">
-          {{ child.label }}
+        <a ng-click="navMenuControl.select_branch(branch)">
+          {{ branch.label }}
         </a>
       </div>
     </div>

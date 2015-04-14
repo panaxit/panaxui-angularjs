@@ -21,7 +21,7 @@
     <abn-tree 
     	tree-data="navMenuData" 
         tree-control="navMenuControl"
-        on-select = "goToRoute(branch)"
+        on-select = "$emit('goToBranchRoute',branch)"
     	initial-selection="Home">
     </abn-tree>
 	
