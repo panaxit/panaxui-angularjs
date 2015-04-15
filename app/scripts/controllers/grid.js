@@ -65,16 +65,22 @@ angular.module('panaxuiApp')
 
 		// Edit handler
 		$scope.onEdit = function() {
-			// $scope.$emit('goToState', 'main.panel.form.view', {
-			// 	catalogName: $scope.catalog.catalogName,
-			// 	mode: 'insert',
-			// 	id: //selected
-			// });
+			var selected = $scope.gridApi.selection.getSelectedRows()[0];
+			var identifier = selected[$scope.catalog.primaryKey] ||
+							 selected[$scope.catalog.identityKey];
+
+			$scope.$emit('goToState', 'main.panel.form.view', {
+				catalogName: $scope.catalog.catalogName,
+				mode: 'edit',
+				id: identifier
+			});
 		};
 
 		// Delete handler
 		$scope.onDelete = function() {
-
+			//if(confirm("Are your sure to Delete record?"))
+			//// Reload grid
+			//$scope.loadGridData();
 		};
 
 		// open Debug Modal and resolve `form-specific` objects
