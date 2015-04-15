@@ -39,11 +39,16 @@ angular.module('panaxuiApp')
 				catalogName: $stateParams.catalogName,
 				controlType: 'gridView',
 				getData: "1",
-				getStructure: "0"
+				getStructure: "1"
 			}).then(function (res) {
+				// Catalog
 				$scope.catalog = res.data.catalog;
-				$scope.schema = res.data.schema;
+				// Grid's Model
 				$scope.gridOptions.data = res.data.model || [];
+				// Grid's Schema
+				$scope.schema = res.data.schema;
+				// Grid's Column Definition (layout)
+				$scope.gridOptions.columnDefs = res.data.grid;
 			});
 		};
 		$scope.loadGridData();

@@ -35,13 +35,10 @@ angular.module('panaxuiApp')
 			CRUDService.read(params).then(function (res) {
 				// Catalog
 				$scope.catalog = res.data.catalog;
-
 				// ASF Model
 				$scope.model = res.data.model[0] || {};
-
 				// ASF Schema
 				$scope.schema = res.data.schema || {};
-
 				// ASF Form
 				$scope.form = res.data.form || ['*'];
 				var actions = {
