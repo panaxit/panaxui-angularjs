@@ -2,15 +2,16 @@
 	<div class="pull-left">
 		<div class="btn-group btn-group-md">
 			<button class="btn btn-primary" type="submit"
-				ng-click="onNew()">
+				ng-click="onNew()"
+				ng-show="catalog.mode == 'edit'">
 				<em class="glyphicon glyphicon-ok-sign"></em>
 				New
 			</button>
 			<button class="btn btn-success" type="submit"
-				ng-click="onEdit()"
+				ng-click="onViewEdit()"
 				ng-disabled="!gridApi.grid.selection.selectedCount">
-				<em class="glyphicon glyphicon-edit"></em>
-				Edit
+				<em class="glyphicon glyphicon-{{catalog.mode == 'edit' ? 'edit' : 'eye-open'}}"></em>
+				{{catalog.mode == 'edit' ? 'Edit' : 'View'}}
 			</button>
 		</div>
 	</div>
@@ -19,7 +20,8 @@
 		<div class="btn-group btn-group-md">
 			<button class="btn btn-danger" type="submit" 
 				ng-click="onDelete()"
-				ng-disabled="!gridApi.grid.selection.selectedCount">
+				ng-disabled="!gridApi.grid.selection.selectedCount"
+				ng-show="catalog.mode == 'edit'">
 				<em class="glyphicon glyphicon-remove-circle"></em>
 				Delete
 			</button>

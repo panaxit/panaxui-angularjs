@@ -63,15 +63,15 @@ angular.module('panaxuiApp')
 			});
 		};
 
-		// Edit handler
-		$scope.onEdit = function() {
+		// View/Edit handler
+		$scope.onViewEdit = function() {
 			var selected = $scope.gridApi.selection.getSelectedRows()[0];
 			var identifier = selected[$scope.catalog.primaryKey] ||
 							 selected[$scope.catalog.identityKey];
 
 			$scope.$emit('goToState', 'main.panel.form.view', {
 				catalogName: $scope.catalog.catalogName,
-				mode: 'edit',
+				mode: $scope.catalog.mode,
 				id: identifier
 			});
 		};
