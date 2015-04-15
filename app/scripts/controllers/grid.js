@@ -54,9 +54,9 @@ angular.module('panaxuiApp')
 			$scope.loadGridData();
 		});
 
-		//New handler
+		// New handler
 		$scope.onNew = function() {
-			$scope.$emit('goToState', 'main.panel.formView', {
+			$scope.$emit('goToState', 'main.panel.form.view', {
 				catalogName: $scope.catalog.catalogName,
 				mode: 'insert',
 				id: undefined
@@ -64,13 +64,13 @@ angular.module('panaxuiApp')
 		};
 
 		// Edit handler
-		// $scope.onEdit = function() {
-		// 	$state.go('main.panel.formView', {
-		// 		catalogName: $scope.catalog.catalogName,
-		// 		mode: 'insert',
-		// 		id: //
-		// 	});
-		// };
+		$scope.onEdit = function() {
+			// $scope.$emit('goToState', 'main.panel.form.view', {
+			// 	catalogName: $scope.catalog.catalogName,
+			// 	mode: 'insert',
+			// 	id: //selected
+			// });
+		};
 
 		// Delete handler
 		$scope.onDelete = function() {

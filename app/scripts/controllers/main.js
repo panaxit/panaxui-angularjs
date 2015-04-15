@@ -53,8 +53,10 @@ angular.module('panaxuiApp')
 					$scope.goToState('main.category', {
 						name: urlify(branch.label)
 					});
-				else
-					$scope.goToState('main.panel.' + branch.data.controlType, branch.data);
+				else if (branch.data.controlType === 'gridView')
+					$scope.goToState('main.panel.grid.view', branch.data);
+				else if (branch.data.controlType === 'formView')
+					$scope.goToState('main.panel.form.view', branch.data);
 			});
 			
 	  	/*

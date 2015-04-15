@@ -119,7 +119,7 @@ angular.module('panaxuiApp')
 									AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
 								} else if(res.data[0].status === 'success') {
 									AlertService.show('success', 'Deleted', 'Record successfully deleted');
-									$scope.$emit('goToState', 'main.panel.gridView', {
+									$scope.$emit('goToState', 'main.panel.grid.view', {
 										catalogName: res.data[0].dataTable,
 										mode: 'edit'
 									});
@@ -155,7 +155,7 @@ angular.module('panaxuiApp')
 									AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
 								} else if(res.data[0].status === 'success') {
 									AlertService.show('success', 'Saved', 'Record successfully saved');
-									$scope.$emit('goToState', 'main.panel.formView', {
+									$scope.$emit('goToState', 'main.panel.form.view', {
 										catalogName: res.data[0].dataTable,
 										mode: 'edit',
 										id: res.data[0].primaryValue || res.data[0].identityValue

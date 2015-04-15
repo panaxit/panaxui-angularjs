@@ -64,87 +64,104 @@ angular
     // Set up states
     $stateProvider
 
+      /*
+      Login state
+       */
       .state('login', {
           url: '/login',
           templateUrl: 'views/shell/login.html'
       })
 
+      /*
+      Main `abstract` root state
+       */
       .state('main', {
           abstract: true,
           templateUrl: 'views/shell/main.html',
           controller: 'MainCtrl',
           data: {
             authRequired: true
-          },
-          ncyBreadcrumb: {
-            label: 'Home'
           }
       })
 
+      /*
+      Home state
+       */
       .state('main.home', {
           url: '/',
           templateUrl: 'views/shell/home.html'
       })
 
+      /*
+      Category state
+       */
       .state('main.category', {
           url: 'category/{name}',
           templateUrl: 'views/shell/category.html',
-          controller: 'CategoryCtrl',
-          ncyBreadcrumb: {
-            label: '{{currentNavBranch.label}}'
-          }
+          controller: 'CategoryCtrl'
       })
 
+      /*
+      Panel `parent` state
+       */
       .state('main.panel', {
           templateUrl: 'views/shell/panel.html',
-          controller: 'PanelCtrl',
-          ncyBreadcrumb: {
-            skip: true
-          }
+          controller: 'PanelCtrl'
       })
 
-      .state('main.panel.gridView', {
-          url: 'grid/{catalogName}/{mode}',
+      /*
+      Grid `abstract` state
+       */
+      .state('main.panel.grid', {
+        abstract: true,
+        url: 'grid/{catalogName}/{mode}',
+        controller: 'GridCtrl',
+        templateUrl: 'views/grid.html'
+      })
+
+      /*
+      GridView state
+       */
+      .state('main.panel.grid.view', {
           views: {
             'main': {
-              controller: 'GridCtrl',
-              templateUrl: 'views/grid.html'
+              templateUrl: 'views/grid.main.html'
             },
             'footer': {
-              controller: 'GridCtrl',
               templateUrl: 'views/grid.footer.html'
             }
-          },
-          ncyBreadcrumb: {
-            label: '{{currentNavBranch.label}}'
           }
       })
 
-      .state('main.panel.formView', {
-          url: 'form/{catalogName}/{mode}/{id}',
+      /*
+      Form `abstract` state
+       */
+      .state('main.panel.form', {
+        abstract: true,
+        url: 'form/{catalogName}/{mode}/{id}',
+        controller: 'FormCtrl',
+        templateUrl: 'views/form.html'
+      })
+
+      /*
+      FormView state
+       */
+      .state('main.panel.form.view', {
           views: {
             'main': {
-              controller: 'FormCtrl',
-              templateUrl: 'views/form.html'
+              templateUrl: 'views/form.main.html'
             },
             'footer': {
-              controller: 'FormCtrl',
               templateUrl: 'views/form.footer.html'
             }
-          },
-          ncyBreadcrumb: {
-            label: '{{currentNavBranch.label}}'
           }
       })
 
-      .state('main.panel.cardsView', {
-          url: 'cards/{catalogName}/{mode}',
-          templateUrl: 'views/cards.html',
-          //controller: 'CardsCtrl',
-          ncyBreadcrumb: {
-            label: '{{currentNavBranch.label}}'
-          }
-      })
+      // .state('main.panel.cardsView', {
+      //     url: 'cards/{catalogName}/{mode}',
+      //     templateUrl: 'views/cards.html',
+      //     controller: 'CardsCtrl'
+      // })
 
       // filters: https://github.com/angular-ui/ui-router/wiki/Multiple-Named-Views
       // .state('main.panel.filtersView', {
@@ -152,9 +169,6 @@ angular
       //     views: {
       //       'filters':
       //       'results':
-      //     }
-      //     ncyBreadcrumb: {
-      //       label: '{{currentNavBranch.label}}'
       //     }
       // })
     ;
