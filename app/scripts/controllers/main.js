@@ -11,9 +11,9 @@ angular.module('panaxuiApp')
 	.controller('MainCtrl', ['$scope', '$state', 'urlifyFilter', 'AuthService',
 		function MainCtrl($scope, $state, urlify, AuthService) {
 
-			/**
-			 * Nav-Tree & Sitemap
-			 */
+			/**********************
+			 * Nav-Tree & Sitemap *
+			 **********************/
 
 			// abn-tree data array
 			$scope.navMenuData = [{
@@ -29,9 +29,9 @@ angular.module('panaxuiApp')
 			// abn-tree control api object
 			$scope.navMenuControl = {};
 
-			/**
-			 * Listen for events from children scopes: form, grid, cards, ...
-			 */
+			/******************************************************************
+			 * Listen for events from children scopes: form, grid, cards, ... *
+			 ******************************************************************/
 			
 			// Go to arbitriary state
 			$scope.goToState = function(state, catalog) {
@@ -55,10 +55,15 @@ angular.module('panaxuiApp')
 				else if (branch.data.controlType === 'formView')
 					$scope.goToState('main.panel.form.view', branch.data);
 			});
+
+			$scope.panelTitle = '';
+			$scope.$on('setPanelTitle', function (event, title) {
+				$scope.panelTitle = title;
+			});
 			
-	  	/*
-	  	Broadcast events to children scopes: form, grid, cards, ...
-	  	 */
+			/***************************************************************
+	  	 * Broadcast events to children scopes: form, grid, cards, ... *
+			 ***************************************************************/
 	  	
 	  	// Open debug modal
 	  	$scope.debugClick = function() {

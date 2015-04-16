@@ -35,7 +35,13 @@ angular.module('panaxuiApp')
 			CRUDService.read(params).then(function (res) {
 				// Catalog
 				$scope.catalog = res.data.catalog;
-				// ASF Model
+				// Panel Title
+				$scope.$emit('setPanelTitle', (function () {
+					if($scope.catalog.mode === 'insert') return 'New ';
+					if($scope.catalog.mode === 'edit') return 'Edit ';
+					if($scope.catalog.mode === 'readonly') return 'View ';
+				})() + $scope.catalog.tableName);
+				// ASF model
 				$scope.model = res.data.model[0] || {};
 				// ASF Schema
 				$scope.schema = res.data.schema || {};
