@@ -8,7 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('GridCtrl', function($scope, $stateParams, $modal, CRUDService) {
+	.controller('GridCtrl', function($scope, $stateParams, $modal, CRUDService, AlertService) {
 
 		// Grid options
 		$scope.gridOptions = {
@@ -70,6 +70,7 @@ angular.module('panaxuiApp')
 
 		// View/Edit handler
 		$scope.onViewEdit = function() {
+			// ToDo: Multiple edit
 			var selected = $scope.gridApi.selection.getSelectedRows()[0];
 			var identifier = selected[$scope.catalog.primaryKey] ||
 							 selected[$scope.catalog.identityKey];
@@ -83,9 +84,45 @@ angular.module('panaxuiApp')
 
 		// Delete handler
 		$scope.onDelete = function() {
-			//if(confirm("Are your sure to Delete record?"))
-			//// Reload grid
-			//$scope.loadGridData();
+			// ToDo: Multiple delete
+			var selected = $scope.gridApi.selection.getSelectedRows()[0];
+			var identifier = selected[$scope.catalog.primaryKey] ||
+							 selected[$scope.catalog.identityKey];
+
+			// Copycat from `form.js`
+			if(confirm("Are your sure to Delete record?")) {
+				/**
+				 * Create payload to be sent
+				 */
+				var payload = {
+			  	tableName: $scope.catalog.catalogName,
+			  	primaryKey: $scope.catalog.primaryKey,
+			  	identityKey: $scope.catalog.identityKey
+				};
+
+				// Set DeleteRows
+				payload.deleteRows = [{}];
+
+				// Set primaryKey and/or identityKey as DeleteRow with current value
+				if(payload.primaryKey)
+					payload.deleteRows[0][payload.primaryKey] = identifier;
+				if(payload.identityKey)
+					payload.deleteRows[0][payload.identityKey] = identifier;
+
+				CRUDService.delete(payload).then(function (res) {
+					if(res.success === true) {
+						if(res.data[0].status === 'error') {
+							AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
+						} else if(res.data[0].status === 'success') {
+							AlertService.show('success', 'Deleted', 'Record successfully deleted');
+							// Remove row from Grid // http://stackoverflow.com/questions/26614641/how-to-properly-delete-selected-items-ui-grid-angular-js
+							$scope.gridOptions.data.splice($scope.gridOptions.data.lastIndexOf(selected), 1);
+						}
+					} else {
+						// Do nothing. HTTP 500 responses handled by ErrorInterceptor
+					}
+				});
+			}
 		};
 
 		// open Debug Modal and resolve `form-specific` objects
