@@ -8,7 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('FormCtrl', function($scope, $stateParams, $modal, CRUDService, AlertService) {
+	.controller('FormCtrl', function($scope, $stateParams, $modal, CRUDService, AlertService, DebugService) {
 
 		// Schema
 		$scope.schema = {};
@@ -221,25 +221,13 @@ angular.module('panaxuiApp')
 
 		// open Debug Modal and resolve `form-specific` objects
 		$scope.$on('openDebugModal', function (event, next) {
-			var debugModalInstance = $modal.open({
-				templateUrl: 'views/shell/debug.html',
-				controller: 'DebugCtrl',
-				size: 'lg',
-				resolve: {
-					debugInfo: function() {
-						return {
-							currentUser: $scope.currentUser,
-							stateParams: $stateParams,
-							catalog: $scope.catalog,
-							schema: $scope.schema,
-							form: $scope.form,
-							model: $scope.model
-						};
-					}
-				}
-			});
-			debugModalInstance.result.then(function() {
-				//$log.info('Debug Modal dismissed at: ' + new Date());
+			DebugService.show({
+				currentUser: $scope.currentUser,
+				stateParams: $stateParams,
+				catalog: $scope.catalog,
+				schema: $scope.schema,
+				form: $scope.form,
+				model: $scope.model
 			});
 		});
 	});

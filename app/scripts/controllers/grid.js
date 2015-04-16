@@ -8,7 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('GridCtrl', function($scope, $stateParams, $modal, CRUDService, AlertService) {
+	.controller('GridCtrl', function($scope, $stateParams, $modal, CRUDService, AlertService, DebugService) {
 
 		// Grid options
 		$scope.gridOptions = {
@@ -127,24 +127,12 @@ angular.module('panaxuiApp')
 
 		// open Debug Modal and resolve `form-specific` objects
 		$scope.$on('openDebugModal', function (event, next) {
-			var debugModalInstance = $modal.open({
-				templateUrl: 'views/shell/debug.html',
-				controller: 'DebugCtrl',
-				size: 'lg',
-				resolve: {
-					debugInfo: function() {
-						return {
-							currentUser: $scope.currentUser,
-							stateParams: $stateParams,
-							catalog: $scope.catalog,
-							schema: $scope.schema,
-							model: $scope.gridOptions.data
-						};
-					}
-				}
-			});
-			debugModalInstance.result.then(function() {
-				//$log.info('Debug Modal dismissed at: ' + new Date());
+			DebugService.show({
+				currentUser: $scope.currentUser,
+				stateParams: $stateParams,
+				catalog: $scope.catalog,
+				schema: $scope.schema,
+				model: $scope.gridOptions.data
 			});
 		});
 

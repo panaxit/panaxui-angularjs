@@ -10,10 +10,10 @@
 angular.module('panaxuiApp')
 	.controller('DebugCtrl', function($scope, $modalInstance, debugInfo) {
 
-		// Set providers
+		// Set debugInfo provider
 		$scope.debugInfo = debugInfo;
 
-		// Ok  clicked
+		// Ok clicked
 		$scope.okClick = function() {
 			$modalInstance.close(); // promise fulfilled
 		};

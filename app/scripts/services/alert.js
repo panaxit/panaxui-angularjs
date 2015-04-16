@@ -4,7 +4,7 @@
  * @ngdoc service
  * @name panaxuiApp.Alert
  * @description
- * # Alert
+ * # AlertService
  * Factory in the panaxuiApp.
  */
 angular.module('panaxuiApp')
@@ -12,7 +12,7 @@ angular.module('panaxuiApp')
 
   	var AlertService = {};
 
-    // show alert
+    // show alert modal
     AlertService.show = function(type, title, body) {
       $modal.open({
         template: '<alert class="px-alert" type="{{type}}"><strong>{{title}}</strong>: {{body}}</alert>',
