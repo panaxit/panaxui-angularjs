@@ -16,7 +16,7 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should load navMenu', function () {
-    expect(scope.showMenu).toBe(true);
-  });
+  // it('should', function () {
+  //   expect().toBe(true);
+  // });
 });
