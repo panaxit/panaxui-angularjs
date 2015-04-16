@@ -13,7 +13,7 @@
         <img ng-src="images/thumbnails/{{branch.data.controlType || 'category'}}.png" alt="{{branch.label}}" class="px-thumbnail-icon">
       </a>
       <div class="caption text-center">
-        <a ng-click="navMenuControl.select_branch(branch)">
+        <a href ng-click="navMenuControl.select_branch(branch)">
           {{ branch.label }}
         </a>
       </div>
