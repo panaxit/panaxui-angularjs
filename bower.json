@@ -19,7 +19,6 @@
     "angular-ui-grid": "~3.0.0-rc.16",
     "angular-ui-router": "~0.2.13",
     "angular-urlify": "*",
-    "rainbow": "~1.1.9",
     "angular-md5": "~0.1.7",
     "angular-schema-form": "~0.7.13",
     "angular-schema-form-ui-select": "~0.1.1",
