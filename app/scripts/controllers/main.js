@@ -14,9 +14,6 @@ angular.module('panaxuiApp')
 			/**
 			 * Nav-Tree & Sitemap
 			 */
-			
-			// Show menu toggle
-			$scope.showMenu = true;
 
 			// abn-tree data array
 			$scope.navMenuData = [{

@@ -60,17 +60,6 @@ a.navbar-brand {
 }
 
 /**
- * Panax Override
- * Bootstrap Breadcrumb: 
- *  - No margin-bottom
- *  - Transparent BG
- */
-.px-breadcrumb {
-  margin-bottom: 0;
-  background-color: transparent;
-}
-
-/**
  * UI Grid dimensions
  */
 .px-ui-grid {

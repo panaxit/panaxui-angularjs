@@ -18,7 +18,6 @@
     "angular-bootstrap-nav-tree": "git+https://github.com/zanitete/angular-bootstrap-nav-tree.git",
     "angular-ui-grid": "~3.0.0-rc.16",
     "angular-ui-router": "~0.2.13",
-    "angular-breadcrumb": "~0.3.3",
     "angular-urlify": "*",
     "rainbow": "~1.1.9",
     "angular-md5": "~0.1.7",

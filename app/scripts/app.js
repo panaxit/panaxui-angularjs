@@ -19,7 +19,6 @@ angular
 
     'ui.bootstrap',
     'angularBootstrapNavTree',
-    'ncy-angular-breadcrumb',
     'ui.grid.autoResize',
     'ui.grid.pagination',
     'ui.grid.selection',
@@ -36,7 +35,7 @@ angular
     'ui.sortable'
   ])
 
-  .config(function config($httpProvider, $stateProvider, $urlRouterProvider, $breadcrumbProvider) {
+  .config(function config($httpProvider, $stateProvider, $urlRouterProvider) {
 
     /**
      * HTTP Interceptors
@@ -54,11 +53,6 @@ angular
     $urlRouterProvider.otherwise(function($injector) {
       var $state = $injector.get('$state');
       $state.go('main.home');
-    });
-    
-    // Always show 'Home' root in breadcrumb
-    $breadcrumbProvider.setOptions({
-      prefixStateName: 'main'
     });
 
     // Set up states

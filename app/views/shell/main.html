@@ -2,16 +2,13 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="sidebar" ng-class="{'col-sm-3 col-md-2': showMenu, 'col-sm-0 col-md-0':!showMenu}">
+    <div class="sidebar col-sm-3 col-md-2">
 
     	<!-- Directive: nav-tree -->
-     	<div nav-tree ng-show="showMenu"></div>
+     	<div nav-tree></div>
 
     </div>
-    <div class="main" ng-class="{'col-sm-9 col-md-10': showMenu, 'col-sm-12 col-md-12': !showMenu}">
-
-    	<!-- Directive: breadcrumb -->
-      <div breadcrumb ng-show="!showMenu"></div>
+    <div class="main col-sm-9 col-md-10">
 
       <!-- ui.router view -->
       <div ui-view></div>
