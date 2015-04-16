@@ -99,8 +99,7 @@ angular
       Panel `parent` state
        */
       .state('main.panel', {
-          templateUrl: 'views/shell/panel.html',
-          controller: 'PanelCtrl'
+          templateUrl: 'views/shell/panel.html'
       })
 
       /*
