@@ -22,6 +22,7 @@ angular
     'ui.grid.autoResize',
     'ui.grid.pagination',
     'ui.grid.selection',
+    'ui.grid.edit',
 
     'ngUrlify',
     'angular-md5',

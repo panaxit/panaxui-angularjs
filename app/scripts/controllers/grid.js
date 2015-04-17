@@ -14,11 +14,11 @@ angular.module('panaxuiApp')
 		$scope.gridOptions = {
 			paginationPageSizes: [5, 10, 25, 50, 100, 500],
 			paginationPageSize: 25,
-			enableRowSelection: true,
-	    enableSelectAll: true,
-	    selectionRowHeaderWidth: 35,
 	    rowHeight: 35,
-	    multiSelect: false
+			enableRowSelection: true,
+	    multiSelect: true,
+	    enableSelectAll: true,
+	    selectionRowHeaderWidth: 35
 		};
 
 		$scope.gridOptions.onRegisterApi = function(gridApi) {
