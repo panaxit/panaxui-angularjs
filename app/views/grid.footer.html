@@ -1,30 +1,47 @@
-<div class="btn-toolbar">
+
+
+<div class="text-center ">
+
 	<div class="pull-left">
-		<div class="btn-group btn-group-md">
-			<button class="btn btn-primary" type="submit"
-				ng-click="onNew()"
-				ng-show="catalog.mode == 'edit'">
-				<em class="glyphicon glyphicon-ok-sign"></em>
-				New
-			</button>
-			<button class="btn btn-success" type="submit"
-				ng-click="onViewEdit()"
-				ng-disabled="!gridApi.grid.selection.selectedCount">
-				<em class="glyphicon glyphicon-{{catalog.mode == 'edit' ? 'edit' : 'eye-open'}}"></em>
-				{{catalog.mode == 'edit' ? 'Edit' : 'View'}}
-			</button>
-		</div>
+	  <select 
+	  	ng-model="gridApi.grid.options.paginationPageSize" 
+	  	ng-options="o as o for o in gridApi.grid.options.paginationPageSizes">
+	  </select>
+	  records per page
+	</div>
+
+	<!-- <div class="btn-group btn-group-md pagination"> -->
+	<div class="btn-group btn-group-md">
+		<button class="btn btn-default" type="button"
+			ng-click="gridApi.pagination.seek(1)">
+			<em class="glyphicon glyphicon-step-backward"></em>
+			First
+		</button>
+		<button class="btn btn-default" type="button"
+			ng-click="gridApi.pagination.previousPage()">
+			<em class="glyphicon glyphicon-triangle-left"></em>
+			Prev
+		</button>
+		<button class="btn btn-default" type="button"
+			ng-repeat="p in getPage(gridApi.pagination.getTotalPages()) track by $index"
+			ng-click="gridApi.pagination.seek($index+1)"
+			ng-class="{ active : gridApi.pagination.getPage() == $index+1 }">
+			{{$index+1}}
+		</button>
+		<button class="btn btn-default" type="button"
+			ng-click="gridApi.pagination.nextPage()">
+			Next
+			<em class="glyphicon glyphicon-triangle-right"></em>
+		</button>
+		<button class="btn btn-default" type="button"
+			ng-click="gridApi.pagination.seek(gridApi.pagination.getTotalPages())">
+			<em class="glyphicon glyphicon-step-forward"></em>
+			Last
+		</button>
 	</div>
 
 	<div class="pull-right">
-		<div class="btn-group btn-group-md">
-			<button class="btn btn-danger" type="submit" 
-				ng-click="onDelete()"
-				ng-disabled="!gridApi.grid.selection.selectedCount"
-				ng-show="catalog.mode == 'edit'">
-				<em class="glyphicon glyphicon-remove-circle"></em>
-				Delete
-			</button>
-		</div>
+	  N - M of {{ gridApi.grid.options.totalItems }} records
 	</div>
+	
 </div>

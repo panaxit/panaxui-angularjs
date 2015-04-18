@@ -121,6 +121,9 @@ angular
             'main': {
               templateUrl: 'views/grid.main.html'
             },
+            'header': {
+              templateUrl: 'views/grid.header.html'
+            },
             'footer': {
               templateUrl: 'views/grid.footer.html'
             }

@@ -18,7 +18,8 @@ angular.module('panaxuiApp')
 			enableRowSelection: true,
 	    multiSelect: true,
 	    enableSelectAll: true,
-	    selectionRowHeaderWidth: 35
+	    selectionRowHeaderWidth: 35,
+	    enablePaginationControls: false
 		};
 
 		$scope.gridOptions.onRegisterApi = function(gridApi) {
@@ -49,6 +50,15 @@ angular.module('panaxuiApp')
 				$scope.schema = res.data.schema;
 				// Grid's Column Definition (layout)
 				$scope.gridOptions.columnDefs = res.data.grid;
+				$scope.gridOptions.columnDefs.unshift({
+					name: ' ',
+					cellTemplate: 'views/grid.actions.html',
+					width: '40',
+					enableColumnMenus: false,
+					enableFiltering: false,
+					enableHiding: false,
+					enableSorting: false,
+				});
 			});
 		};
 		$scope.loadGridData();
@@ -59,26 +69,32 @@ angular.module('panaxuiApp')
 			$scope.loadGridData();
 		});
 
+		// Row handler
+		$scope.rowHandler = {
+			// View/Edit handler
+			onOpen: function(selected) {
+				// ToDo: Multiple edit
+				//var selected = $scope.gridApi.selection.getSelectedRows()[0];
+				var identifier = selected[$scope.catalog.primaryKey] ||
+								 selected[$scope.catalog.identityKey];
+
+				$scope.$emit('goToState', 'main.panel.form.view', {
+					catalogName: $scope.catalog.catalogName,
+					mode: $scope.catalog.mode,
+					id: identifier
+				});
+			},
+			isEditable: function() {
+				return $scope.catalog.mode === 'edit';
+			}
+		};
+
 		// New handler
 		$scope.onNew = function() {
 			$scope.$emit('goToState', 'main.panel.form.view', {
 				catalogName: $scope.catalog.catalogName,
 				mode: 'insert',
 				id: undefined
-			});
-		};
-
-		// View/Edit handler
-		$scope.onViewEdit = function() {
-			// ToDo: Multiple edit
-			var selected = $scope.gridApi.selection.getSelectedRows()[0];
-			var identifier = selected[$scope.catalog.primaryKey] ||
-							 selected[$scope.catalog.identityKey];
-
-			$scope.$emit('goToState', 'main.panel.form.view', {
-				catalogName: $scope.catalog.catalogName,
-				mode: $scope.catalog.mode,
-				id: identifier
 			});
 		};
 

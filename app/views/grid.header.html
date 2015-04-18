@@ -1,0 +1,31 @@
+<div class="btn-toolbar" ng-show="catalog.mode == 'edit'">
+	<div class="pull-left">
+		<div class="btn-group btn-group-md">
+			<button class="btn btn-primary" type="submit"
+				ng-click="onAdd()">
+				<em class="glyphicon glyphicon-plus"></em>
+				Add
+			</button>
+			<button class="btn btn-danger" type="submit"
+				ng-click="onDelete()">
+				<em class="glyphicon glyphicon-minus"></em>
+				Remove
+			</button>
+		</div>
+	</div>
+
+	<div class="pull-right">
+		<div class="btn-group btn-group-md">
+			<button class="btn btn-default" type="submit" 
+				ng-click="onCancel()">
+				<em class="glyphicon glyphicon-ban-circle"></em>
+				Cancel
+			</button>
+			<button class="btn btn-success" type="submit" 
+				ng-click="onSave()">
+				<em class="glyphicon glyphicon-ok"></em>
+				Save
+			</button>
+		</div>
+	</div>
+</div>
