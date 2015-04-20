@@ -54,6 +54,7 @@ angular.module('panaxuiApp')
 					name: ' ',
 					cellTemplate: 'views/grid.actions.html',
 					width: '40',
+					enableCellEdit: false,
 					enableColumnMenus: false,
 					enableFiltering: false,
 					enableHiding: false,
@@ -69,24 +70,16 @@ angular.module('panaxuiApp')
 			$scope.loadGridData();
 		});
 
-		// Row handler
-		$scope.rowHandler = {
-			// View/Edit handler
-			onOpen: function(selected) {
-				// ToDo: Multiple edit
-				//var selected = $scope.gridApi.selection.getSelectedRows()[0];
-				var identifier = selected[$scope.catalog.primaryKey] ||
-								 selected[$scope.catalog.identityKey];
+		// View/Edit handler
+		$scope.onOpen =  function(selected) {
+			var identifier = selected[$scope.catalog.primaryKey] ||
+							 selected[$scope.catalog.identityKey];
 
-				$scope.$emit('goToState', 'main.panel.form.view', {
-					catalogName: $scope.catalog.catalogName,
-					mode: $scope.catalog.mode,
-					id: identifier
-				});
-			},
-			isEditable: function() {
-				return $scope.catalog.mode === 'edit';
-			}
+			$scope.$emit('goToState', 'main.panel.form.view', {
+				catalogName: $scope.catalog.catalogName,
+				mode: $scope.catalog.mode,
+				id: identifier
+			});
 		};
 
 		// New handler
