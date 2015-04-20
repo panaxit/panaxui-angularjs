@@ -19,6 +19,7 @@ angular.module('panaxuiApp')
 	    multiSelect: true,
 	    enableSelectAll: true,
 	    selectionRowHeaderWidth: 35,
+	    enableCellEdit: ($stateParams.mode === 'edit'),
 	    enablePaginationControls: false
 		};
 
