@@ -8,7 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('GridCtrl', function($scope, $stateParams, $modal, CRUDService, AlertService, DebugService) {
+	.controller('GridCtrl', function($scope, $q, $stateParams, $modal, CRUDService, AlertService, DebugService) {
 
 		// Grid options
 		$scope.gridOptions = {
@@ -20,11 +20,13 @@ angular.module('panaxuiApp')
 	    enableSelectAll: true,
 	    selectionRowHeaderWidth: 35,
 	    enableCellEdit: ($stateParams.mode === 'edit'),
-	    enablePaginationControls: false
+	    enablePaginationControls: false,
+	    showGridFooter: false
 		};
 
 		$scope.gridOptions.onRegisterApi = function(gridApi) {
 			$scope.gridApi = gridApi;
+			gridApi.rowEdit.on.saveRow($scope, $scope.onSaveRow);
 		};
 
 		$scope.getPage = function(num) {
@@ -92,11 +94,45 @@ angular.module('panaxuiApp')
 			});
 		};
 
+		// Save Row handler
+		// Code based from `form.js`
+	  $scope.onSaveRow = function (rowEntity) {
+	    var promise = $q.defer();
+	    $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise.promise);
+
+			/**
+			 * Create payload to be sent
+			 */
+			var payload = {
+		  	tableName: $scope.catalog.catalogName,
+		  	primaryKey: $scope.catalog.primaryKey,
+		  	identityKey: $scope.catalog.identityKey
+			};
+
+			// Set DataRows
+			payload.dataRows = [rowEntity];
+
+			CRUDService.update(payload).then(function (res) {
+				if(res.success === true) {
+					if(res.data[0].status === 'error') {
+						AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
+						promise.reject();
+					} else if(res.data[0].status === 'success') {
+						//AlertService.show('success', 'Saved', 'Record successfully saved');
+						promise.resolve();
+					}
+				} else {
+					// HTTP 500 responses handled by ErrorInterceptor
+					promise.reject();
+				}
+			});
+	  }; 
+
 		// Delete handler
+		// Code based from `form.js`
 		$scope.onDelete = function() {
 			var selected = $scope.gridApi.selection.getSelectedRows();
 
-			// Based from `form.js`
 			if(confirm("Are your sure to Delete selected record(s)?")) {
 				/**
 				 * Create payload to be sent

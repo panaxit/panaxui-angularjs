@@ -23,6 +23,7 @@ angular
     'ui.grid.pagination',
     'ui.grid.selection',
     'ui.grid.edit',
+    'ui.grid.rowEdit',
 
     'ngUrlify',
     'angular-md5',
