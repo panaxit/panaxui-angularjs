@@ -40,8 +40,12 @@
 		</button>
 	</div>
 
-	<div class="pull-right">
-	  N - M of {{ gridApi.grid.options.totalItems }} records
-	</div>
+	<!-- ToDo: Create a directive -->
+	<!-- <div class="pull-right">
+	  {{ (gridApi.pagination.getPage() * gridApi.grid.options.paginationPageSize) - gridApi.grid.options.paginationPageSize + 1 }} 
+	  - 
+	  {{ gridApi.pagination.getPage() * gridApi.grid.options.paginationPageSize }}  
+	  of {{ gridApi.grid.options.totalItems }} records
+	</div> -->
 	
 </div>
