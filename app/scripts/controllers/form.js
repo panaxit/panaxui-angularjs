@@ -142,6 +142,7 @@ angular.module('panaxuiApp')
 						// Some controls won't appear in FormController
 						// https://www.pivotaltracker.com/story/show/91149432
 					  //if(!pxForm[key] || pxForm[key].$dirty) 
+					  console.log(key+'='+pxForm[key])
 					  if(pxForm[key] && pxForm[key].$dirty) 
 					  	dirty_model[key] = $scope.model[key];
 					});
