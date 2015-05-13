@@ -28,14 +28,6 @@ angular
     'ngUrlify',
     'angular-md5',
 
-    'schemaForm',
-
-    // https://github.com/networknt/angular-schema-form-ui-select
-    'ui.select',
-    'pascalprecht.translate',
-    'angular-underscore/filters',
-    'ui.sortable',
-
     'formly',
     'formlyBootstrap'
   ])
