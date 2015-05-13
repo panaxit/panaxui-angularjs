@@ -97,23 +97,23 @@
 
         <pre><code data-language="javascript">{{debugInfo.catalog | json}}</code></pre>
 			</accordion-group>
-			<accordion-group ng-show="debugInfo.schema">
-
-        <accordion-heading>
-        		<em class="glyphicon glyphicon-info-sign"></em>
-            Schema
-        </accordion-heading>
-
-        <pre><code data-language="javascript">{{debugInfo.schema | json}}</code></pre>
-			</accordion-group>
-			<accordion-group ng-show="debugInfo.form">
+			<accordion-group ng-show="debugInfo.fields">
 
         <accordion-heading>
         		<em class="glyphicon glyphicon-tasks"></em>
-            Form
+            Fields
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{debugInfo.form | json}}</code></pre>
+        <pre><code data-language="javascript">{{debugInfo.fields | json}}</code></pre>
+			</accordion-group>
+			<accordion-group ng-show="debugInfo.grid">
+
+        <accordion-heading>
+        		<em class="glyphicon glyphicon-th-large"></em>
+            Grid
+        </accordion-heading>
+
+        <pre><code data-language="javascript">{{debugInfo.grid | json}}</code></pre>
 			</accordion-group>
 			<accordion-group ng-show="debugInfo.model">
 

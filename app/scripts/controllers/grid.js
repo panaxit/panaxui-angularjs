@@ -49,8 +49,6 @@ angular.module('panaxuiApp')
 				$scope.catalog = res.data.catalog;
 				// Grid's Model
 				$scope.gridOptions.data = res.data.model || [];
-				// Grid's Schema
-				$scope.schema = res.data.schema;
 				// Grid's Column Definition (layout)
 				$scope.gridOptions.columnDefs = res.data.grid;
 				$scope.gridOptions.columnDefs.unshift({
@@ -182,7 +180,7 @@ angular.module('panaxuiApp')
 				currentUser: $scope.currentUser,
 				stateParams: $stateParams,
 				catalog: $scope.catalog,
-				schema: $scope.schema,
+				grid: $scope.gridOptions.columnDefs,
 				model: $scope.gridOptions.data
 			});
 		});
