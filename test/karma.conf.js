@@ -50,6 +50,9 @@ module.exports = function(config) {
       'bower_components/pickadate/lib/picker.time.js',
       'bower_components/angular-schema-form-datepicker/bootstrap-datepicker.min.js',
       'bower_components/angular-schema-form-colorpicker/bootstrap-colorpicker.min.js',
+      'bower_components/api-check/dist/api-check.js',
+      'bower_components/angular-formly/dist/formly.js',
+      'bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

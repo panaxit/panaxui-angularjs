@@ -34,7 +34,10 @@ angular
     'ui.select',
     'pascalprecht.translate',
     'angular-underscore/filters',
-    'ui.sortable'
+    'ui.sortable',
+
+    'formly',
+    'formlyBootstrap'
   ])
 
   .config(function config($httpProvider, $stateProvider, $urlRouterProvider) {
