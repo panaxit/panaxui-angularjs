@@ -74,5 +74,21 @@ angular.module('panaxuiApp')
 	    return deferred.promise;
 		};
 
+    /**
+     * GET /api/options
+     */
+  	CRUDService.options = function(params) {
+	    var deferred = $q.defer();
+	    params.gui = 'ng';
+	    params.array = true;
+
+	    $http
+		    .get("/api/options", {params: params})
+		    .then(function (response) {
+		      deferred.resolve(response.data);
+		    });
+	    return deferred.promise;
+		};
+
     return CRUDService;
   });
