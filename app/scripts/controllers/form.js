@@ -77,6 +77,30 @@ angular.module('panaxuiApp')
 			$scope.loadForm();
 		});
 
+		// Reset handler
+		$scope.onReset = function() {
+			// // ToDo: Confirm
+	    // // $scope.loadForm();
+	    // Alt: http://angular-formly.com/#/example/form-options/reset-model
+			// ToDo: Confirm
+	    if (pxForm) {
+	      pxForm.$setPristine();
+	      pxForm.$setUntouched();
+	      $scope.model = {};
+	    }
+		};
+
+		// Cancel handler
+		$scope.onCancel = function() {
+			// ToDo: Confirm of unsaved dirty form otherwise/then Go Back
+			console.log("CANCEL")
+		};
+
+		// Submit handler
+		$scope.onSubmit = function(pxForm) {
+
+		};
+
 		// open Debug Modal and resolve `form-specific` objects
 		$scope.$on('openDebugModal', function (event, next) {
 			DebugService.show({
