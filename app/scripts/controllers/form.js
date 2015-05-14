@@ -98,7 +98,77 @@ angular.module('panaxuiApp')
 
 		// Submit handler
 		$scope.onSubmit = function(pxForm) {
-
+			if (pxForm.$valid) {
+				/**
+				 * Create payload to be sent
+				 */
+				var payload = {
+			  	tableName: $scope.catalog.catalogName,
+			  	primaryKey: $scope.catalog.primaryKey,
+			  	identityKey: $scope.catalog.identityKey
+				};
+				/**
+				 * Copy only dirty fields
+				 */
+				var dirty_model = {};
+				angular.forEach($scope.fields, function (el) {
+					if(el.formControl.$dirty)
+						dirty_model[el.key] = el.formControl.$modelValue || el.formControl.$viewValue;
+				});
+				// Set DataRows
+				payload.dataRows = [dirty_model];
+				/**
+				 * Perform Insert/Update in backend
+				 */
+				if($scope.catalog.mode === 'insert') {
+					/**
+					 * mode = INSERT
+					 */
+					// Backend create call
+					CRUDService.create(payload).then(function (res) {
+						if(res.success === true) {
+							if(res.data[0].status === 'error') {
+								AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
+							} else if(res.data[0].status === 'success') {
+								AlertService.show('success', 'Saved', 'Record successfully saved');
+								// Go to 'edit' mode of newly created record
+								$scope.$emit('goToState', 'main.panel.form.view', {
+									catalogName: res.data[0].dataTable,
+									mode: 'edit',
+									id: res.data[0].primaryValue || res.data[0].identityValue
+								});
+							}
+						} else {
+							// Do nothing. HTTP 500 responses handled by ErrorInterceptor
+						}
+					});
+				} else if($scope.catalog.mode === 'edit' && pxForm.$dirty) {
+					/**
+					 * mode = EDIT
+					 */
+					// Set primaryKey and/or identityKey as DataRow with current value
+					if(payload.primaryKey)
+						payload.dataRows[0][payload.primaryKey] = $stateParams.id;
+					if(payload.identityKey)
+						payload.dataRows[0][payload.identityKey] = $stateParams.id;
+					// Backend update call
+					CRUDService.update(payload).then(function (res) {
+						if(res.success === true) {
+							if(res.data[0].status === 'error') {
+								AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
+							} else if(res.data[0].status === 'success') {
+								AlertService.show('success', 'Saved', 'Record successfully saved');
+							}
+						} else {
+							// Do nothing. HTTP 500 responses handled by ErrorInterceptor
+						}
+					});
+				} else {
+					AlertService.show('info', 'Info', 'No changes');
+				}
+			} else {
+				AlertService.show('warning', 'Warning', 'Invalid form');
+			}
 		};
 
 		// open Debug Modal and resolve `form-specific` objects

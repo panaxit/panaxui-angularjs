@@ -1,4 +1,4 @@
-<form ng-submit="onSubmit()" name="pxForm" novalidate>
+<form ng-submit="onSubmit(pxForm)" name="pxForm" novalidate>
   <formly-form model="model" fields="fields">
 		<div class="btn-toolbar">
 			<div class="pull-left">
@@ -8,7 +8,7 @@
 						Cancel
 					</button> -->
 					<button class="btn btn-primary submit-button" type="submit" 
-							ng-disabled="catalog.mode === 'readonly' || pxForm.$invalid">
+							ng-disabled="catalog.mode === 'readonly' || pxForm.$pristine || pxForm.$invalid">
 						<em class="glyphicon glyphicon-ok-sign"></em>
 						Save
 					</button>
