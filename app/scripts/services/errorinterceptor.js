@@ -17,4 +17,7 @@ angular.module('panaxuiApp')
 				return $q.reject(response);
 			}
 		};
+  })
+  .constant('ERROR_EVENTS', {
+    internalServer: 'error-internal-server'
   });

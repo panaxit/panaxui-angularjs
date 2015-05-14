@@ -8,12 +8,12 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-  .config(function config(formlyConfigProvider) {
+	.run(function config(formlyConfig) {
     /*
 	    async_select
 	    Extends select template
      */
-    formlyConfigProvider.setType({
+    formlyConfig.setType({
       name: 'async_select',
       extends: 'select',
       defaultOptions: {

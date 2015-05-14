@@ -167,43 +167,43 @@ angular
     ;
   })
 
-  .constant('ERROR_EVENTS', {
-    internalServer: 'error-internal-server'
-  })
-
-  .constant('AUTH_EVENTS', {
-    loginSuccess: 'auth-login-success',
-    //loginFailed: 'auth-login-failed',
-    sessionTimeout: 'auth-session-timeout',
-    notAuthenticated: 'auth-not-authenticated',
-    logoutSuccess: 'auth-logout-success'
-  })
-  
-  // Try to see if it's already logged in by getting session info
-  .run(function ($rootScope, $state, AUTH_EVENTS, AuthService) {
-    AuthService.sessionInfo().then(function () {
-      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-      $state.go("main.home"); // redundant?
-    });
-  })
-
+  // At application startup :
   .run(function ($rootScope, $state, AUTH_EVENTS, AuthService, AlertService) {
+
+    /**
+     * Try to see if it's already logged in (by getting session info)
+     */
+    
+    // AuthService.sessionInfo().then(function () {
+    //   $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+    //   $state.go("main.home"); // redundant?
+    // });
+  
+    /**
+     * Ping server every 5 minutes to check session
+     */
+    
+    // var poller = function () {
+    //   AuthService.ping();
+    //   $timeout(poller, 300000);
+    // };
+    // $timeout(poller, 300000);
 
     /**
      * State change listener
      */
     
-    $rootScope.$on('$stateChangeStart', function (event, next) {
-      if(next.data && next.data.authRequired) {
-        if (!AuthService.isAuthenticated()) {
-          event.preventDefault();
-          //$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated); // redundant
-        }
-      } else if (AuthService.isAuthenticated()) {
-        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-        $state.go("main.home"); // redundant?
-      }
-    });
+    // $rootScope.$on('$stateChangeStart', function (event, next) {
+    //   if(next.data && next.data.authRequired) {
+    //     if (!AuthService.isAuthenticated()) {
+    //       event.preventDefault();
+    //       //$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated); // redundant
+    //     }
+    //   } else if (AuthService.isAuthenticated()) {
+    //     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+    //     $state.go("main.home"); // redundant?
+    //   }
+    // });
     
     /**
      * Error Events listeners
