@@ -8,32 +8,6 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.run(function config(formlyConfig) {
-    /*
-	    async_select
-	    Extends select template
-     */
-    formlyConfig.setType({
-      name: 'async_select',
-      extends: 'select',
-      defaultOptions: {
-        templateOptions: {
-          options: [],
-          valueProp: "value",
-          labelProp: "label",
-        },
-        controller: /* @ngInject */ function($scope, CRUDService) {
-          $scope.to.loading = CRUDService.options($scope.to.params).then(function(res) {
-            $scope.to.options = res;
-            // note, the line above is shorthand for:
-            // $scope.options.templateOptions.options = data;
-            return res;
-          });
-        }
-      }
-    });
-  })
-
 	.controller('FormCtrl', function($scope, $stateParams, CRUDService, AlertService, DebugService) {
 
 		// Model
