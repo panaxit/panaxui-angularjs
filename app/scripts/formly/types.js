@@ -5,6 +5,7 @@
  */
 angular.module('panaxuiApp')
 	.config(function config(formlyConfigProvider) {
+
     /*
 	    input
      */
@@ -14,6 +15,38 @@ angular.module('panaxuiApp')
       templateUrl: 'scripts/formly/input.html',
       wrapper: ['bootstrapLabel', 'bootstrapHasError']
     });
+
+    /*
+	    default
+     */
+    formlyConfigProvider.setType({
+      name: 'default',
+      extends: 'input',
+      templateUrl: 'scripts/formly/default.html'
+    });
+
+    /**
+     * HTML5 Input Types
+     * http://www.w3schools.com/htmL/html_form_input_types.asp
+		 *	  color
+		 *		date
+		 *		datetime
+		 *		datetime-local
+		 *		email
+		 *		month
+		 *		number
+		 *		range
+		 *		search
+		 *		tel
+		 *		time
+		 *		url
+		 *		week
+		 *
+		 * http://www.w3schools.com/tags/att_input_type.asp
+		 * 		file
+		 * 		...
+     */
+    
     /*
 	    number
      */
@@ -28,6 +61,7 @@ angular.module('panaxuiApp')
     });
     /*
 	    money
+	    extends: nomber
      */
     formlyConfigProvider.setType({
       name: 'money',
@@ -58,6 +92,77 @@ angular.module('panaxuiApp')
       	}
       }
     });
+    /**
+     * Date/Time controls
+     * ToDo: Use AngularUI alternatives?
+     * 	- http://angular-ui.github.io/bootstrap/#/datepicker
+     * 	- angular-ui.github.io/bootstrap/#/timepicker
+     */
+    /*
+	    date
+     */
+    formlyConfigProvider.setType({
+      name: 'date',
+      extends: 'input',
+      defaultOptions: {
+      	templateOptions: {
+      		type: 'date'
+      	}
+      }
+    });
+    /*
+	    time
+     */
+    formlyConfigProvider.setType({
+      name: 'time',
+      extends: 'input',
+      defaultOptions: {
+      	templateOptions: {
+      		type: 'time'
+      	}
+      }
+    });
+    /*
+	    datetime
+     */
+    formlyConfigProvider.setType({
+      name: 'datetime',
+      extends: 'input',
+      defaultOptions: {
+      	templateOptions: {
+      		type: 'datetime-local'
+      	}
+      }
+    });
+    /*
+	    color
+     */
+    formlyConfigProvider.setType({
+      name: 'color',
+      extends: 'input',
+      defaultOptions: {
+      	templateOptions: {
+      		type: 'color'
+      	}
+      }
+    });
+    /*
+	    file
+	    ToDo: Improve
+	    	- https://github.com/danialfarid/ng-file-upload
+	    	- https://github.com/nervgh/angular-file-upload
+	    	- https://github.com/flowjs/ng-flow
+	    ToDo: picture: http://www.w3schools.com/tags/att_input_accept.asp
+     */
+    formlyConfigProvider.setType({
+      name: 'file',
+      extends: 'input',
+      defaultOptions: {
+      	templateOptions: {
+      		type: 'file'
+      	}
+      }
+    });
     /*
 	    url
      */
@@ -70,6 +175,12 @@ angular.module('panaxuiApp')
       	}
       }
     });
+
+    /**
+     * Custom templates
+		 * http://docs.angular-formly.com/v6.4.0/docs/custom-templates
+     */
+
     /*
 	    async_select
 	    Extends select template
