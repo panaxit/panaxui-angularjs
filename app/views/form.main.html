@@ -8,7 +8,7 @@
 						Cancel
 					</button> -->
 					<button class="btn btn-primary submit-button" type="submit" 
-							ng-disabled="catalog.mode === 'readonly' || pxForm.$pristine || pxForm.$invalid">
+							ng-disabled="catalog.mode !== 'insert' &amp;&amp; (catalog.mode === 'readonly' || pxForm.$pristine || pxForm.$invalid)">
 						<em class="glyphicon glyphicon-ok-sign"></em>
 						Save
 					</button>
