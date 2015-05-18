@@ -29,7 +29,8 @@ angular
     'angular-md5',
 
     'formly',
-    'formlyBootstrap'
+    'formlyBootstrap',
+    'ui.select'
   ])
 
   .config(function config($httpProvider, $stateProvider, $urlRouterProvider) {
