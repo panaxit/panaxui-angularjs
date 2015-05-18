@@ -224,12 +224,24 @@ angular.module('panaxuiApp')
      */
 
     /*
+	    select
+     */
+    formlyConfigProvider.setType({
+      name: 'select',
+      overwriteOk: true,
+      templateUrl: 'scripts/formly/select.html',
+      wrapper: ['bootstrapLabel', 'bootstrapHasError']
+    });
+
+    /*
 	    async_select
-	    Extends select template
+	    Extends select
+	    use ui-select (https://github.com/angular-ui/ui-select)
      */
     formlyConfigProvider.setType({
       name: 'async_select',
       extends: 'select',
+      templateUrl: 'scripts/formly/async_select.html',
       defaultOptions: {
         templateOptions: {
           options: [],
@@ -244,6 +256,8 @@ angular.module('panaxuiApp')
             return res;
           });
         }
+        // ToDo: Async alternative: Use ui-select's `refresh` functionality
+        // https://github.com/angular-ui/ui-select/wiki/ui-select-choices
       }
     });
 	});
