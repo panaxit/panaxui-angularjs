@@ -13,10 +13,10 @@ angular.module('panaxuiApp')
 		// Model
 		$scope.model = {};
 
-		// Fields 
-		$scope.fields = [];
+		// Form 
+		$scope.form = [];
 
-		// Load model and fields into form
+		// Load model and layout/fields into form
 		$scope.loadForm = function() {
 			// Set API params
 			var params = {
@@ -40,8 +40,8 @@ angular.module('panaxuiApp')
 				})() + $scope.catalog.tableName);
 				// model
 				$scope.model = res.data.model[0] || {};
-				// fields
-				$scope.fields = res.data.fields || [];
+				// form
+				$scope.form = res.data.form || [];
 			});
 		};
 		$scope.loadForm();
@@ -85,9 +85,16 @@ angular.module('panaxuiApp')
 				 * Copy only dirty fields
 				 */
 				var dirty_model = {};
-				angular.forEach($scope.fields, function (el) {
-					if(el.formControl.$dirty)
-						dirty_model[el.key] = el.formControl.$modelValue || el.formControl.$viewValue;
+				angular.forEach($scope.form, function (fieldset) {
+					// ToDo: Improve recursive iteration
+					var cpToDirty = function(el) {
+						if(el.formControl.$dirty)
+							dirty_model[el.key] = el.formControl.$modelValue || el.formControl.$viewValue;
+					};
+					angular.forEach(fieldset.fields, cpToDirty);
+					angular.forEach(fieldset.tabs, function (tab) {
+						angular.forEach(tab.fields, cpToDirty);
+					});
 				});
 				// Set DataRows
 				payload.dataRows = [dirty_model];
@@ -151,7 +158,7 @@ angular.module('panaxuiApp')
 				currentUser: $scope.currentUser,
 				stateParams: $stateParams,
 				catalog: $scope.catalog,
-				fields: $scope.fields,
+				form: $scope.form,
 				model: $scope.model
 			});
 		});

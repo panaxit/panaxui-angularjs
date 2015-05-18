@@ -1,15 +1,19 @@
-<div class="panel-body">
+<form ng-submit="onSubmit(pxForm)" name="pxForm" novalidate>
 
-  <!-- ui.router view -->
-  <div ui-view="main">
-  </div>
+	<div class="panel-body">
 
-</div>
+	  <!-- ui.router view -->
+	  <div ui-view="main">
+	  </div>
 
-<div class="panel-footer clearfix">
+	</div>
+	
+	<div class="panel-footer clearfix">
 
-  <!-- ui.router view -->
-  <div ui-view="footer">
-  </div>
+	  <!-- ui.router view -->
+	  <div ui-view="footer">
+	  </div>
 
-</div>
+	</div>
+
+</form>
