@@ -5,6 +5,15 @@
 	<div class="panel-body">
 
 		<accordion>
+			<accordion-group ng-show="debugInfo.env">
+
+        <accordion-heading>
+        		<em class="glyphicon glyphicon-tree-deciduous"></em>
+            Environment
+        </accordion-heading>
+
+        <pre><code data-language="javascript">{{debugInfo.env | json}}</code></pre>
+			</accordion-group>
 			<accordion-group ng-show="debugInfo.currentUser">
 
         <accordion-heading>
