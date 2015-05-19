@@ -88,12 +88,22 @@ angular.module('panaxuiApp')
 				angular.forEach($scope.form, function (fieldset) {
 					// ToDo: Improve recursive iteration
 					var cpToDirty = function(el) {
-						if(el.formControl.$dirty)
+						if(el && el.formControl && el.formControl.$dirty)
 							dirty_model[el.key] = el.formControl.$modelValue || el.formControl.$viewValue;
 					};
-					angular.forEach(fieldset.fields, cpToDirty);
+					angular.forEach(fieldset.fields, function (field) {
+						cpToDirty(field);
+						angular.forEach(field.fieldGroup, function (fieldInGroup) {
+							cpToDirty(fieldInGroup);
+						});
+					});
 					angular.forEach(fieldset.tabs, function (tab) {
-						angular.forEach(tab.fields, cpToDirty);
+						angular.forEach(tab.fields, function (field) {
+							cpToDirty(field);
+							angular.forEach(field.fieldGroup, function (fieldInGroup) {
+								cpToDirty(fieldInGroup);
+							});
+						});
 					});
 				});
 				// Set DataRows
