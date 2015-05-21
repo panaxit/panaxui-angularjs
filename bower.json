@@ -19,7 +19,7 @@
     "angular-bootstrap": "~0.12.0",
     "angular-bootstrap-nav-tree-nif": "*",
     "angular-ui-grid": "~3.0.0-rc.16",
-    "angular-ui-router": "~0.2.13",
+    "angular-ui-router": "0.2.13",
     "angular-urlify": "*",
     "angular-md5": "~0.1.7",
     "panaxui-bootstrap": "git+https://benoror@bitbucket.org/panaxit/panaxui-bootstrap.git",
