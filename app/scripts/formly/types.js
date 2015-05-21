@@ -249,15 +249,51 @@ angular.module('panaxuiApp')
           labelProp: "label",
         },
         controller: function($scope, CRUDService) {
-          $scope.to.loading = CRUDService.options($scope.to.params).then(function(res) {
-            $scope.to.options = res;
-            // note, the line above is shorthand for:
-            // $scope.options.templateOptions.options = data;
-            return res;
-          });
+        	// Async loading
+	        var loadAsync = function () {
+	          $scope.to.loading = CRUDService.options($scope.to.params).then(function(res) {
+	          	// Load options
+	            $scope.to.options = res;
+	            // Set foreign entity values (cascaded)
+	            // http://angular-formly.com/#/example/other/filter-select
+	            if($scope.to.params.foreignEntity) {
+	            	if($scope.model.hasOwnProperty($scope.to.params.foreignEntity)) {
+	            		$scope.model[$scope.to.params.foreignEntity] = $scope.to.params.foreignValue;
+	            	} else if($scope.formState.hasOwnProperty($scope.to.params.foreignEntity)) {
+	            		$scope.formState[$scope.to.params.foreignEntity] = $scope.to.params.foreignValue;
+	            	}
+	            }
+	            return res;
+	          });
+	        }
+	        loadAsync();
+	        // ToDo alternative: Async alternative: Use ui-select's `refresh` functionality
+	        // https://github.com/angular-ui/ui-select/wiki/ui-select-choices
+
+          // Watcher foreign entity (cascade)
+          if($scope.to.params.foreignEntity) {
+	          var watcher = function (newValue, oldValue, theScope) {
+	          	if(newValue !== oldValue) {
+	          		//console.log($scope.options.key+': foreignEntity `' +$scope.to.params.foreignEntity+'` changed from: '+oldValue+' to: '+newValue)
+	          		// Set own value
+		          	$scope.to.params.foreignValue = newValue;
+		          	// Set own value to empty in `model` or `formState`
+		          	// Avoid when first-time (!oldValue)
+		          	if($scope.model[$scope.options.key] && oldValue) {
+		          		$scope.model[$scope.options.key] = '';
+		          	} else if($scope.formState[$scope.options.key] && oldValue) {
+		          		$scope.formState[$scope.options.key] = '';
+		          	}
+		          	// Reload options
+		        		loadAsync();
+	          	}
+	          };
+	          // Watch in `model` or `formState`
+	          // http://angular-formly.com/#/example/other/filter-select
+	          $scope.$watch('formState.' + $scope.to.params.foreignEntity, watcher);
+	          $scope.$watch('model.' + $scope.to.params.foreignEntity, watcher);
+	        }
         }
-        // ToDo: Async alternative: Use ui-select's `refresh` functionality
-        // https://github.com/angular-ui/ui-select/wiki/ui-select-choices
       }
     });
 	});

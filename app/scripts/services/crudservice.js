@@ -82,6 +82,9 @@ angular.module('panaxuiApp')
 	    params.gui = 'ng';
 	    params.array = true;
 
+	    if(params.foreignEntity)
+	    	params.filters = "["+params.foreignKey+"='"+params.foreignValue+"']";
+
 	    $http
 		    .get("/api/options", {params: params})
 		    .then(function (response) {

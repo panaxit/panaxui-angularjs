@@ -52,7 +52,7 @@ angular.module('panaxuiApp')
 		});
 
 		// Reset handler
-		$scope.onReset = function() {
+		$scope.onReset = function(pxForm) {
 			// // ToDo: Confirm
 	    // // $scope.loadForm();
 	    // Alt: http://angular-formly.com/#/example/form-options/reset-model
@@ -60,7 +60,6 @@ angular.module('panaxuiApp')
 	    if (pxForm) {
 	      pxForm.$setPristine();
 	      pxForm.$setUntouched();
-	      $scope.model = {};
 	    }
 		};
 
@@ -88,8 +87,11 @@ angular.module('panaxuiApp')
 				angular.forEach($scope.form, function (fieldset) {
 					// ToDo: Improve recursive iteration
 					var cpToDirty = function(el) {
-						if(el && el.formControl && el.formControl.$dirty)
+						// Get fields that are dirty and part of the model (ex. not in formState (ex. cascaded))
+						if(el && el.formControl && el.formControl.$dirty && $scope.model.hasOwnProperty(el.key)) {
+							//console.log(el)
 							dirty_model[el.key] = el.formControl.$modelValue || el.formControl.$viewValue;
+						}
 					};
 					angular.forEach(fieldset.fields, function (field) {
 						cpToDirty(field);
@@ -149,6 +151,11 @@ angular.module('panaxuiApp')
 								AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
 							} else if(res.data[0].status === 'success') {
 								AlertService.show('success', 'Saved', 'Record successfully saved');
+								// Reset form to untouched & pristine
+								// $scope.onReset
+					      pxForm.$setPristine();
+					      pxForm.$setUntouched();
+					      // ToDo: Reload form? (to retrieve saved data and spot glitches via: $scope.loadForm(); ?
 							}
 						} else {
 							// Do nothing. HTTP 500 responses handled by ErrorInterceptor
