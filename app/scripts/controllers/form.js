@@ -13,7 +13,7 @@ angular.module('panaxuiApp')
 		// Model
 		$scope.model = {};
 
-		// Form 
+		// Form
 		$scope.form = [];
 
 		// Load model and layout/fields into form
@@ -83,31 +83,34 @@ angular.module('panaxuiApp')
 				/**
 				 * Copy only dirty fields
 				 */
-				var dirty_model = {};
-				angular.forEach($scope.form, function (fieldset) {
-					// ToDo: Improve recursive iteration
-					var cpToDirty = function(el) {
-						// Get fields that are dirty and part of the model (ex. not in formState (ex. cascaded))
-						if(el && el.formControl && el.formControl.$dirty && $scope.model.hasOwnProperty(el.key)) {
-							//console.log(el)
-							dirty_model[el.key] = el.formControl.$modelValue || el.formControl.$viewValue;
-						}
-					};
-					angular.forEach(fieldset.fields, function (field) {
-						cpToDirty(field);
-						angular.forEach(field.fieldGroup, function (fieldInGroup) {
-							cpToDirty(fieldInGroup);
-						});
-					});
-					angular.forEach(fieldset.tabs, function (tab) {
-						angular.forEach(tab.fields, function (field) {
-							cpToDirty(field);
-							angular.forEach(field.fieldGroup, function (fieldInGroup) {
-								cpToDirty(fieldInGroup);
-							});
-						});
-					});
-				});
+        var dirtyFieldsIterator = function(obj, model) {
+          angular.forEach(obj, function (el) {
+            // fieldset / tab
+            if(el.fields) {
+              dirtyFieldsIterator(el.fields, model);
+            }
+            // tabs
+            if(el.tabs) {
+              dirtyFieldsIterator(el.tabs, model);
+            }
+            // fieldGroup
+            if(el.fieldGroup) {
+              // Nested model
+              if(el.key){
+                model[el.key] = {};
+                dirtyFieldsIterator(el.fieldGroup, model[el.key]);
+              } else {
+                dirtyFieldsIterator(el.fieldGroup, model);
+              }
+            }
+            // Copy regular field's value
+            if(el.formControl && el.formControl.$dirty /**&& $scope.model.hasOwnProperty(el.key)**/) {
+              model[el.key] = el.formControl.$modelValue || el.formControl.$viewValue;
+            }
+          });
+        };
+        var dirty_model = {};
+        dirtyFieldsIterator($scope.form, dirty_model);
 				// Set DataRows
 				payload.dataRows = [dirty_model];
 				/**
