@@ -83,34 +83,34 @@ angular.module('panaxuiApp')
 				/**
 				 * Copy only dirty fields
 				 */
-        var dirtyFieldsIterator = function(obj, model) {
+        var dirtyFieldsIterator = function(obj, dirty_model, orig_model) {
           angular.forEach(obj, function (el) {
             // fieldset / tab
             if(el.fields) {
-              dirtyFieldsIterator(el.fields, model);
+              dirtyFieldsIterator(el.fields, dirty_model, orig_model);
             }
             // tabs
             if(el.tabs) {
-              dirtyFieldsIterator(el.tabs, model);
+              dirtyFieldsIterator(el.tabs, dirty_model, orig_model);
             }
             // fieldGroup
             if(el.fieldGroup) {
               // Nested model
               if(el.key){
-                model[el.key] = {};
-                dirtyFieldsIterator(el.fieldGroup, model[el.key]);
+                dirty_model[el.key] = {};
+                dirtyFieldsIterator(el.fieldGroup, dirty_model[el.key], orig_model[el.key]);
               } else {
-                dirtyFieldsIterator(el.fieldGroup, model);
+                dirtyFieldsIterator(el.fieldGroup, dirty_model, orig_model);
               }
             }
             // Copy regular field's value
-            if(el.formControl && el.formControl.$dirty /**&& $scope.model.hasOwnProperty(el.key)**/) {
-              model[el.key] = el.formControl.$modelValue || el.formControl.$viewValue;
+            if(el.formControl && el.formControl.$dirty && orig_model.hasOwnProperty(el.key)) {
+              dirty_model[el.key] = el.formControl.$modelValue || el.formControl.$viewValue;
             }
           });
         };
         var dirty_model = {};
-        dirtyFieldsIterator($scope.form, dirty_model);
+        dirtyFieldsIterator($scope.form, dirty_model, $scope.model);
 				// Set DataRows
 				payload.dataRows = [dirty_model];
 				/**
