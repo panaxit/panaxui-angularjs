@@ -1,9 +1,26 @@
 {
-  "name": "panaxui",
-  "version": "0.0.0",
+  "name": "panaxui-angularjs",
+  "version": "0.0.1",
+  "author": "Benjamin Orozco <benoror@gmail.com>",
+  "description": "PanaxUI GUI Frontend - AngularJS",
+  "main": "app/index.html",
+  "private": true,
+  "license": "Copyright 2015 PanaxIT (R)",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run test"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://benoror@bitbucket.org/benoror/panaxui-angularjs.git"
+  },
   "dependencies": {},
-  "repository": {},
   "devDependencies": {
+    "ghooks": "^0.3.2",
     "grunt": "^0.4.5",
     "grunt-autoprefixer": "^2.0.0",
     "grunt-concurrent": "^1.0.0",
@@ -35,8 +52,5 @@
   },
   "engines": {
     "node": ">=0.10.0"
-  },
-  "scripts": {
-    "test": "grunt test"
   }
 }
