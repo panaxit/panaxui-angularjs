@@ -172,18 +172,22 @@ angular
   .run(function ($rootScope, $state, AUTH_EVENTS, AuthService, AlertService) {
 
     /**
-     * Try to see if it's already logged in (by getting session info)
+     * Ensure it's already logged in (by getting session info)
      */
-    
-    // AuthService.sessionInfo().then(function () {
-    //   $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-    //   $state.go("main.home"); // redundant?
-    // });
-  
+
+    AuthService.sessionInfo()
+      .then(function () {
+        //$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+        $state.go("main.home");
+      }, function () {
+        //$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
+        $state.go("login");
+      });
+
     /**
      * Ping server every 5 minutes to check session
      */
-    
+
     // var poller = function () {
     //   AuthService.ping();
     //   $timeout(poller, 300000);
@@ -193,7 +197,7 @@ angular
     /**
      * State change listener
      */
-    
+
     // $rootScope.$on('$stateChangeStart', function (event, next) {
     //   if(next.data && next.data.authRequired) {
     //     if (!AuthService.isAuthenticated()) {
@@ -205,20 +209,20 @@ angular
     //     $state.go("main.home"); // redundant?
     //   }
     // });
-    
+
     /**
      * Error Events listeners
      */
-    
+
     $rootScope.$on('error-internal-server', function (event, next) {
       console.info("#EVENT: error-internal-server");
       AlertService.show('danger', 'Error', next.data.message);
     });
-    
+
     /**
      * Authentication Events listeners
      */
-    
+
     $rootScope.$on('auth-login-success', function (event, next) {
       console.info("#EVENT: auth-login-success");
       $state.go("main.home");
