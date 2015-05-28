@@ -68,7 +68,6 @@ angular
       Main `abstract` root state
        */
       .state('main', {
-          url: '/',
           abstract: true,
           templateUrl: 'views/shell/main.html',
           controller: 'MainCtrl',
@@ -81,6 +80,7 @@ angular
       Home state
        */
       .state('main.home', {
+          url: '/home',
           templateUrl: 'views/shell/home.html'
       })
 
