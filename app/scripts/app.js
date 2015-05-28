@@ -68,6 +68,7 @@ angular
       Main `abstract` root state
        */
       .state('main', {
+          url: '/',
           abstract: true,
           templateUrl: 'views/shell/main.html',
           controller: 'MainCtrl',
@@ -80,7 +81,6 @@ angular
       Home state
        */
       .state('main.home', {
-          url: '/',
           templateUrl: 'views/shell/home.html'
       })
 
@@ -97,6 +97,7 @@ angular
       Panel `parent` state
        */
       .state('main.panel', {
+          abstract: true,
           templateUrl: 'views/shell/panel.html'
       })
 
@@ -178,7 +179,7 @@ angular
     AuthService.sessionInfo()
       .then(function () {
         //$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-        $state.go("main.home");
+        //$state.go("main.home");
       }, function () {
         //$rootScope.$broadcast(AUTH_EVENTS.notAuthenticated);
         $state.go("login");
@@ -209,6 +210,11 @@ angular
     //     $state.go("main.home"); // redundant?
     //   }
     // });
+
+    $rootScope.$on('$stateChangeStart', function (event, next) {
+      console.log('stateChangeStart: "'+next.name+'" ')
+      console.dir(next)
+    });
 
     /**
      * Error Events listeners
