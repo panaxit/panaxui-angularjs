@@ -46,7 +46,7 @@ angular.module('panaxuiApp')
 		 * 		file
 		 * 		...
      */
-    
+
     /*
 	    number
      */
@@ -159,7 +159,7 @@ angular.module('panaxuiApp')
       	 */
       	var newValue = (function timeConversion(oldValue) {
       		if(oldValue) {
-	      		// John Resig's: 
+	      		// John Resig's:
 	      		// http://stackoverflow.com/questions/141348/what-is-the-best-way-to-parse-a-time-into-a-date-object-from-user-input-in-javas
 	      		var d = new Date();
 	      		var time = oldValue.match(/(\d+)(?::(\d\d))?\s*(p?)/);
@@ -295,5 +295,14 @@ angular.module('panaxuiApp')
 	        }
         }
       }
+    });
+
+    /*
+      ui-grid (nested)
+     */
+    formlyConfigProvider.setType({
+      name: 'ui-grid',
+      templateUrl: 'scripts/formly/ui-grid.html',
+      wrapper: ['bootstrapLabel', 'bootstrapHasError']
     });
 	});
