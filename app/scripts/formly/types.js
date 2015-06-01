@@ -46,7 +46,7 @@ angular.module('panaxuiApp')
 		 * 		file
 		 * 		...
      */
-    
+
     /*
 	    number
      */
@@ -127,19 +127,19 @@ angular.module('panaxuiApp')
       	$scope.options.value = newValue;
       }
     });
-    /*
-	    date
-	    extends: datetime
-     */
-    formlyConfigProvider.setType({
-      name: 'date',
-      extends: 'datetime',
-      defaultOptions: {
-      	templateOptions: {
-      		type: 'date'
-      	}
-      }
-    });
+    // /*
+	   //  date
+	   //  extends: datetime
+    //  */
+    // formlyConfigProvider.setType({
+    //   name: 'date',
+    //   extends: 'datetime',
+    //   defaultOptions: {
+    //   	templateOptions: {
+    //   		type: 'date'
+    //   	}
+    //   }
+    // });
     /*
 	    time
 	    extends: datetime
@@ -159,7 +159,7 @@ angular.module('panaxuiApp')
       	 */
       	var newValue = (function timeConversion(oldValue) {
       		if(oldValue) {
-	      		// John Resig's: 
+	      		// John Resig's:
 	      		// http://stackoverflow.com/questions/141348/what-is-the-best-way-to-parse-a-time-into-a-date-object-from-user-input-in-javas
 	      		var d = new Date();
 	      		var time = oldValue.match(/(\d+)(?::(\d\d))?\s*(p?)/);
@@ -245,8 +245,8 @@ angular.module('panaxuiApp')
       defaultOptions: {
         templateOptions: {
           options: [],
-          valueProp: "value",
-          labelProp: "label",
+          valueProp: 'value',
+          labelProp: 'label',
         },
         controller: function($scope, CRUDService) {
         	// Async loading
@@ -265,7 +265,7 @@ angular.module('panaxuiApp')
 	            }
 	            return res;
 	          });
-	        }
+	        };
 	        loadAsync();
 	        // ToDo alternative: Async alternative: Use ui-select's `refresh` functionality
 	        // https://github.com/angular-ui/ui-select/wiki/ui-select-choices
@@ -296,4 +296,84 @@ angular.module('panaxuiApp')
         }
       }
     });
+
+    /*
+    datepicker
+    (https://github.com/formly-js/angular-formly-website/issues/15#issuecomment-103467421)
+     */
+
+    var attributes = [
+      'date-disabled',
+      'custom-class',
+      'show-weeks',
+      'starting-day',
+      'init-date',
+      'min-mode',
+      'max-mode',
+      'format-day',
+      'format-month',
+      'format-year',
+      'format-day-header',
+      'format-day-title',
+      'format-month-title',
+      'year-range',
+      'shortcut-propagation',
+      'datepicker-popup',
+      'show-button-bar',
+      'current-text',
+      'clear-text',
+      'close-text',
+      'close-on-date-selection',
+      'datepicker-append-to-body'
+    ];
+
+    var bindings = [
+      'datepicker-mode',
+      'min-date',
+      'max-date'
+    ];
+
+    var ngModelAttrs = {};
+
+    angular.forEach(attributes, function(attr) {
+      ngModelAttrs[camelize(attr)] = {attribute: attr};
+    });
+
+    angular.forEach(bindings, function(binding) {
+      ngModelAttrs[camelize(binding)] = {bound: binding};
+    });
+
+    function camelize(string) {
+      string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
+        return chr ? chr.toUpperCase() : '';
+      });
+      // Ensure 1st char is always lowercase
+      return string.replace(/^([A-Z])/, function(match, chr) {
+        return chr ? chr.toLowerCase() : '';
+      });
+    }
+
+    formlyConfigProvider.setType({
+      name: 'date',
+      template: '<input class="form-control" ng-model="model[options.key]" is-open="to.isOpen" datepicker-options="to.datepickerOptions" />',
+      wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+      defaultOptions: {
+        ngModelAttrs: ngModelAttrs,
+        templateOptions: {
+          type: 'text',
+          datepickerPopup: 'dd-MMMM-yyyy',
+          addonLeft: {
+            class: 'glyphicon glyphicon-calendar',
+            onClick: function(options, scope) {
+              options.templateOptions.isOpen = !options.templateOptions.isOpen;
+            }
+          },
+          onFocus: function($viewValue, $modelValue, scope) {
+            scope.to.isOpen = !scope.to.isOpen;
+          },
+          datepickerOptions: {}
+        }
+      }
+    });
+
 	});
