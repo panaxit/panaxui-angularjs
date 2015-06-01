@@ -130,6 +130,7 @@ angular.module('panaxuiApp')
     // /*
 	   //  date
 	   //  extends: datetime
+     //  ToDo: Restore as date HTML5 fallback
     //  */
     // formlyConfigProvider.setType({
     //   name: 'date',
@@ -355,7 +356,7 @@ angular.module('panaxuiApp')
 
     formlyConfigProvider.setType({
       name: 'date',
-      template: '<input class="form-control" ng-model="model[options.key]" is-open="to.isOpen" datepicker-options="to.datepickerOptions" />',
+      templateUrl: 'scripts/formly/datepicker.html',
       wrapper: ['bootstrapLabel', 'bootstrapHasError'],
       defaultOptions: {
         ngModelAttrs: ngModelAttrs,
