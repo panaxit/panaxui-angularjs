@@ -7,6 +7,21 @@ angular.module('panaxuiApp')
 	.config(function config(formlyConfigProvider) {
 
     /*
+    ngModelAttrs stuff
+     */
+    var ngModelAttrs = {};
+
+    function camelize(string) {
+      string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
+        return chr ? chr.toUpperCase() : '';
+      });
+      // Ensure 1st char is always lowercase
+      return string.replace(/^([A-Z])/, function(match, chr) {
+        return chr ? chr.toLowerCase() : '';
+      });
+    }
+
+    /*
 	    input
      */
     formlyConfigProvider.setType({
@@ -144,39 +159,40 @@ angular.module('panaxuiApp')
     /*
 	    time
 	    extends: datetime
+     //  ToDo: Restore as time HTML5 fallback
      */
-    formlyConfigProvider.setType({
-      name: 'time',
-      extends: 'input',
-      defaultOptions: {
-      	templateOptions: {
-      		type: 'time'
-      	}
-      },
-      controller: function ($scope) {
-      	/**
-      	 * HTML5 input type=time
-      	 * Convert time string to Date object
-      	 */
-      	var newValue = (function timeConversion(oldValue) {
-      		if(oldValue) {
-	      		// John Resig's:
-	      		// http://stackoverflow.com/questions/141348/what-is-the-best-way-to-parse-a-time-into-a-date-object-from-user-input-in-javas
-	      		var d = new Date();
-	      		var time = oldValue.match(/(\d+)(?::(\d\d))?\s*(p?)/);
-	      		d.setHours( parseInt(time[1]) + (time[3] ? 12 : 0) );
-	      		d.setMinutes( parseInt(time[2]) || 0 );
-	      		return d;
-      		}
-      		return undefined;
-      	})($scope.model[$scope.options.key]);
+    // formlyConfigProvider.setType({
+    //   name: 'time',
+    //   extends: 'input',
+    //   defaultOptions: {
+    //   	templateOptions: {
+    //   		type: 'time'
+    //   	}
+    //   },
+    //   controller: function ($scope) {
+    //   	/**
+    //   	 * HTML5 input type=time
+    //   	 * Convert time string to Date object
+    //   	 */
+    //   	var newValue = (function timeConversion(oldValue) {
+    //   		if(oldValue) {
+	   //    		// John Resig's:
+	   //    		// http://stackoverflow.com/questions/141348/what-is-the-best-way-to-parse-a-time-into-a-date-object-from-user-input-in-javas
+	   //    		var d = new Date();
+	   //    		var time = oldValue.match(/(\d+)(?::(\d\d))?\s*(p?)/);
+	   //    		d.setHours( parseInt(time[1]) + (time[3] ? 12 : 0) );
+	   //    		d.setMinutes( parseInt(time[2]) || 0 );
+	   //    		return d;
+    //   		}
+    //   		return undefined;
+    //   	})($scope.model[$scope.options.key]);
 
-      	// Change in model
-      	$scope.model[$scope.options.key] = newValue;
-      	// Change original value as well (keep in $pristine)
-      	$scope.options.value = newValue;
-      }
-    });
+    //   	// Change in model
+    //   	$scope.model[$scope.options.key] = newValue;
+    //   	// Change original value as well (keep in $pristine)
+    //   	$scope.options.value = newValue;
+    //   }
+    // });
     /*
 	    color
      */
@@ -303,7 +319,10 @@ angular.module('panaxuiApp')
     (https://github.com/formly-js/angular-formly-website/issues/15#issuecomment-103467421)
      */
 
-    var attributes = [
+    ngModelAttrs = {};
+
+    // Attributes
+    angular.forEach([
       'date-disabled',
       'custom-class',
       'show-weeks',
@@ -326,33 +345,18 @@ angular.module('panaxuiApp')
       'close-text',
       'close-on-date-selection',
       'datepicker-append-to-body'
-    ];
-
-    var bindings = [
-      'datepicker-mode',
-      'min-date',
-      'max-date'
-    ];
-
-    var ngModelAttrs = {};
-
-    angular.forEach(attributes, function(attr) {
+    ], function(attr) {
       ngModelAttrs[camelize(attr)] = {attribute: attr};
     });
 
-    angular.forEach(bindings, function(binding) {
+    // Bindings
+    angular.forEach([
+      'datepicker-mode',
+      'min-date',
+      'max-date'
+    ], function(binding) {
       ngModelAttrs[camelize(binding)] = {bound: binding};
     });
-
-    function camelize(string) {
-      string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
-        return chr ? chr.toUpperCase() : '';
-      });
-      // Ensure 1st char is always lowercase
-      return string.replace(/^([A-Z])/, function(match, chr) {
-        return chr ? chr.toLowerCase() : '';
-      });
-    }
 
     formlyConfigProvider.setType({
       name: 'date',
