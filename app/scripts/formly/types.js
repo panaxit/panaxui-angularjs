@@ -381,4 +381,41 @@ angular.module('panaxuiApp')
       }
     });
 
+    /*
+    timepicker
+    https://github.com/formly-js/angular-formly-website/issues/23
+    */
+
+    ngModelAttrs = {};
+
+    // attributes
+    angular.forEach([
+      'meridians',
+      'readonly-input',
+      'mousewheel',
+      'arrowkeys'
+    ], function(attr) {
+      ngModelAttrs[camelize(attr)] = {attribute: attr};
+    });
+
+    // bindings
+    angular.forEach([
+      'hour-step',
+      'minute-step',
+      'show-meridian'
+    ], function(binding) {
+      ngModelAttrs[camelize(binding)] = {bound: binding};
+    });
+
+    formlyConfigProvider.setType({
+      name: 'time',
+      templateUrl: 'scripts/formly/timepicker.html',
+      wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+      defaultOptions: {
+        ngModelAttrs: ngModelAttrs,
+        templateOptions: {
+        }
+      }
+    });
+
 	});
