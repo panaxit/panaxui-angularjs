@@ -30,7 +30,8 @@ angular
 
     'formly',
     'formlyBootstrap',
-    'ui.select'
+    'ui.select',
+    'color.picker'
   ])
 
   .config(function config($httpProvider, $stateProvider, $urlRouterProvider) {

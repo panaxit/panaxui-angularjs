@@ -37,6 +37,8 @@ module.exports = function(config) {
       'bower_components/angular-formly/dist/formly.js',
       'bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js',
       'bower_components/angular-ui-select/dist/select.js',
+      'bower_components/tinycolor/tinycolor.js',
+      'bower_components/angularjs-color-picker/angularjs-color-picker.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

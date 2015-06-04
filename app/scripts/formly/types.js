@@ -193,18 +193,19 @@ angular.module('panaxuiApp')
     //   	$scope.options.value = newValue;
     //   }
     // });
-    /*
-	    color
-     */
-    formlyConfigProvider.setType({
-      name: 'color',
-      extends: 'input',
-      defaultOptions: {
-      	templateOptions: {
-      		type: 'color'
-      	}
-      }
-    });
+    // /*
+	   //  color
+     //  ToDo: Restore as color HTML5 fallback
+    //  */
+    // formlyConfigProvider.setType({
+    //   name: 'color',
+    //   extends: 'input',
+    //   defaultOptions: {
+    //   	templateOptions: {
+    //   		type: 'color'
+    //   	}
+    //   }
+    // });
     /*
 	    file
 	    ToDo: Improve
@@ -417,5 +418,42 @@ angular.module('panaxuiApp')
         }
       }
     });
+
+  /*
+  colorpicker
+  */
+
+  ngModelAttrs = {};
+
+  // attributes
+  angular.forEach([
+    'color-picker-format',
+    'color-picker-alpha',
+    'color-picker-swatch',
+    'color-picker-swatch-pos',
+    'color-picker-swatch-bootstrap',
+    'color-picker-swatch-only',
+    'color-picker-pos',
+    'color-picker-case'
+  ], function(attr) {
+    ngModelAttrs[camelize(attr)] = {attribute: attr};
+  });
+
+  // bindings
+  angular.forEach([
+  ], function(binding) {
+    ngModelAttrs[camelize(binding)] = {bound: binding};
+  });
+
+  formlyConfigProvider.setType({
+    name: 'color',
+    template: '<color-picker ng-model="model[options.key]" color-picker-swatch-bootstrap="false"></color-picker>',
+    wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+    defaultOptions: {
+      ngModelAttrs: ngModelAttrs,
+      templateOptions: {
+      }
+    }
+  });
 
 	});
