@@ -18,7 +18,9 @@ angular
     'ui.router',
 
     'ui.bootstrap',
+    'cgBusy',
     'angularBootstrapNavTree',
+
     'ui.grid.autoResize',
     'ui.grid.pagination',
     'ui.grid.selection',
@@ -169,7 +171,7 @@ angular
   })
 
   // At application startup :
-  .run(function ($rootScope, $state, AUTH_EVENTS, AuthService, AlertService) {
+  .run(function ($rootScope, $state, $q, AUTH_EVENTS, AuthService, AlertService) {
 
     /**
      * Ensure it's already logged in (by getting session info)
@@ -242,6 +244,22 @@ angular
     $rootScope.$on('auth-logout-success', function (event, next) {
       console.info("#EVENT: auth-logout-success");
       $state.go("login");
+    });
+
+    /**
+     * Loading Events listeners
+     */
+
+    var loadingDefer;
+    $rootScope.$on('$stateChangeStart',function(){
+       loadingDefer = $q.defer();
+       $rootScope.loadingPromise = loadingDefer.promise;
+    });
+    $rootScope.$on('$stateChangeSuccess', function(){
+       loadingDefer.resolve();
+    });
+    $rootScope.$on('$stateChangeError', function(){
+       loadingDefer.reject();
     });
   })
 ;

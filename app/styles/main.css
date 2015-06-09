@@ -19,9 +19,9 @@ a.navbar-brand {
   font-weight: bold;
 }
 
-/** 
+/**
  * Boostrap Input: XS size
- * http://stackoverflow.com/questions/22920589/bootstrap-3-input-xs-smaller-than-sm 
+ * http://stackoverflow.com/questions/22920589/bootstrap-3-input-xs-smaller-than-sm
  */
 .input-xs {
   height: 22px;
@@ -85,7 +85,7 @@ a.navbar-brand {
 
 /**
  * LOGIN
- * 
+ *
  * Based on: http://getbootstrap.com/examples/signin/
  */
 .form-login > .logo {
@@ -172,4 +172,45 @@ a.navbar-brand {
 
 [class*="flex-"]:nth-last-child(2) {
   padding-right: 0;
+}
+
+/*
+  loading animation - loading.html
+  http://www.gradient-animator.com/
+  https://github.com/cgross/angular-busy
+ */
+div#px-busyDiv {
+  position: fixed;
+  bottom: 0;
+  height: 1.6%;
+  width: 100%;
+}
+
+div#px-loadingDiv {
+  background: linear-gradient(270deg, #eee, #4675d3);
+  background-size: 400% 400%;
+  -webkit-animation: Loading 1s ease infinite;
+  -moz-animation: Loading 1s ease infinite;
+  -o-animation: Loading 1s ease infinite;
+  animation: Loading 1s ease infinite;
+}
+@-webkit-keyframes Loading {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+}
+@-moz-keyframes Loading {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+}
+@-o-keyframes Loading {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+}
+@keyframes Loading {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
 }

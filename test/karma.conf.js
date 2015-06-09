@@ -29,6 +29,7 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/angular-bootstrap-nav-tree-nif/dist/abn_tree_directive.js',
+      'bower_components/angular-busy/dist/angular-busy.js',
       'bower_components/angular-ui-grid/ui-grid.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-urlify/angular-urlify-filter.js',
