@@ -42,6 +42,7 @@ angular
      */
     $httpProvider.interceptors.push('ErrorInterceptor');
     $httpProvider.interceptors.push('AuthInterceptor');
+    $httpProvider.interceptors.push('LoadingInterceptor');
 
     /**
      * UI Router
@@ -251,15 +252,24 @@ angular
      */
 
     var loadingDefer;
-    $rootScope.$on('$stateChangeStart',function(){
+    // At HTTP requests
+    $rootScope.$on('loading-start',function(){
        loadingDefer = $q.defer();
        $rootScope.loadingPromise = loadingDefer.promise;
     });
-    $rootScope.$on('$stateChangeSuccess', function(){
+    $rootScope.$on('loading-end', function(){
        loadingDefer.resolve();
     });
-    $rootScope.$on('$stateChangeError', function(){
-       loadingDefer.reject();
-    });
+    // At state change
+    // $rootScope.$on('$stateChangeStart',function(){
+    //    loadingDefer = $q.defer();
+    //    $rootScope.loadingPromise = loadingDefer.promise;
+    // });
+    // $rootScope.$on('$stateChangeSuccess', function(){
+    //    loadingDefer.resolve();
+    // });
+    // $rootScope.$on('$stateChangeError', function(){
+    //    loadingDefer.reject();
+    // });
   })
 ;
