@@ -6,17 +6,13 @@
   </div>
 </div>
 
-<div class="row clearfix">
-  <div class="col-md-3 col-sm-6" ng-repeat="branch in currentNavBranch.children">
-    <div class="thumbnail">
-      <a ng-click="navMenuControl.select_branch(branch)">
-        <img ng-src="images/thumbnails/{{branch.data.controlType || 'category'}}.png" alt="{{branch.label}}" class="px-thumbnail-icon">
+<div class="row clearfix flexcontainer">
+  <div class="px-thumbnail-icon thumbnail text-center" ng-repeat="branch in currentNavBranch.children">
+    <a ng-click="navMenuControl.select_branch(branch)">
+      <img ng-src="images/thumbnails/{{branch.data.controlType || 'category'}}.png" alt="{{branch.label}}" class="px-thumbnail-icon">
+    </a>
+      <a href ng-click="navMenuControl.select_branch(branch)">
+        {{ branch.label }}
       </a>
-      <div class="caption text-center">
-        <a href ng-click="navMenuControl.select_branch(branch)">
-          {{ branch.label }}
-        </a>
-      </div>
-    </div>
   </div>
 </div>
