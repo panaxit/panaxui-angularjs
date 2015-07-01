@@ -156,6 +156,29 @@ a.navbar-brand {
 }
 
 /**
+ * Formly defaults
+ */
+.formly-field {
+  margin-bottom: 16px;
+}
+
+.formly.row, .formly.row .formly-field {
+  margin-bottom: 0;
+}
+
+.formly.row .formly-field:first-child {
+  padding-left: 0;
+}
+
+.formly.row .formly-field:nth-last-child(2) {
+  padding-right: 0;
+}
+
+.formly-field-group ng-form {
+  margin: 0;
+}
+
+/**
  * Flexbox
  * Source: http://angular-formly.com/#/example/other/advanced-layout-flex
  */
