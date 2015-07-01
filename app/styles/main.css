@@ -60,14 +60,6 @@ a.navbar-brand {
 }
 
 /**
- * UI Grid dimensions
- */
-.px-ui-grid {
-  width: 100%;
-  min-height: 400px;
-}
-
-/**
  * Thumbnails
  */
 /* http://www.sketchingwithcss.com/samplechapter/cheatsheet.html */
