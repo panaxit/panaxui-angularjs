@@ -29,6 +29,7 @@ module.exports = function(config) {
       'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
       'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/angular-bootstrap-nav-tree-nif/dist/abn_tree_directive.js',
+      'bower_components/angular-busy/dist/angular-busy.js',
       'bower_components/angular-ui-grid/ui-grid.js',
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-urlify/angular-urlify-filter.js',
@@ -37,6 +38,8 @@ module.exports = function(config) {
       'bower_components/angular-formly/dist/formly.js',
       'bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js',
       'bower_components/angular-ui-select/dist/select.js',
+      'bower_components/tinycolor/tinycolor.js',
+      'bower_components/angularjs-color-picker/angularjs-color-picker.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

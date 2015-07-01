@@ -18,7 +18,9 @@ angular
     'ui.router',
 
     'ui.bootstrap',
+    'cgBusy',
     'angularBootstrapNavTree',
+
     'ui.grid.autoResize',
     'ui.grid.pagination',
     'ui.grid.selection',
@@ -30,7 +32,8 @@ angular
 
     'formly',
     'formlyBootstrap',
-    'ui.select'
+    'ui.select',
+    'color.picker'
   ])
 
   .config(function config($httpProvider, $stateProvider, $urlRouterProvider) {
@@ -40,6 +43,7 @@ angular
      */
     $httpProvider.interceptors.push('ErrorInterceptor');
     $httpProvider.interceptors.push('AuthInterceptor');
+    $httpProvider.interceptors.push('LoadingInterceptor');
 
     /**
      * UI Router
@@ -169,7 +173,7 @@ angular
   })
 
   // At application startup :
-  .run(function ($rootScope, $state, AUTH_EVENTS, AuthService, AlertService) {
+  .run(function ($rootScope, $state, $q, AUTH_EVENTS, AuthService, AlertService) {
 
     /**
      * Ensure it's already logged in (by getting session info)
@@ -243,5 +247,30 @@ angular
       console.info("#EVENT: auth-logout-success");
       $state.go("login");
     });
+
+    /**
+     * Loading Events listeners
+     */
+
+    var loadingDefer;
+    // At HTTP requests
+    $rootScope.$on('loading-start',function(){
+       loadingDefer = $q.defer();
+       $rootScope.loadingPromise = loadingDefer.promise;
+    });
+    $rootScope.$on('loading-end', function(){
+       loadingDefer.resolve();
+    });
+    // At state change
+    // $rootScope.$on('$stateChangeStart',function(){
+    //    loadingDefer = $q.defer();
+    //    $rootScope.loadingPromise = loadingDefer.promise;
+    // });
+    // $rootScope.$on('$stateChangeSuccess', function(){
+    //    loadingDefer.resolve();
+    // });
+    // $rootScope.$on('$stateChangeError', function(){
+    //    loadingDefer.reject();
+    // });
   })
 ;
