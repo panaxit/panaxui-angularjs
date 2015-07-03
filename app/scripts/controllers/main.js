@@ -32,7 +32,7 @@ angular.module('panaxuiApp')
 			/******************************************************************
 			 * Listen for events from children scopes: form, grid, cards, ... *
 			 ******************************************************************/
-			
+
 			// Go to arbitriary state
 			$scope.goToState = function(state, catalog) {
 				$state.go(state, catalog);
@@ -52,19 +52,21 @@ angular.module('panaxuiApp')
 					});
 				else if (branch.data.controlType === 'gridView')
 					$scope.goToState('main.panel.grid.view', branch.data);
-				else if (branch.data.controlType === 'formView')
-					$scope.goToState('main.panel.form.view', branch.data);
+        else if (branch.data.controlType === 'formView')
+          $scope.goToState('main.panel.form.view', branch.data);
+        else if (branch.data.controlType === 'cardView')
+          $scope.goToState('main.panel.cards.view', branch.data);
 			});
 
 			$scope.panelTitle = '';
 			$scope.$on('setPanelTitle', function (event, title) {
 				$scope.panelTitle = title;
 			});
-			
+
 			/***************************************************************
 	  	 * Broadcast events to children scopes: form, grid, cards, ... *
 			 ***************************************************************/
-	  	
+
 	  	// Open debug modal
 	  	$scope.debugClick = function() {
 	  		$scope.$broadcast('openDebugModal');

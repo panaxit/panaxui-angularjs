@@ -93,6 +93,19 @@ a.navbar-brand {
   cursor: pointer;
 }
 
+/**
+ * cardView
+ */
+div.px-card {
+  width: 300px;
+  height: 180px;
+  margin: 16px 16px 16px 16px;
+}
+
+div.px-card .px-card-img {
+  width: 84px;
+  height: 84px;
+}
 
 /**
  * Alerts

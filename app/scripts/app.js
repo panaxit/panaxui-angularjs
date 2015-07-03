@@ -132,6 +132,27 @@ angular
       })
 
       /*
+      CardsView `abstract` state
+       */
+      .state('main.panel.cards', {
+        abstract: true,
+        url: 'cards/{catalogName}/{mode}',
+        controller: 'CardsCtrl',
+        templateUrl: 'views/cards.html'
+      })
+
+      /*
+      CardsView state
+       */
+      .state('main.panel.cards.view', {
+          views: {
+            'main': {
+              templateUrl: 'views/cards.main.html'
+            }
+          }
+      })
+
+      /*
       Form `abstract` state
        */
       .state('main.panel.form', {
@@ -154,12 +175,6 @@ angular
             }
           }
       })
-
-      // .state('main.panel.cardsView', {
-      //     url: 'cards/{catalogName}/{mode}',
-      //     templateUrl: 'views/cards.html',
-      //     controller: 'CardsCtrl'
-      // })
 
       // filters: https://github.com/angular-ui/ui-router/wiki/Multiple-Named-Views
       // .state('main.panel.filtersView', {
