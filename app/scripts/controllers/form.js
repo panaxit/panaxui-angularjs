@@ -83,24 +83,37 @@ angular.module('panaxuiApp')
 				/**
 				 * Copy only dirty fields
 				 */
-        var dirtyFieldsIterator = function(obj, dirty_model, orig_model) {
+        var dirtyFieldsIterator = function(obj, dirty_model, orig_model, orig_catalog) {
           angular.forEach(obj, function (el) {
             // fieldset / tab
             if(el.fields) {
-              dirtyFieldsIterator(el.fields, dirty_model, orig_model);
+              dirtyFieldsIterator(el.fields, dirty_model, orig_model, orig_catalog);
             }
             // tabs
             if(el.tabs) {
-              dirtyFieldsIterator(el.tabs, dirty_model, orig_model);
+              dirtyFieldsIterator(el.tabs, dirty_model, orig_model, orig_catalog);
             }
             // fieldGroup
             if(el.fieldGroup) {
               // Nested model
               if(el.key){
-                dirty_model[el.key] = {};
-                dirtyFieldsIterator(el.fieldGroup, dirty_model[el.key], orig_model[el.key]);
+                dirty_model[el.key] = {
+                  tableName: orig_catalog[el.key].catalog.catalogName,
+                  primaryKey: orig_catalog[el.key].catalog.primaryKey,
+                  identityKey: orig_catalog[el.key].catalog.identityKey,
+                  foreignReference: orig_catalog[el.key].catalog.foreignReference
+                };
+                if(orig_catalog[el.key].catalog.mode === 'insert') {
+                  dirty_model[el.key].insertRows = [{}];
+                  dirtyFieldsIterator(el.fieldGroup, dirty_model[el.key].insertRows[0],
+                                      orig_model[el.key], orig_catalog[el.key].catalog);
+                } else if(orig_catalog[el.key].catalog.mode === 'edit') {
+                  dirty_model[el.key].updateRows = [{}];
+                  dirtyFieldsIterator(el.fieldGroup, dirty_model[el.key].updateRows[0],
+                                      orig_model[el.key], orig_catalog[el.key].catalog);
+                }
               } else {
-                dirtyFieldsIterator(el.fieldGroup, dirty_model, orig_model);
+                dirtyFieldsIterator(el.fieldGroup, dirty_model, orig_model, orig_catalog);
               }
             }
             // Copy regular field's value
@@ -110,7 +123,7 @@ angular.module('panaxuiApp')
           });
         };
         var dirty_model = {};
-        dirtyFieldsIterator($scope.form, dirty_model, $scope.model);
+        dirtyFieldsIterator($scope.form, dirty_model, $scope.model, $scope.catalog);
 				/**
 				 * Perform Insert/Update in backend
 				 */
