@@ -111,8 +111,6 @@ angular.module('panaxuiApp')
         };
         var dirty_model = {};
         dirtyFieldsIterator($scope.form, dirty_model, $scope.model);
-				// Set DataRows
-				payload.dataRows = [dirty_model];
 				/**
 				 * Perform Insert/Update in backend
 				 */
@@ -120,6 +118,8 @@ angular.module('panaxuiApp')
 					/**
 					 * mode = INSERT
 					 */
+          // Set DataRows
+          payload.insertRows = [dirty_model];
 					// Backend create call
 					CRUDService.create(payload).then(function (res) {
 						if(res.success === true) {
@@ -129,9 +129,9 @@ angular.module('panaxuiApp')
 								AlertService.show('success', 'Saved', 'Record successfully saved');
 								// Go to 'edit' mode of newly created record
 								$scope.$emit('goToState', 'main.panel.form.view', {
-									catalogName: res.data[0].dataTable,
+									catalogName: res.data[0].tableName,
 									mode: 'edit',
-									id: res.data[0].primaryValue || res.data[0].identityValue
+									id:  res.data[0].identity
 								});
 							}
 						} else {
@@ -142,11 +142,13 @@ angular.module('panaxuiApp')
 					/**
 					 * mode = EDIT
 					 */
+          // Set DataRows
+          payload.updateRows = [dirty_model];
 					// Set primaryKey and/or identityKey as DataRow with current value
 					if(payload.primaryKey)
-						payload.dataRows[0][payload.primaryKey] = $stateParams.id;
+						payload.updateRows[0][payload.primaryKey] = $stateParams.id;
 					if(payload.identityKey)
-						payload.dataRows[0][payload.identityKey] = $stateParams.id;
+						payload.updateRows[0][payload.identityKey] = $stateParams.id;
 					// Backend update call
 					CRUDService.update(payload).then(function (res) {
 						if(res.success === true) {

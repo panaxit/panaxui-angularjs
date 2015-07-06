@@ -108,7 +108,7 @@ angular.module('panaxuiApp')
 			};
 
 			// Set DataRows
-			payload.dataRows = [rowEntity];
+			payload.updateRows = [rowEntity];
 
 			CRUDService.update(payload).then(function (res) {
 				if(res.success === true) {
@@ -124,7 +124,7 @@ angular.module('panaxuiApp')
 					promise.reject();
 				}
 			});
-	  }; 
+	  };
 
 		// Delete handler
 		// Code based from `form.js`
@@ -146,7 +146,7 @@ angular.module('panaxuiApp')
 
 				// Set primaryKey and/or identityKey as DeleteRows
 				angular.forEach(selected, function(row, index) {
-					var identifier = row[$scope.catalog.primaryKey] || 
+					var identifier = row[$scope.catalog.primaryKey] ||
 													 row[$scope.catalog.identityKey];
 
 					payload.deleteRows[index] = {};
@@ -161,7 +161,7 @@ angular.module('panaxuiApp')
 						if(res.data[0].status === 'error') {
 							AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
 						} else if(res.data[0].status === 'success') {
-							AlertService.show('success', 'Deleted', 'Record successfully deleted');
+							AlertService.show('success', 'Deleted', 'Record(s) successfully deleted');
 							// Remove row(s) from Grid // http://stackoverflow.com/questions/26614641/how-to-properly-delete-selected-items-ui-grid-angular-js
 							angular.forEach(selected, function(row, index) {
 								$scope.gridOptions.data.splice($scope.gridOptions.data.lastIndexOf(row), 1);
