@@ -462,6 +462,12 @@ angular.module('panaxuiApp')
     defaultOptions: {
       ngModelAttrs: ngModelAttrs,
       templateOptions: {
+        "colorPickerFormat": "'hex'",
+        "colorPickerAlpha": false,
+        "colorPickerPos": "'top left'",
+        "colorPickerSwatchOnly": false,
+        "colorPickerSwatchBootstrap": false,
+        "colorPickerSwatchPos": "'left'"
       }
     }
   });
