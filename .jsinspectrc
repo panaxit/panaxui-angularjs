@@ -1,0 +1,7 @@
+{
+  "threshold":     20,
+  "identifiers":   false,
+  "ignore":        "test|spec|dist|bower_components",
+  "reporter":      "default",
+  "suppress":      100
+}
