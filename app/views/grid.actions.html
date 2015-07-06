@@ -1,5 +1,6 @@
-<div class="btn-group btn-group-md">
-	<button class="btn btn-default" type="submit"
+<div class="btn-group btn-group-sm">
+	<button class="btn" type="submit"
+    ng-class="{'btn-default':(grid.appScope.catalog.mode !== 'edit'), 'btn-primary':(grid.appScope.catalog.mode === 'edit')}"
 		ng-click="grid.appScope.onOpen(row.entity)">
 		<em class="glyphicon glyphicon-folder-open"></em>
 		<!-- {{catalog.mode == 'edit' ? 'Edit' : 'View'}} -->

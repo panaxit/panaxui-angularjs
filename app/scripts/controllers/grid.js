@@ -14,11 +14,11 @@ angular.module('panaxuiApp')
 		$scope.gridOptions = {
 			paginationPageSizes: [5, 10, 25, 50, 100, 500],
 			paginationPageSize: 25,
-	    rowHeight: 35,
-			enableRowSelection: true,
-	    multiSelect: true,
-	    enableSelectAll: true,
-	    selectionRowHeaderWidth: 35,
+	    rowHeight: 32,
+			enableRowSelection: ($stateParams.mode === 'edit'),
+	    //multiSelect: ($stateParams.mode === 'edit'),
+	    //enableSelectAll: ($stateParams.mode === 'edit'),
+	    //selectionRowHeaderWidth: 32,
 	    enableCellEdit: ($stateParams.mode === 'edit'),
 	    enablePaginationControls: false,
 	    showGridFooter: false
@@ -26,7 +26,8 @@ angular.module('panaxuiApp')
 
 		$scope.gridOptions.onRegisterApi = function(gridApi) {
 			$scope.gridApi = gridApi;
-			gridApi.rowEdit.on.saveRow($scope, $scope.onSaveRow);
+      if ($stateParams.mode === 'edit')
+		    gridApi.rowEdit.on.saveRow($scope, $scope.onSaveRow);
 		};
 
 		$scope.getPage = function(num) {
@@ -51,10 +52,10 @@ angular.module('panaxuiApp')
 				$scope.gridOptions.data = res.data.model || [];
 				// Grid's Column Definition (layout)
 				$scope.gridOptions.columnDefs = res.data.grid;
-				$scope.gridOptions.columnDefs.unshift({
+				$scope.gridOptions.columnDefs.push({
 					name: ' ',
 					cellTemplate: 'views/grid.actions.html',
-					width: '40',
+					width: '34',
 					enableCellEdit: false,
 					enableColumnMenus: false,
 					enableFiltering: false,
