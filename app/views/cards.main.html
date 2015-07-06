@@ -4,26 +4,44 @@
 
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
-        <h3 class="panel-title pull-left">Acey, Sofia</h3>
+        <h3 class="panel-title pull-left">
+        {{ record[catalog.customAttr.titleField] || '[No titleField Found]'}}
+        </h3>
+        <div class="btn-group btn-group-xs pull-right">
+          <button class="btn" type="submit"
+                  ng-class="{'btn-default':(mode !== 'edit'), 'btn-primary':(mode === 'edit')}"
+                  ng-click="onOpen(record)">
+            <!-- <em class="glyphicon glyphicon-folder-open"></em> -->
+            {{mode === 'edit' ? 'Edit' : 'View'}}
+          </button>
+        </div>
       </div>
       <div class="list-group">
         <div class="list-group-item">
-          <img src="/upload/adela.jpg" class="px-card-img img-rounded pull-left">
-          <label>Company</label>
-          <h5 class="list-group-item-heading">Masung Corp.</h5>
-          <label>Email</label>
-          <h5 class="list-group-item-heading">Sofia.Acey@masung.com</h5>
+          <img src="{{ record[catalog.customAttr.imageField] ? '/upload/' + record[catalog.customAttr.imageField] : '/images/noimg.png' }}"
+               class="px-card-img img-rounded pull-left">
+          <label>
+          {{ catalog.customAttr.descField1 || '[No descField1 Found]' }}
+          </label>
+          <h5 class="list-group-item-heading">
+          {{ record[catalog.customAttr.descField1] || '[No descField1 Found]' }}
+          </h5>
+          <label>
+          {{ catalog.customAttr.descField2 || '[No descField2 Found]' }}
+          </label>
+          <h5 class="list-group-item-heading">
+          {{ record[catalog.customAttr.descField2]  || '[No descField2 Found]'}}
+          </h5>
         </div>
       </div>
-      <div class="panel-footer clearfix">
-        <div class="btn-group btn-group-xs pull-right">
-          <a class="btn btn-primary" href="/contacts/VBMJHwcLX3Vx/edit" data-toggle="modal" data-target="#editModal"> <i class="fa fa-pencil"></i>
-            <span>Edit</span>
-          </a>
-        </div>
-      </div>
+      <!-- <div class="panel-footer clearfix">
+      </div> -->
     </div>
 
   </div>
 
+</div>
+
+<div ng-if="!data || data.length === 0">
+<h1 class="text-center">No data found!</h1>
 </div>

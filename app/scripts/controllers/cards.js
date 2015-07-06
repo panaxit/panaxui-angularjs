@@ -8,16 +8,18 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-  .controller('CardsCtrl', function($scope, $stateParams, CRUDService) {
+  .controller('CardsCtrl', function($scope, $stateParams, CRUDService, DebugService) {
 
     // Cards data
     $scope.data = [];
 
+    // Preserve mode
+    $scope.mode = $stateParams.mode;
+
     // Load grid's data
     $scope.loadData = function() {
-      $stateParams.mode = 'readonly'; // Is always readonly to get all records
       CRUDService.read({
-        mode: $stateParams.mode,
+        mode: 'readonly', //$stateParams.mode, // Is always readonly to get all records
         catalogName: $stateParams.catalogName,
         controlType: 'cardView',
         getData: "1",
