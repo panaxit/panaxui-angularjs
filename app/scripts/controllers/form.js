@@ -75,55 +75,7 @@ angular.module('panaxuiApp')
 				/**
 				 * Create payload to be sent
 				 */
-				var payload = {
-			  	tableName: $scope.catalog.catalogName,
-			  	primaryKey: $scope.catalog.primaryKey,
-			  	identityKey: $scope.catalog.identityKey
-				};
-				/**
-				 * Copy only dirty fields
-				 */
-        var dirtyFieldsIterator = function(obj, dirty_model, orig_model, orig_catalog) {
-          angular.forEach(obj, function (el) {
-            // fieldset / tab
-            if(el.fields) {
-              dirtyFieldsIterator(el.fields, dirty_model, orig_model, orig_catalog);
-            }
-            // tabs
-            if(el.tabs) {
-              dirtyFieldsIterator(el.tabs, dirty_model, orig_model, orig_catalog);
-            }
-            // fieldGroup
-            if(el.fieldGroup) {
-              // Nested model
-              if(el.key){
-                dirty_model[el.key] = {
-                  tableName: orig_catalog[el.key].catalog.catalogName,
-                  primaryKey: orig_catalog[el.key].catalog.primaryKey,
-                  identityKey: orig_catalog[el.key].catalog.identityKey,
-                  foreignReference: orig_catalog[el.key].catalog.foreignReference
-                };
-                if(orig_catalog[el.key].catalog.mode === 'insert') {
-                  dirty_model[el.key].insertRows = [{}];
-                  dirtyFieldsIterator(el.fieldGroup, dirty_model[el.key].insertRows[0],
-                                      orig_model[el.key], orig_catalog[el.key].catalog);
-                } else if(orig_catalog[el.key].catalog.mode === 'edit') {
-                  dirty_model[el.key].updateRows = [{}];
-                  dirtyFieldsIterator(el.fieldGroup, dirty_model[el.key].updateRows[0],
-                                      orig_model[el.key], orig_catalog[el.key].catalog);
-                }
-              } else {
-                dirtyFieldsIterator(el.fieldGroup, dirty_model, orig_model, orig_catalog);
-              }
-            }
-            // Copy regular field's value
-            if(el.formControl && el.formControl.$dirty && orig_model.hasOwnProperty(el.key)) {
-              dirty_model[el.key] = el.formControl.$modelValue || el.formControl.$viewValue;
-            }
-          });
-        };
-        var dirty_model = {};
-        dirtyFieldsIterator($scope.form, dirty_model, $scope.model, $scope.catalog);
+        var payload = CRUDService.buildPersistPayload($scope.form, $scope.model, $scope.catalog, $stateParams.id);
 				/**
 				 * Perform Insert/Update in backend
 				 */
@@ -131,8 +83,6 @@ angular.module('panaxuiApp')
 					/**
 					 * mode = INSERT
 					 */
-          // Set DataRows
-          payload.insertRows = [dirty_model];
 					// Backend create call
 					CRUDService.create(payload).then(function (res) {
 						if(res.success === true) {
@@ -155,13 +105,6 @@ angular.module('panaxuiApp')
 					/**
 					 * mode = EDIT
 					 */
-          // Set DataRows
-          payload.updateRows = [dirty_model];
-					// Set primaryKey and/or identityKey as DataRow with current value
-					if(payload.primaryKey)
-						payload.updateRows[0][payload.primaryKey] = $stateParams.id;
-					if(payload.identityKey)
-						payload.updateRows[0][payload.identityKey] = $stateParams.id;
 					// Backend update call
 					CRUDService.update(payload).then(function (res) {
 						if(res.success === true) {
