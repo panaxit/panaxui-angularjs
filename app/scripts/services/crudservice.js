@@ -28,6 +28,25 @@ angular.module('panaxuiApp')
 		};
 
     /**
+     * GET /api/options
+     */
+    CRUDService.options = function(params) {
+      var deferred = $q.defer();
+      params.gui = 'ng';
+      params.array = true;
+
+      if(params.foreignEntity)
+        params.filters = "["+params.foreignKey+"='"+params.foreignValue+"']";
+
+      $http
+        .get("/api/options", {params: params})
+        .then(function (response) {
+          deferred.resolve(response.data);
+        });
+      return deferred.promise;
+    };
+
+    /**
      * POST /api/create
      */
   	CRUDService.create = function(payload) {
@@ -63,30 +82,11 @@ angular.module('panaxuiApp')
 
 	    // http://stackoverflow.com/questions/24829933/angularjs-delete-with-data-sets-wrong-content-type-header
       $http({
-      	url: "/api/delete", 
-      	method: 'DELETE', 
-      	data: payload, 
+      	url: "/api/delete",
+      	method: 'DELETE',
+      	data: payload,
       	headers: {'Content-Type': 'application/json'}
       })
-		    .then(function (response) {
-		      deferred.resolve(response.data);
-		    });
-	    return deferred.promise;
-		};
-
-    /**
-     * GET /api/options
-     */
-  	CRUDService.options = function(params) {
-	    var deferred = $q.defer();
-	    params.gui = 'ng';
-	    params.array = true;
-
-	    if(params.foreignEntity)
-	    	params.filters = "["+params.foreignKey+"='"+params.foreignValue+"']";
-
-	    $http
-		    .get("/api/options", {params: params})
 		    .then(function (response) {
 		      deferred.resolve(response.data);
 		    });
