@@ -110,7 +110,7 @@ angular
       .state('main.panel.grid', {
         abstract: true,
         url: 'grid/{catalogName}/{mode}',
-        controller: 'GridCtrl',
+        controller: 'GridCtrl as vm',
         templateUrl: 'views/grid.html'
       })
 

@@ -3,8 +3,8 @@
 <div class="text-center ">
 
 	<div class="pull-left">
-	  <select 
-	  	ng-model="gridApi.grid.options.paginationPageSize" 
+	  <select
+	  	ng-model="gridApi.grid.options.paginationPageSize"
 	  	ng-options="o as o for o in gridApi.grid.options.paginationPageSizes">
 	  </select>
 	  records per page
@@ -23,7 +23,7 @@
 			Prev
 		</button>
 		<button class="btn btn-default" type="button"
-			ng-repeat="p in getPage(gridApi.pagination.getTotalPages()) track by $index"
+			ng-repeat="p in vm.getArray(gridApi.pagination.getTotalPages()) track by $index"
 			ng-click="gridApi.pagination.seek($index+1)"
 			ng-class="{ active : gridApi.pagination.getPage() == $index+1 }">
 			{{$index+1}}
@@ -42,10 +42,10 @@
 
 	<!-- ToDo: Create a directive -->
 	<!-- <div class="pull-right">
-	  {{ (gridApi.pagination.getPage() * gridApi.grid.options.paginationPageSize) - gridApi.grid.options.paginationPageSize + 1 }} 
-	  - 
-	  {{ gridApi.pagination.getPage() * gridApi.grid.options.paginationPageSize }}  
+	  {{ (gridApi.pagination.getPage() * gridApi.grid.options.paginationPageSize) - gridApi.grid.options.paginationPageSize + 1 }}
+	  -
+	  {{ gridApi.pagination.getPage() * gridApi.grid.options.paginationPageSize }}
 	  of {{ gridApi.grid.options.totalItems }} records
 	</div> -->
-	
+
 </div>

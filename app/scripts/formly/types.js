@@ -316,16 +316,6 @@ angular.module('panaxuiApp')
     });
 
     /*
-      ui-grid (nested)
-     */
-    formlyConfigProvider.setType({
-      name: 'ui-grid',
-      templateUrl: 'scripts/formly/ui-grid.html',
-      wrapper: ['bootstrapLabel', 'bootstrapHasError']
-    });
-
-
-    /*
     datepicker
     (https://github.com/formly-js/angular-formly-website/issues/15#issuecomment-103467421)
      */
@@ -429,47 +419,58 @@ angular.module('panaxuiApp')
       }
     });
 
-  /*
-  colorpicker
-  */
+    /*
+    colorpicker
+    */
 
-  ngModelAttrs = {};
+    ngModelAttrs = {};
 
-  // attributes
-  angular.forEach([
-    'color-picker-format',
-    'color-picker-alpha',
-    'color-picker-swatch',
-    'color-picker-swatch-pos',
-    'color-picker-swatch-bootstrap',
-    'color-picker-swatch-only',
-    'color-picker-pos',
-    'color-picker-case'
-  ], function(attr) {
-    ngModelAttrs[camelize(attr)] = {attribute: attr};
-  });
+    // attributes
+    angular.forEach([
+      'color-picker-format',
+      'color-picker-alpha',
+      'color-picker-swatch',
+      'color-picker-swatch-pos',
+      'color-picker-swatch-bootstrap',
+      'color-picker-swatch-only',
+      'color-picker-pos',
+      'color-picker-case'
+    ], function(attr) {
+      ngModelAttrs[camelize(attr)] = {attribute: attr};
+    });
 
-  // bindings
-  angular.forEach([
-  ], function(binding) {
-    ngModelAttrs[camelize(binding)] = {bound: binding};
-  });
+    // bindings
+    angular.forEach([
+    ], function(binding) {
+      ngModelAttrs[camelize(binding)] = {bound: binding};
+    });
 
-  formlyConfigProvider.setType({
-    name: 'color',
-    template: '<color-picker ng-model="model[options.key]" color-picker-swatch-bootstrap="false"></color-picker>',
-    wrapper: ['bootstrapLabel', 'bootstrapHasError'],
-    defaultOptions: {
-      ngModelAttrs: ngModelAttrs,
-      templateOptions: {
-        "colorPickerFormat": "'hex'",
-        "colorPickerAlpha": false,
-        "colorPickerPos": "'top left'",
-        "colorPickerSwatchOnly": false,
-        "colorPickerSwatchBootstrap": false,
-        "colorPickerSwatchPos": "'left'"
+    formlyConfigProvider.setType({
+      name: 'color',
+      template: '<color-picker ng-model="model[options.key]" color-picker-swatch-bootstrap="false"></color-picker>',
+      wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+      defaultOptions: {
+        ngModelAttrs: ngModelAttrs,
+        templateOptions: {
+          "colorPickerFormat": "'hex'",
+          "colorPickerAlpha": false,
+          "colorPickerPos": "'top left'",
+          "colorPickerSwatchOnly": false,
+          "colorPickerSwatchBootstrap": false,
+          "colorPickerSwatchPos": "'left'"
+        }
       }
-    }
-  });
+    });
+
+    /*
+      ui-grid (nested)
+     */
+    formlyConfigProvider.setType({
+      name: 'ui-grid',
+      //templateUrl: 'scripts/formly/ui-grid.html',
+      templateUrl: 'views/grid.main.html',
+      wrapper: ['bootstrapLabel', 'bootstrapHasError'],
+      controller: 'FormlyGridCtrl'
+    });
 
 	});
