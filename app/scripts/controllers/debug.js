@@ -8,7 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-	.controller('DebugCtrl', function($scope, $modalInstance, formlyVersion, debugInfo) {
+	.controller('DebugCtrl', function($scope, $modalInstance, $location, formlyVersion, debugInfo) {
 
 		// Set debugInfo provider
 		$scope.debugInfo = debugInfo;
@@ -16,7 +16,10 @@ angular.module('panaxuiApp')
 		$scope.debugInfo.env = {
       angularVersion: angular.version.full,
       formlyVersion: formlyVersion
-		}
+		};
+
+    $scope.debugInfo.host = $location.host();
+    $scope.debugInfo.port = $location.port();
 
 		// Ok clicked
 		$scope.okClick = function() {
