@@ -30,26 +30,26 @@
 				  <tr>
 				    <td>Host</td>
 				    <td>
-				    	<code>127.0.0.1:3000</code>
-				    </td> 
+				    	<code>{{debugInfo.host}}:{{debugInfo.port}}</code>
+				    </td>
 				  </tr>
 				  <tr>
 				    <td>API</td>
 				    <td>
 				    	<code>panaxui-nodejs-{{debugInfo.currentUser.api_version}}</code>
-				    </td> 
+				    </td>
 				  </tr>
 				  <tr>
 				    <td>GUI</td>
 				    <td>
 				    	<code>panaxui-angularjs-0.0.1</code>
-				    </td> 
+				    </td>
 				  </tr>
 				  <tr>
 				    <td>User</td>
 				    <td>
 				    	<code>{{debugInfo.currentUser.username}}</code>
-				    </td> 
+				    </td>
 				  </tr>
         	<tr>
         		<th colspan="2">
@@ -60,31 +60,37 @@
 				    <td>Server</td>
 				    <td>
 				    	<code>{{debugInfo.currentUser.db.server}}</code>
-				    </td> 
+				    </td>
 				  </tr>
 				  <tr>
 				    <td>Vendor</td>
 				    <td>
 				    	<code>{{debugInfo.currentUser.db.vendor}}</code>
-				    </td> 
+				    </td>
 				  </tr>
-				  <tr>
-				    <td>Version</td>
-				    <td>
-				    	<code>{{debugInfo.currentUser.db.version}}</code>
-				    </td> 
-				  </tr>
+          <tr>
+            <td>Version</td>
+            <td>
+              <code>{{debugInfo.currentUser.db.panaxdb}}</code>
+            </td>
+          </tr>
+          <tr>
+            <td>Version2</td>
+            <td>
+              <code>{{debugInfo.currentUser.db.version}}</code>
+            </td>
+          </tr>
 				  <tr>
 				    <td>Database</td>
 				    <td>
 				    	<code>{{debugInfo.currentUser.db.database}}</code>
-				    </td> 
+				    </td>
 				  </tr>
 				  <tr>
 				    <td>User</td>
 				    <td>
 				    	<code>{{debugInfo.currentUser.db.user}}</code>
-				    </td> 
+				    </td>
 				  </tr>
 				</table>
 			</accordion-group>
