@@ -10,13 +10,13 @@
 angular.module('panaxuiApp')
   .controller('CardsCtrl', function($scope, $stateParams, CRUDService, DebugService) {
 
-    // Cards data
-    $scope.data = [];
+    // Cards data model
+    $scope.model = [];
 
     // Preserve mode
     $scope.mode = $stateParams.mode;
 
-    // Load grid's data
+    // Load grid's data model
     $scope.loadData = function() {
       CRUDService.read({
         mode: 'readonly', //$stateParams.mode, // Is always readonly to get all records
@@ -28,7 +28,7 @@ angular.module('panaxuiApp')
         // Catalog
         $scope.catalog = res.data.catalog;
         // Grid's Model
-        $scope.data = res.data.model || [];
+        $scope.model = res.data.model || [];
       });
     };
     $scope.loadData();
@@ -46,7 +46,19 @@ angular.module('panaxuiApp')
         stateParams: $stateParams,
         catalog: $scope.catalog,
         //grid: $scope.gridOptions.columnDefs,
-        model: $scope.data
+        model: $scope.model
       });
     });
+
+    // View/Edit handler
+    $scope.onOpen =  function(selected) {
+      var identifier = selected[$scope.catalog.primaryKey] ||
+               selected[$scope.catalog.identityKey];
+
+      $scope.$emit('goToState', 'main.panel.form.view', {
+        catalogName: $scope.catalog.catalogName,
+        mode: $scope.mode,
+        id: identifier
+      });
+    };
   });

@@ -1,6 +1,6 @@
 <div class="row clearfix flexcontainer">
 
-  <div class="px-card" ng-repeat="record in data">
+  <div class="px-card" ng-repeat="record in model">
 
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
@@ -18,7 +18,7 @@
       </div>
       <div class="list-group">
         <div class="list-group-item">
-          <img src="{{ record[catalog.customAttrs.iconField] ? '/upload/' + record[catalog.customAttrs.iconField] : '/images/noimg.png' }}"
+          <img ng-src="{{ record[catalog.customAttrs.iconField] ? '/upload/' + record[catalog.customAttrs.iconField] : '/images/noimg.png' }}"
                class="px-card-img img-rounded pull-left">
           <label>
           {{ catalog.customAttrs.descField1 || '[No descField1 Found]' }}
