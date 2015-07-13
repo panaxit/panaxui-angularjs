@@ -4,8 +4,17 @@
   <div class="row">
     <div class="sidebar col-sm-3 col-md-2">
 
-    	<!-- Directive: nav-tree -->
-     	<div nav-tree></div>
+      <div class="panel panel-default">
+
+        <!-- Directive: abn-tree -->
+        <abn-tree
+          tree-data="navMenuData"
+            tree-control="navMenuControl"
+            on-select="$emit('goToBranch',branch)"
+          initial-selection="Home">
+        </abn-tree>
+
+      </div>
 
     </div>
     <div class="main col-sm-9 col-md-10">
