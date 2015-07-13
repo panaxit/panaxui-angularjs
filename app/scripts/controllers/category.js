@@ -15,10 +15,7 @@ angular.module('panaxuiApp')
 
 		// open Debug Modal and resolve `category-specific` objects
 		$scope.$on('openDebugModal', function (event, next) {
-			DebugService.show({
-				currentUser: $scope.currentUser,
-				stateParams: $stateParams
-			});
+			DebugService.show();
   	});
 
 	});

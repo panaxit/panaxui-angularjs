@@ -133,8 +133,6 @@ angular.module('panaxuiApp')
 		// open Debug Modal and resolve `form-specific` objects
 		$scope.$on('openDebugModal', function (event, next) {
 			DebugService.show({
-				currentUser: $scope.currentUser,
-				stateParams: $stateParams,
 				catalog: $scope.catalog,
 				form: $scope.form,
 				model: $scope.model

@@ -11,7 +11,7 @@ angular.module('panaxuiApp')
 	.controller('ApplicationCtrl', ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', 'Session', 'md5',
 		function($scope, $rootScope, AUTH_EVENTS, AuthService, Session, md5) {
 
-			$scope.currentUser = Session;
+			$rootScope.currentUser = Session;
 
 			$scope.logout = function() {
 				AuthService.logout();
@@ -22,7 +22,7 @@ angular.module('panaxuiApp')
 				username: '',
 				passworde: ''
 			};
-			
+
 			$scope.login = function login(credentials) {
 				AuthService.login({
 					username: credentials.username,

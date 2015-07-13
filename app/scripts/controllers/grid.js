@@ -1,12 +1,13 @@
 'use strict';
 
+angular.module('panaxuiApp')
+  .controller('GridCtrl', GridCtrl);
+
 function GridCtrl($scope) {
   this.init.apply(this, arguments);
 }
 
 GridCtrl.$inject = ['$scope', '$stateParams', '$q', 'CRUDService', 'AlertService', 'DebugService'];
-
-angular.module('panaxuiApp').controller('GridCtrl', GridCtrl);
 
 GridCtrl.prototype.init = function($scope, $stateParams, $q, CRUDService, AlertService, DebugService) {
   this._$scope = $scope;
@@ -88,8 +89,6 @@ GridCtrl.prototype.init = function($scope, $stateParams, $q, CRUDService, AlertS
    */
   _self._$scope.$on('openDebugModal', function (event, next) {
    DebugService.show({
-     currentUser: _self._$scope.currentUser,
-     stateParams: _self._$stateParams,
      catalog: _self._$scope.catalog,
      grid: _self._$scope.gridOptions.columnDefs,
      model: _self._$scope.gridOptions.data
