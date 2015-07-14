@@ -132,24 +132,13 @@ angular
       })
 
       /*
-      CardsView `abstract` state
-       */
-      .state('main.panel.cards', {
-        abstract: true,
-        url: 'cards/{catalogName}/{mode}',
-        controller: 'CardsCtrl',
-        templateUrl: 'views/cards.html'
-      })
-
-      /*
       CardsView state
        */
-      .state('main.panel.cards.view', {
-          views: {
-            'main': {
-              templateUrl: 'views/cards.main.html'
-            }
-          }
+      .state('main.panel.cards', {
+        url: 'cards/{catalogName}/{mode}',
+        template: '<px-cards model="vm.model" catalog="vm.catalog" mode="vm.mode"></px-cards>',
+        controllerAs: 'vm',
+        controller: 'CardsCtrl as vm'
       })
 
       /*
