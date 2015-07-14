@@ -109,10 +109,8 @@ angular
        */
       .state('main.panel.grid', {
         url: 'grid/{catalogName}/{mode}',
-        template: '<px-grid></px-grid>',
-        // template: '<px-grid gridOptions="vm.gridOptions"></px-grid>',
-        // controllerAs: 'vm',
-        // controller: 'GridCtrl as vm',
+        templateUrl: 'views/grid.html',
+        controller: 'GridCtrl as vm'
       })
 
       /*
