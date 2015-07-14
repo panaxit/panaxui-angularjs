@@ -16,7 +16,7 @@ function pxGrid() {
     scope: {
       mode: '@',
       catalog: '=',
-      model: '=',
+      data: '=',
       grid: '=',
       loader: '&',
       openHandler: '&',
@@ -81,8 +81,8 @@ function pxGrid() {
         }
       };
 
-      $scope.$watch('vm.model', function(newModel) {
-        vm.gridOptions.data = newModel;
+      $scope.$watch('vm.data', function(newData) {
+        vm.gridOptions.data = newData;
       });
 
       $scope.$watch('vm.grid', function(newGrid) {

@@ -14,7 +14,7 @@ angular.module('panaxuiApp')
     vm.mode = $stateParams.mode;
     vm.grid = [];
     vm.catalog = {};
-    vm.model = [];
+    vm.data = [];
 
     vm.loader = function() {
       CRUDService.read({
@@ -25,7 +25,7 @@ angular.module('panaxuiApp')
         getStructure: "1"
       }).then(function (res) {
         vm.catalog = res.data.catalog;
-        vm.model = res.data.model || [];
+        vm.data = res.data.model || [];
         vm.grid = res.data.grid;
       });
     };
@@ -83,7 +83,7 @@ angular.module('panaxuiApp')
              AlertService.show('success', 'Deleted', 'Record(s) successfully deleted');
              // Remove row(s) from Grid // http://stackoverflow.com/questions/26614641/how-to-properly-delete-selected-items-ui-grid-angular-js
              angular.forEach(selected, function(row, index) {
-               vm.model.splice(vm.model.lastIndexOf(row), 1);
+               vm.data.splice(vm.data.lastIndexOf(row), 1);
              });
            }
          } else {
@@ -97,7 +97,7 @@ angular.module('panaxuiApp')
      DebugService.show({
        catalog: vm.catalog,
        grid: vm.grid,
-       model: vm.model
+       model: vm.data
      });
     });
 

@@ -13,7 +13,7 @@ angular.module('panaxuiApp')
 
     vm.mode = $stateParams.mode;
     vm.catalog = {};
-    vm.model = [];
+    vm.data = [];
 
     vm.loader = function() {
       CRUDService.read({
@@ -24,7 +24,7 @@ angular.module('panaxuiApp')
         getStructure: "1"
       }).then(function (res) {
         vm.catalog = res.data.catalog || {};
-        vm.model = res.data.model || [];
+        vm.data = res.data.model || [];
       });
     };
 
@@ -42,7 +42,7 @@ angular.module('panaxuiApp')
     $scope.$on('openDebugModal', function (event, next) {
       DebugService.show({
         catalog: vm.catalog,
-        model: vm.model
+        model: vm.data
       });
     });
 

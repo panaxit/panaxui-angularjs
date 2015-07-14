@@ -15,7 +15,7 @@ function pxCards() {
     templateUrl: 'scripts/directives/px-cards/pxcards.html',
     scope: {
       mode: '@',
-      model: '=',
+      data: '=',
       catalog: '=',
       loader: '&',
       openHandler: '&'
