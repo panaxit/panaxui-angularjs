@@ -105,30 +105,14 @@ angular
       })
 
       /*
-      Grid `abstract` state
-       */
-      .state('main.panel.grid', {
-        abstract: true,
-        url: 'grid/{catalogName}/{mode}',
-        controller: 'GridCtrl as vm',
-        templateUrl: 'views/grid.html'
-      })
-
-      /*
       GridView state
        */
-      .state('main.panel.grid.view', {
-          views: {
-            'main': {
-              templateUrl: 'views/grid.main.html'
-            },
-            'header': {
-              templateUrl: 'views/grid.header.html'
-            },
-            'footer': {
-              templateUrl: 'views/grid.footer.html'
-            }
-          }
+      .state('main.panel.grid', {
+        url: 'grid/{catalogName}/{mode}',
+        template: '<px-grid></px-grid>',
+        // template: '<px-grid gridOptions="vm.gridOptions"></px-grid>',
+        // controllerAs: 'vm',
+        // controller: 'GridCtrl as vm',
       })
 
       /*

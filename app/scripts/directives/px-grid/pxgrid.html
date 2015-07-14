@@ -1,0 +1,89 @@
+<div class="panel-footer clearfix">
+  <div class="btn-toolbar" ng-show="vm.catalog.mode == 'edit'">
+    <div class="pull-left">
+      <div class="btn-group btn-group-md">
+        <button class="btn btn-primary" type="submit"
+          ng-click="vm.onNew()">
+          <em class="glyphicon glyphicon-plus"></em>
+          Add
+        </button>
+      </div>
+    </div>
+
+    <div class="pull-right">
+      <div class="btn-group btn-group-md">
+        <button class="btn btn-danger" type="submit"
+          ng-click="vm.onDelete()"
+          ng-disabled="!vm.gridApi.grid.selection.selectedCount">
+          <em class="glyphicon glyphicon-minus"></em>
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="panel-body">
+
+  <div ui-grid="vm.gridOptions"
+    ui-grid-auto-resize
+    ui-grid-pagination
+    ui-grid-selection
+    ui-grid-edit
+    ui-grid-row-edit
+    class="px-ui-grid">
+  </div>
+
+</div>
+
+<div class="panel-footer clearfix">
+  <div class="text-center ">
+
+    <div class="pull-left">
+      <select
+        ng-model="vm.gridApi.grid.options.paginationPageSize"
+        ng-options="o as o for o in vm.gridApi.grid.options.paginationPageSizes">
+      </select>
+      records per page
+    </div>
+
+    <!-- <div class="btn-group btn-group-md pagination"> -->
+    <div class="btn-group btn-group-md">
+      <button class="btn btn-default" type="button"
+        ng-click="vm.gridApi.pagination.seek(1)">
+        <em class="glyphicon glyphicon-step-backward"></em>
+        First
+      </button>
+      <button class="btn btn-default" type="button"
+        ng-click="vm.gridApi.pagination.previousPage()">
+        <em class="glyphicon glyphicon-triangle-left"></em>
+        Prev
+      </button>
+      <button class="btn btn-default" type="button"
+        ng-repeat="p in vm.getArray(vm.gridApi.pagination.getTotalPages()) track by $index"
+        ng-click="vm.gridApi.pagination.seek($index+1)"
+        ng-class="{ active : vm.gridApi.pagination.getPage() == $index+1 }">
+        {{$index+1}}
+      </button>
+      <button class="btn btn-default" type="button"
+        ng-click="vm.gridApi.pagination.nextPage()">
+        Next
+        <em class="glyphicon glyphicon-triangle-right"></em>
+      </button>
+      <button class="btn btn-default" type="button"
+        ng-click="vm.gridApi.pagination.seek(vm.gridApi.pagination.getTotalPages())">
+        <em class="glyphicon glyphicon-step-forward"></em>
+        Last
+      </button>
+    </div>
+
+    <!-- ToDo: Create a directive -->
+    <!-- <div class="pull-right">
+      {{ (gridApi.pagination.getPage() * gridApi.grid.options.paginationPageSize) - gridApi.grid.options.paginationPageSize + 1 }}
+      -
+      {{ gridApi.pagination.getPage() * gridApi.grid.options.paginationPageSize }}
+      of {{ gridApi.grid.options.totalItems }} records
+    </div> -->
+
+  </div>
+</div>
