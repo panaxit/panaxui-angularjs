@@ -33,10 +33,22 @@ angular.module('panaxuiApp')
       vm.loader();
     });
 
+    vm.onOpen =  function(selected) {
+      var identifier = selected[vm.catalog.primaryKey] ||
+               selected[vm.catalog.identityKey];
+
+      $scope.$emit('goToState', 'main.panel.form.view', {
+        catalogName: vm.catalog.catalogName,
+        mode: vm.mode,
+        id: identifier
+      });
+    };
+
     $scope.$on('openDebugModal', function (event, next) {
       DebugService.show({
         catalog: vm.catalog,
         model: vm.model
       });
     });
+
   });

@@ -120,8 +120,7 @@ angular
        */
       .state('main.panel.cards', {
         url: 'cards/{catalogName}/{mode}',
-        template: '<px-cards model="vm.model" catalog="vm.catalog" mode="vm.mode"></px-cards>',
-        controllerAs: 'vm',
+        template: '<px-cards model="vm.model" catalog="vm.catalog" mode="{{vm.mode}}" open-handler="vm.onOpen(selected)"></px-cards>',
         controller: 'CardsCtrl as vm'
       })
 
