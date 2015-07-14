@@ -17,8 +17,15 @@ function pxCards() {
       mode: '@',
       model: '=',
       catalog: '=',
+      loader: '&',
       openHandler: '&'
     },
-    bindToController: true
+    bindToController: true,
+    controllerAs: 'vm',
+    controller: function () {
+      var vm = this;
+
+      vm.loader();
+    }
   };
 }

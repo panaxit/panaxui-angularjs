@@ -1,36 +1,36 @@
 <div class="row clearfix flexcontainer">
 
-  <div class="px-card" ng-repeat="record in model">
+  <div class="px-card" ng-repeat="record in vm.model">
 
     <div class="panel panel-default">
       <div class="panel-heading clearfix">
         <h3 class="panel-title pull-left">
-        {{ record[catalog.customAttrs.titleField] || '[No titleField Found]'}}
+        {{ record[vm.catalog.customAttrs.titleField] || '[No titleField Found]'}}
         </h3>
         <div class="btn-group btn-group-xs pull-right">
           <button class="btn" type="submit"
-                  ng-class="{'btn-default':(mode !== 'edit'), 'btn-primary':(mode === 'edit')}"
-                  ng-click="openHandler({selected: record})">
+                  ng-class="{'btn-default':(vm.mode !== 'edit'), 'btn-primary':(vm.mode === 'edit')}"
+                  ng-click="vm.openHandler({selected: record})">
             <!-- <em class="glyphicon glyphicon-folder-open"></em> -->
-            {{mode === 'edit' ? 'Edit' : 'View'}}
+            {{vm.mode === 'edit' ? 'Edit' : 'View'}}
           </button>
         </div>
       </div>
       <div class="list-group">
         <div class="list-group-item">
-          <img ng-src="{{ record[catalog.customAttrs.iconField] ? '/upload/' + record[catalog.customAttrs.iconField] : '/images/noimg.png' }}"
+          <img ng-src="{{ record[vm.catalog.customAttrs.iconField] ? '/upload/' + record[vm.catalog.customAttrs.iconField] : '/images/noimg.png' }}"
                class="px-card-img img-rounded pull-left">
           <label>
-          {{ catalog.customAttrs.descField1 || '[No descField1 Found]' }}
+          {{ vm.catalog.customAttrs.descField1 || '[No descField1 Found]' }}
           </label>
           <h5 class="list-group-item-heading">
-          {{ record[catalog.customAttrs.descField1] || '[No descField1 Found]' }}
+          {{ record[vm.catalog.customAttrs.descField1] || '[No descField1 Found]' }}
           </h5>
           <label>
-          {{ catalog.customAttrs.descField2 || '[No descField2 Found]' }}
+          {{ vm.catalog.customAttrs.descField2 || '[No descField2 Found]' }}
           </label>
           <h5 class="list-group-item-heading">
-          {{ record[catalog.customAttrs.descField2]  || '[No descField2 Found]'}}
+          {{ record[vm.catalog.customAttrs.descField2]  || '[No descField2 Found]'}}
           </h5>
         </div>
       </div>
@@ -42,6 +42,6 @@
 
 </div>
 
-<div ng-if="!model || model.length === 0">
+<div ng-if="!vm.model || vm.model.length === 0">
 <h1 class="text-center">No data found!</h1>
 </div>

@@ -27,7 +27,6 @@ angular.module('panaxuiApp')
         vm.model = res.data.model || [];
       });
     };
-    vm.loader();
 
     $scope.$on('reloadData', function (event, next) {
       vm.loader();
