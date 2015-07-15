@@ -30,6 +30,13 @@ angular.module('panaxuiApp')
       });
     };
 
+    vm.loader();
+
+    $scope.$on('reloadData', function (event, next) {
+      // ToDo: Redraw (re-render) grid. Ex.: when hiding, showing columns
+      vm.loader();
+    });
+
     vm.onOpen = function(selected) {
       var identifier = selected[vm.catalog.primaryKey] ||
                selected[vm.catalog.identityKey];

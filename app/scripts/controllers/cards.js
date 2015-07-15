@@ -28,6 +28,12 @@ angular.module('panaxuiApp')
       });
     };
 
+    vm.loader();
+
+    $scope.$on('reloadData', function (event, next) {
+      vm.loader();
+    });
+
     vm.onOpen =  function(selected) {
       var identifier = selected[vm.catalog.primaryKey] ||
                selected[vm.catalog.identityKey];

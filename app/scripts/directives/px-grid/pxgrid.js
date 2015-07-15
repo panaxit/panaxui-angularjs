@@ -28,8 +28,6 @@ function pxGrid() {
     controller: function ($scope, $stateParams, $q, DebugService, CRUDService, AlertService) {
       var vm = this;
 
-      vm.loader();
-
       vm.gridOptions = {
         paginationPageSizes: [5, 10, 25, 50, 100, 500],
         paginationPageSize: 25,
@@ -99,11 +97,6 @@ function pxGrid() {
           enableHiding: false,
           enableSorting: false,
         });
-      });
-
-      $scope.$on('reloadData', function (event, next) {
-        // ToDo: Redraw (re-render) grid. Ex.: when hiding, showing columns
-        vm.loader();
       });
 
       vm.getArray = function(num) {

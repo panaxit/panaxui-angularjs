@@ -22,14 +22,6 @@ function pxCards() {
     },
     bindToController: true,
     controllerAs: 'vm',
-    controller: function ($scope) {
-      var vm = this;
-
-      vm.loader();
-
-      $scope.$on('reloadData', function (event, next) {
-        vm.loader();
-      });
-    }
+    controller: function () {}
   };
 }
