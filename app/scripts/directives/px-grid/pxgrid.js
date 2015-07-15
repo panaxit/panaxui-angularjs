@@ -14,7 +14,6 @@ function pxGrid() {
     restrict: 'E',
     templateUrl: 'scripts/directives/px-grid/pxgrid.html',
     scope: {
-      mode: '@',
       catalog: '=',
       data: '=',
       grid: '=',
@@ -32,16 +31,16 @@ function pxGrid() {
         paginationPageSizes: [5, 10, 25, 50, 100, 500],
         paginationPageSize: 25,
         rowHeight: 32,
-        enableRowSelection: (vm.mode === 'edit'),
+        enableRowSelection: (vm.catalog.mode === 'edit'),
         //multiSelect: (vm._$stateParams.mode === 'edit'),
         //enableSelectAll: (vm._$stateParams.mode === 'edit'),
         //selectionRowHeaderWidth: 32,
-        enableCellEdit: (vm.mode === 'edit'),
+        enableCellEdit: (vm.catalog.mode === 'edit'),
         enablePaginationControls: false,
         showGridFooter: false,
         onRegisterApi: function(gridApi) {
           vm.gridApi = gridApi;
-          if (vm.mode === 'edit') {
+          if (vm.catalog.mode === 'edit') {
             // Save Row handler
             // Code based from `form.js`
             gridApi.rowEdit.on.saveRow($scope, function (rowEntity) {

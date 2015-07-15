@@ -463,14 +463,14 @@ angular.module('panaxuiApp')
     });
 
     /*
-      ui-grid (nested)
+      px-grid (nested)
      */
     formlyConfigProvider.setType({
-      name: 'ui-grid',
+      name: 'px-grid',
       //templateUrl: 'scripts/formly/ui-grid.html',
-      templateUrl: 'views/grid.main.html',
+      templateUrl: 'views/grid.html',
       wrapper: ['bootstrapLabel', 'bootstrapHasError'],
-      controller: 'FormlyGridCtrl'
+      controller: 'FormlyGridCtrl as vm'
     });
 
 	});
