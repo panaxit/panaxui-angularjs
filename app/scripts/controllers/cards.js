@@ -11,10 +11,6 @@ angular.module('panaxuiApp')
   .controller('CardsCtrl', function($scope, $stateParams, CRUDService, DebugService) {
     var vm = this;
 
-    vm.mode = $stateParams.mode;
-    vm.catalog = {};
-    vm.data = [];
-
     vm.loader = function() {
       CRUDService.read({
         mode: 'readonly', //$stateParams.mode, // Is always readonly to get all records

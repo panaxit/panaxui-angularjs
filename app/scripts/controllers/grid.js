@@ -11,10 +11,6 @@ angular.module('panaxuiApp')
   .controller('GridCtrl', function($scope, $stateParams, CRUDService, DebugService, AlertService) {
     var vm = this;
 
-    vm.grid = [];
-    vm.catalog = {};
-    vm.data = [];
-
     vm.loader = function() {
       CRUDService.read({
         mode: $stateParams.mode,

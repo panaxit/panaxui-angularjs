@@ -11,10 +11,6 @@ angular.module('panaxuiApp')
 	.controller('FormCtrl', function($scope, $stateParams, CRUDService, AlertService, DebugService) {
     var vm = this;
 
-    vm.form = [];
-    vm.catalog = {};
-    vm.data = {};
-
 		vm.loader = function() {
 			var params = {
 				mode: $stateParams.mode,
