@@ -40,7 +40,7 @@ angular.module('panaxuiApp')
       var identifier = selected[vm.catalog.primaryKey] ||
                selected[vm.catalog.identityKey];
 
-      $scope.$emit('goToState', 'main.panel.form.view', {
+      $scope.$emit('goToState', 'main.panel.form', {
         catalogName: vm.catalog.catalogName,
         mode: vm.catalog.mode,
         id: identifier
@@ -48,7 +48,7 @@ angular.module('panaxuiApp')
     };
 
     vm.onNew = function () {
-      $scope.$emit('goToState', 'main.panel.form.view', {
+      $scope.$emit('goToState', 'main.panel.form', {
         catalogName: vm.catalog.catalogName,
         mode: 'insert',
         id: undefined

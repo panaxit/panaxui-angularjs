@@ -123,27 +123,12 @@ angular
       })
 
       /*
-      Form `abstract` state
-       */
-      .state('main.panel.form', {
-        abstract: true,
-        url: 'form/{catalogName}/{mode}/{id}',
-        controller: 'FormCtrl',
-        templateUrl: 'views/form.html'
-      })
-
-      /*
       FormView state
        */
-      .state('main.panel.form.view', {
-          views: {
-            'main': {
-              templateUrl: 'views/form.main.html'
-            },
-            'footer': {
-              templateUrl: 'views/form.footer.html'
-            }
-          }
+      .state('main.panel.form', {
+        url: 'form/{catalogName}/{mode}/{id}',
+        templateUrl: 'views/form.html',
+        controller: 'FormCtrl as vm'
       })
 
       // filters: https://github.com/angular-ui/ui-router/wiki/Multiple-Named-Views

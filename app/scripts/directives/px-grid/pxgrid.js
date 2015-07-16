@@ -24,7 +24,7 @@ function pxGrid() {
     },
     bindToController: true,
     controllerAs: 'vm',
-    controller: function ($scope, $stateParams, $q, DebugService, CRUDService, AlertService) {
+    controller: function ($scope, $stateParams, $q, CRUDService, AlertService) {
       var vm = this;
 
       vm.gridOptions = {
@@ -102,5 +102,5 @@ function pxGrid() {
         return new Array(num);
       };
     }
-  }
+  };
 }

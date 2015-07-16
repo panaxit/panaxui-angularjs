@@ -38,7 +38,7 @@ angular.module('panaxuiApp')
       var identifier = selected[vm.catalog.primaryKey] ||
                selected[vm.catalog.identityKey];
 
-      $scope.$emit('goToState', 'main.panel.form.view', {
+      $scope.$emit('goToState', 'main.panel.form', {
         catalogName: vm.catalog.catalogName,
         mode: vm.mode,
         id: identifier

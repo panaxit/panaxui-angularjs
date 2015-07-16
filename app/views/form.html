@@ -1,19 +1,9 @@
-<form ng-submit="onSubmit(pxForm)" name="pxForm" novalidate>
-
-	<div class="panel-body">
-
-	  <!-- ui.router view -->
-	  <div ui-view="main">
-	  </div>
-
-	</div>
-	
-	<div class="panel-footer clearfix">
-
-	  <!-- ui.router view -->
-	  <div ui-view="footer">
-	  </div>
-
-	</div>
-
-</form>
+<px-form
+  data="vm.data"
+  catalog="vm.catalog"
+  form="vm.form"
+  loader="vm.loader()"
+  reset-handler="vm.onReset(pxForm)"
+  cancel-handler="vm.onCancel()"
+  submit-handler="vm.onSubmit(pxForm)">
+</px-form>

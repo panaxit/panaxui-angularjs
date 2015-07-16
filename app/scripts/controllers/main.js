@@ -53,7 +53,7 @@ angular.module('panaxuiApp')
 				else if (branch.data.controlType === 'gridView')
 					$scope.goToState('main.panel.grid', branch.data);
         else if (branch.data.controlType === 'formView')
-          $scope.goToState('main.panel.form.view', branch.data);
+          $scope.goToState('main.panel.form', branch.data);
         else if (branch.data.controlType === 'cardView')
           $scope.goToState('main.panel.cards', branch.data);
 			});

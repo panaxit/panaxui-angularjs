@@ -9,16 +9,13 @@
  */
 angular.module('panaxuiApp')
 	.controller('FormCtrl', function($scope, $stateParams, CRUDService, AlertService, DebugService) {
+    var vm = this;
 
-		// Model
-		$scope.model = {};
+    vm.form = [];
+    vm.catalog = {};
+    vm.data = {};
 
-		// Form
-		$scope.form = [];
-
-		// Load model and layout/fields into form
-		$scope.loadForm = function() {
-			// Set API params
+		vm.loader = function() {
 			var params = {
 				mode: $stateParams.mode,
 				catalogName: $stateParams.catalogName,
@@ -26,35 +23,30 @@ angular.module('panaxuiApp')
 				getData: '1',
 				getStructure: '1'
 			};
-			if($stateParams.id)
+			if($stateParams.id) {
 				params.filters = '\'id=' + $stateParams.id + '\''; // ToDo: Arbitriary Identity Key Name
-
+      }
 			CRUDService.read(params).then(function (res) {
-				// Catalog
-				$scope.catalog = res.data.catalog;
-				// Panel Title
-				$scope.$emit('setPanelTitle', (function () {
-					if($scope.catalog.mode === 'insert') return 'New ';
-					if($scope.catalog.mode === 'edit') return 'Edit ';
-					if($scope.catalog.mode === 'readonly') return 'View ';
-				})() + $scope.catalog.tableName);
-				// model
-				$scope.model = res.data.model[0] || {};
-				// form
-				$scope.form = res.data.form || [];
+				vm.catalog = res.data.catalog;
+				vm.data = res.data.model[0] || {};
+				vm.form = res.data.form || [];
+        $scope.$emit('setPanelTitle', (function () {
+          if(vm.catalog.mode === 'insert') return 'New ';
+          if(vm.catalog.mode === 'edit') return 'Edit ';
+          if(vm.catalog.mode === 'readonly') return 'View ';
+        })() + vm.catalog.tableName);
 			});
 		};
-		$scope.loadForm();
 
-		// Reload listener
+    vm.loader();
+
 		$scope.$on('reloadData', function (event, next) {
-			$scope.loadForm();
+			vm.loader();
 		});
 
-		// Reset handler
-		$scope.onReset = function(pxForm) {
+		vm.onReset = function(pxForm) {
 			// // ToDo: Confirm
-	    // // $scope.loadForm();
+	    // // vm.loader();
 	    // Alt: http://angular-formly.com/#/example/form-options/reset-model
 			// ToDo: Confirm
 	    if (pxForm) {
@@ -63,23 +55,22 @@ angular.module('panaxuiApp')
 	    }
 		};
 
-		// Cancel handler
-		$scope.onCancel = function() {
+		vm.onCancel = function() {
 			// ToDo: Confirm of unsaved dirty form otherwise/then Go Back
 			console.log("CANCEL")
 		};
 
 		// Submit handler
-		$scope.onSubmit = function(pxForm) {
+		vm.onSubmit = function(pxForm) {
 			if (pxForm.$valid) {
 				/**
 				 * Create payload to be sent
 				 */
-        var payload = CRUDService.buildPersistPayload($scope.form, $scope.model, $scope.catalog, $stateParams.id);
+        var payload = CRUDService.buildPersistPayload(vm.form, vm.data, vm.catalog, $stateParams.id);
 				/**
 				 * Perform Insert/Update in backend
 				 */
-				if($scope.catalog.mode === 'insert') {
+				if(vm.catalog.mode === 'insert') {
 					/**
 					 * mode = INSERT
 					 */
@@ -91,7 +82,7 @@ angular.module('panaxuiApp')
 							} else if(res.data[0].status === 'success') {
 								AlertService.show('success', 'Saved', 'Record successfully saved');
 								// Go to 'edit' mode of newly created record
-								$scope.$emit('goToState', 'main.panel.form.view', {
+								$scope.$emit('goToState', 'main.panel.form', {
 									catalogName: res.data[0].tableName,
 									mode: 'edit',
 									id:  res.data[0].identity
@@ -101,7 +92,7 @@ angular.module('panaxuiApp')
 							// Do nothing. HTTP 500 responses handled by ErrorInterceptor
 						}
 					});
-				} else if($scope.catalog.mode === 'edit' && pxForm.$dirty) {
+				} else if(vm.catalog.mode === 'edit' && pxForm.$dirty) {
 					/**
 					 * mode = EDIT
 					 */
@@ -113,10 +104,10 @@ angular.module('panaxuiApp')
 							} else if(res.data[0].status === 'success') {
 								AlertService.show('success', 'Saved', 'Record successfully saved');
 								// Reset form to untouched & pristine
-								// $scope.onReset
+								// vm.onReset
 					      pxForm.$setPristine();
 					      pxForm.$setUntouched();
-					      // ToDo: Reload form? (to retrieve saved data and spot glitches via: $scope.loadForm(); ?
+					      // ToDo: Reload form? (to retrieve saved data and spot glitches via: vm.loader(); ?
 							}
 						} else {
 							// Do nothing. HTTP 500 responses handled by ErrorInterceptor
@@ -133,9 +124,9 @@ angular.module('panaxuiApp')
 		// open Debug Modal and resolve `form-specific` objects
 		$scope.$on('openDebugModal', function (event, next) {
 			DebugService.show({
-				catalog: $scope.catalog,
-				form: $scope.form,
-				model: $scope.model
+				catalog: vm.catalog,
+				form: vm.form,
+				model: vm.data
 			});
 		});
 	});
