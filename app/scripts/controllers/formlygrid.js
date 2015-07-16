@@ -17,8 +17,8 @@ angular.module('panaxuiApp')
 
     vm.loader = function() {
       vm.data = $scope.model[$scope.options.key] || [];
-      vm.grid = $scope.to.grid;
-      vm.catalog = $scope.to.catalog;
+      vm.grid = $scope.options.data.grid;
+      vm.catalog = $scope.options.data.catalog;
     };
 
     vm.loader();
