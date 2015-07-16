@@ -8,7 +8,7 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-  .controller('GridCtrl', function($scope, $stateParams, CRUDService, DebugService, AlertService) {
+  .controller('GridCtrl', function($scope, $stateParams, $q, CRUDService, DebugService, AlertService) {
     var vm = this;
 
     vm.loader = function() {
@@ -94,6 +94,41 @@ angular.module('panaxuiApp')
        });
       }
     };
+
+    vm.onRowChange = function (rowEntity) {
+      // Save Row handler
+      // Code based from `form.js`
+      var promise = $q.defer();
+
+      /**
+      * Create payload to be sent
+      */
+      var payload = {
+       tableName: vm.catalog.catalogName,
+       primaryKey: vm.catalog.primaryKey,
+       identityKey: vm.catalog.identityKey
+      };
+
+      // Set DataRows
+      payload.updateRows = [rowEntity];
+
+      CRUDService.update(payload).then(function (res) {
+       if(res.success === true) {
+         if(res.data[0].status === 'error') {
+           AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
+           promise.reject();
+         } else if(res.data[0].status === 'success') {
+           //AlertService.show('success', 'Saved', 'Record successfully saved');
+           promise.resolve();
+         }
+       } else {
+         // HTTP 500 responses handled by ErrorInterceptor
+         promise.reject();
+       }
+      });
+
+      return promise.promise;
+    }
 
     $scope.$on('openDebugModal', function (event, next) {
      DebugService.show({
