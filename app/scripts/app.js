@@ -65,7 +65,7 @@ angular
        */
       .state('login', {
           url: '/login',
-          templateUrl: 'views/shell/login.html'
+          templateUrl: 'views/login.html'
       })
 
       /*
@@ -73,7 +73,7 @@ angular
        */
       .state('main', {
           abstract: true,
-          templateUrl: 'views/shell/main.html',
+          templateUrl: 'views/main.html',
           controller: 'MainCtrl',
           data: {
             authRequired: true
@@ -85,7 +85,7 @@ angular
        */
       .state('main.home', {
           url: '/',
-          templateUrl: 'views/shell/home.html'
+          templateUrl: 'views/home.html'
       })
 
       /*
@@ -93,7 +93,7 @@ angular
        */
       .state('main.category', {
           url: 'category/{name}',
-          templateUrl: 'views/shell/category.html',
+          templateUrl: 'views/category.html',
           controller: 'CategoryCtrl'
       })
 
@@ -101,7 +101,7 @@ angular
       Panel `parent` state
        */
       .state('main.panel', {
-          templateUrl: 'views/shell/panel.html'
+          templateUrl: 'views/panel.html'
       })
 
       /*

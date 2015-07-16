@@ -15,7 +15,7 @@ angular.module('panaxuiApp')
   	// show debug modal
   	DebugService.show = function(debugInfo) {
 			var debugModalInstance = $modal.open({
-				templateUrl: 'views/shell/debug.html',
+				templateUrl: 'views/debug.html',
 				controller: 'DebugCtrl',
 				size: 'lg',
 				resolve: {
