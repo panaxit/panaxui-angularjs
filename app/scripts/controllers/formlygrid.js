@@ -11,10 +11,6 @@ angular.module('panaxuiApp')
   .controller('FormlyGridCtrl', function ($scope) {
     var vm = this;
 
-    vm.grid = [];
-    vm.catalog = {};
-    vm.data = [];
-
     vm.loader = function() {
       vm.data = $scope.model[$scope.options.key] || [];
       vm.grid = $scope.options.data.grid;
