@@ -29,39 +29,50 @@ function GridCtrl($scope, $stateParams, $q, CRUDService, DebugService, AlertServ
 
   vm.loader();
 
-  $scope.$on('reloadData', function (event, next) {
-    // ToDo: Redraw (re-render) grid. Ex.: when hiding, showing columns
-    vm.loader();
-  });
+  vm.watchers = function() {
+    $scope.$on('reloadData', function (event, next) {
+      // ToDo: Redraw (re-render) grid. Ex.: when hiding, showing columns
+      vm.loader();
+    });
+    $scope.$on('openDebugModal', function (event, next) {
+     DebugService.show({
+       catalog: vm.catalog,
+       grid: vm.grid,
+       model: vm.data
+     });
+    });
+  };
 
-  vm.onOpen = function(selected) {
-    var identifier = selected[vm.catalog.primaryKey] ||
-             selected[vm.catalog.identityKey];
+  vm.watchers();
+
+  vm.onOpen = function(selected, catalog) {
+    var identifier = selected[catalog.primaryKey] ||
+             selected[catalog.identityKey];
 
     $scope.$emit('goToState', 'main.panel.form', {
-      catalogName: vm.catalog.catalogName,
-      mode: vm.catalog.mode,
+      catalogName: catalog.catalogName,
+      mode: catalog.mode,
       id: identifier
     });
   };
 
-  vm.onNew = function () {
+  vm.onNew = function (catalogName) {
     $scope.$emit('goToState', 'main.panel.form', {
-      catalogName: vm.catalog.catalogName,
+      catalogName: catalogName,
       mode: 'insert',
       id: undefined
     });
   };
 
-  vm.onDelete = function (selected) {
+  vm.onDelete = function (selected, catalog) {
     if(confirm("Are your sure to Delete selected record(s)?")) {
      /**
       * Create payload to be sent
       */
      var payload = {
-       tableName: vm.catalog.catalogName,
-       primaryKey: vm.catalog.primaryKey,
-       identityKey: vm.catalog.identityKey
+       tableName: catalog.catalogName,
+       primaryKey: catalog.primaryKey,
+       identityKey: catalog.identityKey
      };
 
      // Set DeleteRows
@@ -69,8 +80,8 @@ function GridCtrl($scope, $stateParams, $q, CRUDService, DebugService, AlertServ
 
      // Set primaryKey and/or identityKey as DeleteRows
      angular.forEach(selected, function(row, index) {
-       var identifier = row[vm.catalog.primaryKey] ||
-                        row[vm.catalog.identityKey];
+       var identifier = row[catalog.primaryKey] ||
+                        row[catalog.identityKey];
 
        payload.deleteRows[index] = {};
        if(payload.primaryKey)
@@ -86,9 +97,11 @@ function GridCtrl($scope, $stateParams, $q, CRUDService, DebugService, AlertServ
          } else if(res.data[0].status === 'success') {
            AlertService.show('success', 'Deleted', 'Record(s) successfully deleted');
            // Remove row(s) from Grid // http://stackoverflow.com/questions/26614641/how-to-properly-delete-selected-items-ui-grid-angular-js
-           angular.forEach(selected, function(row, index) {
-             vm.data.splice(vm.data.lastIndexOf(row), 1);
-           });
+           // angular.forEach(selected, function(row, index) {
+           //   vm.data.splice(vm.data.lastIndexOf(row), 1);
+           // });
+           // Emit 'reloadData' instead
+           $scope.$emit('reloadData');
          }
        } else {
          // Do nothing. HTTP 500 responses handled by ErrorInterceptor
@@ -97,7 +110,7 @@ function GridCtrl($scope, $stateParams, $q, CRUDService, DebugService, AlertServ
     }
   };
 
-  vm.onRowChange = function (rowEntity) {
+  vm.onRowChange = function (rowEntity, catalog) {
     // Save Row handler
     // Code based from `form.js`
     var promise = $q.defer();
@@ -106,9 +119,9 @@ function GridCtrl($scope, $stateParams, $q, CRUDService, DebugService, AlertServ
     * Create payload to be sent
     */
     var payload = {
-     tableName: vm.catalog.catalogName,
-     primaryKey: vm.catalog.primaryKey,
-     identityKey: vm.catalog.identityKey
+     tableName: catalog.catalogName,
+     primaryKey: catalog.primaryKey,
+     identityKey: catalog.identityKey
     };
 
     // Set DataRows
@@ -131,13 +144,5 @@ function GridCtrl($scope, $stateParams, $q, CRUDService, DebugService, AlertServ
 
     return promise.promise;
   }
-
-  $scope.$on('openDebugModal', function (event, next) {
-   DebugService.show({
-     catalog: vm.catalog,
-     grid: vm.grid,
-     model: vm.data
-   });
-  });
 
 }

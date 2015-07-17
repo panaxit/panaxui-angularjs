@@ -8,9 +8,16 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-  .controller('FormlyGridCtrl', function ($scope) {
+  .controller('FormlyGridCtrl', function ($scope, $controller) {
     var vm = this;
 
+    // Mixin: http://moduscreate.com/angularjs-tricks-with-angular-extend/
+    var BaseCtrl = $controller('GridCtrl as vm', {$scope: $scope});
+    angular.extend(this, BaseCtrl);
+
+    /*
+    Overload methods
+     */
     vm.loader = function() {
       vm.data = $scope.model[$scope.options.key] || [];
       vm.grid = $scope.options.data.grid;
@@ -18,4 +25,9 @@ angular.module('panaxuiApp')
     };
 
     vm.loader();
+
+    vm.watchers = function() {
+    };
+
+    vm.watchers();
   });

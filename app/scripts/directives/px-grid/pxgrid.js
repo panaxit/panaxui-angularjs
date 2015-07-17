@@ -48,7 +48,7 @@ function pxGrid() {
           //vm.gridOptions.selectionRowHeaderWidth = 32,
           if (newCatalog.mode === 'edit') {
             vm.gridApi.rowEdit.on.saveRow($scope, function(rowEntity) {
-              vm.gridApi.rowEdit.setSavePromise(rowEntity, vm.rowChangePromise({rowEntity: rowEntity}));
+              vm.gridApi.rowEdit.setSavePromise(rowEntity, vm.rowChangePromise({rowEntity: rowEntity, catalog: newCatalog}));
             });
           }
         }

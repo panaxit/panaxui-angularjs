@@ -3,8 +3,8 @@
   catalog="vm.catalog"
   grid="vm.grid"
   loader="vm.loader()"
-  open-handler="vm.onOpen(selected)"
-  new-handler="vm.onNew()"
-  delete-handler="vm.onDelete(selected)"
-  row-change-promise="vm.onRowChange(rowEntity)">
+  open-handler="vm.onOpen(selected, catalog)"
+  new-handler="vm.onNew(catalogName)"
+  delete-handler="vm.onDelete(selected, catalog)"
+  row-change-promise="vm.onRowChange(rowEntity, catalog)">
 </px-grid>

@@ -3,7 +3,7 @@
     <div class="pull-left">
       <div class="btn-group btn-group-md">
         <button class="btn btn-primary" type="submit"
-          ng-click="vm.newHandler()">
+          ng-click="vm.newHandler({catalogName: vm.catalog.catalogName})">
           <em class="glyphicon glyphicon-plus"></em>
           Add
         </button>
@@ -13,7 +13,7 @@
     <div class="pull-right">
       <div class="btn-group btn-group-md">
         <button class="btn btn-danger" type="submit"
-          ng-click="vm.deleteHandler({selected: vm.gridApi.selection.getSelectedRows()})"
+          ng-click="vm.deleteHandler({selected: vm.gridApi.selection.getSelectedRows(), catalog: vm.catalog})"
           ng-disabled="!vm.gridApi.grid.selection.selectedCount">
           <em class="glyphicon glyphicon-minus"></em>
           Remove
