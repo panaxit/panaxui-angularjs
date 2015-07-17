@@ -8,134 +8,136 @@
  * Controller of the panaxuiApp
  */
 angular.module('panaxuiApp')
-  .controller('GridCtrl', function($scope, $stateParams, $q, CRUDService, DebugService, AlertService) {
-    var vm = this;
+  .controller('GridCtrl', GridCtrl);
 
-    vm.loader = function() {
-      CRUDService.read({
-        mode: $stateParams.mode,
-        catalogName: $stateParams.catalogName,
-        controlType: 'gridView',
-        getData: "1",
-        getStructure: "1"
-      }).then(function (res) {
-        vm.catalog = res.data.catalog;
-        vm.data = res.data.model || [];
-        vm.grid = res.data.grid;
-      });
-    };
+function GridCtrl($scope, $stateParams, $q, CRUDService, DebugService, AlertService) {
+  var vm = this;
 
-    vm.loader();
-
-    $scope.$on('reloadData', function (event, next) {
-      // ToDo: Redraw (re-render) grid. Ex.: when hiding, showing columns
-      vm.loader();
+  vm.loader = function() {
+    CRUDService.read({
+      mode: $stateParams.mode,
+      catalogName: $stateParams.catalogName,
+      controlType: 'gridView',
+      getData: "1",
+      getStructure: "1"
+    }).then(function (res) {
+      vm.catalog = res.data.catalog;
+      vm.data = res.data.model || [];
+      vm.grid = res.data.grid;
     });
+  };
 
-    vm.onOpen = function(selected) {
-      var identifier = selected[vm.catalog.primaryKey] ||
-               selected[vm.catalog.identityKey];
+  vm.loader();
 
-      $scope.$emit('goToState', 'main.panel.form', {
-        catalogName: vm.catalog.catalogName,
-        mode: vm.catalog.mode,
-        id: identifier
-      });
-    };
+  $scope.$on('reloadData', function (event, next) {
+    // ToDo: Redraw (re-render) grid. Ex.: when hiding, showing columns
+    vm.loader();
+  });
 
-    vm.onNew = function () {
-      $scope.$emit('goToState', 'main.panel.form', {
-        catalogName: vm.catalog.catalogName,
-        mode: 'insert',
-        id: undefined
-      });
-    };
+  vm.onOpen = function(selected) {
+    var identifier = selected[vm.catalog.primaryKey] ||
+             selected[vm.catalog.identityKey];
 
-    vm.onDelete = function (selected) {
-      if(confirm("Are your sure to Delete selected record(s)?")) {
-       /**
-        * Create payload to be sent
-        */
-       var payload = {
-         tableName: vm.catalog.catalogName,
-         primaryKey: vm.catalog.primaryKey,
-         identityKey: vm.catalog.identityKey
-       };
+    $scope.$emit('goToState', 'main.panel.form', {
+      catalogName: vm.catalog.catalogName,
+      mode: vm.catalog.mode,
+      id: identifier
+    });
+  };
 
-       // Set DeleteRows
-       payload.deleteRows = [];
+  vm.onNew = function () {
+    $scope.$emit('goToState', 'main.panel.form', {
+      catalogName: vm.catalog.catalogName,
+      mode: 'insert',
+      id: undefined
+    });
+  };
 
-       // Set primaryKey and/or identityKey as DeleteRows
-       angular.forEach(selected, function(row, index) {
-         var identifier = row[vm.catalog.primaryKey] ||
-                          row[vm.catalog.identityKey];
-
-         payload.deleteRows[index] = {};
-         if(payload.primaryKey)
-           payload.deleteRows[index][payload.primaryKey] = identifier;
-         if(payload.identityKey)
-           payload.deleteRows[index][payload.identityKey] = identifier;
-       });
-
-       CRUDService.delete(payload).then(function (res) {
-         if(res.success === true) {
-           if(res.data[0].status === 'error') {
-             AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
-           } else if(res.data[0].status === 'success') {
-             AlertService.show('success', 'Deleted', 'Record(s) successfully deleted');
-             // Remove row(s) from Grid // http://stackoverflow.com/questions/26614641/how-to-properly-delete-selected-items-ui-grid-angular-js
-             angular.forEach(selected, function(row, index) {
-               vm.data.splice(vm.data.lastIndexOf(row), 1);
-             });
-           }
-         } else {
-           // Do nothing. HTTP 500 responses handled by ErrorInterceptor
-         }
-       });
-      }
-    };
-
-    vm.onRowChange = function (rowEntity) {
-      // Save Row handler
-      // Code based from `form.js`
-      var promise = $q.defer();
-
-      /**
+  vm.onDelete = function (selected) {
+    if(confirm("Are your sure to Delete selected record(s)?")) {
+     /**
       * Create payload to be sent
       */
-      var payload = {
+     var payload = {
        tableName: vm.catalog.catalogName,
        primaryKey: vm.catalog.primaryKey,
        identityKey: vm.catalog.identityKey
-      };
+     };
 
-      // Set DataRows
-      payload.updateRows = [rowEntity];
+     // Set DeleteRows
+     payload.deleteRows = [];
 
-      CRUDService.update(payload).then(function (res) {
+     // Set primaryKey and/or identityKey as DeleteRows
+     angular.forEach(selected, function(row, index) {
+       var identifier = row[vm.catalog.primaryKey] ||
+                        row[vm.catalog.identityKey];
+
+       payload.deleteRows[index] = {};
+       if(payload.primaryKey)
+         payload.deleteRows[index][payload.primaryKey] = identifier;
+       if(payload.identityKey)
+         payload.deleteRows[index][payload.identityKey] = identifier;
+     });
+
+     CRUDService.delete(payload).then(function (res) {
        if(res.success === true) {
          if(res.data[0].status === 'error') {
            AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
-           promise.reject();
          } else if(res.data[0].status === 'success') {
-           //AlertService.show('success', 'Saved', 'Record successfully saved');
-           promise.resolve();
+           AlertService.show('success', 'Deleted', 'Record(s) successfully deleted');
+           // Remove row(s) from Grid // http://stackoverflow.com/questions/26614641/how-to-properly-delete-selected-items-ui-grid-angular-js
+           angular.forEach(selected, function(row, index) {
+             vm.data.splice(vm.data.lastIndexOf(row), 1);
+           });
          }
        } else {
-         // HTTP 500 responses handled by ErrorInterceptor
-         promise.reject();
+         // Do nothing. HTTP 500 responses handled by ErrorInterceptor
        }
-      });
-
-      return promise.promise;
-    }
-
-    $scope.$on('openDebugModal', function (event, next) {
-     DebugService.show({
-       catalog: vm.catalog,
-       grid: vm.grid,
-       model: vm.data
      });
+    }
+  };
+
+  vm.onRowChange = function (rowEntity) {
+    // Save Row handler
+    // Code based from `form.js`
+    var promise = $q.defer();
+
+    /**
+    * Create payload to be sent
+    */
+    var payload = {
+     tableName: vm.catalog.catalogName,
+     primaryKey: vm.catalog.primaryKey,
+     identityKey: vm.catalog.identityKey
+    };
+
+    // Set DataRows
+    payload.updateRows = [rowEntity];
+
+    CRUDService.update(payload).then(function (res) {
+     if(res.success === true) {
+       if(res.data[0].status === 'error') {
+         AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
+         promise.reject();
+       } else if(res.data[0].status === 'success') {
+         //AlertService.show('success', 'Saved', 'Record successfully saved');
+         promise.resolve();
+       }
+     } else {
+       // HTTP 500 responses handled by ErrorInterceptor
+       promise.reject();
+     }
     });
 
+    return promise.promise;
+  }
+
+  $scope.$on('openDebugModal', function (event, next) {
+   DebugService.show({
+     catalog: vm.catalog,
+     grid: vm.grid,
+     model: vm.data
+   });
   });
+
+}
