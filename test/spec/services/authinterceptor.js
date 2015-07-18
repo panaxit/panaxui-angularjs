@@ -11,8 +11,8 @@ describe('Service: AuthInterceptor', function () {
     AuthInterceptor = _AuthInterceptor_;
   }));
 
-  it('should do something', function () {
-    expect(!!AuthInterceptor).toBe(true);
-  });
+  // it('should do something', function () {
+  //   expect(!!AuthInterceptor).toBe(true);
+  // });
 
 });

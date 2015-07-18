@@ -11,8 +11,8 @@ describe('Service: CRUDService', function () {
     CRUDService = _CRUDService_;
   }));
 
-  it('should do something', function () {
-    expect(!!CRUDService).toBe(true);
-  });
+  // it('should do something', function () {
+  //   expect(!!CRUDService).toBe(true);
+  // });
 
 });

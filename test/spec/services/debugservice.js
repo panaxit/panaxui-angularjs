@@ -11,8 +11,8 @@ describe('Service: DebugService', function () {
     DebugService = _DebugService_;
   }));
 
-  it('should do something', function () {
-    expect(!!DebugService).toBe(true);
-  });
+  // it('should do something', function () {
+  //   expect(!!DebugService).toBe(true);
+  // });
 
 });

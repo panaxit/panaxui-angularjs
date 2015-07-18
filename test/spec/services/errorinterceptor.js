@@ -11,8 +11,8 @@ describe('Service: ErrorInterceptor', function () {
     ErrorInterceptor = _ErrorInterceptor_;
   }));
 
-  it('should do something', function () {
-    expect(!!ErrorInterceptor).toBe(true);
-  });
+  // it('should do something', function () {
+  //   expect(!!ErrorInterceptor).toBe(true);
+  // });a
 
 });
