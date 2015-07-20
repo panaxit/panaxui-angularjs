@@ -98,37 +98,37 @@ angular.module('panaxuiApp')
      */
     CRUDService.buildPersistPayload = function(form, model, catalog, id) {
 
-      var dirtyFieldsIterator = function(obj, dirty_model, orig_model, orig_catalog) {
+      var dirtyFieldsIterator = function(obj, dirty_model, orig_model) {
         angular.forEach(obj, function (el) {
           // fieldset / tab
           if(el.fields) {
-            dirtyFieldsIterator(el.fields, dirty_model, orig_model, orig_catalog);
+            dirtyFieldsIterator(el.fields, dirty_model, orig_model);
           }
           // tabs
           if(el.tabs) {
-            dirtyFieldsIterator(el.tabs, dirty_model, orig_model, orig_catalog);
+            dirtyFieldsIterator(el.tabs, dirty_model, orig_model);
           }
           // fieldGroup
           if(el.fieldGroup) {
-            // Nested model
+            // Nested-form model
             if(el.key){
               dirty_model[el.key] = {
-                tableName: orig_catalog[el.key].catalog.catalogName,
-                primaryKey: orig_catalog[el.key].catalog.primaryKey,
-                identityKey: orig_catalog[el.key].catalog.identityKey,
-                foreignReference: orig_catalog[el.key].catalog.foreignReference
+                tableName: el.data.catalog.catalogName,
+                primaryKey: el.data.catalog.primaryKey,
+                identityKey: el.data.catalog.identityKey,
+                foreignReference: el.data.catalog.foreignReference
               };
-              if(orig_catalog[el.key].catalog.mode === 'insert') {
+              if(el.data.catalog.mode === 'insert') {
                 dirty_model[el.key].insertRows = [{}];
                 dirtyFieldsIterator(el.fieldGroup, dirty_model[el.key].insertRows[0],
-                                    orig_model[el.key], orig_catalog[el.key].catalog);
-              } else if(orig_catalog[el.key].catalog.mode === 'edit') {
+                                    orig_model[el.key]);
+              } else if(el.data.catalog.mode === 'edit') {
                 dirty_model[el.key].updateRows = [{}];
                 dirtyFieldsIterator(el.fieldGroup, dirty_model[el.key].updateRows[0],
-                                    orig_model[el.key], orig_catalog[el.key].catalog);
+                                    orig_model[el.key]);
               }
             } else {
-              dirtyFieldsIterator(el.fieldGroup, dirty_model, orig_model, orig_catalog);
+              dirtyFieldsIterator(el.fieldGroup, dirty_model, orig_model);
             }
           }
           // Copy regular field's value
@@ -146,10 +146,10 @@ angular.module('panaxuiApp')
 
       if(catalog.mode === 'insert') {
         payload.insertRows = [{}];
-        dirtyFieldsIterator(form, payload.insertRows[0], model, catalog);
+        dirtyFieldsIterator(form, payload.insertRows[0], model);
       } else if(catalog.mode === 'edit') {
         payload.updateRows = [{}];
-        dirtyFieldsIterator(form, payload.updateRows[0], model, catalog);
+        dirtyFieldsIterator(form, payload.updateRows[0], model);
         // Set primaryKey and/or identityKey as DataRow with current value
         if(!!payload.primaryKey)
           payload.updateRows[0][payload.primaryKey] = id;
