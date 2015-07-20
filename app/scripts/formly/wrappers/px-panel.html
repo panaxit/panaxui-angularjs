@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+
+  <div class="panel-heading clearfix">
+    <strong class="control-label" ng-if="to.label">
+      {{to.label}}
+      {{to.required ? '*' : ''}}
+    </strong>
+  </div>
+
+  <formly-transclude></formly-transclude>
+
+</div>
