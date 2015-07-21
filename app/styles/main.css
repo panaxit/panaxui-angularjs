@@ -269,3 +269,15 @@ div#px-loadingDiv {
     50%{background-position:100% 50%}
     100%{background-position:0% 51%}
 }
+
+/**
+ * Nested panels heading
+ * https://teamtreehouse.com/forum/change-background-color-of-panelheading-bootstrap
+ */
+.px-nested-panel-heading {
+  background-color: #eee !important;
+}
+.px-nested-panel-body {
+  padding: 0px 0px 0px 0px !important;
+  margin: -1px 0px 0px 0px !important;
+}
