@@ -16,6 +16,7 @@ function pxForm() {
     scope: {
       catalog: '=',
       data: '=',
+      fields: '=',
       form: '=',
       loader: '&',
       resetHandler: '&',

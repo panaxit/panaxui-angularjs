@@ -1,23 +1,27 @@
-<form ng-submit="vm.submitHandler({pxForm: pxForm})" name="pxForm" novalidate>
+<form ng-submit="vm.submitHandler()" name="vm.form" novalidate>
 
 	<div class="panel-body">
 
-    <fieldset ng-repeat="fieldset in vm.form | filter:{type:'fieldset'}">
+    <fieldset ng-repeat="fieldset in vm.fields | filter:{type:'fieldset'}">
       <formly-form model="vm.data"
                    fields="fieldset.fields"
+                   form="vm.form"
                    heading="{{fieldset.title}}"
                    active="fieldset.active"
                    disable="fieldset.disabled">
       </formly-form>
     </fieldset>
 
-    <tabset ng-repeat="tabpanel in vm.form | filter:{type:'tabpanel'}">
+    <tabset ng-repeat="tabpanel in vm.fields | filter:{type:'tabpanel'}">
       <tab ng-repeat="tab in tabpanel.tabs | filter:{type:'tab'}"
            heading="{{tab.title}}"
            active="tab.active"
            disable="tab.disabled">
 
-          <formly-form model="vm.data" fields="tab.fields">
+          <formly-form
+                    model="vm.data"
+                    fields="tab.fields"
+                    form="vm.form">
           </formly-form>
 
       </tab>
@@ -35,7 +39,7 @@
             Cancel
           </button> -->
           <button class="btn btn-primary submit-button" type="submit"
-              ng-disabled="vm.catalog.mode !== 'insert' &amp;&amp; (vm.catalog.mode === 'readonly' || pxForm.$pristine || pxForm.$invalid)">
+              ng-disabled="vm.catalog.mode !== 'insert' &amp;&amp; (vm.catalog.mode === 'readonly' || vm.form.$pristine || vm.form.$invalid)">
             <em class="glyphicon glyphicon-ok-sign"></em>
             Save
           </button>
@@ -44,7 +48,7 @@
 
       <div class="pull-right">
         <div class="btn-group btn-group-md">
-          <!-- <button class="btn btn-info" type="button" ng-click="vm.resetHandler({pxForm: pxForm})">
+          <!-- <button class="btn btn-info" type="button" ng-click="vm.resetHandler({form: form})">
             <em class="glyphicon glyphicon-retweet"></em>
             Reset
           </button> -->

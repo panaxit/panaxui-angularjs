@@ -33,7 +33,7 @@ FormCtrl.prototype.init = function($scope, $stateParams, CRUDService, AlertServi
 	vm.$scope.$on('openDebugModal', function (event, next) {
 		vm.DebugService.show({
 			catalog: vm.catalog,
-			form: vm.form,
+			form: vm.fields,
 			model: vm.data
 		});
 	});
@@ -54,7 +54,7 @@ FormCtrl.prototype.loader = function() {
   vm.CRUDService.read(params).then(function (res) {
     vm.catalog = res.data.catalog;
     vm.data = res.data.model[0] || {};
-    vm.form = res.data.form || [];
+    vm.fields = res.data.fields || [];
     vm.$scope.$emit('setPanelTitle', (function () {
       if(vm.catalog.mode === 'insert') return 'New ';
       if(vm.catalog.mode === 'edit') return 'Edit ';
@@ -63,14 +63,16 @@ FormCtrl.prototype.loader = function() {
   });
 }
 
-FormCtrl.prototype.onReset = function(pxForm) {
+FormCtrl.prototype.onReset = function() {
   // // ToDo: Confirm
   // // vm.loader();
   // Alt: http://angular-formly.com/#/example/form-options/reset-model
   // ToDo: Confirm
-  if (pxForm) {
-    pxForm.$setPristine();
-    pxForm.$setUntouched();
+  if (vm.form) {
+    // http://jsbin.com/zaqeke
+    vm.options.resetModel();
+    vm.form.$setPristine();
+    vm.form.$setUntouched();
   }
 }
 
@@ -79,13 +81,13 @@ FormCtrl.prototype.onCancel = function() {
   console.log("CANCEL")
 }
 
-FormCtrl.prototype.onSubmit = function(pxForm) {
+FormCtrl.prototype.onSubmit = function() {
   var vm = this;
-  if (pxForm.$valid) {
+  if (vm.form.$valid) {
     /**
      * Create payload to be sent
      */
-    var payload = vm.CRUDService.buildPersistPayload(vm.form, vm.data, vm.catalog, vm.$stateParams.id);
+    var payload = vm.CRUDService.buildPersistPayload(vm.fields, vm.data, vm.catalog, vm.$stateParams.id);
     /**
      * Perform Insert/Update in backend
      */
@@ -111,7 +113,7 @@ FormCtrl.prototype.onSubmit = function(pxForm) {
           // Do nothing. HTTP 500 responses handled by ErrorInterceptor
         }
       });
-    } else if(vm.catalog.mode === 'edit' && pxForm.$dirty) {
+    } else if(vm.catalog.mode === 'edit' && vm.form.$dirty) {
       /**
        * mode = EDIT
        */
@@ -124,8 +126,8 @@ FormCtrl.prototype.onSubmit = function(pxForm) {
             vm.AlertService.show('success', 'Saved', 'Record successfully saved');
             // Reset form to untouched & pristine
             // vm.onReset
-            pxForm.$setPristine();
-            pxForm.$setUntouched();
+            vm.form.$setPristine();
+            vm.form.$setUntouched();
             // ToDo: Reload form? (to retrieve saved data and spot glitches via: vm.loader(); ?
           }
         } else {
@@ -139,3 +141,40 @@ FormCtrl.prototype.onSubmit = function(pxForm) {
     vm.AlertService.show('warning', 'Warning', 'Invalid form');
   }
 }
+
+/**
+ * @ngdoc function
+ * @name panaxuiApp.controller:FormlyFormCtrl
+ * @description
+ * # FormlyFormCtrl
+ * Controller of the panaxuiApp
+ */
+angular.module('panaxuiApp')
+  .controller('FormlyFormCtrl', FormlyFormCtrl);
+
+function FormlyFormCtrl($scope, $stateParams, CRUDService, AlertService, DebugService) {
+  this.init.apply(this, arguments);
+}
+
+// Controller inheritance
+// http://blog.mgechev.com/2013/12/18/inheritance-services-controllers-in-angularjs/
+angular.extend(FormlyFormCtrl.prototype, FormCtrl.prototype);
+
+FormlyFormCtrl.prototype.init = function($scope, $stateParams, CRUDService, AlertService, DebugService) {
+  var vm = this;
+
+  vm.$scope = $scope;
+  vm.$stateParams = $stateParams;
+  vm.CRUDService = CRUDService;
+  vm.AlertService = AlertService;
+  vm.DebugService = DebugService;
+
+  vm.loader();
+};
+
+FormlyFormCtrl.prototype.loader = function() {
+  var vm = this;
+  vm.data = vm.$scope.model[vm.$scope.options.key] || [];
+  vm.fields = vm.$scope.options.data.fields;
+  vm.catalog = vm.$scope.options.data.catalog;
+};
