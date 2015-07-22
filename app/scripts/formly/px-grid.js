@@ -8,7 +8,7 @@ angular.module('panaxuiApp')
      */
     formlyConfigProvider.setType({
       name: 'px-grid',
-      templateUrl: 'views/grid.html',
+      templateUrl: 'scripts/formly/px-grid.html',
       wrapper: ['px-panel', 'bootstrapHasError'],
       controller: 'FormlyGridCtrl as vm'
     });
