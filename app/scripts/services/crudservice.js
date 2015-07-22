@@ -108,28 +108,25 @@ angular.module('panaxuiApp')
           if(el.tabs) {
             dirtyFieldsIterator(el.tabs, dirty_model, orig_model);
           }
-          // fieldGroup
-          if(el.fieldGroup) {
-            // Nested-form model
-            if(el.key){
-              dirty_model[el.key] = {
-                tableName: el.data.catalog.catalogName,
-                primaryKey: el.data.catalog.primaryKey,
-                identityKey: el.data.catalog.identityKey,
-                foreignReference: el.data.catalog.foreignReference
-              };
-              if(el.data.catalog.mode === 'insert') {
-                dirty_model[el.key].insertRows = [{}];
-                dirtyFieldsIterator(el.fieldGroup, dirty_model[el.key].insertRows[0],
-                                    orig_model[el.key]);
-              } else if(el.data.catalog.mode === 'edit') {
-                dirty_model[el.key].updateRows = [{}];
-                dirtyFieldsIterator(el.fieldGroup, dirty_model[el.key].updateRows[0],
-                                    orig_model[el.key]);
-              }
-            } else {
-              dirtyFieldsIterator(el.fieldGroup, dirty_model, orig_model);
+          // Nested Form
+          if(el.data && el.data.fields) {
+            dirty_model[el.key] = {
+              tableName: el.data.catalog.catalogName,
+              primaryKey: el.data.catalog.primaryKey,
+              identityKey: el.data.catalog.identityKey,
+              foreignReference: el.data.catalog.foreignReference
+            };
+            if(el.data.catalog.mode === 'insert') {
+              dirty_model[el.key].insertRows = [{}];
+              dirtyFieldsIterator(el.data.fields, dirty_model[el.key].insertRows[0], orig_model[el.key]);
+            } else if(el.data.catalog.mode === 'edit') {
+              dirty_model[el.key].updateRows = [{}];
+              dirtyFieldsIterator(el.data.fields, dirty_model[el.key].updateRows[0], orig_model[el.key]);
             }
+          }
+          // fieldGroup (async_select, ...)
+          if(el.fieldGroup) {
+            dirtyFieldsIterator(el.fieldGroup, dirty_model, orig_model);
           }
           // Copy regular field's value
           if(el.formControl && el.formControl.$dirty && orig_model.hasOwnProperty(el.key)) {
