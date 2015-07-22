@@ -25,7 +25,7 @@
     "angular-md5": "~0.1.7",
     "panaxui-bootstrap": "git+https://benoror@bitbucket.org/panaxit/panaxui-bootstrap.git",
     "api-check": "~7.2.2",
-    "angular-formly": "6.19.0",
+    "angular-formly": "6.20.0",
     "angular-formly-templates-bootstrap": "~4.0.9",
     "angular-ui-select": "~0.11.2",
     "angularjs-color-picker": "git+https://github.com/benoror/angular-color-picker.git"
