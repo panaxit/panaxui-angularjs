@@ -1,0 +1,90 @@
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+
+	<div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<!-- <a class="navbar-brand" ui-sref="main.home">
+			<img alt="PanaxUI-NG" src="images/logo_fff_small.png" height="20">
+			</a> -->
+			<a class="navbar-brand" href ng-click="vm.selectHome()">
+			PANAX
+			</a>
+		</div>
+
+		<div class="navbar-collapse collapse" id="navbar">
+
+			<ul class="nav navbar-nav navbar-right">
+
+				<!-- <li>
+			     <a href="#">Other</a>
+				</li> -->
+
+			    <li dropdown is-open="status.isopen">
+
+			      <a href="#" class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+			        {{vm.currentUser.username}} <span class="caret"></span>
+			      </a>
+			      <ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="#">Settings</a>
+						</li>
+						<li class="divider"></li>
+						<li role="presentation" class="dropdown-header"><span class="label label-info">Dev Tools</span></li>
+						<li>
+							<a ng-click="vm.cliClick()">&nbsp;PanaxCLI</a>
+						</li>
+						<li>
+							<a ng-click="vm.debugClick()">&nbsp;Debug Info</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a ng-click="vm.logout()">Logout</a>
+						</li>
+			      </ul>
+			    </li>
+
+			</ul>
+		</div>
+	</div>
+
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="sidebar col-sm-3 col-md-2">
+
+
+      <div class="panel panel-default">
+
+        <div class="panel-heading">
+        <input type="text" class="form-control" placeholder="search..." ng-model="vm.treeSearch">
+        </div>
+
+        <!-- Directive: angular-tree-control -->
+        <treecontrol class="pxTree"
+           tree-model="vm.treeData"
+           options="vm.treeOptions"
+           on-selection="vm.onSelection(node)"
+           filter-expression="vm.treeSearch"
+           selected-node="vm.treeSelected"
+           expanded-nodes="vm.treeExpanded">
+           {{node.label}}
+        </treecontrol>
+
+      </div>
+
+    </div>
+    <div class="main col-sm-9 col-md-10">
+
+      <!-- ui.router view -->
+      <div ui-view></div>
+
+    </div>
+  </div>
+</div>

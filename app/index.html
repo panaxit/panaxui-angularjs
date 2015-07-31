@@ -5,39 +5,28 @@
     <title>PANAX</title> <!-- ToDo: Bind app.title to ApplicationCtrl -->
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.) styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel='stylesheet' href='bower_components/bootstrap/dist/css/bootstrap.css' />
-    <link rel='stylesheet' href='bower_components/angular-bootstrap-nav-tree-nif/dist/abn_tree.css' />
-    <link rel='stylesheet' href='bower_components/angular-busy/dist/angular-busy.css' />
-    <link rel='stylesheet' href='bower_components/angular-ui-grid/ui-grid.css' />
-    <link rel='stylesheet' href='bower_components/panaxui-bootstrap/css/bootstrap.css' />
-    <link rel='stylesheet' href='bower_components/angular-ui-select/dist/select.css' />
-    <link rel='stylesheet' href='bower_components/angularjs-color-picker/angularjs-color-picker.css' />
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:css(.tmp) styles/main.css -->
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-    <!-- custom:css -->
-    <!-- <link rel="stylesheet" href="bower_components/panaxui-bootstrap/css/bootstrap-theme.css" /> -->
-    <!-- endcustom -->
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+    <link rel="stylesheet" href="./index.css" />
+    <script type="text/javascript" src="dist/bundle.js" charset="utf-8"></script>
   </head>
-  <body ng-app="panaxuiApp" ng-controller="ApplicationCtrl">
+  <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <!-- ui.router view -->
-    <div ui-view></div>
-    <div id="px-busyDiv"
-         cg-busy="{promise:loadingPromise,minDuration:500,backdrop:false,templateUrl:'views/loading.html'}"></div>
+    <div ng-controller="IndexCtrl as vm">
 
+      <!-- ui.router view -->
+      <div ui-view></div>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
+      <!-- loading indicator -->
+      <div id="px-loadingDiv" az-promise-show="vm.azPromise">
+      </div>
+
+    </div>
+
+    <!-- ToDo: Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <!-- <script>
        !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
        (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
        r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
@@ -45,73 +34,6 @@
 
        ga('create', 'UA-XXXXX-X');
        ga('send', 'pageview');
-    </script>
-
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-bootstrap-nav-tree-nif/dist/abn_tree_directive.js"></script>
-    <script src="bower_components/angular-busy/dist/angular-busy.js"></script>
-    <script src="bower_components/angular-ui-grid/ui-grid.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/angular-urlify/angular-urlify-filter.js"></script>
-    <script src="bower_components/angular-md5/angular-md5.js"></script>
-    <script src="bower_components/api-check/dist/api-check.js"></script>
-    <script src="bower_components/angular-formly/dist/formly.js"></script>
-    <script src="bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
-    <script src="bower_components/angular-ui-select/dist/select.js"></script>
-    <script src="bower_components/tinycolor/tinycolor.js"></script>
-    <script src="bower_components/angularjs-color-picker/angularjs-color-picker.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-        <!-- build:js({.tmp,app}) scripts/scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/application.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/debug.js"></script>
-        <script src="scripts/controllers/category.js"></script>
-        <script src="scripts/controllers/grid.js"></script>
-        <script src="scripts/controllers/cards.js"></script>
-        <script src="scripts/controllers/form.js"></script>
-        <script src="scripts/services/session.js"></script>
-        <script src="scripts/services/authservice.js"></script>
-        <script src="scripts/services/authinterceptor.js"></script>
-        <script src="scripts/services/crudservice.js"></script>
-        <script src="scripts/services/alertservice.js"></script>
-        <script src="scripts/services/errorinterceptor.js"></script>
-        <script src="scripts/services/debugservice.js"></script>
-        <script src="scripts/services/loadinginterceptor.js"></script>
-        <script src="scripts/directives/px-cards/pxcards.js"></script>
-        <script src="scripts/directives/px-grid/pxgrid.js"></script>
-        <script src="scripts/directives/px-form/pxform.js"></script>
-        <!-- endbuild -->
-    <!-- formly custom types -->
-    <script src="scripts/formly/wrappers/px-panel.js"></script>
-    <script src="scripts/formly/default.js"></script>
-    <script src="scripts/formly/input.js"></script>
-    <script src="scripts/formly/number.js"></script>
-    <script src="scripts/formly/money.js"></script>
-    <script src="scripts/formly/email.js"></script>
-    <script src="scripts/formly/password.js"></script>
-    <script src="scripts/formly/datetime.js"></script>
-    <script src="scripts/formly/file.js"></script>
-    <script src="scripts/formly/url.js"></script>
-    <script src="scripts/formly/select.js"></script>
-    <script src="scripts/formly/async_select.js"></script>
-    <script src="scripts/formly/datepicker.js"></script>
-    <script src="scripts/formly/timepicker.js"></script>
-    <script src="scripts/formly/colorpicker.js"></script>
-    <script src="scripts/formly/px-grid.js"></script>
-    <script src="scripts/formly/px-form.js"></script>
-    <!-- roboto font -->
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400italic,700italic,400,700|Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
+    </script> -->
 </body>
 </html>

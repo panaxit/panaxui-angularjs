@@ -1,12 +1,13 @@
 # PanaxUI - GUI Frontend - AngularJS 
 
-This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.11.1.
+## Build & Development
 
-## Build & development
+`npm run build`
 
-Run `grunt` for building and `grunt serve` for preview.
+or
+
+`npm run watch`
 
 ## Testing
 
-Running `grunt test` will run the unit tests with karma.
+`npm test`

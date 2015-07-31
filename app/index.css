@@ -1,0 +1,63 @@
+body {
+  padding: 0;
+  background-color: #eee;
+}
+
+/**
+ * AngularUI Bootstrap
+ * CSS Initialization
+ * http://angular-ui.github.io/bootstrap/
+ */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+/**
+ * Alerts
+ */
+.px-alert {
+  margin-bottom: 0px;
+}
+
+/*
+  loading animation - loading.html
+  http://www.gradient-animator.com/
+  https://github.com/cgross/angular-busy
+ */
+div#px-busyDiv {
+  position: fixed;
+  bottom: 0;
+  height: 1.6%;
+  width: 100%;
+}
+
+div#px-loadingDiv {
+  position: fixed;
+  bottom: 0;
+  height: 1.6%;
+  width: 100%;
+  background: linear-gradient(270deg, #eee, #4675d3);
+  background-size: 400% 400%;
+  -webkit-animation: Loading 1s ease infinite;
+  -moz-animation: Loading 1s ease infinite;
+  -o-animation: Loading 1s ease infinite;
+  animation: Loading 1s ease infinite;
+}
+@-webkit-keyframes Loading {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+}
+@-moz-keyframes Loading {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+}
+@-o-keyframes Loading {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+}
+@keyframes Loading {
+    0%{background-position:0% 51%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 51%}
+}

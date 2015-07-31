@@ -1,0 +1,165 @@
+/**
+ * AngularUI Bootstrap
+ * CSS Initialization
+ * http://angular-ui.github.io/bootstrap/
+ */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+/* Nav Brand */
+a.navbar-brand {
+  font-weight: bold;
+}
+
+/*
+angular-tree-control
+ */
+
+.pxTree {
+}
+
+.tree-expanded {
+  padding: 0 0 0 8px !important;
+  color: #666;
+}
+
+.tree-collapsed {
+  padding: 0 0 0 8px !important;
+  color: #4675d3;
+}
+
+.tree-leaf {
+  padding: 0 0 0 8px !important;
+  color: #4675d3;
+}
+
+.tree-label {
+  font-family: 'Roboto Condensed', sans-serif;
+  padding: 2px 6px 2px 2px !important;
+  border-radius: 4px;
+  /*color: #333333;*/
+}
+
+.tree-branch-head, .tree-leaf-head {
+  padding: 4px 4px 4px 4px !important;
+  border-radius: 4px;
+}
+
+.tree-branch-head:hover {
+  color: #eee;
+  background-color: #4675d3;
+}
+
+.tree-label:hover {
+  color: #eee;
+  background-color: #4675d3;
+}
+
+/**
+ * Boostrap Input: XS size
+ * http://stackoverflow.com/questions/22920589/bootstrap-3-input-xs-smaller-than-sm
+ */
+.input-xs {
+  height: 22px;
+  padding: 5px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.input-group-xs>.form-control,
+.input-group-xs>.input-group-addon,
+.input-group-xs>.input-group-btn>.btn {
+    height: 22px;
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/**
+ * Search input clear
+ * http://stackoverflow.com/questions/20062218/how-do-i-clear-a-search-box-with-an-x-in-bootstrap-3
+ */
+/**#searchinput {
+    width: 180px;
+}**/
+#searchclear {
+    position: absolute;
+    right: 5px;
+    top: 0;
+    bottom: 0;
+    height: 14px;
+    margin: auto;
+    font-size: 14px;
+    cursor: pointer;
+    color: #ccc;
+}
+
+/**
+ * flex container
+ */
+/* http://www.sketchingwithcss.com/samplechapter/cheatsheet.html */
+.flexcontainer {
+   display: -webkit-flex;
+   display: flex;
+   -webkit-align-items: center;
+   align-items: center;
+   -webkit-justify-content: center;
+   justify-content: center;
+   /* You can set flex-wrap and flex-direction individually */
+   -webkit-flex-direction: row;
+   flex-direction: row;
+   -webkit-flex-wrap: wrap;
+   flex-wrap: wrap;
+   /* Or do it all in one line with flex flow */
+   -webkit-flex-flow: row wrap;
+   flex-flow: row wrap;
+   /* tweak the where items line up on the row */
+   /* valid values are: flex-start, flex-end, space-between, space-around, stretch */
+   -webkit-align-content: flex-end;
+   align-content: flex-end;
+}
+
+/**
+ * Flexbox
+ * Source: http://angular-formly.com/#/example/other/advanced-layout-flex
+ */
+.display-flex {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+.flex-3 {
+  flex: 3;
+}
+
+.flex-4 {
+  flex: 4;
+}
+
+.flex-5 {
+  flex: 5;
+}
+
+.flex-6 {
+  flex: 6;
+}
+
+[class*="flex-"] {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+[class*="flex-"]:first-child {
+  padding-left: 0;
+}
+
+[class*="flex-"]:nth-last-child(2) {
+  padding-right: 0;
+}

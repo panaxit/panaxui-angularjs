@@ -1,0 +1,22 @@
+<!--
+Based on: http://getbootstrap.com/examples/signin/
+-->
+
+<div class="container">
+
+<form class="form-login" method="post" ng-submit="vm.login(vm.credentials)">
+  <div class="logo">
+    <img src="images/apple-touch-icon-144-precomposed.png" />
+  </div>
+  <h2 class="form-login-heading">Welcome to Panax</h2>
+  <label for="inputUsername" class="sr-only">Username</label>
+  <input ng-model="vm.credentials.username" type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input ng-model="vm.credentials.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  <!-- <div class="checkbox">
+    <label><input type="checkbox" value="remember-me">Remember me</label>
+  </div> -->
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+</form>
+
+</div>
