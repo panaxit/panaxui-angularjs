@@ -26711,7 +26711,7 @@
 
 
 	// module
-	exports.push([module.id, "/**\n * AngularUI Bootstrap\n * CSS Initialization\n * http://angular-ui.github.io/bootstrap/\n */\n.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }\n\n/* Nav Brand */\na.navbar-brand {\n  font-weight: bold;\n}\n\n/*\nangular-tree-control\n */\n\n.pxTree {\n}\n\n.tree-expanded {\n  padding: 0 0 0 8px !important;\n  color: #666;\n}\n\n.tree-collapsed {\n  padding: 0 0 0 8px !important;\n  color: #4675d3;\n}\n\n.tree-leaf {\n  padding: 0 0 0 8px !important;\n  color: #4675d3;\n}\n\n.tree-label {\n  font-family: 'Roboto Condensed', sans-serif;\n  padding: 2px 6px 2px 2px !important;\n  border-radius: 4px;\n  /*color: #333333;*/\n}\n\n.tree-branch-head, .tree-leaf-head {\n  padding: 4px 4px 4px 4px !important;\n  border-radius: 4px;\n}\n\n.tree-branch-head:hover {\n  color: #eee;\n  background-color: #4675d3;\n}\n\n.tree-label:hover {\n  color: #eee;\n  background-color: #4675d3;\n}\n\n/**\n * Boostrap Input: XS size\n * http://stackoverflow.com/questions/22920589/bootstrap-3-input-xs-smaller-than-sm\n */\n.input-xs {\n  height: 22px;\n  padding: 5px 5px;\n  font-size: 12px;\n  line-height: 1.5;\n  border-radius: 3px;\n}\n\n.input-group-xs>.form-control,\n.input-group-xs>.input-group-addon,\n.input-group-xs>.input-group-btn>.btn {\n    height: 22px;\n    padding: 1px 5px;\n    font-size: 12px;\n    line-height: 1.5;\n}\n\n/**\n * Search input clear\n * http://stackoverflow.com/questions/20062218/how-do-i-clear-a-search-box-with-an-x-in-bootstrap-3\n */\n/**#searchinput {\n    width: 180px;\n}**/\n#searchclear {\n    position: absolute;\n    right: 5px;\n    top: 0;\n    bottom: 0;\n    height: 14px;\n    margin: auto;\n    font-size: 14px;\n    cursor: pointer;\n    color: #ccc;\n}\n\n/**\n * flex container\n */\n/* http://www.sketchingwithcss.com/samplechapter/cheatsheet.html */\n.flexcontainer {\n   display: -webkit-flex;\n   display: flex;\n   -webkit-align-items: center;\n   align-items: center;\n   -webkit-justify-content: center;\n   justify-content: center;\n   /* You can set flex-wrap and flex-direction individually */\n   -webkit-flex-direction: row;\n   flex-direction: row;\n   -webkit-flex-wrap: wrap;\n   flex-wrap: wrap;\n   /* Or do it all in one line with flex flow */\n   -webkit-flex-flow: row wrap;\n   flex-flow: row wrap;\n   /* tweak the where items line up on the row */\n   /* valid values are: flex-start, flex-end, space-between, space-around, stretch */\n   -webkit-align-content: flex-end;\n   align-content: flex-end;\n}\n\n/**\n * Flexbox\n * Source: http://angular-formly.com/#/example/other/advanced-layout-flex\n */\n.display-flex {\n  display: flex;\n}\n\n.flex-1 {\n  flex: 1;\n}\n\n.flex-2 {\n  flex: 2;\n}\n\n.flex-3 {\n  flex: 3;\n}\n\n.flex-4 {\n  flex: 4;\n}\n\n.flex-5 {\n  flex: 5;\n}\n\n.flex-6 {\n  flex: 6;\n}\n\n[class*=\"flex-\"] {\n  padding-left: 10px;\n  padding-right: 10px;\n}\n\n[class*=\"flex-\"]:first-child {\n  padding-left: 0;\n}\n\n[class*=\"flex-\"]:nth-last-child(2) {\n  padding-right: 0;\n}\n", ""]);
+	exports.push([module.id, "/**\r\n * AngularUI Bootstrap\r\n * CSS Initialization\r\n * http://angular-ui.github.io/bootstrap/\r\n */\r\n.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }\r\n\r\n/* Nav Brand */\r\na.navbar-brand {\r\n  font-weight: bold;\r\n}\r\n\r\n/*\r\nangular-tree-control\r\n */\r\n\r\n.pxTree {\r\n}\r\n\r\n.tree-expanded {\r\n  padding: 0 0 0 8px !important;\r\n  color: #666;\r\n}\r\n\r\n.tree-collapsed {\r\n  padding: 0 0 0 8px !important;\r\n  color: #4675d3;\r\n}\r\n\r\n.tree-leaf {\r\n  padding: 0 0 0 8px !important;\r\n  color: #4675d3;\r\n}\r\n\r\n.tree-label {\r\n  font-family: 'Roboto Condensed', sans-serif;\r\n  padding: 2px 6px 2px 2px !important;\r\n  border-radius: 4px;\r\n  /*color: #333333;*/\r\n}\r\n\r\n.tree-branch-head, .tree-leaf-head {\r\n  padding: 4px 4px 4px 4px !important;\r\n  border-radius: 4px;\r\n}\r\n\r\n.tree-branch-head:hover {\r\n  color: #eee;\r\n  background-color: #4675d3;\r\n}\r\n\r\n.tree-label:hover {\r\n  color: #eee;\r\n  background-color: #4675d3;\r\n}\r\n\r\n/**\r\n * Boostrap Input: XS size\r\n * http://stackoverflow.com/questions/22920589/bootstrap-3-input-xs-smaller-than-sm\r\n */\r\n.input-xs {\r\n  height: 22px;\r\n  padding: 5px 5px;\r\n  font-size: 12px;\r\n  line-height: 1.5;\r\n  border-radius: 3px;\r\n}\r\n\r\n.input-group-xs>.form-control,\r\n.input-group-xs>.input-group-addon,\r\n.input-group-xs>.input-group-btn>.btn {\r\n    height: 22px;\r\n    padding: 1px 5px;\r\n    font-size: 12px;\r\n    line-height: 1.5;\r\n}\r\n\r\n/**\r\n * Search input clear\r\n * http://stackoverflow.com/questions/20062218/how-do-i-clear-a-search-box-with-an-x-in-bootstrap-3\r\n */\r\n/**#searchinput {\r\n    width: 180px;\r\n}**/\r\n#searchclear {\r\n    position: absolute;\r\n    right: 5px;\r\n    top: 0;\r\n    bottom: 0;\r\n    height: 14px;\r\n    margin: auto;\r\n    font-size: 14px;\r\n    cursor: pointer;\r\n    color: #ccc;\r\n}\r\n\r\n/**\r\n * flex container\r\n */\r\n/* http://www.sketchingwithcss.com/samplechapter/cheatsheet.html */\r\n.flexcontainer {\r\n   display: -webkit-flex;\r\n   display: flex;\r\n   -webkit-align-items: center;\r\n   align-items: center;\r\n   -webkit-justify-content: center;\r\n   justify-content: center;\r\n   /* You can set flex-wrap and flex-direction individually */\r\n   -webkit-flex-direction: row;\r\n   flex-direction: row;\r\n   -webkit-flex-wrap: wrap;\r\n   flex-wrap: wrap;\r\n   /* Or do it all in one line with flex flow */\r\n   -webkit-flex-flow: row wrap;\r\n   flex-flow: row wrap;\r\n   /* tweak the where items line up on the row */\r\n   /* valid values are: flex-start, flex-end, space-between, space-around, stretch */\r\n   -webkit-align-content: flex-end;\r\n   align-content: flex-end;\r\n}\r\n\r\n/**\r\n * Flexbox\r\n * Source: http://angular-formly.com/#/example/other/advanced-layout-flex\r\n */\r\n.display-flex {\r\n  display: flex;\r\n}\r\n\r\n.flex-1 {\r\n  flex: 1;\r\n}\r\n\r\n.flex-2 {\r\n  flex: 2;\r\n}\r\n\r\n.flex-3 {\r\n  flex: 3;\r\n}\r\n\r\n.flex-4 {\r\n  flex: 4;\r\n}\r\n\r\n.flex-5 {\r\n  flex: 5;\r\n}\r\n\r\n.flex-6 {\r\n  flex: 6;\r\n}\r\n\r\n[class*=\"flex-\"] {\r\n  padding-left: 10px;\r\n  padding-right: 10px;\r\n}\r\n\r\n[class*=\"flex-\"]:first-child {\r\n  padding-left: 0;\r\n}\r\n\r\n[class*=\"flex-\"]:nth-last-child(2) {\r\n  padding-right: 0;\r\n}\r\n", ""]);
 
 	// exports
 
@@ -32415,7 +32415,7 @@
 /* 31 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"well well-lg\">\n\n  <div class=\"page-header text-center\">\n    <h1>Welcome to <strong>Panax</strong>!</h1>\n  </div>\n\n</div>\n"
+	module.exports = "<div class=\"well well-lg\">\r\n\r\n  <div class=\"page-header text-center\">\r\n    <h1>Welcome to <strong>Panax</strong>!</h1>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ },
 /* 32 */
@@ -32485,7 +32485,7 @@
 
 
 	// module
-	exports.push([module.id, ".px-thumbnail-icon {\n  height: 128px;\n  width: 128px;\n  padding: 8px 8px 8px 8px;\n  margin: 0px 32px 8px 32px;\n  cursor: pointer;\n}\n", ""]);
+	exports.push([module.id, ".px-thumbnail-icon {\r\n  height: 128px;\r\n  width: 128px;\r\n  padding: 8px 8px 8px 8px;\r\n  margin: 0px 32px 8px 32px;\r\n  cursor: pointer;\r\n}\r\n", ""]);
 
 	// exports
 
@@ -32519,7 +32519,7 @@
 /* 36 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"well well-lg\">\n  <div class=\"text-center\">\n    <div class=\"page-header\">\n      <h1>{{vm.currentNavBranch.label}}</h1>\n    </div>\n  </div>\n</div>\n\n<div class=\"row clearfix flexcontainer\">\n  <div class=\"px-thumbnail-icon thumbnail text-center\" ng-repeat=\"branch in vm.currentNavBranch.children\">\n    <a ng-click=\"vm.onClick(branch)\">\n      <img ng-src=\"images/thumbnails/{{branch.data.controlType || 'category'}}.png\" alt=\"{{branch.label}}\" class=\"px-thumbnail-icon\">\n    </a>\n      <a href ng-click=\"vm.onClick(branch)\">\n        {{ branch.label }}\n      </a>\n  </div>\n</div>\n"
+	module.exports = "<div class=\"well well-lg\">\r\n  <div class=\"text-center\">\r\n    <div class=\"page-header\">\r\n      <h1>{{vm.currentNavBranch.label}}</h1>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"row clearfix flexcontainer\">\r\n  <div class=\"px-thumbnail-icon thumbnail text-center\" ng-repeat=\"branch in vm.currentNavBranch.children\">\r\n    <a ng-click=\"vm.onClick(branch)\">\r\n      <img ng-src=\"images/thumbnails/{{branch.data.controlType || 'category'}}.png\" alt=\"{{branch.label}}\" class=\"px-thumbnail-icon\">\r\n    </a>\r\n      <a href ng-click=\"vm.onClick(branch)\">\r\n        {{ branch.label }}\r\n      </a>\r\n  </div>\r\n</div>\r\n"
 
 /***/ },
 /* 37 */
@@ -32623,7 +32623,7 @@
 
 
 	// module
-	exports.push([module.id, "/**\n * Nested panels heading\n * https://teamtreehouse.com/forum/change-background-color-of-panelheading-bootstrap\n */\n.px-nested-panel-heading {\n  background-color: #eee !important;\n}\n.px-nested-panel-body {\n  padding: 0px 0px 0px 0px !important;\n  margin: -1px 0px 0px 0px !important;\n}\n", ""]);
+	exports.push([module.id, "/**\r\n * Nested panels heading\r\n * https://teamtreehouse.com/forum/change-background-color-of-panelheading-bootstrap\r\n */\r\n.px-nested-panel-heading {\r\n  background-color: #eee !important;\r\n}\r\n.px-nested-panel-body {\r\n  padding: 0px 0px 0px 0px !important;\r\n  margin: -1px 0px 0px 0px !important;\r\n}\r\n", ""]);
 
 	// exports
 
@@ -32655,7 +32655,7 @@
 /* 42 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"panel panel-primary\">\n\n  <div class=\"panel-heading clearfix\">\n    <h1 class=\"panel-title pull-left\">{{ currentNavBranch.label || vm.panelTitle}}</h1>\n\n    <div class=\"btn-group btn-group-xs pull-right\">\n      <button class=\"btn btn-primary\" type=\"button\"> <em class=\"glyphicon glyphicon-star-empty\"></em>\n      </button>\n      <button class=\"btn btn-primary\" type=\"button\"> <em class=\"glyphicon glyphicon-print\"></em>\n      </button>\n      <button class=\"btn btn-primary\" type=\"button\">\n        <em class=\"glyphicon glyphicon-question-sign\"></em>\n      </button>\n      <button class=\"btn btn-primary\" type=\"button\" ng-click=\"reloadClick()\">\n        <em class=\"glyphicon glyphicon-refresh\"></em>\n      </button>\n    </div>\n  </div>\n\n  <!-- ui.router view -->\n  <div ui-view>\n  </div>\n\n</div>\n"
+	module.exports = "<div class=\"panel panel-primary\">\r\n\r\n  <div class=\"panel-heading clearfix\">\r\n    <h1 class=\"panel-title pull-left\">{{ currentNavBranch.label || vm.panelTitle}}</h1>\r\n\r\n    <div class=\"btn-group btn-group-xs pull-right\">\r\n      <button class=\"btn btn-primary\" type=\"button\"> <em class=\"glyphicon glyphicon-star-empty\"></em>\r\n      </button>\r\n      <button class=\"btn btn-primary\" type=\"button\"> <em class=\"glyphicon glyphicon-print\"></em>\r\n      </button>\r\n      <button class=\"btn btn-primary\" type=\"button\">\r\n        <em class=\"glyphicon glyphicon-question-sign\"></em>\r\n      </button>\r\n      <button class=\"btn btn-primary\" type=\"button\" ng-click=\"reloadClick()\">\r\n        <em class=\"glyphicon glyphicon-refresh\"></em>\r\n      </button>\r\n    </div>\r\n  </div>\r\n\r\n  <!-- ui.router view -->\r\n  <div ui-view>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ },
 /* 43 */
@@ -32753,7 +32753,7 @@
 /* 46 */
 /***/ function(module, exports) {
 
-	module.exports = "<px-grid\n  data=\"vm.data\"\n  catalog=\"vm.catalog\"\n  grid=\"vm.grid\"\n  loader=\"vm.loader()\"\n  open-handler=\"vm.onOpen(selected, catalog)\"\n  new-handler=\"vm.onNew(catalogName)\"\n  delete-handler=\"vm.onDelete(selected, catalog)\"\n  row-change-promise=\"vm.onRowChange(rowEntity, catalog)\">\n</px-grid>\n"
+	module.exports = "<px-grid\r\n  data=\"vm.data\"\r\n  catalog=\"vm.catalog\"\r\n  grid=\"vm.grid\"\r\n  loader=\"vm.loader()\"\r\n  open-handler=\"vm.onOpen(selected, catalog)\"\r\n  new-handler=\"vm.onNew(catalogName)\"\r\n  delete-handler=\"vm.onDelete(selected, catalog)\"\r\n  row-change-promise=\"vm.onRowChange(rowEntity, catalog)\">\r\n</px-grid>\r\n"
 
 /***/ },
 /* 47 */
@@ -59149,7 +59149,7 @@
 
 
 	// module
-	exports.push([module.id, "/**\n * Formly defaults\n */\n.formly-field {\n  margin-bottom: 16px;\n}\n\n.formly.row, .formly.row .formly-field {\n  margin-bottom: 0;\n}\n\n.formly.row .formly-field:first-child {\n  padding-left: 0;\n}\n\n.formly.row .formly-field:nth-last-child(2) {\n  padding-right: 0;\n}\n\n.formly-field-group ng-form {\n  margin: 0;\n}\n", ""]);
+	exports.push([module.id, "/**\r\n * Formly defaults\r\n */\r\n.formly-field {\r\n  margin-bottom: 16px;\r\n}\r\n\r\n.formly.row, .formly.row .formly-field {\r\n  margin-bottom: 0;\r\n}\r\n\r\n.formly.row .formly-field:first-child {\r\n  padding-left: 0;\r\n}\r\n\r\n.formly.row .formly-field:nth-last-child(2) {\r\n  padding-right: 0;\r\n}\r\n\r\n.formly-field-group ng-form {\r\n  margin: 0;\r\n}\r\n", ""]);
 
 	// exports
 
@@ -59182,7 +59182,7 @@
 /* 65 */
 /***/ function(module, exports) {
 
-	module.exports = "<px-form\n  data=\"vm.data\"\n  catalog=\"vm.catalog\"\n  fields=\"vm.fields\"\n  form=\"vm.form\"\n  loader=\"vm.loader()\"\n  reset-handler=\"vm.onReset()\"\n  cancel-handler=\"vm.onCancel()\"\n  submit-handler=\"vm.onSubmit()\">\n</px-form>\n"
+	module.exports = "<px-form\r\n  data=\"vm.data\"\r\n  catalog=\"vm.catalog\"\r\n  fields=\"vm.fields\"\r\n  form=\"vm.form\"\r\n  loader=\"vm.loader()\"\r\n  reset-handler=\"vm.onReset()\"\r\n  cancel-handler=\"vm.onCancel()\"\r\n  submit-handler=\"vm.onSubmit()\">\r\n</px-form>\r\n"
 
 /***/ },
 /* 66 */
@@ -59451,7 +59451,7 @@
 	'use strict';
 
 	Object.defineProperty(exports, '__esModule', {
-	  value: true
+	    value: true
 	});
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
@@ -68263,7 +68263,7 @@
 /* 102 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"panel panel-default\">\n\n  <div class=\"panel-heading px-nested-panel-heading clearfix\">\n    <strong class=\"control-label\" ng-if=\"to.label\">\n      {{to.label}}\n      {{to.required ? '*' : ''}}\n    </strong>\n  </div>\n\n  <div class=\"panel-body px-nested-panel-body\">\n    <formly-transclude></formly-transclude>\n  </div>\n\n</div>\n"
+	module.exports = "<div class=\"panel panel-default\">\r\n\r\n  <div class=\"panel-heading px-nested-panel-heading clearfix\">\r\n    <strong class=\"control-label\" ng-if=\"to.label\">\r\n      {{to.label}}\r\n      {{to.required ? '*' : ''}}\r\n    </strong>\r\n  </div>\r\n\r\n  <div class=\"panel-body px-nested-panel-body\">\r\n    <formly-transclude></formly-transclude>\r\n  </div>\r\n\r\n</div>\r\n"
 
 /***/ },
 /* 103 */
@@ -68294,7 +68294,7 @@
 /* 104 */
 /***/ function(module, exports) {
 
-	module.exports = "<div class=\"panel-body\">\n\n  <fieldset ng-repeat=\"fieldset in vm.fields | filter:{type:'fieldset'}\">\n    <formly-form model=\"vm.data\"\n                 fields=\"fieldset.fields\"\n                 heading=\"{{fieldset.title}}\"\n                 active=\"fieldset.active\"\n                 disable=\"fieldset.disabled\">\n    </formly-form>\n  </fieldset>\n\n  <tabset ng-repeat=\"tabpanel in vm.fields | filter:{type:'tabpanel'}\">\n    <tab ng-repeat=\"tab in tabpanel.tabs | filter:{type:'tab'}\"\n         heading=\"{{tab.title}}\"\n         active=\"tab.active\"\n         disable=\"tab.disabled\">\n\n        <formly-form\n                  model=\"vm.data\"\n                  fields=\"tab.fields\">\n        </formly-form>\n\n    </tab>\n  </tabset>\n\n</div>\n"
+	module.exports = "<div class=\"panel-body\">\r\n\r\n  <fieldset ng-repeat=\"fieldset in vm.fields | filter:{type:'fieldset'}\">\r\n    <formly-form model=\"vm.data\"\r\n                 fields=\"fieldset.fields\"\r\n                 heading=\"{{fieldset.title}}\"\r\n                 active=\"fieldset.active\"\r\n                 disable=\"fieldset.disabled\">\r\n    </formly-form>\r\n  </fieldset>\r\n\r\n  <tabset ng-repeat=\"tabpanel in vm.fields | filter:{type:'tabpanel'}\">\r\n    <tab ng-repeat=\"tab in tabpanel.tabs | filter:{type:'tab'}\"\r\n         heading=\"{{tab.title}}\"\r\n         active=\"tab.active\"\r\n         disable=\"tab.disabled\">\r\n\r\n        <formly-form\r\n                  model=\"vm.data\"\r\n                  fields=\"tab.fields\">\r\n        </formly-form>\r\n\r\n    </tab>\r\n  </tabset>\r\n\r\n</div>\r\n"
 
 /***/ },
 /* 105 */
@@ -68324,7 +68324,7 @@
 /* 106 */
 /***/ function(module, exports) {
 
-	module.exports = "<px-grid\n  data=\"vm.data\"\n  catalog=\"vm.catalog\"\n  grid=\"vm.grid\"\n  loader=\"vm.loader()\"\n  open-handler=\"vm.onOpen(selected, catalog)\"\n  new-handler=\"vm.onNew(catalogName)\"\n  delete-handler=\"vm.onDelete(selected, catalog)\"\n  row-change-promise=\"vm.onRowChange(rowEntity, catalog)\">\n</px-grid>\n"
+	module.exports = "<px-grid\r\n  data=\"vm.data\"\r\n  catalog=\"vm.catalog\"\r\n  grid=\"vm.grid\"\r\n  loader=\"vm.loader()\"\r\n  open-handler=\"vm.onOpen(selected, catalog)\"\r\n  new-handler=\"vm.onNew(catalogName)\"\r\n  delete-handler=\"vm.onDelete(selected, catalog)\"\r\n  row-change-promise=\"vm.onRowChange(rowEntity, catalog)\">\r\n</px-grid>\r\n"
 
 /***/ },
 /* 107 */
@@ -68987,7 +68987,7 @@
 /* 109 */
 /***/ function(module, exports) {
 
-	module.exports = "<form ng-submit=\"vm.submitHandler()\" name=\"vm.form\" novalidate>\n\n\t<div class=\"panel-body\">\n\n    <fieldset ng-repeat=\"fieldset in vm.fields | filter:{type:'fieldset'}\">\n      <formly-form model=\"vm.data\"\n                   fields=\"fieldset.fields\"\n                   form=\"vm.form\"\n                   heading=\"{{fieldset.title}}\"\n                   active=\"fieldset.active\"\n                   disable=\"fieldset.disabled\">\n      </formly-form>\n    </fieldset>\n\n    <tabset ng-repeat=\"tabpanel in vm.fields | filter:{type:'tabpanel'}\">\n      <tab ng-repeat=\"tab in tabpanel.tabs | filter:{type:'tab'}\"\n           heading=\"{{tab.title}}\"\n           active=\"tab.active\"\n           disable=\"tab.disabled\">\n\n          <formly-form\n                    model=\"vm.data\"\n                    fields=\"tab.fields\"\n                    form=\"vm.form\">\n          </formly-form>\n\n      </tab>\n    </tabset>\n\n\t</div>\n\n\t<div class=\"panel-footer clearfix\">\n\n    <div class=\"btn-toolbar\">\n      <div class=\"pull-left\">\n        <div class=\"btn-group btn-group-md\">\n          <!-- <button class=\"btn btn-default\" type=\"button\" ng-click=\"vm.cancelHandler()\">\n            <em class=\"glyphicon glyphicon-ban-circle\"></em>\n            Cancel\n          </button> -->\n          <button class=\"btn btn-primary submit-button\" type=\"submit\"\n              ng-disabled=\"vm.catalog.mode !== 'insert' &amp;&amp; (vm.catalog.mode === 'readonly' || vm.form.$pristine || vm.form.$invalid)\">\n            <em class=\"glyphicon glyphicon-ok-sign\"></em>\n            Save\n          </button>\n        </div>\n      </div>\n\n      <div class=\"pull-right\">\n        <div class=\"btn-group btn-group-md\">\n          <!-- <button class=\"btn btn-info\" type=\"button\" ng-click=\"vm.resetHandler({form: form})\">\n            <em class=\"glyphicon glyphicon-retweet\"></em>\n            Reset\n          </button> -->\n        </div>\n      </div>\n    </div>\n\n\t</div>\n\n</form>\n"
+	module.exports = "<form ng-submit=\"vm.submitHandler()\" name=\"vm.form\" novalidate>\r\n\r\n\t<div class=\"panel-body\">\r\n\r\n    <fieldset ng-repeat=\"fieldset in vm.fields | filter:{type:'fieldset'}\">\r\n      <formly-form model=\"vm.data\"\r\n                   fields=\"fieldset.fields\"\r\n                   form=\"vm.form\"\r\n                   heading=\"{{fieldset.title}}\"\r\n                   active=\"fieldset.active\"\r\n                   disable=\"fieldset.disabled\">\r\n      </formly-form>\r\n    </fieldset>\r\n\r\n    <tabset ng-repeat=\"tabpanel in vm.fields | filter:{type:'tabpanel'}\">\r\n      <tab ng-repeat=\"tab in tabpanel.tabs | filter:{type:'tab'}\"\r\n           heading=\"{{tab.title}}\"\r\n           active=\"tab.active\"\r\n           disable=\"tab.disabled\">\r\n\r\n          <formly-form\r\n                    model=\"vm.data\"\r\n                    fields=\"tab.fields\"\r\n                    form=\"vm.form\">\r\n          </formly-form>\r\n\r\n      </tab>\r\n    </tabset>\r\n\r\n\t</div>\r\n\r\n\t<div class=\"panel-footer clearfix\">\r\n\r\n    <div class=\"btn-toolbar\">\r\n      <div class=\"pull-left\">\r\n        <div class=\"btn-group btn-group-md\">\r\n          <!-- <button class=\"btn btn-default\" type=\"button\" ng-click=\"vm.cancelHandler()\">\r\n            <em class=\"glyphicon glyphicon-ban-circle\"></em>\r\n            Cancel\r\n          </button> -->\r\n          <button class=\"btn btn-primary submit-button\" type=\"submit\"\r\n              ng-disabled=\"vm.catalog.mode !== 'insert' &amp;&amp; (vm.catalog.mode === 'readonly' || vm.form.$pristine || vm.form.$invalid)\">\r\n            <em class=\"glyphicon glyphicon-ok-sign\"></em>\r\n            Save\r\n          </button>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"pull-right\">\r\n        <div class=\"btn-group btn-group-md\">\r\n          <!-- <button class=\"btn btn-info\" type=\"button\" ng-click=\"vm.resetHandler({form: form})\">\r\n            <em class=\"glyphicon glyphicon-retweet\"></em>\r\n            Reset\r\n          </button> -->\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n\t</div>\r\n\r\n</form>\r\n"
 
 /***/ },
 /* 110 */
@@ -69057,7 +69057,7 @@
 
 
 	// module
-	exports.push([module.id, "/**\n * cardView\n */\ndiv.px-card {\n  width: 300px;\n  height: 180px;\n  margin: 16px 16px -16px 16px;\n}\n\ndiv.px-card .px-card-img {\n  width: 80px;\n  height: 80px;\n  margin: 2px 8px 2px 2px;\n}\n", ""]);
+	exports.push([module.id, "/**\r\n * cardView\r\n */\r\ndiv.px-card {\r\n  width: 300px;\r\n  height: 180px;\r\n  margin: 16px 16px -16px 16px;\r\n}\r\n\r\ndiv.px-card .px-card-img {\r\n  width: 80px;\r\n  height: 80px;\r\n  margin: 2px 8px 2px 2px;\r\n}\r\n", ""]);
 
 	// exports
 
@@ -69090,7 +69090,7 @@
 /* 114 */
 /***/ function(module, exports) {
 
-	module.exports = "<px-cards\n  mode=\"{{vm.mode}}\"\n  data=\"vm.data\"\n  catalog=\"vm.catalog\"\n  loader=\"vm.loader()\"\n  open-handler=\"vm.onOpen(selected)\">\n</px-cards>\n"
+	module.exports = "<px-cards\r\n  mode=\"{{vm.mode}}\"\r\n  data=\"vm.data\"\r\n  catalog=\"vm.catalog\"\r\n  loader=\"vm.loader()\"\r\n  open-handler=\"vm.onOpen(selected)\">\r\n</px-cards>\r\n"
 
 /***/ },
 /* 115 */
@@ -69251,7 +69251,7 @@
 /* 119 */
 /***/ function(module, exports) {
 
-	module.exports = "<nav class=\"navbar navbar-inverse navbar-static-top\" role=\"navigation\">\n\n\t<div class=\"container-fluid\">\n\t    <!-- Brand and toggle get grouped for better mobile display -->\n\t\t<div class=\"navbar-header\">\n\t\t\t<button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\">\n\t\t\t\t<span class=\"sr-only\">Toggle navigation</span>\n\t\t\t\t<span class=\"icon-bar\"></span>\n\t\t\t\t<span class=\"icon-bar\"></span>\n\t\t\t\t<span class=\"icon-bar\"></span>\n\t\t\t</button>\n\t\t\t<!-- <a class=\"navbar-brand\" ui-sref=\"main.home\">\n\t\t\t<img alt=\"PanaxUI-NG\" src=\"images/logo_fff_small.png\" height=\"20\">\n\t\t\t</a> -->\n\t\t\t<a class=\"navbar-brand\" href ng-click=\"vm.selectHome()\">\n\t\t\tPANAX\n\t\t\t</a>\n\t\t</div>\n\n\t\t<div class=\"navbar-collapse collapse\" id=\"navbar\">\n\n\t\t\t<ul class=\"nav navbar-nav navbar-right\">\n\n\t\t\t\t<!-- <li>\n\t\t\t     <a href=\"#\">Other</a>\n\t\t\t\t</li> -->\n\n\t\t\t    <li dropdown is-open=\"status.isopen\">\n\n\t\t\t      <a href=\"#\" class=\"dropdown-toggle\" dropdown-toggle ng-disabled=\"disabled\">\n\t\t\t        {{vm.currentUser.username}} <span class=\"caret\"></span>\n\t\t\t      </a>\n\t\t\t      <ul class=\"dropdown-menu\" role=\"menu\">\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a href=\"#\">Settings</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li class=\"divider\"></li>\n\t\t\t\t\t\t<li role=\"presentation\" class=\"dropdown-header\"><span class=\"label label-info\">Dev Tools</span></li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a ng-click=\"vm.cliClick()\">&nbsp;PanaxCLI</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a ng-click=\"vm.debugClick()\">&nbsp;Debug Info</a>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li class=\"divider\"></li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<a ng-click=\"vm.logout()\">Logout</a>\n\t\t\t\t\t\t</li>\n\t\t\t      </ul>\n\t\t\t    </li>\n\n\t\t\t</ul>\n\t\t</div>\n\t</div>\n\n</nav>\n\n<div class=\"container-fluid\">\n  <div class=\"row\">\n    <div class=\"sidebar col-sm-3 col-md-2\">\n\n\n      <div class=\"panel panel-default\">\n\n        <div class=\"panel-heading\">\n        <input type=\"text\" class=\"form-control\" placeholder=\"search...\" ng-model=\"vm.treeSearch\">\n        </div>\n\n        <!-- Directive: angular-tree-control -->\n        <treecontrol class=\"pxTree\"\n           tree-model=\"vm.treeData\"\n           options=\"vm.treeOptions\"\n           on-selection=\"vm.onSelection(node)\"\n           filter-expression=\"vm.treeSearch\"\n           selected-node=\"vm.treeSelected\"\n           expanded-nodes=\"vm.treeExpanded\">\n           {{node.label}}\n        </treecontrol>\n\n      </div>\n\n    </div>\n    <div class=\"main col-sm-9 col-md-10\">\n\n      <!-- ui.router view -->\n      <div ui-view></div>\n\n    </div>\n  </div>\n</div>\n"
+	module.exports = "<nav class=\"navbar navbar-inverse navbar-static-top\" role=\"navigation\">\r\n\r\n\t<div class=\"container-fluid\">\r\n\t    <!-- Brand and toggle get grouped for better mobile display -->\r\n\t\t<div class=\"navbar-header\">\r\n\t\t\t<button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\">\r\n\t\t\t\t<span class=\"sr-only\">Toggle navigation</span>\r\n\t\t\t\t<span class=\"icon-bar\"></span>\r\n\t\t\t\t<span class=\"icon-bar\"></span>\r\n\t\t\t\t<span class=\"icon-bar\"></span>\r\n\t\t\t</button>\r\n\t\t\t<!-- <a class=\"navbar-brand\" ui-sref=\"main.home\">\r\n\t\t\t<img alt=\"PanaxUI-NG\" src=\"images/logo_fff_small.png\" height=\"20\">\r\n\t\t\t</a> -->\r\n\t\t\t<a class=\"navbar-brand\" href ng-click=\"vm.selectHome()\">\r\n\t\t\tPANAX\r\n\t\t\t</a>\r\n\t\t</div>\r\n\r\n\t\t<div class=\"navbar-collapse collapse\" id=\"navbar\">\r\n\r\n\t\t\t<ul class=\"nav navbar-nav navbar-right\">\r\n\r\n\t\t\t\t<!-- <li>\r\n\t\t\t     <a href=\"#\">Other</a>\r\n\t\t\t\t</li> -->\r\n\r\n\t\t\t    <li dropdown is-open=\"status.isopen\">\r\n\r\n\t\t\t      <a href=\"#\" class=\"dropdown-toggle\" dropdown-toggle ng-disabled=\"disabled\">\r\n\t\t\t        {{vm.currentUser.username}} <span class=\"caret\"></span>\r\n\t\t\t      </a>\r\n\t\t\t      <ul class=\"dropdown-menu\" role=\"menu\">\r\n\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t<a href=\"#\">Settings</a>\r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t<li class=\"divider\"></li>\r\n\t\t\t\t\t\t<li role=\"presentation\" class=\"dropdown-header\"><span class=\"label label-info\">Dev Tools</span></li>\r\n\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t<a ng-click=\"vm.cliClick()\">&nbsp;PanaxCLI</a>\r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t<a ng-click=\"vm.debugClick()\">&nbsp;Debug Info</a>\r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t<li class=\"divider\"></li>\r\n\t\t\t\t\t\t<li>\r\n\t\t\t\t\t\t\t<a ng-click=\"vm.logout()\">Logout</a>\r\n\t\t\t\t\t\t</li>\r\n\t\t\t      </ul>\r\n\t\t\t    </li>\r\n\r\n\t\t\t</ul>\r\n\t\t</div>\r\n\t</div>\r\n\r\n</nav>\r\n\r\n<div class=\"container-fluid\">\r\n  <div class=\"row\">\r\n    <div class=\"sidebar col-sm-3 col-md-2\">\r\n\r\n\r\n      <div class=\"panel panel-default\">\r\n\r\n        <div class=\"panel-heading\">\r\n        <input type=\"text\" class=\"form-control\" placeholder=\"search...\" ng-model=\"vm.treeSearch\">\r\n        </div>\r\n\r\n        <!-- Directive: angular-tree-control -->\r\n        <treecontrol class=\"pxTree\"\r\n           tree-model=\"vm.treeData\"\r\n           options=\"vm.treeOptions\"\r\n           on-selection=\"vm.onSelection(node)\"\r\n           filter-expression=\"vm.treeSearch\"\r\n           selected-node=\"vm.treeSelected\"\r\n           expanded-nodes=\"vm.treeExpanded\">\r\n           {{node.label}}\r\n        </treecontrol>\r\n\r\n      </div>\r\n\r\n    </div>\r\n    <div class=\"main col-sm-9 col-md-10\">\r\n\r\n      <!-- ui.router view -->\r\n      <div ui-view></div>\r\n\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ },
 /* 120 */
@@ -69527,7 +69527,7 @@
 
 
 	// module
-	exports.push([module.id, "body {\n  padding: 0;\n  background-color: #eee;\n}\n\n/**\n * AngularUI Bootstrap\n * CSS Initialization\n * http://angular-ui.github.io/bootstrap/\n */\n.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }\n\n/**\n * Alerts\n */\n.px-alert {\n  margin-bottom: 0px;\n}\n\n/*\n  loading animation - loading.html\n  http://www.gradient-animator.com/\n  https://github.com/cgross/angular-busy\n */\ndiv#px-busyDiv {\n  position: fixed;\n  bottom: 0;\n  height: 1.6%;\n  width: 100%;\n}\n\ndiv#px-loadingDiv {\n  position: fixed;\n  bottom: 0;\n  height: 1.6%;\n  width: 100%;\n  background: linear-gradient(270deg, #eee, #4675d3);\n  background-size: 400% 400%;\n  -webkit-animation: Loading 1s ease infinite;\n  -moz-animation: Loading 1s ease infinite;\n  -o-animation: Loading 1s ease infinite;\n  animation: Loading 1s ease infinite;\n}\n@-webkit-keyframes Loading {\n    0%{background-position:0% 51%}\n    50%{background-position:100% 50%}\n    100%{background-position:0% 51%}\n}\n@-moz-keyframes Loading {\n    0%{background-position:0% 51%}\n    50%{background-position:100% 50%}\n    100%{background-position:0% 51%}\n}\n@-o-keyframes Loading {\n    0%{background-position:0% 51%}\n    50%{background-position:100% 50%}\n    100%{background-position:0% 51%}\n}\n@keyframes Loading {\n    0%{background-position:0% 51%}\n    50%{background-position:100% 50%}\n    100%{background-position:0% 51%}\n}\n", ""]);
+	exports.push([module.id, "body {\r\n  padding: 0;\r\n  background-color: #eee;\r\n}\r\n\r\n/**\r\n * AngularUI Bootstrap\r\n * CSS Initialization\r\n * http://angular-ui.github.io/bootstrap/\r\n */\r\n.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }\r\n\r\n/**\r\n * Alerts\r\n */\r\n.px-alert {\r\n  margin-bottom: 0px;\r\n}\r\n\r\n/*\r\n  loading animation - loading.html\r\n  http://www.gradient-animator.com/\r\n  https://github.com/cgross/angular-busy\r\n */\r\ndiv#px-busyDiv {\r\n  position: fixed;\r\n  bottom: 0;\r\n  height: 1.6%;\r\n  width: 100%;\r\n}\r\n\r\ndiv#px-loadingDiv {\r\n  position: fixed;\r\n  bottom: 0;\r\n  height: 1.6%;\r\n  width: 100%;\r\n  background: linear-gradient(270deg, #eee, #4675d3);\r\n  background-size: 400% 400%;\r\n  -webkit-animation: Loading 1s ease infinite;\r\n  -moz-animation: Loading 1s ease infinite;\r\n  -o-animation: Loading 1s ease infinite;\r\n  animation: Loading 1s ease infinite;\r\n}\r\n@-webkit-keyframes Loading {\r\n    0%{background-position:0% 51%}\r\n    50%{background-position:100% 50%}\r\n    100%{background-position:0% 51%}\r\n}\r\n@-moz-keyframes Loading {\r\n    0%{background-position:0% 51%}\r\n    50%{background-position:100% 50%}\r\n    100%{background-position:0% 51%}\r\n}\r\n@-o-keyframes Loading {\r\n    0%{background-position:0% 51%}\r\n    50%{background-position:100% 50%}\r\n    100%{background-position:0% 51%}\r\n}\r\n@keyframes Loading {\r\n    0%{background-position:0% 51%}\r\n    50%{background-position:100% 50%}\r\n    100%{background-position:0% 51%}\r\n}\r\n", ""]);
 
 	// exports
 
@@ -75099,7 +75099,7 @@
 
 
 	// module
-	exports.push([module.id, "/**\n * LOGIN\n *\n * Based on: http://getbootstrap.com/examples/signin/\n */\n.form-login > .logo {\n  text-align: center;\n}\n.form-login {\n  max-width: 330px;\n  padding: 55px 40px 55px 40px;\n  margin: 0 auto;\n}\n.form-login .form-login-heading,\n.form-login .checkbox {\n  margin-bottom: 10px;\n}\n.form-login-heading {\n  text-align: center;\n}\n.form-login .checkbox {\n  font-weight: normal;\n}\n.form-login .form-control {\n  position: relative;\n  height: auto;\n  -webkit-box-sizing: border-box;\n     -moz-box-sizing: border-box;\n          box-sizing: border-box;\n  padding: 10px;\n  font-size: 16px;\n}\n.form-login .form-control:focus {\n  z-index: 2;\n}\n.form-login input[type=\"text\"] {\n  margin-bottom: -1px;\n  border-bottom-right-radius: 0;\n  border-bottom-left-radius: 0;\n}\n.form-login input[type=\"password\"] {\n  margin-bottom: 10px;\n  border-top-left-radius: 0;\n  border-top-right-radius: 0;\n}\n", ""]);
+	exports.push([module.id, "/**\r\n * LOGIN\r\n *\r\n * Based on: http://getbootstrap.com/examples/signin/\r\n */\r\n.form-login > .logo {\r\n  text-align: center;\r\n}\r\n.form-login {\r\n  max-width: 330px;\r\n  padding: 55px 40px 55px 40px;\r\n  margin: 0 auto;\r\n}\r\n.form-login .form-login-heading,\r\n.form-login .checkbox {\r\n  margin-bottom: 10px;\r\n}\r\n.form-login-heading {\r\n  text-align: center;\r\n}\r\n.form-login .checkbox {\r\n  font-weight: normal;\r\n}\r\n.form-login .form-control {\r\n  position: relative;\r\n  height: auto;\r\n  -webkit-box-sizing: border-box;\r\n     -moz-box-sizing: border-box;\r\n          box-sizing: border-box;\r\n  padding: 10px;\r\n  font-size: 16px;\r\n}\r\n.form-login .form-control:focus {\r\n  z-index: 2;\r\n}\r\n.form-login input[type=\"text\"] {\r\n  margin-bottom: -1px;\r\n  border-bottom-right-radius: 0;\r\n  border-bottom-left-radius: 0;\r\n}\r\n.form-login input[type=\"password\"] {\r\n  margin-bottom: 10px;\r\n  border-top-left-radius: 0;\r\n  border-top-right-radius: 0;\r\n}\r\n", ""]);
 
 	// exports
 
