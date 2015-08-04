@@ -6,7 +6,7 @@ import ngUrlify from 'angular-urlify';
 import ngTreeControl from 'angular-tree-control';
 import 'angular-tree-control/css/tree-control.css';
 
-import MainCRUD from '../../shell/CRUD';
+import MainCRUD from '../../shell/crud';
 import MainDebug from '../../shell/debug';
 import MainHome from '../../shell/home';
 import MainCategory from '../../shell/category';
