@@ -2,7 +2,7 @@ export default class DebugCtrl {
   constructor($scope, $rootScope, $stateParams, $modalInstance, $location, SessionService, formlyVersion, debugInfo) {
 
 		// Set debugInfo provider
-		$scope.debugInfo = debugInfo;
+		$scope.debugInfo = debugInfo || {};
     $scope.debugInfo.currentUser = SessionService;
     $scope.debugInfo.stateParams = $stateParams;
 		$scope.debugInfo.env = {
