@@ -48,7 +48,7 @@ export default class MainCtrl {
 			if (branch === vm.treeData[0])
 				vm.goToState('main.home');
 			else if (branch.children && branch.children.length)
-				vm.goToState('main.category', {
+				vm.goToState('main.panel.category', {
 					name: urlifyFilter(branch.label)
 				});
 			else if (branch.data.controlType === 'gridView')

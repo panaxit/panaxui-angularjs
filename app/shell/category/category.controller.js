@@ -4,6 +4,8 @@ export default class CategoryCtrl {
 
     vm.currentNavBranch = $rootScope.currentNavBranch;
 
+    $scope.$emit('setPanelTitle', 'Category: ' + vm.currentNavBranch.label);
+
     vm.onClick = function(node) {
       $scope.$emit('goToBranch', node);
     };
