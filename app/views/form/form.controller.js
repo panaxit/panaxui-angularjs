@@ -51,6 +51,24 @@ export default class FormCtrl {
     });
   }
 
+  isSubmitDisabled() {
+    var vm = this;
+    if(vm.catalog && vm.catalog.mode !== 'readonly') {
+      if(vm.catalog.mode === 'insert') {
+        if(vm.form.$invalid)
+          return true;
+        return false;
+      } else if(vm.catalog.mode === 'edit') {
+        if(vm.form.$pristine)
+          return true;
+        if(vm.form.$invalid)
+          return true;
+        return false;
+      }
+    }
+    return true;
+  }
+
   onReset() {
     // // ToDo: Confirm
     // // vm.loader();

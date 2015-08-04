@@ -13,6 +13,7 @@ function pxForm() {
       fields: '=',
       form: '=',
       loader: '&',
+      submitDisabled: '&',
       resetHandler: '&',
       cancelHandler: '&',
       submitHandler: '&'

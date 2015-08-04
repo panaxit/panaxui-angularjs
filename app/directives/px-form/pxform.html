@@ -39,7 +39,7 @@
             Cancel
           </button> -->
           <button class="btn btn-primary submit-button" type="submit"
-              ng-disabled="vm.catalog.mode !== 'insert' &amp;&amp; (vm.catalog.mode === 'readonly' || vm.form.$pristine || vm.form.$invalid)">
+              ng-disabled="vm.submitDisabled()">
             <em class="glyphicon glyphicon-ok-sign"></em>
             Save
           </button>
