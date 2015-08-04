@@ -1,5 +1,5 @@
 export default class IndexCtrl {
-  constructor($scope, $state, $q, AuthService, AlertService) {
+  constructor($scope, $rootScope, $state, $q, AuthService, AlertService) {
     var vm = this;
 
     /**
@@ -18,7 +18,7 @@ export default class IndexCtrl {
     // At HTTP requests
     $scope.$on('loading-start',function(){
        loadingDefer = $q.defer();
-       vm.azPromise = loadingDefer.promise;
+       $rootScope.azPromise = loadingDefer.promise;
     });
     $scope.$on('loading-end', function(){
        loadingDefer.resolve();
@@ -58,4 +58,4 @@ export default class IndexCtrl {
   }
 }
 
-IndexCtrl.$inject = ['$scope', '$state', '$q', 'AuthService', 'AlertService'];
+IndexCtrl.$inject = ['$scope', '$rootScope', '$state', '$q', 'AuthService', 'AlertService'];
