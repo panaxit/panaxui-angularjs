@@ -106,10 +106,10 @@ angular-tree-control
    -webkit-justify-content: center;
    justify-content: center;
    /* You can set flex-wrap and flex-direction individually */
-   -webkit-flex-direction: row;
+   /*-webkit-flex-direction: row;
    flex-direction: row;
    -webkit-flex-wrap: wrap;
-   flex-wrap: wrap;
+   flex-wrap: wrap;*/
    /* Or do it all in one line with flex flow */
    -webkit-flex-flow: row wrap;
    flex-flow: row wrap;

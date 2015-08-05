@@ -1,18 +1,20 @@
 <div class="well well-lg">
   <div class="text-center">
     <div class="page-header">
-      <h1>{{vm.currentNavBranch.label}}</h1>
+      <h1>{{vm.categoryTitle}}</h1>
     </div>
   </div>
 </div>
 
-<div class="row clearfix flexcontainer">
-  <div class="px-thumbnail-icon thumbnail text-center" ng-repeat="branch in vm.currentNavBranch.children">
-    <a ng-click="vm.onClick(branch)">
-      <img ng-src="images/thumbnails/{{branch.data.controlType || 'category'}}.png" alt="{{branch.label}}" class="px-thumbnail-icon">
-    </a>
-      <a href ng-click="vm.onClick(branch)">
-        {{ branch.label }}
+<div ng-repeat="row in vm.categoryChildren">
+  <div class="row clearfix flexcontainer px-thumbnail-container">
+    <div class="px-thumbnail-icon thumbnail text-center" ng-repeat="branch in row">
+      <a ng-click="vm.onClick(branch)">
+        <img ng-src="images/thumbnails/{{branch.data.controlType || 'category'}}.png" alt="{{branch.label}}" class="px-thumbnail-icon">
       </a>
+        <a href ng-click="vm.onClick(branch)">
+          {{ branch.label }}
+        </a>
+    </div>
   </div>
 </div>
