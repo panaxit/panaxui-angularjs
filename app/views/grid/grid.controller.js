@@ -28,15 +28,18 @@ export default class GridCtrl {
     });
   }
 
-  loader() {
+  loader(pageIndex, pageSize) {
     var vm = this;
-    vm.CRUDService.read({
+    var params = {
       mode: vm.$stateParams.mode,
       catalogName: vm.$stateParams.catalogName,
       controlType: 'gridView',
       getData: "1",
-      getStructure: "1"
-    }).then(function (res) {
+      getStructure: "1",
+      pageIndex: pageIndex || '1',
+      pageSize: pageSize || '25'
+    };
+    vm.CRUDService.read(params).then(function (res) {
       vm.catalog = res.data.catalog;
       vm.data = res.data.model || [];
       vm.grid = res.data.grid;
@@ -107,6 +110,11 @@ export default class GridCtrl {
        }
      });
     }
+  }
+
+  onPaginationChange(newPage, pageSize) {
+    var vm = this;
+    vm.loader(newPage+'', pageSize+'');
   }
 
   onRowChange(rowEntity, catalog) {

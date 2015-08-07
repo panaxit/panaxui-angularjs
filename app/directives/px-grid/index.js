@@ -15,6 +15,7 @@ function pxGrid() {
       openHandler: '&',
       newHandler: '&',
       deleteHandler: '&',
+      paginationChangeHandler: '&',
       rowChangePromise: '&'
     },
     bindToController: true,
@@ -22,16 +23,43 @@ function pxGrid() {
     controller: function ($scope) {
       var vm = this;
 
-      vm.gridOptions = {
-        paginationPageSizes: [5, 10, 25, 50, 100, 500],
-        paginationPageSize: 25,
-        rowHeight: 32,
-        enablePaginationControls: false,
-        showGridFooter: false,
-        onRegisterApi: function(gridApi) {
-          vm.gridApi = gridApi;
-        }
+      vm.gridOptions = {};
+      // Default options
+      vm.gridOptions.paginationPageSizes = [5, 10, 25, 50, 100, 500];
+      vm.gridOptions.paginationPageSize = 25;
+      vm.gridOptions.enablePaginationControls = false;
+      vm.gridOptions.rowHeight = 32;
+      vm.gridOptions.showGridFooter = false;
+      vm.gridOptions.onRegisterApi = function(gridApi) {
+        vm.gridApi = gridApi;
       };
+
+      $scope.$watch('vm.grid', function(newGrid) {
+        if(newGrid) {
+          // Column Defs
+          vm.gridOptions.columnDefs = newGrid.columnDefs;
+          vm.gridOptions.columnDefs.push({
+            name: 'px-actions',
+            displayName: '⚡',
+            type: 'object',
+            cellTemplate: require('./pxgrid.row.actions.html'),
+            width: '34',
+            enableCellEdit: false,
+            enableColumnMenus: false,
+            enableFiltering: false,
+            enableHiding: false,
+            enableSorting: false,
+          });
+          // External Pagination
+          if(newGrid.totalItems) {
+            vm.gridOptions.useExternalPagination = true;
+            vm.gridOptions.totalItems = newGrid.totalItems;
+            vm.gridApi.pagination.on.paginationChanged($scope, function(newPage, pageSize) {
+              vm.paginationChangeHandler({newPage: newPage, pageSize: pageSize});
+            });
+          }
+        }
+      });
 
       $scope.$watch('vm.catalog', function(newCatalog) {
         if(newCatalog) {
@@ -51,24 +79,6 @@ function pxGrid() {
       $scope.$watch('vm.data', function(newData) {
         if(newData) {
           vm.gridOptions.data = newData;
-        }
-      });
-
-      $scope.$watch('vm.grid', function(newGrid) {
-        if(newGrid) {
-          vm.gridOptions.columnDefs = newGrid;
-          vm.gridOptions.columnDefs.push({
-            name: 'px-actions',
-            displayName: '⚡',
-            type: 'object',
-            cellTemplate: require('./pxgrid.row.actions.html'),
-            width: '34',
-            enableCellEdit: false,
-            enableColumnMenus: false,
-            enableFiltering: false,
-            enableHiding: false,
-            enableSorting: false,
-          });
         }
       });
 
