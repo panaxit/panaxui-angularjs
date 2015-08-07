@@ -1,12 +1,14 @@
 export default class PanelCtrl {
   constructor($scope) {
+    var vm = this;
+
     // Change title
     $scope.$on('setPanelTitle', function (event, title) {
-      $scope.panelTitle = title;
+      vm.panelTitle = title;
     });
 
     // Reload data
-    $scope.reloadClick = function() {
+    vm.reloadClick = function() {
       $scope.$broadcast('reloadData');
     };
   }

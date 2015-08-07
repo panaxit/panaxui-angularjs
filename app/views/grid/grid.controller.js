@@ -44,6 +44,7 @@ export default class GridCtrl {
       vm.catalog = res.data.catalog;
       vm.data = res.data.model || [];
       vm.grid = res.data.grid;
+      vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
   }
 

@@ -1,7 +1,7 @@
 <div class="panel panel-primary">
 
   <div class="panel-heading clearfix">
-    <h1 class="panel-title pull-left">{{ panelTitle || currentNavBranch.label}}</h1>
+    <h1 class="panel-title pull-left">{{ vm.panelTitle }}</h1>
 
     <div class="btn-group btn-group-xs pull-right">
       <button class="btn btn-primary" type="button"> <em class="glyphicon glyphicon-star-empty"></em>
@@ -11,7 +11,7 @@
       <button class="btn btn-primary" type="button">
         <em class="glyphicon glyphicon-question-sign"></em>
       </button>
-      <button class="btn btn-primary" type="button" ng-click="reloadClick()">
+      <button class="btn btn-primary" type="button" ng-click="vm.reloadClick()">
         <em class="glyphicon glyphicon-refresh"></em>
       </button>
     </div>

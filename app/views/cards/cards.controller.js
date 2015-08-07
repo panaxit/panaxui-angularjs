@@ -39,6 +39,7 @@ export default class CardsCtrl {
     }).then(function (res) {
       vm.catalog = res.data.catalog || {};
       vm.data = res.data.model || [];
+      vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
   }
 
