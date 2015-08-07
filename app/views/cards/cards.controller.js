@@ -32,6 +32,7 @@ export default class CardsCtrl {
     vm.CRUDService.read({
       mode: 'readonly', //$stateParams.mode, // Is always readonly to get all records
       catalogName: vm.$stateParams.catalogName,
+      filters: vm.$stateParams.filters || '',
       controlType: 'cardView',
       getData: "1",
       getStructure: "1"

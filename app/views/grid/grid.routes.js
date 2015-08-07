@@ -4,7 +4,7 @@ export default function routes($stateProvider) {
    */
   $stateProvider
     .state('main.panel.grid', {
-      url: 'grid/{catalogName}/{mode}',
+      url: 'grid/{catalogName}/{mode}?filters',
       template: require('./grid.html'),
       controller: 'GridCtrl as vm'
     });

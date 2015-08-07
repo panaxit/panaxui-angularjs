@@ -33,6 +33,7 @@ export default class GridCtrl {
     var params = {
       mode: vm.$stateParams.mode,
       catalogName: vm.$stateParams.catalogName,
+      filters: vm.$stateParams.filters || '',
       controlType: 'gridView',
       getData: "1",
       getStructure: "1",

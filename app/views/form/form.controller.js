@@ -32,12 +32,13 @@ export default class FormCtrl {
     var params = {
       mode: vm.$stateParams.mode,
       catalogName: vm.$stateParams.catalogName,
+      filters: vm.$stateParams.filters || '',
       controlType: 'formView',
       getData: '1',
       getStructure: '1'
     };
     if(vm.$stateParams.id) {
-      params.filters = '\'id=' + vm.$stateParams.id + '\''; // ToDo: Arbitriary Identity Key Name
+      params.filters += '\'id=' + vm.$stateParams.id + '\'';
     }
     vm.CRUDService.read(params).then(function (res) {
       vm.catalog = res.data.catalog;

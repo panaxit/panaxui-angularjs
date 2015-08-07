@@ -45,22 +45,23 @@ export default class MainCtrl {
 		// Go to state of selected branch (nav-tree)
 		$scope.$on('goToBranch', function (event, branch) {
       $rootScope.currentNavBranch = branch;
-			if (branch === vm.treeData[0]) {
+      // Reset inherited query parameters
+      // https://github.com/angular-ui/ui-router/wiki/Quick-Reference#toparams
+      branch.data.id = branch.data.id || undefined;
+      branch.data.filters = branch.data.filters || undefined;
+      //goToState
+			if (branch === vm.treeData[0])
 				vm.goToState('main.home');
-      } else if (branch.children && branch.children.length) {
+      else if (branch.children && branch.children.length)
 				vm.goToState('main.panel.category', {
 					name: urlifyFilter(branch.label)
 				});
-      } else if (branch.data.controlType === 'gridView') {
+      else if (branch.data.controlType === 'gridView')
 				vm.goToState('main.panel.grid', branch.data);
-      } else if (branch.data.controlType === 'formView') {
-        // Reset inherited query parameters
-        // https://github.com/angular-ui/ui-router/wiki/Quick-Reference#toparams
-        branch.data.id = branch.data.id || undefined;
+      else if (branch.data.controlType === 'formView')
         vm.goToState('main.panel.form', branch.data);
-      } else if (branch.data.controlType === 'cardView') {
+      else if (branch.data.controlType === 'cardView')
         vm.goToState('main.panel.cards', branch.data);
-      }
 		});
 
     vm.logout = function() {
