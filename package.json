@@ -32,6 +32,7 @@
     "angular-ui-grid": "^3.0.1",
     "angular-ui-router": "^0.2.15",
     "angular-urlify": "*",
+    "angular-utils-pagination": "^0.8.2",
     "api-check": "^7.5.0",
     "az-promise-show": "^1.1.2",
     "bootstrap": "^3.3.5",

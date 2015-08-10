@@ -1,47 +1,58 @@
-<div class="row clearfix flexcontainer">
+<div class="panel-body">
 
-  <div class="px-card" ng-repeat="record in vm.data">
+  <div class="row clearfix flexcontainer">
 
-    <div class="panel panel-default">
-      <div class="panel-heading clearfix">
-        <h3 class="panel-title pull-left">
-        {{ record[vm.catalog.customAttrs.titleField] || '[No titleField Found]'}}
-        </h3>
-        <div class="btn-group btn-group-xs pull-right">
-          <button class="btn" type="submit"
-                  ng-class="{'btn-default':(vm.mode !== 'edit'), 'btn-primary':(vm.mode === 'edit')}"
-                  ng-click="vm.openHandler({selected: record})">
-            <!-- <em class="glyphicon glyphicon-folder-open"></em> -->
-            {{vm.mode === 'edit' ? 'Edit' : 'View'}}
-          </button>
+    <div class="px-card" dir-paginate="record in vm.data | itemsPerPage: vm.options.paginationPageSize">
+
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <h3 class="panel-title pull-left">
+          {{ record[vm.catalog.customAttrs.titleField] || '[No titleField Found]'}}
+          </h3>
+          <div class="btn-group btn-group-xs pull-right">
+            <button class="btn" type="submit"
+                    ng-class="{'btn-default':(vm.mode !== 'edit'), 'btn-primary':(vm.mode === 'edit')}"
+                    ng-click="vm.openHandler({selected: record})">
+              <!-- <em class="glyphicon glyphicon-folder-open"></em> -->
+              {{vm.mode === 'edit' ? 'Edit' : 'View'}}
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="list-group">
-        <div class="list-group-item">
-          <img ng-src="{{ record[vm.catalog.customAttrs.iconField] ? '/upload/' + record[vm.catalog.customAttrs.iconField] : '/images/noimg.png' }}"
-               class="px-card-img img-rounded pull-left">
-          <label>
-          {{ vm.catalog.customAttrs.descField1 || '[No descField1 Found]' }}
-          </label>
-          <h5 class="list-group-item-heading">
-          {{ record[vm.catalog.customAttrs.descField1] || '[No descField1 Found]' }}
-          </h5>
-          <label>
-          {{ vm.catalog.customAttrs.descField2 || '[No descField2 Found]' }}
-          </label>
-          <h5 class="list-group-item-heading">
-          {{ record[vm.catalog.customAttrs.descField2]  || '[No descField2 Found]'}}
-          </h5>
+        <div class="list-group">
+          <div class="list-group-item">
+            <img ng-src="{{ record[vm.catalog.customAttrs.iconField] ? '/upload/' + record[vm.catalog.customAttrs.iconField] : '/images/noimg.png' }}"
+                 class="px-card-img img-rounded pull-left">
+            <label>
+            {{ vm.catalog.customAttrs.descField1 || '[No descField1 Found]' }}
+            </label>
+            <h5 class="list-group-item-heading">
+            {{ record[vm.catalog.customAttrs.descField1] || '[No descField1 Found]' }}
+            </h5>
+            <label>
+            {{ vm.catalog.customAttrs.descField2 || '[No descField2 Found]' }}
+            </label>
+            <h5 class="list-group-item-heading">
+            {{ record[vm.catalog.customAttrs.descField2]  || '[No descField2 Found]'}}
+            </h5>
+          </div>
         </div>
+        <!-- <div class="panel-footer clearfix">
+        </div> -->
       </div>
-      <!-- <div class="panel-footer clearfix">
-      </div> -->
+
     </div>
 
   </div>
 
+  <div ng-if="!vm.data || vm.data.length === 0">
+  <h1 class="text-center">No data found!</h1>
+  </div>
+
 </div>
 
-<div ng-if="!vm.data || vm.data.length === 0">
-<h1 class="text-center">No data found!</h1>
+<div class="panel-footer clearfix">
+  <dir-pagination-controls
+    boundary-links="true"
+    template-url="directives/px-cards/pxcards.pagination.html">
+  </dir-pagination-controls>
 </div>

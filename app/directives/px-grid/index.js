@@ -23,8 +23,8 @@ function pxGrid() {
     controller: function ($scope) {
       var vm = this;
 
-      vm.gridOptions = {};
       // Default options
+      vm.gridOptions = {};
       vm.gridOptions.paginationPageSizes = [5, 10, 25, 50, 100, 500];
       vm.gridOptions.paginationPageSize = 25;
       vm.gridOptions.enablePaginationControls = false;
