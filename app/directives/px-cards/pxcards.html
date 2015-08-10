@@ -1,9 +1,15 @@
+<div class="panel-footer clearfix">
+  <!-- <label for="search">Search:</label> -->
+  <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+</div>
+
+
 <div class="panel-body">
 
   <div class="row clearfix flexcontainer">
 
     <div class="px-card"
-         dir-paginate="record in vm.data | itemsPerPage: vm.options.paginationPageSize"
+         dir-paginate="record in vm.data | filter:q | itemsPerPage: vm.options.paginationPageSize"
          total-items="vm.options.totalItems"
          current-page="vm.options.currentPage">
 
