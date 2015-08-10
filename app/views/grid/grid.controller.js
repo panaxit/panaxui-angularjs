@@ -119,19 +119,24 @@ export default class GridCtrl {
     vm.loader(newPage+'', pageSize+'');
   }
 
-  onRowChange(rowEntity, catalog) {
+  onRowChange(rowEntity) {
     // Save Row handler
-    // Code based from `form.js`
     var vm = this;
     var promise = vm.$q.defer();
+
+    // Do not update if not in edit mode
+    if(vm.catalog.mode !== 'edit') {
+      promise.reject();
+      return promise.promise;
+    }
 
     /**
     * Create payload to be sent
     */
     var payload = {
-     tableName: catalog.catalogName,
-     primaryKey: catalog.primaryKey,
-     identityKey: catalog.identityKey
+     tableName: vm.catalog.catalogName,
+     primaryKey: vm.catalog.primaryKey,
+     identityKey: vm.catalog.identityKey
     };
 
     // Set DataRows

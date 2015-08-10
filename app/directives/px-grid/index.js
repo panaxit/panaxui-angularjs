@@ -33,6 +33,14 @@ function pxGrid() {
       //vm.gridOptions.selectionRowHeaderWidth= 32;
       vm.gridOptions.onRegisterApi = function(gridApi) {
         vm.gridApi = gridApi;
+        // Row edit
+        vm.gridApi.rowEdit.on.saveRow($scope, function(rowEntity) {
+          vm.gridApi.rowEdit.setSavePromise(rowEntity, vm.rowChangePromise({rowEntity: rowEntity}));
+        });
+        // External pagination
+        vm.gridApi.pagination.on.paginationChanged($scope, function(newPage, pageSize) {
+          vm.paginationChangeHandler({newPage: newPage, pageSize: pageSize});
+        });
       };
 
       $scope.$watch('vm.grid', function(newGrid) {
@@ -57,22 +65,14 @@ function pxGrid() {
       $scope.$watch('vm.catalog', function(newCatalog) {
         if(newCatalog) {
           vm.gridOptions.enableRowSelection = (newCatalog.mode === 'edit');
-          vm.gridOptions.enableCellEdit = (newCatalog.mode === 'edit');
           //vm.gridOptions.multiSelect = (newCatalog.mode === 'edit'),
           //vm.gridOptions.enableSelectAll = (newCatalog.mode === 'edit'),
           // Row edit
-          if (newCatalog.mode === 'edit') {
-            vm.gridApi.rowEdit.on.saveRow($scope, function(rowEntity) {
-              vm.gridApi.rowEdit.setSavePromise(rowEntity, vm.rowChangePromise({rowEntity: rowEntity, catalog: newCatalog}));
-            });
-          }
+          vm.gridOptions.enableCellEdit = (newCatalog.mode === 'edit');
           // External Pagination
           if(newCatalog.totalItems) {
-            vm.gridOptions.useExternalPagination = true;
+            vm.gridOptions.useExternalPagination = (true);
             vm.gridOptions.totalItems = newCatalog.totalItems;
-            vm.gridApi.pagination.on.paginationChanged($scope, function(newPage, pageSize) {
-              vm.paginationChangeHandler({newPage: newPage, pageSize: pageSize});
-            });
           }
         }
       });
