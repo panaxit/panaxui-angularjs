@@ -2,7 +2,10 @@
 
   <div class="row clearfix flexcontainer">
 
-    <div class="px-card" dir-paginate="record in vm.data | itemsPerPage: vm.options.paginationPageSize">
+    <div class="px-card"
+         dir-paginate="record in vm.data | itemsPerPage: vm.options.paginationPageSize"
+         total-items="vm.options.totalItems"
+         current-page="vm.options.currentPage">
 
       <div class="panel panel-default">
         <div class="panel-heading clearfix">
@@ -52,6 +55,7 @@
 
 <div class="panel-footer clearfix">
   <dir-pagination-controls
+    on-page-change="vm.paginationChanged(newPageNumber)"
     boundary-links="true"
     template-url="directives/px-cards/pxcards.pagination.html">
   </dir-pagination-controls>

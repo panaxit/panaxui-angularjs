@@ -22,11 +22,12 @@ export default class CardsCtrl {
     var vm = this;
     vm.DebugService.show({
       catalog: vm.catalog,
+      cards: vm.cards,
       model: vm.data
     });
   }
 
-  loader() {
+  loader(pageIndex, pageSize) {
     var vm = this;
 
     vm.CRUDService.read({
@@ -35,10 +36,13 @@ export default class CardsCtrl {
       filters: vm.$stateParams.filters || '',
       controlType: 'cardView',
       getData: "1",
-      getStructure: "1"
+      getStructure: "1",
+      pageIndex: pageIndex || '1',
+      pageSize: pageSize || '8'
     }).then(function (res) {
       vm.catalog = res.data.catalog || {};
       vm.data = res.data.model || [];
+      vm.cards = res.data.cards;
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
   }
@@ -53,6 +57,11 @@ export default class CardsCtrl {
       mode: vm.mode,
       id: identifier
     });
+  }
+
+  onPaginationChange(newPage) {
+    var vm = this;
+    vm.loader(newPage+'');
   }
 }
 

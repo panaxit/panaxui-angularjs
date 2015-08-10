@@ -121,15 +121,24 @@
 
         <pre><code data-language="javascript">{{debugInfo.form | json}}</code></pre>
 			</accordion-group>
-			<accordion-group ng-show="debugInfo.grid">
+      <accordion-group ng-show="debugInfo.grid">
 
         <accordion-heading>
-        		<em class="glyphicon glyphicon-th-large"></em>
+            <em class="glyphicon glyphicon-th-large"></em>
             Grid
         </accordion-heading>
 
         <pre><code data-language="javascript">{{debugInfo.grid | json}}</code></pre>
-			</accordion-group>
+      </accordion-group>
+      <accordion-group ng-show="debugInfo.cards">
+
+        <accordion-heading>
+            <em class="glyphicon glyphicon-th"></em>
+            Cards
+        </accordion-heading>
+
+        <pre><code data-language="javascript">{{debugInfo.cards | json}}</code></pre>
+      </accordion-group>
 			<accordion-group ng-show="debugInfo.model">
 
         <accordion-heading>
