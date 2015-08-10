@@ -26,11 +26,11 @@ function pxCards() {
       vm.options.paginationPageSize = 8;
       vm.options.currentPage = 1;
 
-      $scope.$watch('vm.cards', function(newCards) {
-        if(newCards) {
+      $scope.$watch('vm.catalog', function(newCatalog) {
+        if(newCatalog) {
           // External Pagination
-          if(newCards.totalItems) {
-            vm.options.totalItems = newCards.totalItems;
+          if(newCatalog.totalItems) {
+            vm.options.totalItems = newCatalog.totalItems;
           }
         }
       });
@@ -43,7 +43,7 @@ function pxCards() {
 }
 
 export default angular.module('app.directives.pxcards', [
-    'angularUtils.directives.dirPagination'
+    dirPagination
   ])
   .directive('pxCards', pxCards)
   .name;
