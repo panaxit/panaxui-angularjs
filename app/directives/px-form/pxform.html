@@ -1,9 +1,13 @@
 <form ng-submit="vm.submitHandler()" name="vm.form" novalidate>
 
+<div dir-paginate="record in vm.data | itemsPerPage: vm.options.paginationPageSize"
+     total-items="vm.options.totalItems"
+     current-page="vm.options.currentPage">
+
 	<div class="panel-body">
 
     <fieldset ng-repeat="fieldset in vm.fields | filter:{type:'fieldset'}">
-      <formly-form model="vm.data"
+      <formly-form model="record"
                    fields="fieldset.fields"
                    form="vm.form"
                    heading="{{fieldset.title}}"
@@ -19,7 +23,7 @@
            disable="tab.disabled">
 
           <formly-form
-                    model="vm.data"
+                    model="record"
                     fields="tab.fields"
                     form="vm.form">
           </formly-form>
@@ -58,4 +62,14 @@
 
 	</div>
 
+</div>
+
 </form>
+
+<div class="panel-footer clearfix">
+  <dir-pagination-controls
+    on-page-change="vm.paginationChanged(newPageNumber)"
+    boundary-links="true"
+    template-url="directives/px-cards/pxcards.pagination.html">
+  </dir-pagination-controls>
+</div>

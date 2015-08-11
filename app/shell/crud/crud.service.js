@@ -89,7 +89,7 @@ class CRUDService {
     /**
      * Create data table payload to be sent
      */
-    vm.buildPersistPayload = function(form, model, catalog, id) {
+    vm.buildPersistPayload = function(form, model, catalog) {
 
       var dirtyFieldsIterator = function(obj, dirty_model, orig_model) {
         angular.forEach(obj, function (el) {
@@ -136,15 +136,15 @@ class CRUDService {
 
       if(catalog.mode === 'insert') {
         payload.insertRows = [{}];
-        dirtyFieldsIterator(form, payload.insertRows[0], model);
+        dirtyFieldsIterator(form, payload.insertRows[0], model[0]);
       } else if(catalog.mode === 'edit') {
         payload.updateRows = [{}];
-        dirtyFieldsIterator(form, payload.updateRows[0], model);
+        dirtyFieldsIterator(form, payload.updateRows[0], model[0]);
         // Set primaryKey and/or identityKey as DataRow with current value
         if(!!payload.primaryKey)
-          payload.updateRows[0][payload.primaryKey] = id;
+          payload.updateRows[0][payload.primaryKey] = model[0][payload.primaryKey];
         if(!!payload.identityKey)
-          payload.updateRows[0][payload.identityKey] = id;
+          payload.updateRows[0][payload.identityKey] = model[0][payload.identityKey];
       }
 
       return payload;

@@ -27,7 +27,7 @@ export default class FormCtrl {
     });
   }
 
-  loader() {
+  loader(pageIndex, pageSize) {
     var vm = this;
     var params = {
       mode: vm.$stateParams.mode,
@@ -35,14 +35,16 @@ export default class FormCtrl {
       filters: vm.$stateParams.filters || '',
       controlType: 'formView',
       getData: '1',
-      getStructure: '1'
+      getStructure: '1',
+      pageIndex: pageIndex || '1',
+      pageSize: pageSize || '1'
     };
     if(vm.$stateParams.id) {
       params.filters += '\'id=' + vm.$stateParams.id + '\'';
     }
     vm.CRUDService.read(params).then(function (res) {
       vm.catalog = res.data.catalog;
-      vm.data = res.data.model[0] || {};
+      vm.data = res.data.model || [];
       vm.fields = res.data.fields || [];
       vm.$scope.$emit('setPanelTitle', (function () {
         if(vm.catalog.mode === 'insert') return 'New ';
@@ -94,7 +96,7 @@ export default class FormCtrl {
       /**
        * Create payload to be sent
        */
-      var payload = vm.CRUDService.buildPersistPayload(vm.fields, vm.data, vm.catalog, vm.$stateParams.id);
+      var payload = vm.CRUDService.buildPersistPayload(vm.fields, vm.data, vm.catalog);
       /**
        * Perform Insert/Update in backend
        */
@@ -147,6 +149,11 @@ export default class FormCtrl {
     } else {
       vm.AlertService.show('warning', 'Warning', 'Invalid form');
     }
+  }
+
+  onPaginationChange(newPage) {
+    var vm = this;
+    vm.loader(newPage+'');
   }
 }
 
