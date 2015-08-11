@@ -47,15 +47,18 @@ export default class CardsCtrl {
     });
   }
 
+  // ToDo: Use catalog parameter (as in GridCtrl) for nested cardsView
   onOpen(selected) {
     var vm = this;
-    var identifier = selected[vm.catalog.primaryKey] ||
-             selected[vm.catalog.identityKey];
+    var idType = (!!vm.catalog.identityKey) ? 'identityKey' : 'primaryKey';
+    var idKey = vm.catalog[idType];
+    var idValue = selected[idKey];
 
     vm.$scope.$emit('goToState', 'main.panel.form', {
       catalogName: vm.catalog.catalogName,
       mode: vm.mode,
-      id: identifier
+      [idType]: idKey,
+      id: idValue
     });
   }
 

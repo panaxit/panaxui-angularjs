@@ -49,13 +49,16 @@ export default class GridCtrl {
   }
 
   onOpen(selected, catalog) {
-    var identifier = selected[catalog.primaryKey] ||
-             selected[catalog.identityKey];
+    var vm = this;
+    var idType = (!!catalog.identityKey) ? 'identityKey' : 'primaryKey';
+    var idKey = catalog[idType];
+    var idValue = selected[idKey];
 
-    this.$scope.$emit('goToState', 'main.panel.form', {
+    vm.$scope.$emit('goToState', 'main.panel.form', {
       catalogName: catalog.catalogName,
       mode: catalog.mode,
-      id: identifier
+      [idType]: idKey,
+      id: idValue
     });
   }
 

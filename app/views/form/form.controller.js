@@ -40,7 +40,9 @@ export default class FormCtrl {
       pageSize: pageSize || vm.$stateParams.pageSize || '1'
     };
     if(vm.$stateParams.id) {
-      params.filters += '\'id=' + vm.$stateParams.id + '\'';
+      // Fallback options
+      var idKey = vm.$stateParams.identityKey || vm.$stateParams.primaryKey || 'id';
+      params.filters += '[' + idKey + '=' + vm.$stateParams.id + ']';
     }
     vm.CRUDService.read(params).then(function (res) {
       vm.catalog = res.data.catalog;
