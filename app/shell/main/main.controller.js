@@ -49,6 +49,8 @@ export default class MainCtrl {
       // https://github.com/angular-ui/ui-router/wiki/Quick-Reference#toparams
       branch.data.id = branch.data.id || undefined;
       branch.data.filters = branch.data.filters || undefined;
+      branch.data.pageSize = branch.data.pageSize || undefined;
+      branch.data.pageIndex = branch.data.pageIndex || undefined;
       //goToState
 			if (branch === vm.treeData[0])
 				vm.goToState('main.home');

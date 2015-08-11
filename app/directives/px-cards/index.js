@@ -23,14 +23,14 @@ function pxCards() {
       // Default options
       vm.options = {};
       vm.options.paginationPageSizes = [4, 8, 16, 32, 64, 128];
-      vm.options.paginationPageSize = 8;
-      vm.options.currentPage = 1;
 
       $scope.$watch('vm.catalog', function(newCatalog) {
         if(newCatalog) {
           // External Pagination
           if(newCatalog.totalItems) {
             vm.options.totalItems = newCatalog.totalItems;
+            vm.options.paginationPageSize = newCatalog.pageSize;
+            vm.options.currentPage = newCatalog.pageIndex;
           }
         }
       });

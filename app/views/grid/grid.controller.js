@@ -37,8 +37,8 @@ export default class GridCtrl {
       controlType: 'gridView',
       getData: "1",
       getStructure: "1",
-      pageIndex: pageIndex || '1',
-      pageSize: pageSize || '25'
+      pageIndex: pageIndex || vm.$stateParams.pageIndex || '1',
+      pageSize: pageSize || vm.$stateParams.pageSize || '25'
     };
     vm.CRUDService.read(params).then(function (res) {
       vm.catalog = res.data.catalog;

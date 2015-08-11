@@ -26,7 +26,6 @@ function pxGrid() {
       // Default options
       vm.gridOptions = {};
       vm.gridOptions.paginationPageSizes = [5, 10, 25, 50, 100, 500];
-      vm.gridOptions.paginationPageSize = 25;
       vm.gridOptions.enablePaginationControls = false;
       vm.gridOptions.rowHeight = 32;
       vm.gridOptions.showGridFooter = false;
@@ -71,8 +70,10 @@ function pxGrid() {
           vm.gridOptions.enableCellEdit = (newCatalog.mode === 'edit');
           // External Pagination
           if(newCatalog.totalItems) {
-            vm.gridOptions.useExternalPagination = (true);
+            vm.gridOptions.useExternalPagination = true;
             vm.gridOptions.totalItems = newCatalog.totalItems;
+            vm.gridOptions.paginationPageSize = newCatalog.pageSize;
+            vm.gridOptions.paginationCurrentPage = newCatalog.pageIndex;
           }
         }
       });

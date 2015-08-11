@@ -4,7 +4,7 @@ export default function routes($stateProvider) {
    */
   $stateProvider
     .state('main.panel.form', {
-      url: 'form/{catalogName}/{mode}?id&filters',
+      url: 'form/{catalogName}/{mode}?id&filters&pageSize&pageIndex',
       template: require('./form.html'),
       controller: 'FormCtrl as vm'
     });

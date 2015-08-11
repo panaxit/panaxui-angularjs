@@ -37,8 +37,8 @@ export default class CardsCtrl {
       controlType: 'cardView',
       getData: "1",
       getStructure: "1",
-      pageIndex: pageIndex || '1',
-      pageSize: pageSize || '8'
+      pageIndex: pageIndex || vm.$stateParams.pageIndex || '1',
+      pageSize: pageSize || vm.$stateParams.pageSize || '8'
     }).then(function (res) {
       vm.catalog = res.data.catalog || {};
       vm.data = res.data.model || [];
