@@ -1,9 +1,9 @@
 <px-cards
   mode="{{vm.mode}}"
+  options="vm.options"
   data="vm.data"
   catalog="vm.catalog"
   cards="vm.cards"
-  loader="vm.loader()"
   open-handler="vm.onOpen(selected)"
-  pagination-change-handler="vm.onPaginationChange(newPage)">
+  pagination-change-handler="vm.onPaginationChange(newPage, oldPage, newPageSize, oldPageSize)">
 </px-cards>

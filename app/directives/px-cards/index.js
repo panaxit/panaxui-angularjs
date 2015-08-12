@@ -8,10 +8,10 @@ function pxCards() {
     template: require('./pxcards.html'),
     scope: {
       mode: '@',
+      options: '=',
       data: '=',
       catalog: '=',
       cards: '=',
-      loader: '&',
       openHandler: '&',
       paginationChangeHandler: '&'
     },
@@ -20,24 +20,16 @@ function pxCards() {
     controller: function ($scope) {
       var vm = this;
 
-      // Default options
-      vm.options = {};
-      vm.options.paginationPageSizes = [4, 8, 16, 32, 64, 128];
-
-      $scope.$watch('vm.catalog', function(newCatalog) {
-        if(newCatalog) {
-          // External Pagination
-          if(newCatalog.totalItems) {
-            vm.options.totalItems = newCatalog.totalItems;
-            vm.options.paginationPageSize = newCatalog.pageSize;
-            vm.options.currentPage = newCatalog.pageIndex;
-          }
+      $scope.$watchGroup(['vm.options.currentPage', 'vm.options.paginationPageSize'], (newValues, oldValues) => {
+        if(newValues !== oldValues) {
+          vm.paginationChangeHandler({
+            newPage: newValues[0],
+            oldPage: oldValues[0],
+            newPageSize: newValues[1],
+            oldPageSize: oldValues[1]
+          });
         }
       });
-
-      vm.paginationChanged = function(newPage) {
-        vm.paginationChangeHandler({newPage: newPage});
-      };
     }
   };
 }

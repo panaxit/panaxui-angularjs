@@ -9,11 +9,11 @@ function pxForm() {
     restrict: 'E',
     template: require('./pxform.html'),
     scope: {
+      options: '=',
       catalog: '=',
       data: '=',
       fields: '=',
       form: '=',
-      loader: '&',
       submitDisabled: '&',
       resetHandler: '&',
       cancelHandler: '&',
@@ -25,24 +25,16 @@ function pxForm() {
     controller: function ($scope) {
       var vm = this;
 
-      // Default options
-      vm.options = {};
-      vm.options.paginationPageSizes = [1, 2, 3, 5, 8, 13];
-
-      $scope.$watch('vm.catalog', function(newCatalog) {
-        if(newCatalog) {
-          // External Pagination
-          if(newCatalog.totalItems) {
-            vm.options.totalItems = newCatalog.totalItems;
-            vm.options.paginationPageSize = newCatalog.pageSize;
-            vm.options.currentPage = newCatalog.pageIndex;
-          }
+      $scope.$watchGroup(['vm.options.currentPage', 'vm.options.paginationPageSize'], (newValues, oldValues) => {
+        if(newValues !== oldValues) {
+          vm.paginationChangeHandler({
+            newPage: newValues[0],
+            oldPage: oldValues[0],
+            newPageSize: newValues[1],
+            oldPageSize: oldValues[1]
+          });
         }
       });
-
-      vm.paginationChanged = function(newPage) {
-        vm.paginationChangeHandler({newPage: newPage});
-      };
     }
   };
 }

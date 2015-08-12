@@ -1,34 +1,40 @@
 export default class FormCtrl {
-  constructor($scope, $stateParams, CRUDService, AlertService, DebugService) {
+  constructor($scope, $stateParams, $q, CRUDService, AlertService, DebugService) {
     var vm = this;
 
     vm.$scope = $scope;
     vm.$stateParams = $stateParams;
+    vm.$q = $q;
     vm.CRUDService = CRUDService;
     vm.AlertService = AlertService;
     vm.DebugService = DebugService;
 
-    vm.loader();
+    // Initially set defaults, load & configure
+    vm.defaults();
+    vm.load().then(() => { vm.configure(); });
 
     vm.$scope.$on('reloadData', function (event, next) {
-      vm.loader();
+      vm.load();
     });
 
     // open Debug Modal and resolve `form-specific` objects
     vm.$scope.$on('openDebugModal', (event, next) => { vm.openDebugModal(); });
   }
 
-  openDebugModal() {
+  defaults() {
     var vm = this;
-    vm.DebugService.show({
-      catalog: vm.catalog,
-      form: vm.fields,
-      model: vm.data
-    });
+    // Default options
+    vm.options = {
+      // Pagination options
+      paginationPageSizes: [1, 2, 3, 5, 7, 10],
+      currentPage: parseInt(vm.$stateParams.pageIndex) || 1,
+      paginationPageSize: parseInt(vm.$stateParams.pageSize) || 1
+    };
   }
 
-  loader(pageIndex, pageSize) {
+  load(pageIndex, pageSize) {
     var vm = this;
+    var deferred = this.$q.defer();
     var params = {
       mode: vm.$stateParams.mode,
       catalogName: vm.$stateParams.catalogName,
@@ -36,8 +42,8 @@ export default class FormCtrl {
       controlType: 'formView',
       getData: '1',
       getStructure: '1',
-      pageIndex: pageIndex || vm.$stateParams.pageIndex || '1',
-      pageSize: pageSize || vm.$stateParams.pageSize || '1'
+      pageIndex: pageIndex || vm.options.currentPage,
+      pageSize: pageSize || vm.options.paginationPageSize
     };
     if(vm.$stateParams.id) {
       // Fallback options
@@ -53,6 +59,26 @@ export default class FormCtrl {
         if(vm.catalog.mode === 'edit') return 'Edit ';
         if(vm.catalog.mode === 'readonly') return 'View ';
       })() + vm.catalog.tableName);
+      deferred.resolve(res.data);
+    });
+    return deferred.promise;
+  }
+
+  configure() {
+    var vm = this;
+    if(vm.catalog.totalItems) {
+      vm.options.totalItems = vm.catalog.totalItems;
+      vm.options.paginationPageSize = vm.catalog.pageSize;
+      vm.options.currentPage = vm.catalog.pageIndex;
+    }
+  }
+
+  openDebugModal() {
+    var vm = this;
+    vm.DebugService.show({
+      catalog: vm.catalog,
+      form: vm.fields,
+      model: vm.data
     });
   }
 
@@ -76,7 +102,7 @@ export default class FormCtrl {
 
   onReset() {
     // // ToDo: Confirm
-    // // vm.loader();
+    // // vm.load();
     // Alt: http://angular-formly.com/#/example/form-options/reset-model
     // ToDo: Confirm
     if (vm.form) {
@@ -139,7 +165,7 @@ export default class FormCtrl {
               // vm.onReset
               vm.form.$setPristine();
               vm.form.$setUntouched();
-              // ToDo: Reload form? (to retrieve saved data and spot glitches via: vm.loader(); ?
+              // ToDo: Reload form? (to retrieve saved data and spot glitches via: vm.load(); ?
             }
           } else {
             // Do nothing. HTTP 500 responses handled by ErrorInterceptor
@@ -153,9 +179,12 @@ export default class FormCtrl {
     }
   }
 
-  onPaginationChange(newPage) {
+  onPaginationChange(newPage, oldPage, newPageSize, oldPageSize) {
     var vm = this;
-    vm.loader(newPage+'');
+    if((oldPage!==undefined && newPage!==oldPage) || (oldPageSize!==undefined && newPageSize!==newPageSize)) {
+      vm.load(newPage, newPageSize);
+      return;
+    }
   }
 
   /**
@@ -223,4 +252,4 @@ export default class FormCtrl {
   }
 }
 
-FormCtrl.$inject = ['$scope', '$stateParams', 'CRUDService', 'AlertService', 'DebugService'];
+FormCtrl.$inject = ['$scope', '$stateParams', '$q', 'CRUDService', 'AlertService', 'DebugService'];

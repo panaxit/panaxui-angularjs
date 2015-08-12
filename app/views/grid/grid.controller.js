@@ -9,14 +9,94 @@ export default class GridCtrl {
     vm.DebugService = DebugService;
     vm.AlertService = AlertService;
 
-    vm.loader();
+    // Initially set defaults, load & configure
+    vm.defaults();
+    vm.load().then(() => { vm.configure(); });
 
     vm.$scope.$on('reloadData', function (event, next) {
       // ToDo: Redraw (re-render) grid. Ex.: when hiding, showing columns
-      vm.loader();
+      vm.load();
     });
 
     vm.$scope.$on('openDebugModal', (event, next) => { vm.openDebugModal(); });
+  }
+
+  defaults() {
+    var vm = this;
+    // Default options
+    vm.options = {
+      // Pagination options
+      paginationPageSizes: [5, 10, 25, 50, 100, 500],
+      enablePaginationControls: false,
+      rowHeight: 32,
+      showGridFooter: false,
+      //selectionRowHeaderWidth: 32,
+      onRegisterApi: function(gridApi) {
+        vm.gridApi = gridApi;
+        // Row edit
+        vm.gridApi.rowEdit.on.saveRow(vm.$scope, function(rowEntity) {
+          vm.gridApi.rowEdit.setSavePromise(rowEntity, vm.rowChangePromise({rowEntity: rowEntity}));
+        });
+        // External pagination
+        vm.gridApi.pagination.on.paginationChanged(vm.$scope, function(newPage, pageSize) {
+          vm.paginationChangeHandler({newPage: newPage, pageSize: pageSize});
+        });
+      },
+      currentPage: parseInt(vm.$stateParams.pageIndex) || 1,
+      paginationPageSize: parseInt(vm.$stateParams.pageSize) || 25
+    };
+  }
+
+  load(pageIndex, pageSize) {
+    var vm = this;
+    var deferred = this.$q.defer();
+    var params = {
+      mode: vm.$stateParams.mode,
+      catalogName: vm.$stateParams.catalogName,
+      filters: vm.$stateParams.filters || '',
+      controlType: 'gridView',
+      getData: "1",
+      getStructure: "1",
+      pageIndex: pageIndex || vm.options.currentPage,
+      pageSize: pageSize || vm.options.paginationPageSize
+    };
+    vm.CRUDService.read(params).then(function (res) {
+      vm.catalog = res.data.catalog;
+      vm.data = res.data.model || [];
+      vm.grid = res.data.grid;
+      vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
+      deferred.resolve(res.data);
+    });
+    return deferred.promise;
+  }
+
+  configure() {
+    debugger;
+    var vm = this;
+    vm.options.data = vm.data;
+    vm.options.columnDefs = vm.grid.columnDefs;
+    vm.options.columnDefs.push({
+      name: 'px-actions',
+      displayName: '⚡',
+      type: 'object',
+      cellTemplate: require('../../directives/px-grid/pxgrid.row.actions.html'),
+      width: '34',
+      enableCellEdit: false,
+      enableColumnMenus: false,
+      enableFiltering: false,
+      enableHiding: false,
+      enableSorting: false,
+    });
+    if(vm.catalog.totalItems) {
+      vm.options.useExternalPagination = true;
+      vm.options.totalItems = vm.catalog.totalItems;
+      vm.options.paginationPageSize = vm.catalog.pageSize;
+      vm.options.paginationCurrentPage = vm.catalog.pageIndex;
+    }
+    vm.options.enableCellEdit = (vm.catalog.mode === 'edit');
+    vm.options.enableRowSelection = (vm.catalog.mode === 'edit');
+    //vm.options.multiSelect = (vm.catalog.mode === 'edit');
+    //vm.options.enableSelectAll = (vm.catalog.mode === 'edit');
   }
 
   openDebugModal() {
@@ -25,26 +105,6 @@ export default class GridCtrl {
       catalog: vm.catalog,
       grid: vm.grid,
       model: vm.data
-    });
-  }
-
-  loader(pageIndex, pageSize) {
-    var vm = this;
-    var params = {
-      mode: vm.$stateParams.mode,
-      catalogName: vm.$stateParams.catalogName,
-      filters: vm.$stateParams.filters || '',
-      controlType: 'gridView',
-      getData: "1",
-      getStructure: "1",
-      pageIndex: pageIndex || vm.$stateParams.pageIndex || '1',
-      pageSize: pageSize || vm.$stateParams.pageSize || '25'
-    };
-    vm.CRUDService.read(params).then(function (res) {
-      vm.catalog = res.data.catalog;
-      vm.data = res.data.model || [];
-      vm.grid = res.data.grid;
-      vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
   }
 
@@ -117,9 +177,12 @@ export default class GridCtrl {
     }
   }
 
-  onPaginationChange(newPage, pageSize) {
+  onPaginationChange(newPage, oldPage, newPageSize, oldPageSize) {
     var vm = this;
-    vm.loader(newPage+'', pageSize+'');
+    if((oldPage!==undefined && newPage!==oldPage) || (oldPageSize!==undefined && newPageSize!==newPageSize)) {
+      vm.load(newPage, newPageSize);
+      return;
+    }
   }
 
   onRowChange(rowEntity) {

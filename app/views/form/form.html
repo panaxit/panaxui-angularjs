@@ -1,12 +1,12 @@
 <px-form
+  options="vm.options"
   data="vm.data"
   catalog="vm.catalog"
   fields="vm.fields"
   form="vm.form"
-  loader="vm.loader()"
   submit-disabled="vm.isSubmitDisabled()"
   reset-handler="vm.onReset()"
   cancel-handler="vm.onCancel()"
   submit-handler="vm.onSubmit()"
-  pagination-change-handler="vm.onPaginationChange(newPage)">
+  pagination-change-handler="vm.onPaginationChange(newPage, oldPage, newPageSize, oldPageSize)">
 </px-form>
