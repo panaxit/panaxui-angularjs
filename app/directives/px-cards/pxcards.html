@@ -59,16 +59,37 @@
 
 </div>
 
-<div class="panel-footer clearfix">
-  <div class="pull-left">
-    <select
-      ng-model="vm.options.paginationPageSize"
-      ng-options="o as o for o in vm.options.paginationPageSizes">
-    </select>
-    records per page
-  </div>
-  <dir-pagination-controls
-    boundary-links="true"
-    template-url="directives/shared/dirPagination.tpl.html">
-  </dir-pagination-controls>
+<div class="panel-footer">
+  <!-- http://stackoverflow.com/questions/19929213/bootstrap-change-div-order-with-pull-right-pull-left-3-columns -->
+
+    <div class="row">
+      <div class="col-xs-4">
+        <div clas="text-left">
+          <select
+            ng-model="vm.options.paginationPageSize"
+            ng-options="o as o for o in vm.options.paginationPageSizes">
+          </select>
+          records per page
+        </div>
+      </div>
+      <div class="col-xs-8">
+        <div class="row">
+          <div class="col-md-4 col-md-push-8">
+            <div class="text-right">
+              {{((vm.options.currentPage - 1) * vm.options.paginationPageSize) + 1}}
+              &ndash;
+              {{[vm.options.currentPage * vm.options.paginationPageSize, vm.options.totalItems] | min}}
+              of {{vm.options.totalItems}} records
+            </div>
+          </div>
+          <div class="col-md-8 col-md-pull-4">
+            <dir-pagination-controls
+              boundary-links="true"
+              template-url="directives/shared/dirPagination.tpl.html">
+            </dir-pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </div>

@@ -1,37 +1,33 @@
-<div class="text-center">
-
-  <!-- <div class="btn-group btn-group-md pagination"> -->
-  <div class="btn-group btn-group-md" ng-if="1 < pages.length || !autoHide">
-    <button class="btn btn-default" type="button"
-      ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == 1 }"
-      ng-click="setCurrent(1)">
-      <em class="glyphicon glyphicon-step-backward"></em>
-      First
-    </button>
-    <button class="btn btn-default" type="button"
-      ng-if="directionLinks" ng-class="{ disabled : pagination.current == 1 }"
-      ng-click="setCurrent(pagination.current - 1)">
-      <em class="glyphicon glyphicon-triangle-left"></em>
-      Prev
-    </button>
-    <button class="btn btn-default" type="button"
-      ng-repeat="pageNumber in pages track by $index"
-      ng-class="{ active : pagination.current == pageNumber, disabled : pageNumber == '...' }"
-      ng-click="setCurrent(pageNumber)">
-      {{pageNumber}}
-    </button>
-    <button class="btn btn-default" type="button"
-      ng-if="directionLinks" ng-class="{ disabled : pagination.current == pagination.last }"
-      ng-click="setCurrent(pagination.current + 1)">
-      Next
-      <em class="glyphicon glyphicon-triangle-right"></em>
-    </button>
-    <button class="btn btn-default" type="button"
-      ng-if="boundaryLinks"  ng-class="{ disabled : pagination.current == pagination.last }"
-      ng-click="setCurrent(pagination.last)">
-      <em class="glyphicon glyphicon-step-forward"></em>
-      Last
-    </button>
-  </div>
-
+<!-- <div class="btn-group btn-group-md pagination"> -->
+<div class="btn-group btn-group-md" ng-if="1 < pages.length || !autoHide">
+  <button class="btn btn-default" type="button"
+    ng-if="boundaryLinks" ng-class="{ disabled : pagination.current == 1 }"
+    ng-click="setCurrent(1)">
+    <em class="glyphicon glyphicon-step-backward"></em>
+    First
+  </button>
+  <button class="btn btn-default" type="button"
+    ng-if="directionLinks" ng-class="{ disabled : pagination.current == 1 }"
+    ng-click="setCurrent(pagination.current - 1)">
+    <em class="glyphicon glyphicon-triangle-left"></em>
+    Prev
+  </button>
+  <button class="btn btn-default" type="button"
+    ng-repeat="pageNumber in pages track by $index"
+    ng-class="{ active : pagination.current == pageNumber, disabled : pageNumber == '...' }"
+    ng-click="setCurrent(pageNumber)">
+    {{pageNumber}}
+  </button>
+  <button class="btn btn-default" type="button"
+    ng-if="directionLinks" ng-class="{ disabled : pagination.current == pagination.last }"
+    ng-click="setCurrent(pagination.current + 1)">
+    Next
+    <em class="glyphicon glyphicon-triangle-right"></em>
+  </button>
+  <button class="btn btn-default" type="button"
+    ng-if="boundaryLinks"  ng-class="{ disabled : pagination.current == pagination.last }"
+    ng-click="setCurrent(pagination.last)">
+    <em class="glyphicon glyphicon-step-forward"></em>
+    Last
+  </button>
 </div>
