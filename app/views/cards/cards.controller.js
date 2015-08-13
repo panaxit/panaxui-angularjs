@@ -34,7 +34,7 @@ export default class CardsCtrl {
       mode: 'readonly', //$stateParams.mode, // Is always readonly to get all records
       catalogName: vm.$stateParams.catalogName,
       filters: vm.$stateParams.filters || '',
-      controlType: 'cardView',
+      controlType: 'cardsView',
       getData: "1",
       getStructure: "1",
       pageIndex: pageIndex || vm.$stateParams.pageIndex || '1',

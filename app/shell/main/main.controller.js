@@ -64,7 +64,7 @@ export default class MainCtrl {
 				vm.goToState('main.panel.grid', branch.data);
       else if (branch.data.controlType === 'formView')
         vm.goToState('main.panel.form', branch.data);
-      else if (branch.data.controlType === 'cardView')
+      else if (branch.data.controlType === 'cardsView')
         vm.goToState('main.panel.cards', branch.data);
 		});
 
