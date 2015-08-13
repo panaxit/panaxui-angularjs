@@ -9,6 +9,8 @@ import uibootstrap from 'angular-ui-bootstrap';
 import uirouter from 'angular-ui-router';
 import azPromiseShow from  'az-promise-show';
 
+import CoreFilters from './core/filters';
+
 import ShellLogin from './shell/login';
 import ShellMain from './shell/main';
 import ShellError from './shell/error';
@@ -25,6 +27,8 @@ export default angular.module('app', [
 		uibootstrap,
 		uirouter,
     azPromiseShow,
+
+    CoreFilters,
 
 		ShellLogin,
 		ShellMain,
