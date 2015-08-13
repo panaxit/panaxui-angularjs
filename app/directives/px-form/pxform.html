@@ -67,9 +67,15 @@
 </form>
 
 <div class="panel-footer clearfix">
+  <div class="pull-left">
+    <select
+      ng-model="vm.options.paginationPageSize"
+      ng-options="o as o for o in vm.options.paginationPageSizes">
+    </select>
+    records per page
+  </div>
   <dir-pagination-controls
-    on-page-change="vm.paginationChanged(newPageNumber)"
     boundary-links="true"
-    template-url="directives/px-cards/pxcards.pagination.html">
+    template-url="directives/shared/dirPagination.tpl.html">
   </dir-pagination-controls>
 </div>

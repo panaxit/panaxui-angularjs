@@ -37,8 +37,8 @@ export default class CardsCtrl {
       controlType: 'cardsView',
       getData: "1",
       getStructure: "1",
-      pageIndex: pageIndex || vm.$stateParams.pageIndex || '1',
-      pageSize: pageSize || vm.$stateParams.pageSize || '8'
+      pageIndex: pageIndex || parseInt(vm.$stateParams.pageIndex) || 1,
+      pageSize: pageSize || parseInt(vm.$stateParams.pageSize) || 8
     }).then(function (res) {
       vm.catalog = res.data.catalog || {};
       vm.data = res.data.model || [];
@@ -62,9 +62,9 @@ export default class CardsCtrl {
     });
   }
 
-  onPaginationChange(newPage) {
+  onPaginationChange(newPage, newPageSize) {
     var vm = this;
-    vm.loader(newPage+'');
+    vm.loader(newPage, newPageSize);
   }
 }
 

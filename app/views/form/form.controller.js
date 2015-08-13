@@ -36,8 +36,8 @@ export default class FormCtrl {
       controlType: 'formView',
       getData: '1',
       getStructure: '1',
-      pageIndex: pageIndex || vm.$stateParams.pageIndex || '1',
-      pageSize: pageSize || vm.$stateParams.pageSize || '1'
+      pageIndex: pageIndex || vm.$stateParams.pageIndex || 1,
+      pageSize: pageSize || vm.$stateParams.pageSize || 1
     };
     if(vm.$stateParams.id) {
       // Fallback options
@@ -153,9 +153,9 @@ export default class FormCtrl {
     }
   }
 
-  onPaginationChange(newPage) {
+  onPaginationChange(newPage, newPageSize) {
     var vm = this;
-    vm.loader(newPage+'');
+    vm.loader(newPage, newPageSize);
   }
 }
 
