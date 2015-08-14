@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-import dirPagination from 'angular-utils-pagination';
+import pxPagination from '../../directives/px-pagination';
 
 function pxCards() {
   return {
@@ -11,7 +11,6 @@ function pxCards() {
       data: '=',
       catalog: '=',
       cards: '=',
-      loader: '&',
       openHandler: '&',
       paginationChangeHandler: '&'
     },
@@ -34,38 +33,12 @@ function pxCards() {
           }
         }
       });
-
-      vm.getTotalPages = function() {
-        if (!vm.catalog.totalItems) { // (!vm.options.enablePagination) {
-          return null;
-        }
-        return (vm.options.totalItems === 0) ? 1 : Math.ceil(vm.options.totalItems / vm.options.paginationPageSize);
-      };
-
-      $scope.$watch('vm.options.currentPage + vm.options.paginationPageSize', (newValues, oldValues) => {
-        if (newValues === oldValues || oldValues === undefined) {
-          return;
-        }
-        if (!angular.isNumber(vm.options.currentPage) || vm.options.currentPage < 1) {
-          vm.options.currentPage = 1;
-          return;
-        }
-        if (vm.options.totalItems > 0 && vm.options.currentPage > vm.getTotalPages()) {
-          vm.options.currentPage = vm.getTotalPages();
-          return;
-        }
-
-        vm.paginationChangeHandler({
-          newPage: vm.options.currentPage,
-          newPageSize: vm.options.paginationPageSize
-        });
-      });
     }
   };
 }
 
 export default angular.module('app.directives.pxcards', [
-    dirPagination
+    pxPagination
   ])
   .directive('pxCards', pxCards)
   .name;

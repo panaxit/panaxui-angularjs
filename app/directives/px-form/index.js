@@ -2,7 +2,7 @@ import angular from 'angular';
 
 import formly from 'angular-formly';
 import formlyBootstrap from 'angular-formly-templates-bootstrap';
-import dirPagination from 'angular-utils-pagination';
+import pxPagination from '../../directives/px-pagination';
 
 function pxForm() {
   return {
@@ -13,7 +13,6 @@ function pxForm() {
       data: '=',
       fields: '=',
       form: '=',
-      loader: '&',
       submitDisabled: '&',
       resetHandler: '&',
       cancelHandler: '&',
@@ -39,32 +38,6 @@ function pxForm() {
           }
         }
       });
-
-      vm.getTotalPages = function() {
-        if (!vm.catalog.totalItems) { // (!vm.options.enablePagination) {
-          return null;
-        }
-        return (vm.options.totalItems === 0) ? 1 : Math.ceil(vm.options.totalItems / vm.options.paginationPageSize);
-      };
-
-      $scope.$watch('vm.options.currentPage + vm.options.paginationPageSize', (newValues, oldValues) => {
-        if (newValues === oldValues || oldValues === undefined) {
-          return;
-        }
-        if (!angular.isNumber(vm.options.currentPage) || vm.options.currentPage < 1) {
-          vm.options.currentPage = 1;
-          return;
-        }
-        if (vm.options.totalItems > 0 && vm.options.currentPage > vm.getTotalPages()) {
-          vm.options.currentPage = vm.getTotalPages();
-          return;
-        }
-
-        vm.paginationChangeHandler({
-          newPage: vm.options.currentPage,
-          newPageSize: vm.options.paginationPageSize
-        });
-      });
     }
   };
 }
@@ -72,7 +45,7 @@ function pxForm() {
 export default angular.module('app.directives.pxform', [
     formly,
     formlyBootstrap,
-    dirPagination
+    pxPagination
   ])
   .directive('pxForm', pxForm)
   .name;
