@@ -11,7 +11,6 @@ function pxGrid() {
       catalog: '=',
       data: '=',
       grid: '=',
-      loader: '&',
       openHandler: '&',
       newHandler: '&',
       deleteHandler: '&',
@@ -24,13 +23,13 @@ function pxGrid() {
       var vm = this;
 
       // Default options
-      vm.gridOptions = {};
-      vm.gridOptions.paginationPageSizes = [5, 10, 25, 50, 100, 500];
-      vm.gridOptions.enablePaginationControls = false;
-      vm.gridOptions.rowHeight = 32;
-      vm.gridOptions.showGridFooter = false;
-      //vm.gridOptions.selectionRowHeaderWidth= 32;
-      vm.gridOptions.onRegisterApi = function(gridApi) {
+      vm.options = {};
+      vm.options.paginationPageSizes = [5, 10, 25, 50, 100, 500];
+      vm.options.enablePaginationControls = false;
+      vm.options.rowHeight = 32;
+      vm.options.showGridFooter = false;
+      //vm.options.selectionRowHeaderWidth= 32;
+      vm.options.onRegisterApi = function(gridApi) {
         vm.gridApi = gridApi;
         // Row edit
         vm.gridApi.rowEdit.on.saveRow($scope, function(rowEntity) {
@@ -45,8 +44,8 @@ function pxGrid() {
       $scope.$watch('vm.grid', function(newGrid) {
         if(newGrid) {
           // Column Defs
-          vm.gridOptions.columnDefs = newGrid.columnDefs;
-          vm.gridOptions.columnDefs.push({
+          vm.options.columnDefs = newGrid.columnDefs;
+          vm.options.columnDefs.push({
             name: 'px-actions',
             displayName: '⚡',
             type: 'object',
@@ -63,24 +62,24 @@ function pxGrid() {
 
       $scope.$watch('vm.catalog', function(newCatalog) {
         if(newCatalog) {
-          vm.gridOptions.enableRowSelection = (newCatalog.mode === 'edit');
-          //vm.gridOptions.multiSelect = (newCatalog.mode === 'edit'),
-          //vm.gridOptions.enableSelectAll = (newCatalog.mode === 'edit'),
+          vm.options.enableRowSelection = (newCatalog.mode === 'edit');
+          //vm.options.multiSelect = (newCatalog.mode === 'edit'),
+          //vm.options.enableSelectAll = (newCatalog.mode === 'edit'),
           // Row edit
-          vm.gridOptions.enableCellEdit = (newCatalog.mode === 'edit');
+          vm.options.enableCellEdit = (newCatalog.mode === 'edit');
           // External Pagination
           if(newCatalog.totalItems) {
-            vm.gridOptions.useExternalPagination = true;
-            vm.gridOptions.totalItems = newCatalog.totalItems;
-            vm.gridOptions.paginationPageSize = newCatalog.pageSize;
-            vm.gridOptions.paginationCurrentPage = newCatalog.pageIndex;
+            vm.options.useExternalPagination = true;
+            vm.options.totalItems = newCatalog.totalItems;
+            vm.options.paginationPageSize = newCatalog.pageSize;
+            vm.options.paginationCurrentPage = newCatalog.pageIndex;
           }
         }
       });
 
       $scope.$watch('vm.data', function(newData) {
         if(newData) {
-          vm.gridOptions.data = newData;
+          vm.options.data = newData;
         }
       });
 
@@ -94,10 +93,10 @@ function pxGrid() {
 export default angular.module('app.directives.pxgrid', [
     'ui.grid',
     'ui.grid.autoResize',
-    'ui.grid.pagination',
     'ui.grid.selection',
     'ui.grid.edit',
-    'ui.grid.rowEdit'
+    'ui.grid.rowEdit',
+    'ui.grid.pagination'
   ])
   .directive('pxGrid', pxGrid)
   .name;
