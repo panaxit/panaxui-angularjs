@@ -29,7 +29,7 @@ function pxCards() {
           if(newCatalog.totalItems) {
             vm.options.totalItems = newCatalog.totalItems;
             vm.options.paginationPageSize = newCatalog.pageSize;
-            vm.options.currentPage = newCatalog.pageIndex;
+            vm.options.paginationCurrentPage = newCatalog.pageIndex;
           }
         }
       });

@@ -22,21 +22,21 @@ function pxPagination() {
         return (vm.options.totalItems === 0) ? 1 : Math.ceil(vm.options.totalItems / vm.options.paginationPageSize);
       };
 
-      $scope.$watch('vm.options.currentPage + vm.options.paginationPageSize', (newValues, oldValues) => {
+      $scope.$watch('vm.options.paginationCurrentPage + vm.options.paginationPageSize', (newValues, oldValues) => {
         if (newValues === oldValues || oldValues === undefined) {
           return;
         }
-        if (!angular.isNumber(vm.options.currentPage) || vm.options.currentPage < 1) {
-          vm.options.currentPage = 1;
+        if (!angular.isNumber(vm.options.paginationCurrentPage) || vm.options.paginationCurrentPage < 1) {
+          vm.options.paginationCurrentPage = 1;
           return;
         }
-        if (vm.options.totalItems > 0 && vm.options.currentPage > vm.getTotalPages()) {
-          vm.options.currentPage = vm.getTotalPages();
+        if (vm.options.totalItems > 0 && vm.options.paginationCurrentPage > vm.getTotalPages()) {
+          vm.options.paginationCurrentPage = vm.getTotalPages();
           return;
         }
 
         vm.onPaginationChange({
-          newPage: vm.options.currentPage,
+          newPage: vm.options.paginationCurrentPage,
           newPageSize: vm.options.paginationPageSize
         });
       });

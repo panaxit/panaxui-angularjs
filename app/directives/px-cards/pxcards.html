@@ -11,7 +11,7 @@
     <div class="px-card"
          dir-paginate="record in vm.data | filter:q | itemsPerPage: vm.options.paginationPageSize"
          total-items="vm.options.totalItems"
-         current-page="vm.options.currentPage">
+         current-page="vm.options.paginationCurrentPage">
 
       <div class="panel panel-default">
         <div class="panel-heading clearfix">

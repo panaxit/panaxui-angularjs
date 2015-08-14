@@ -13,9 +13,9 @@
     <div class="row">
       <div class="col-md-4 col-md-push-8">
         <div class="text-right">
-          {{((vm.options.currentPage - 1) * vm.options.paginationPageSize) + 1}}
+          {{((vm.options.paginationCurrentPage - 1) * vm.options.paginationPageSize) + 1}}
           &ndash;
-          {{[vm.options.currentPage * vm.options.paginationPageSize, vm.options.totalItems] | min}}
+          {{[vm.options.paginationCurrentPage * vm.options.paginationPageSize, vm.options.totalItems] | min}}
           of {{vm.options.totalItems}} records
         </div>
       </div>
