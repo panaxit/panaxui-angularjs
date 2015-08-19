@@ -11,8 +11,6 @@ export default class FormlyGridCtrl extends GridCtrl {
     vm.CRUDService = CRUDService;
     vm.DebugService = DebugService;
     vm.AlertService = AlertService;
-
-    vm.loader();
   }
 
   openDebugModal() {
@@ -21,6 +19,7 @@ export default class FormlyGridCtrl extends GridCtrl {
 
   loader() {
     var vm = this;
+
     vm.data = vm.$scope.model[vm.$scope.options.key] || [];
     vm.grid = vm.$scope.options.data.grid;
     vm.catalog = vm.$scope.options.data.catalog;

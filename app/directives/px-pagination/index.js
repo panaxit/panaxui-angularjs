@@ -8,7 +8,7 @@ function pxPagination() {
     template: require('./pxpagination.html'),
     scope: {
       options: '=',
-      onPaginationChange: '&'
+      onPaginationChange: '&?'
     },
     bindToController: true,
     controllerAs: 'vm',

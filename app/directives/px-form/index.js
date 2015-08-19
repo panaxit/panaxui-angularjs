@@ -12,12 +12,9 @@ function pxForm() {
       catalog: '=',
       data: '=',
       fields: '=',
-      form: '=',
-      submitDisabled: '&',
-      resetHandler: '&',
-      cancelHandler: '&',
-      submitHandler: '&',
-      paginationChangeHandler: '&'
+      form: '=?',
+      asyncPagination: '@?',
+      paginationChangeHandler: '&?'
     },
     bindToController: true,
     controllerAs: 'vm',
@@ -27,14 +24,21 @@ function pxForm() {
       // Default options
       vm.options = {};
       vm.options.paginationPageSizes = [1, 2, 3, 5, 8, 13];
+      vm.options.paginationId = 'pagination' + (Math.floor(Math.random() * (1000 - 1)) + 1);
 
       $scope.$watch('vm.catalog', function(newCatalog) {
         if(newCatalog) {
-          // External Pagination
+          // Pagination
           if(newCatalog.totalItems) {
+            // Server-side Pagination
             vm.options.totalItems = newCatalog.totalItems;
             vm.options.paginationPageSize = newCatalog.pageSize;
             vm.options.paginationCurrentPage = newCatalog.pageIndex;
+          } else {
+            // Client-side Pagination
+            vm.options.totalItems = vm.data.length;
+            vm.options.paginationPageSize = vm.catalog.pageSize || 1;
+            vm.options.paginationCurrentPage = vm.catalog.pageIndex || 1;
           }
         }
       });

@@ -10,8 +10,6 @@ export default class FormlyFormCtrl extends FormCtrl {
     vm.CRUDService = CRUDService;
     vm.AlertService = AlertService;
     vm.DebugService = DebugService;
-
-    vm.loader();
   }
 
   openDebugModal() {

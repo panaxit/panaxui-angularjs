@@ -1,26 +1,9 @@
 <div class="panel-body">
 
-  <fieldset ng-repeat="fieldset in vm.fields | filter:{type:'fieldset'}">
-    <formly-form model="vm.data"
-                 fields="fieldset.fields"
-                 heading="{{fieldset.title}}"
-                 active="fieldset.active"
-                 disable="fieldset.disabled">
-    </formly-form>
-  </fieldset>
-
-  <tabset ng-repeat="tabpanel in vm.fields | filter:{type:'tabpanel'}">
-    <tab ng-repeat="tab in tabpanel.tabs | filter:{type:'tab'}"
-         heading="{{tab.title}}"
-         active="tab.active"
-         disable="tab.disabled">
-
-        <formly-form
-                  model="vm.data"
-                  fields="tab.fields">
-        </formly-form>
-
-    </tab>
-  </tabset>
+  <px-form
+    data="vm.data"
+    catalog="vm.catalog"
+    fields="vm.fields">
+  </px-form>
 
 </div>
