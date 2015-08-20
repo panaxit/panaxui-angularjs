@@ -12,7 +12,10 @@
             Environment
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{debugInfo.env | json}}</code></pre>
+        <pre>
+          <json-formatter open="2" json="debugInfo.env"></json-formatter>
+        </pre>
+
 			</accordion-group>
 			<accordion-group ng-show="debugInfo.currentUser">
 
@@ -101,7 +104,10 @@
             State
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{debugInfo.stateParams | json}}</code></pre>
+        <pre>
+          <json-formatter open="2" json="debugInfo.stateParams"></json-formatter>
+        </pre>
+
 			</accordion-group>
 			<accordion-group ng-show="debugInfo.catalog">
 
@@ -110,7 +116,10 @@
             Catalog
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{debugInfo.catalog | json}}</code></pre>
+        <pre>
+          <json-formatter open="2" json="debugInfo.catalog"></json-formatter>
+        </pre>
+
 			</accordion-group>
 			<accordion-group ng-show="debugInfo.form">
 
@@ -119,7 +128,10 @@
             Form (fields)
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{debugInfo.form | json}}</code></pre>
+        <pre>
+          <json-formatter open="2" json="debugInfo.form"></json-formatter>
+        </pre>
+
 			</accordion-group>
       <accordion-group ng-show="debugInfo.grid">
 
@@ -128,7 +140,10 @@
             Grid
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{debugInfo.grid | json}}</code></pre>
+        <pre>
+          <json-formatter open="2" json="debugInfo.grid"></json-formatter>
+        </pre>
+
       </accordion-group>
       <accordion-group ng-show="debugInfo.cards">
 
@@ -137,7 +152,10 @@
             Cards
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{debugInfo.cards | json}}</code></pre>
+        <pre>
+          <json-formatter open="2" json="debugInfo.cards"></json-formatter>
+        </pre>
+
       </accordion-group>
 			<accordion-group ng-show="debugInfo.model">
 
@@ -146,7 +164,10 @@
             Model
         </accordion-heading>
 
-        <pre><code data-language="javascript">{{debugInfo.model | json}}</code></pre>
+        <pre>
+          <json-formatter open="2" json="debugInfo.model"></json-formatter>
+        </pre>
+
 			</accordion-group>
 		</accordion>
 

@@ -36,6 +36,7 @@
     "api-check": "^7.5.0",
     "az-promise-show": "^1.1.2",
     "bootstrap": "^3.3.5",
+    "jsonformatter": "^0.3.1",
     "panaxui-bootstrap": "git+https://benoror@bitbucket.org/panaxit/panaxui-bootstrap.git",
     "tinycolor2": "^1.1.2",
     "ui-select": "^0.11.2"
