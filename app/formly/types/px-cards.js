@@ -1,11 +1,11 @@
 export default function(formlyConfigProvider) {
   /*
-    px-form (nested)
+    px-cards (nested)
    */
   formlyConfigProvider.setType({
-    name: 'px-form',
-    template: require('./px-form.html'),
+    name: 'px-cards',
+    template: require('./px-cards.html'),
     wrapper: ['px-panel', 'bootstrapHasError'],
-    controller: 'FormlyFormCtrl as vm'
+    controller: 'FormlyCardsCtrl as vm'
   });
 }

@@ -56,6 +56,7 @@ import datetime from './types/datetime';
 import pxPanel from './wrappers/px-panel';
 import pxForm from './types/px-form';
 import pxGrid from './types/px-grid';
+import pxCards from './types/px-cards';
 
 export default angular.module('app.main.form.formly', [
     formly,
@@ -82,4 +83,5 @@ export default angular.module('app.main.form.formly', [
   .config(pxPanel)
   .config(pxForm)
   .config(pxGrid)
+  .config(pxCards)
   .name;

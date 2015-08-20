@@ -3,58 +3,109 @@
   <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
 </div>
 
-
 <div class="panel-body">
 
-  <div class="row clearfix flexcontainer">
+  <div class="row clearfix">
 
-    <div class="px-card"
-         dir-paginate="record in vm.data | filter:q | itemsPerPage: vm.options.paginationPageSize"
-         total-items="vm.options.totalItems"
-         current-page="vm.options.paginationCurrentPage">
+    <!-- hack fix: https://github.com/michaelbromley/angularUtils/issues/157 -->
+    <div ng-switch on="vm.asyncPagination">
+      <!-- Server side pagination -->
+      <div ng-switch-when="true" class="flexcontainer">
 
-      <div class="panel panel-default">
-        <div class="panel-heading clearfix">
-          <h3 class="panel-title pull-left">
-          {{ record[vm.catalog.customAttrs.titleField] || '[No titleField Found]'}}
-          </h3>
-          <div class="btn-group btn-group-xs pull-right">
-            <button class="btn" type="submit"
-                    ng-class="{'btn-default':(vm.mode !== 'edit'), 'btn-primary':(vm.mode === 'edit')}"
-                    ng-click="vm.openHandler({selected: record})">
-              <!-- <em class="glyphicon glyphicon-folder-open"></em> -->
-              {{vm.mode === 'edit' ? 'Edit' : 'View'}}
-            </button>
+        <div class="px-card"
+             dir-paginate="record in vm.data | filter:q | itemsPerPage: vm.options.paginationPageSize"
+             total-items="vm.options.totalItems"
+             current-page="vm.options.paginationCurrentPage"
+             pagination-id="vm.options.paginationId">
+
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title pull-left">
+              {{ record[vm.catalog.customAttrs.titleField] || '&nbsp;'}}
+              </h3>
+              <div class="btn-group btn-group-xs pull-right">
+                <button class="btn" type="submit"
+                        ng-class="{'btn-default':(vm.mode !== 'edit'), 'btn-primary':(vm.mode === 'edit')}"
+                        ng-click="vm.openHandler({selected: record})">
+                  <!-- <em class="glyphicon glyphicon-folder-open"></em> -->
+                  {{vm.mode === 'edit' ? 'Edit' : 'View'}}
+                </button>
+              </div>
+            </div>
+            <div class="list-group">
+              <div class="list-group-item">
+                <img ng-src="{{ record[vm.catalog.customAttrs.iconField] ? '/upload/' + record[vm.catalog.customAttrs.iconField] : '/images/noimg.png' }}"
+                     class="px-card-img img-rounded pull-left">
+                <label>
+                {{ vm.catalog.customAttrs.descField1 || '&nbsp;' }}
+                </label>
+                <h5 class="list-group-item-heading">
+                {{ record[vm.catalog.customAttrs.descField1] || '&nbsp;' }}
+                </h5>
+                <label>
+                {{ vm.catalog.customAttrs.descField2 || '&nbsp;' }}
+                </label>
+                <h5 class="list-group-item-heading">
+                {{ record[vm.catalog.customAttrs.descField2]  || '&nbsp;' }}
+                </h5>
+              </div>
+            </div>
+            <!-- <div class="panel-footer clearfix">
+            </div> -->
           </div>
+
         </div>
-        <div class="list-group">
-          <div class="list-group-item">
-            <img ng-src="{{ record[vm.catalog.customAttrs.iconField] ? '/upload/' + record[vm.catalog.customAttrs.iconField] : '/images/noimg.png' }}"
-                 class="px-card-img img-rounded pull-left">
-            <label>
-            {{ vm.catalog.customAttrs.descField1 || '[No descField1 Found]' }}
-            </label>
-            <h5 class="list-group-item-heading">
-            {{ record[vm.catalog.customAttrs.descField1] || '[No descField1 Found]' }}
-            </h5>
-            <label>
-            {{ vm.catalog.customAttrs.descField2 || '[No descField2 Found]' }}
-            </label>
-            <h5 class="list-group-item-heading">
-            {{ record[vm.catalog.customAttrs.descField2]  || '[No descField2 Found]'}}
-            </h5>
-          </div>
-        </div>
-        <!-- <div class="panel-footer clearfix">
-        </div> -->
+
       </div>
+      <!-- Client side pagination -->
+      <div ng-switch-default class="flexcontainer">
 
+        <div class="px-card"
+             dir-paginate="record in vm.data | filter:q | itemsPerPage: vm.options.paginationPageSize"
+             current-page="vm.options.paginationCurrentPage"
+             pagination-id="vm.options.paginationId">
+
+          <div class="panel panel-default">
+            <div class="panel-heading clearfix">
+              <h3 class="panel-title pull-left">
+              {{ record[vm.catalog.customAttrs.titleField] || '&nbsp;' }}
+              </h3>
+              <div class="btn-group btn-group-xs pull-right">
+                <button class="btn" type="submit"
+                        ng-class="{'btn-default':(vm.mode !== 'edit'), 'btn-primary':(vm.mode === 'edit')}"
+                        ng-click="vm.openHandler({selected: record})">
+                  <!-- <em class="glyphicon glyphicon-folder-open"></em> -->
+                  {{vm.mode === 'edit' ? 'Edit' : 'View'}}
+                </button>
+              </div>
+            </div>
+            <div class="list-group">
+              <div class="list-group-item">
+                <img ng-src="{{ record[vm.catalog.customAttrs.iconField] ? '/upload/' + record[vm.catalog.customAttrs.iconField] : '/images/noimg.png' }}"
+                     class="px-card-img img-rounded pull-left">
+                <label>
+                {{ vm.catalog.customAttrs.descField1 || '&nbsp;' }}
+                </label>
+                <h5 class="list-group-item-heading">
+                {{ record[vm.catalog.customAttrs.descField1] || '&nbsp;' }}
+                </h5>
+                <label>
+                {{ vm.catalog.customAttrs.descField2 || '&nbsp;' }}
+                </label>
+                <h5 class="list-group-item-heading">
+                {{ record[vm.catalog.customAttrs.descField2]  || '&nbsp;'}}
+                </h5>
+              </div>
+            </div>
+            <!-- <div class="panel-footer clearfix">
+            </div> -->
+          </div>
+
+        </div>
+
+      </div>
     </div>
 
-  </div>
-
-  <div ng-if="!vm.data || vm.data.length === 0">
-  <h1 class="text-center">No data found!</h1>
   </div>
 
 </div>
@@ -63,7 +114,7 @@
 
   <px-pagination
     options="vm.options"
-    on-pagination-change="vm.paginationChangeHandler({newPage: newPage, newPageSize: newPageSize})">
+    ng-attr-on-pagination-change="vm.paginationChangeHandler({newPage: newPage, newPageSize: newPageSize})">
   </px-pagination>
 
 </div>
