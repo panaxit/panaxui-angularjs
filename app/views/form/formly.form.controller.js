@@ -20,6 +20,9 @@ export default class FormlyFormCtrl extends FormCtrl {
     var vm = this;
 
     vm.data = vm.$scope.model[vm.$scope.options.key] || [];
+    if(!angular.isArray(vm.data)) { // If single record
+      vm.data = [vm.data];
+    }
     vm.fields = vm.$scope.options.data.fields;
     vm.catalog = vm.$scope.options.data.catalog;
   }
