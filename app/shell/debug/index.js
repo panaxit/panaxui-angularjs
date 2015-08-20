@@ -3,8 +3,8 @@ import angular from 'angular';
 import DebugService from './debug.service';
 import DebugCtrl from './debug.controller';
 
-import jsonFormatter from 'jsonFormatter';
-import 'jsonFormatter/dist/json-formatter.css';
+import jsonFormatter from 'jsonformatter';
+import 'jsonformatter/dist/json-formatter.css';
 
 export default angular.module('app.debug', [
     DebugService,
