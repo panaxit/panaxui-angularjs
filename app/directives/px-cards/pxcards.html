@@ -18,41 +18,7 @@
              current-page="vm.options.paginationCurrentPage"
              pagination-id="vm.options.paginationId">
 
-          <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-              <h3 class="panel-title pull-left">
-              {{ record[vm.catalog.customAttrs.titleField] || '&nbsp;'}}
-              </h3>
-              <div class="btn-group btn-group-xs pull-right">
-                <button class="btn" type="submit"
-                        ng-class="{'btn-default':(vm.mode !== 'edit'), 'btn-primary':(vm.mode === 'edit')}"
-                        ng-click="vm.openHandler({selected: record})">
-                  <!-- <em class="glyphicon glyphicon-folder-open"></em> -->
-                  {{vm.mode === 'edit' ? 'Edit' : 'View'}}
-                </button>
-              </div>
-            </div>
-            <div class="list-group">
-              <div class="list-group-item">
-                <img ng-src="{{ record[vm.catalog.customAttrs.iconField] ? '/upload/' + record[vm.catalog.customAttrs.iconField] : '/images/noimg.png' }}"
-                     class="px-card-img img-rounded pull-left">
-                <label>
-                {{ vm.catalog.customAttrs.descField1 || '&nbsp;' }}
-                </label>
-                <h5 class="list-group-item-heading">
-                {{ record[vm.catalog.customAttrs.descField1] || '&nbsp;' }}
-                </h5>
-                <label>
-                {{ vm.catalog.customAttrs.descField2 || '&nbsp;' }}
-                </label>
-                <h5 class="list-group-item-heading">
-                {{ record[vm.catalog.customAttrs.descField2]  || '&nbsp;' }}
-                </h5>
-              </div>
-            </div>
-            <!-- <div class="panel-footer clearfix">
-            </div> -->
-          </div>
+          <ng-include src="'pxcards-layout'"></ng-include>
 
         </div>
 
@@ -65,41 +31,7 @@
              current-page="vm.options.paginationCurrentPage"
              pagination-id="vm.options.paginationId">
 
-          <div class="panel panel-default">
-            <div class="panel-heading clearfix">
-              <h3 class="panel-title pull-left">
-              {{ record[vm.catalog.customAttrs.titleField] || '&nbsp;' }}
-              </h3>
-              <div class="btn-group btn-group-xs pull-right">
-                <button class="btn" type="submit"
-                        ng-class="{'btn-default':(vm.mode !== 'edit'), 'btn-primary':(vm.mode === 'edit')}"
-                        ng-click="vm.openHandler({selected: record})">
-                  <!-- <em class="glyphicon glyphicon-folder-open"></em> -->
-                  {{vm.mode === 'edit' ? 'Edit' : 'View'}}
-                </button>
-              </div>
-            </div>
-            <div class="list-group">
-              <div class="list-group-item">
-                <img ng-src="{{ record[vm.catalog.customAttrs.iconField] ? '/upload/' + record[vm.catalog.customAttrs.iconField] : '/images/noimg.png' }}"
-                     class="px-card-img img-rounded pull-left">
-                <label>
-                {{ vm.catalog.customAttrs.descField1 || '&nbsp;' }}
-                </label>
-                <h5 class="list-group-item-heading">
-                {{ record[vm.catalog.customAttrs.descField1] || '&nbsp;' }}
-                </h5>
-                <label>
-                {{ vm.catalog.customAttrs.descField2 || '&nbsp;' }}
-                </label>
-                <h5 class="list-group-item-heading">
-                {{ record[vm.catalog.customAttrs.descField2]  || '&nbsp;'}}
-                </h5>
-              </div>
-            </div>
-            <!-- <div class="panel-footer clearfix">
-            </div> -->
-          </div>
+          <ng-include src="'pxcards-layout'"></ng-include>
 
         </div>
 
@@ -118,3 +50,41 @@
   </px-pagination>
 
 </div>
+
+<script type="text/ng-template" id="pxcards-layout">
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <h3 class="panel-title pull-left">
+    {{ record[vm.catalog.customAttrs.titleField] || '&nbsp;'}}
+    </h3>
+    <div class="btn-group btn-group-xs pull-right">
+      <button class="btn" type="submit"
+              ng-class="{'btn-default':(vm.mode !== 'edit'), 'btn-primary':(vm.mode === 'edit')}"
+              ng-click="vm.openHandler({selected: record})">
+        <!-- <em class="glyphicon glyphicon-folder-open"></em> -->
+        {{vm.mode === 'edit' ? 'Edit' : 'View'}}
+      </button>
+    </div>
+  </div>
+  <div class="list-group">
+    <div class="list-group-item">
+      <img ng-src="{{ record[vm.catalog.customAttrs.iconField] ? '/upload/' + record[vm.catalog.customAttrs.iconField] : '/images/noimg.png' }}"
+           class="px-card-img img-rounded pull-left">
+      <label>
+      {{ vm.catalog.customAttrs.descField1 || '&nbsp;' }}
+      </label>
+      <h5 class="list-group-item-heading">
+      {{ record[vm.catalog.customAttrs.descField1] || '&nbsp;' }}
+      </h5>
+      <label>
+      {{ vm.catalog.customAttrs.descField2 || '&nbsp;' }}
+      </label>
+      <h5 class="list-group-item-heading">
+      {{ record[vm.catalog.customAttrs.descField2]  || '&nbsp;' }}
+      </h5>
+    </div>
+  </div>
+  <!-- <div class="panel-footer clearfix">
+  </div> -->
+</div>
+</script>

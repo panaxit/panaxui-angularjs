@@ -1,6 +1,6 @@
 <!-- hack fix: https://github.com/michaelbromley/angularUtils/issues/157 -->
 <div ng-switch on="vm.asyncPagination">
-  <!-- Server side pagination -->
+  <!-- Server side pagination (with total-items)-->
   <div ng-switch-when="true">
 
     <div dir-paginate="record in vm.data | itemsPerPage: vm.options.paginationPageSize"
@@ -8,65 +8,19 @@
          current-page="vm.options.paginationCurrentPage"
          pagination-id="vm.options.paginationId">
 
-        <fieldset ng-repeat="fieldset in vm.fields | filter:{type:'fieldset'}">
-          <formly-form model="record"
-                       fields="fieldset.fields"
-                       ng-attr-form="vm.form"
-                       heading="{{fieldset.title}}"
-                       active="fieldset.active"
-                       disable="fieldset.disabled">
-          </formly-form>
-        </fieldset>
-
-        <tabset ng-repeat="tabpanel in vm.fields | filter:{type:'tabpanel'}">
-          <tab ng-repeat="tab in tabpanel.tabs | filter:{type:'tab'}"
-               heading="{{tab.title}}"
-               active="tab.active"
-               disable="tab.disabled">
-
-              <formly-form
-                        model="record"
-                        fields="tab.fields"
-                        ng-attr-form="vm.form">
-              </formly-form>
-
-          </tab>
-        </tabset>
+      <ng-include src="'pxform-layout'"></ng-include>
 
     </div>
 
   </div>
-  <!-- Client side pagination -->
+  <!-- Client side pagination (without total-items)-->
   <div ng-switch-default>
 
     <div dir-paginate="record in vm.data | itemsPerPage: vm.options.paginationPageSize"
          current-page="vm.options.paginationCurrentPage"
          pagination-id="vm.options.paginationId">
 
-        <fieldset ng-repeat="fieldset in vm.fields | filter:{type:'fieldset'}">
-          <formly-form model="record"
-                       fields="fieldset.fields"
-                       ng-attr-form="vm.form"
-                       heading="{{fieldset.title}}"
-                       active="fieldset.active"
-                       disable="fieldset.disabled">
-          </formly-form>
-        </fieldset>
-
-        <tabset ng-repeat="tabpanel in vm.fields | filter:{type:'tabpanel'}">
-          <tab ng-repeat="tab in tabpanel.tabs | filter:{type:'tab'}"
-               heading="{{tab.title}}"
-               active="tab.active"
-               disable="tab.disabled">
-
-              <formly-form
-                        model="record"
-                        fields="tab.fields"
-                        ng-attr-form="vm.form">
-              </formly-form>
-
-          </tab>
-        </tabset>
+      <ng-include src="'pxform-layout'"></ng-include>
 
     </div>
 
@@ -81,3 +35,30 @@
   </px-pagination>
 
 </div>
+
+<script type="text/ng-template" id="pxform-layout">
+  <fieldset ng-repeat="fieldset in vm.fields | filter:{type:'fieldset'}">
+    <formly-form model="record"
+                 fields="fieldset.fields"
+                 ng-attr-form="vm.form"
+                 heading="{{fieldset.title}}"
+                 active="fieldset.active"
+                 disable="fieldset.disabled">
+    </formly-form>
+  </fieldset>
+
+  <tabset ng-repeat="tabpanel in vm.fields | filter:{type:'tabpanel'}">
+    <tab ng-repeat="tab in tabpanel.tabs | filter:{type:'tab'}"
+         heading="{{tab.title}}"
+         active="tab.active"
+         disable="tab.disabled">
+
+        <formly-form
+                  model="record"
+                  fields="tab.fields"
+                  ng-attr-form="vm.form">
+        </formly-form>
+
+    </tab>
+  </tabset>
+</script>
