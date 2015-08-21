@@ -1,5 +1,7 @@
 import angular from 'angular';
 
+import './pxform.css';
+
 import formly from 'angular-formly';
 import formlyBootstrap from 'angular-formly-templates-bootstrap';
 import pxPagination from '../../directives/px-pagination';

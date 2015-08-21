@@ -8,7 +8,7 @@
          current-page="vm.options.paginationCurrentPage"
          pagination-id="vm.options.paginationId">
 
-      <ng-include src="'pxform-layout'"></ng-include>
+      <ng-include src="'pxform-layout'" class="pxrecord"></ng-include>
 
     </div>
 
@@ -37,7 +37,8 @@
 </div>
 
 <script type="text/ng-template" id="pxform-layout">
-  <fieldset ng-repeat="fieldset in vm.fields | filter:{type:'fieldset'}">
+
+  <fieldset ng-repeat="fieldset in vm.fields | filter:{type:'fieldset'}" class="pxrecord">
     <formly-form model="record"
                  fields="fieldset.fields"
                  ng-attr-form="vm.form"
@@ -61,4 +62,5 @@
 
     </tab>
   </tabset>
+
 </script>
