@@ -19,7 +19,7 @@ function pxGrid() {
     },
     bindToController: true,
     controllerAs: 'vm',
-    controller: function ($scope) {
+    controller: function ($scope, uiGridConstants) {
       var vm = this;
 
       // Default options
@@ -28,6 +28,7 @@ function pxGrid() {
       vm.options.enablePaginationControls = false;
       vm.options.rowHeight = 32;
       vm.options.showGridFooter = false;
+      vm.options.enableFiltering = true;
       //vm.options.selectionRowHeaderWidth= 32;
       vm.options.onRegisterApi = function(gridApi) {
         vm.gridApi = gridApi;
@@ -45,6 +46,19 @@ function pxGrid() {
         if(newGrid) {
           // Column Defs
           vm.options.columnDefs = newGrid.columnDefs;
+          vm.options.columnDefs.forEach(function (colDef, index) {
+            colDef.enableFiltering = false;
+            colDef.menuItems = [
+              {
+                title: 'Toggle Filter',
+                icon: 'ui-grid-icon-filter',
+                action: function() {
+                  this.context.col.colDef.enableFiltering = !this.context.col.colDef.enableFiltering;
+                  this.grid.api.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+                }
+              }
+            ];
+          });
           vm.options.columnDefs.push({
             name: 'px-actions',
             displayName: '⚡',
@@ -57,6 +71,9 @@ function pxGrid() {
             enableHiding: false,
             enableSorting: false,
           });
+          // Notify all watchers
+          // http://ui-grid.info/docs/#/api/ui.grid.class:Grid#methods_notifydatachange
+          vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
         }
       });
 
