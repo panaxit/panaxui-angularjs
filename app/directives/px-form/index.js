@@ -26,7 +26,7 @@ function pxForm() {
       // Default options
       vm.options = {};
       vm.options.paginationPageSizes = [1, 2, 3, 5, 8, 13];
-      vm.options.paginationId = 'pagination' + (Math.floor(Math.random() * (1000 - 1)) + 1);
+      vm.options.paginationId = 'pagination' + getRandomInt(0, 9999);
 
       $scope.$watch('vm.catalog', function(newCatalog) {
         if(newCatalog) {
@@ -44,6 +44,10 @@ function pxForm() {
           }
         }
       });
+
+      function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
     }
   };
 }
