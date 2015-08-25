@@ -38,7 +38,7 @@
 
 <script type="text/ng-template" id="pxform-layout">
 
-  <fieldset ng-repeat="fieldset in vm.fields | filter:{type:'fieldset'}" class="pxrecord">
+  <fieldset ng-repeat="fieldset in vm.fields[$index] | filter:{type:'fieldset'}" class="pxrecord">
     <formly-form model="record"
                  fields="fieldset.fields"
                  ng-attr-form="vm.form"
@@ -48,7 +48,7 @@
     </formly-form>
   </fieldset>
 
-  <tabset ng-repeat="tabpanel in vm.fields | filter:{type:'tabpanel'}">
+  <tabset ng-repeat="tabpanel in vm.fields[$index] | filter:{type:'tabpanel'}">
     <tab ng-repeat="tab in tabpanel.tabs | filter:{type:'tab'}"
          heading="{{tab.title}}"
          active="tab.active"

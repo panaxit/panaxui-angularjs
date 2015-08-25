@@ -112,7 +112,7 @@ export default class FormCtrl {
             if(res.data[0].status === 'error') {
               vm.AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
             } else if(res.data[0].status === 'success') {
-              vm.AlertService.show('success', 'Saved', 'Record successfully saved');
+              vm.AlertService.show('success', 'Saved', 'Record(s) successfully saved');
               // Go to 'edit' mode of newly created record
               vm.$scope.$emit('goToState', 'main.panel.form', {
                 catalogName: res.data[0].tableName,
@@ -134,7 +134,7 @@ export default class FormCtrl {
             if(res.data[0].status === 'error') {
               vm.AlertService.show('danger', 'Error', res.data[0].statusMessage + ' [statusId: ' + res.data[0].statusId + ']');
             } else if(res.data[0].status === 'success') {
-              vm.AlertService.show('success', 'Saved', 'Record successfully saved');
+              vm.AlertService.show('success', 'Saved', 'Record(s) successfully updated');
               // Reset form to untouched & pristine
               // vm.onReset
               vm.form.$setPristine();

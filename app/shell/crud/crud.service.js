@@ -90,10 +90,10 @@ class CRUDService {
      * Create data table payload to be sent
      * Used by: Form
      */
-    vm.buildPersistPayload = function(form, model, catalog) {
+    vm.buildPersistPayload = function(fields, model, catalog) {
 
-      var dirtyFieldsIterator = function(obj, dirty_model, orig_model) {
-        angular.forEach(obj, function (el) {
+      var dirtyFieldsIterator = function(fields, dirty_model, orig_model) {
+        angular.forEach(fields, function (el) {
           // fieldset / tab
           if(el.fields) {
             dirtyFieldsIterator(el.fields, dirty_model, orig_model);
@@ -110,12 +110,19 @@ class CRUDService {
               identityKey: el.data.catalog.identityKey,
               foreignReference: el.data.catalog.foreignReference
             };
-            if(el.data.catalog.mode === 'insert') {
-              dirty_model[el.key].insertRows = [{}];
-              dirtyFieldsIterator(el.data.fields, dirty_model[el.key].insertRows[0], orig_model[el.key]);
-            } else if(el.data.catalog.mode === 'edit') {
-              dirty_model[el.key].updateRows = [{}];
-              dirtyFieldsIterator(el.data.fields, dirty_model[el.key].updateRows[0], orig_model[el.key]);
+            var rowsType;
+            if(el.data.catalog.mode === 'insert') rowsType = 'insertRows';
+            if(el.data.catalog.mode === 'edit') rowsType = 'updateRows';
+            if(angular.isObject(orig_model[el.key])) {
+              dirty_model[el.key][rowsType] = [{}];
+              dirtyFieldsIterator(el.data.fields[0], dirty_model[el.key][rowsType][0], orig_model[el.key]);
+            } else if (isArray(orig_model[el.key])) {
+              dirty_model[el.key][rowsType] = [];
+              orig_model[el.key].forEach((record, index) => {
+                var row = {};
+                dirtyFieldsIterator(el.data.fields[index], row, record);
+                dirty_model[el.key][rowsType].push(row);
+              });
             }
           }
           // fieldGroup (async_select, ...)
@@ -136,16 +143,26 @@ class CRUDService {
       };
 
       if(catalog.mode === 'insert') {
-        payload.insertRows = [{}];
-        dirtyFieldsIterator(form, payload.insertRows[0], model[0]);
+        payload.insertRows = [];
+        model.forEach((record, index) => {
+          var row = {};
+          dirtyFieldsIterator(fields[index], row, record);
+          payload.insertRows.push(row);
+        });
       } else if(catalog.mode === 'edit') {
-        payload.updateRows = [{}];
-        dirtyFieldsIterator(form, payload.updateRows[0], model[0]);
-        // Set primaryKey and/or identityKey as DataRow with current value
-        if(!!payload.primaryKey)
-          payload.updateRows[0][payload.primaryKey] = model[0][payload.primaryKey];
-        if(!!payload.identityKey)
-          payload.updateRows[0][payload.identityKey] = model[0][payload.identityKey];
+        payload.updateRows = [];
+        model.forEach((record, index) => {
+          var row = {};
+          dirtyFieldsIterator(fields[index], row, record);
+          // Set primaryKey and/or identityKey as DataRow with current value
+          if(!!payload.primaryKey) {
+            row[payload.primaryKey] = record[payload.primaryKey];
+          }
+          if(!!payload.identityKey) {
+            row[payload.identityKey] = record[payload.identityKey];
+          }
+          payload.updateRows.push(row);
+        });
       }
 
       return payload;
