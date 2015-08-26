@@ -41,7 +41,10 @@ export default class FormCtrl {
     };
     if(vm.$stateParams.id) {
       // Fallback options
-      var idKey = vm.$stateParams.identityKey || vm.$stateParams.primaryKey || 'id';
+      var idKey = vm.$stateParams.identityKey
+               || vm.$stateParams.primaryKey
+               || '$identity' // Supported in SQL Server only for tables
+               || 'id';       // Last resort
       params.filters += '[' + idKey + '=' + vm.$stateParams.id + ']';
     }
     vm.CRUDService.read(params).then(function (res) {
