@@ -1,5 +1,4 @@
 import angular from 'angular';
-import _ from 'lodash/collection';
 
 import uigrid from 'angular-ui-grid/ui-grid.js';
 import 'angular-ui-grid/ui-grid.css';
@@ -82,13 +81,14 @@ function pxGrid() {
       $scope.$watch('vm.catalog', function(newCatalog) {
         if(newCatalog) {
           // Selection
-          _.forEach([
+          debugger;
+          angular.forEach([
             'enableRowSelection',
             'enableRowHeaderSelection',
             'multiSelect',
             'enableSelectAll'
           ], (k) => {
-            vm.options[k] = _.includes(newCatalog.mode, 'edit', 'browse');
+            vm.options[k] = (['edit', 'browse'].indexOf(newCatalog.mode)>-1);
           });
           // Row edit
           vm.options.enableCellEdit = _.includes(newCatalog.mode, 'edit');
