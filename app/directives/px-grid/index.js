@@ -1,4 +1,5 @@
 import angular from 'angular';
+import _ from 'lodash/collection';
 
 import uigrid from 'angular-ui-grid/ui-grid.js';
 import 'angular-ui-grid/ui-grid.css';
@@ -24,12 +25,13 @@ function pxGrid() {
 
       // Default options
       vm.options = {};
-      vm.options.paginationPageSizes = [5, 10, 25, 50, 100, 500];
-      vm.options.enablePaginationControls = false;
       vm.options.rowHeight = 32;
       vm.options.showGridFooter = false;
       vm.options.enableFiltering = true;
-      //vm.options.selectionRowHeaderWidth= 32;
+      // Pagination defaults
+      vm.options.paginationPageSizes = [5, 10, 25, 50, 100, 500];
+      vm.options.enablePaginationControls = false;
+      // On Register API callback
       vm.options.onRegisterApi = function(gridApi) {
         vm.gridApi = gridApi;
         // Row edit
@@ -71,19 +73,25 @@ function pxGrid() {
             enableHiding: false,
             enableSorting: false,
           });
-          // Notify all watchers
-          // http://ui-grid.info/docs/#/api/ui.grid.class:Grid#methods_notifydatachange
-          vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
         }
+        // Notify all watchers
+        // http://ui-grid.info/docs/#/api/ui.grid.class:Grid#methods_notifydatachange
+        vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
       });
 
       $scope.$watch('vm.catalog', function(newCatalog) {
         if(newCatalog) {
-          vm.options.enableRowSelection = (newCatalog.mode === 'edit');
-          //vm.options.multiSelect = (newCatalog.mode === 'edit'),
-          //vm.options.enableSelectAll = (newCatalog.mode === 'edit'),
+          // Selection
+          _.forEach([
+            'enableRowSelection',
+            'enableRowHeaderSelection',
+            'multiSelect',
+            'enableSelectAll'
+          ], (k) => {
+            vm.options[k] = _.includes(newCatalog.mode, 'edit', 'browse');
+          });
           // Row edit
-          vm.options.enableCellEdit = (newCatalog.mode === 'edit');
+          vm.options.enableCellEdit = _.includes(newCatalog.mode, 'edit');
           // External Pagination
           if(newCatalog.totalItems) {
             vm.options.useExternalPagination = true;
@@ -92,6 +100,8 @@ function pxGrid() {
             vm.options.paginationCurrentPage = newCatalog.pageIndex;
           }
         }
+        // Notify data change
+        vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
       });
 
       $scope.$watch('vm.data', function(newData) {
