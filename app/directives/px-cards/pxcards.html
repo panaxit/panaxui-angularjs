@@ -51,18 +51,43 @@
 
 </div>
 
+<div class="panel-footer" ng-if="vm.mode == 'browse'">
+  <div class="pull-left">
+    {{vm.selectedRecords.length}} record(s) selected
+  </div>
+  <div class="btn-toolbar">
+    <div class="pull-right">
+      <div class="btn-group btn-group-md">
+        <button class="btn btn-primary" type="submit"
+          ng-click="vm.nextHandler({selected: vm.selectedRecords})"
+          ng-disabled="!vm.selectedRecords.length">
+          <em class="glyphicon glyphicon-arrow-right"></em>
+          Edit <!-- ToDo: PanaxDB Routes -->
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 <script type="text/ng-template" id="pxcards-layout">
-<div class="panel panel-default">
+<div class="panel" ng-class="(vm.selectedRecords.indexOf(record)>=0) ? 'panel-primary' : 'panel-default'">
   <div class="panel-heading clearfix">
     <h3 class="panel-title pull-left">
     {{ record[vm.catalog.customAttrs.titleField] || '&nbsp;'}}
     </h3>
     <div class="btn-group btn-group-xs pull-right">
       <button class="btn" type="submit"
-              ng-class="{'btn-default':(vm.mode !== 'edit'), 'btn-primary':(vm.mode === 'edit')}"
-              ng-click="vm.openHandler({selected: record})">
-        <!-- <em class="glyphicon glyphicon-folder-open"></em> -->
-        {{vm.mode === 'edit' ? 'Edit' : 'View'}}
+              ng-class="{
+                'btn-primary':(vm.mode === 'edit'),
+                'btn-default':(vm.mode !== 'edit')
+              }"
+              ng-click="vm.onClick(record)">
+        {{vm.mode === 'edit' ? 'Edit' : ''}}
+        {{vm.mode === 'readonly' ? 'View' : ''}}
+        {{vm.mode === 'browse' ? '' : ''}}
+        <em ng-if="vm.mode === 'browse' && vm.selectedRecords.indexOf(record)==-1" class="glyphicon glyphicon-ok"></em>
+        <em ng-if="vm.mode === 'browse' && vm.selectedRecords.indexOf(record)>=0" class="glyphicon glyphicon-remove"></em>
       </button>
     </div>
   </div>

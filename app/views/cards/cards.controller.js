@@ -66,6 +66,26 @@ export default class CardsCtrl {
     var vm = this;
     vm.loader(newPage, newPageSize);
   }
+
+  onNext(selected) {
+    var vm = this;
+    var len = selected.length,
+        idKey = vm.catalog.identityKey || vm.catalog.primaryKey,
+        filters = '[' + idKey + ' IN (';
+    angular.forEach(selected, function(row, index) {
+      filters += `'${row[idKey]}'`;
+      if(index !== len-1) {
+        filters += ', ';
+      }
+    });
+    filters += ')]';
+    // ToDo: PanaxDB Routes
+    vm.$scope.$emit('goToState', 'main.panel.form', {
+      catalogName: vm.catalog.catalogName,
+      mode: 'edit',
+      filters: filters
+    });
+  }
 }
 
 CardsCtrl.$inject = ['$scope', '$stateParams', 'CRUDService', 'DebugService'];

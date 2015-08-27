@@ -12,6 +12,7 @@ function pxCards() {
       catalog: '=',
       cards: '=',
       openHandler: '&',
+      nextHandler: '&',
       asyncPagination: '@?',
       paginationChangeHandler: '&?'
     },
@@ -24,6 +25,8 @@ function pxCards() {
       vm.options = {};
       vm.options.paginationPageSizes = [4, 8, 16, 32, 64, 128];
       vm.options.paginationId = 'pagination' + (Math.floor(Math.random() * (1000 - 1)) + 1);
+
+      vm.selectedRecords = [];
 
       $scope.$watch('vm.catalog', function(newCatalog) {
         if(newCatalog) {
@@ -41,6 +44,19 @@ function pxCards() {
           }
         }
       });
+
+      vm.onClick = function(record) {
+        if (['edit', 'readonly'].indexOf(vm.mode) > -1) {
+          vm.openHandler({selected: record});
+        } else if (vm.mode === 'browse') {
+          var index = vm.selectedRecords.indexOf(record);
+          if(index > -1) {
+            vm.selectedRecords.splice(index, 1);
+          } else {
+            vm.selectedRecords.push(record);
+          }
+        }
+      };
     }
   };
 }
