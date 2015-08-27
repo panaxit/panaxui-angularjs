@@ -15,7 +15,8 @@ function pxGrid() {
       newHandler: '&',
       deleteHandler: '&',
       paginationChangeHandler: '&',
-      rowChangePromise: '&'
+      rowChangePromise: '&',
+      nextHandler: '&'
     },
     bindToController: true,
     controllerAs: 'vm',
@@ -60,18 +61,6 @@ function pxGrid() {
               }
             ];
           });
-          vm.options.columnDefs.push({
-            name: 'px-actions',
-            displayName: '⚡',
-            type: 'object',
-            cellTemplate: require('./pxgrid.row.actions.html'),
-            width: '34',
-            enableCellEdit: false,
-            enableColumnMenus: false,
-            enableFiltering: false,
-            enableHiding: false,
-            enableSorting: false,
-          });
         }
         // Notify all watchers
         // http://ui-grid.info/docs/#/api/ui.grid.class:Grid#methods_notifydatachange
@@ -81,17 +70,31 @@ function pxGrid() {
       $scope.$watch('vm.catalog', function(newCatalog) {
         if(newCatalog) {
           // Selection
-          debugger;
-          angular.forEach([
-            'enableRowSelection',
-            'enableRowHeaderSelection',
-            'multiSelect',
-            'enableSelectAll'
-          ], (k) => {
-            vm.options[k] = (['edit', 'browse'].indexOf(newCatalog.mode)>-1);
-          });
+          var pxSelectionEnabled = (['edit', 'browse'].indexOf(newCatalog.mode) > -1);
+          vm.options.enableRowSelection = pxSelectionEnabled;
+          vm.options.enableRowHeaderSelection = pxSelectionEnabled;
+          vm.options.multiSelect = pxSelectionEnabled;
+          vm.options.enableSelectAll = pxSelectionEnabled;
           // Row edit
-          vm.options.enableCellEdit = _.includes(newCatalog.mode, 'edit');
+          var pxRowEditEnabled = (['edit'].indexOf(newCatalog.mode) > -1);
+          vm.options.enableCellEdit = pxRowEditEnabled;
+          // Row actions
+          if(['edit', 'readonly'].indexOf(newCatalog.mode) > -1) {
+            vm.options.columnDefs.push({
+              name: 'px-actions',
+              displayName: '⚡',
+              type: 'object',
+              cellTemplate: require('./pxgrid.row.actions.html'),
+              width: '34',
+              enableCellEdit: false,
+              enableColumnMenus: false,
+              enableFiltering: false,
+              enableHiding: false,
+              enableSorting: false,
+            });
+            // Notify column change
+            vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+          }
           // External Pagination
           if(newCatalog.totalItems) {
             vm.options.useExternalPagination = true;
@@ -100,7 +103,7 @@ function pxGrid() {
             vm.options.paginationCurrentPage = newCatalog.pageIndex;
           }
         }
-        // Notify data change
+        // Notify options change
         vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
       });
 
