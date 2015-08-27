@@ -48,15 +48,15 @@ export default class GridCtrl {
     });
   }
 
-  onOpen(selected, catalog) {
+  onOpen(selected) {
     var vm = this;
-    var idType = (!!catalog.identityKey) ? 'identityKey' : 'primaryKey';
-    var idKey = catalog[idType];
+    var idType = (!!vm.catalog.identityKey) ? 'identityKey' : 'primaryKey';
+    var idKey = vm.catalog[idType];
     var idValue = selected[idKey];
 
     vm.$scope.$emit('goToState', 'main.panel.form', {
-      catalogName: catalog.catalogName,
-      mode: catalog.mode,
+      catalogName: vm.catalog.catalogName,
+      mode: vm.catalog.mode,
       [idType]: idKey,
       id: idValue
     });
@@ -70,16 +70,16 @@ export default class GridCtrl {
     });
   }
 
-  onDelete(selected, catalog) {
+  onDelete(selected) {
     var vm = this;
     if(confirm("Are your sure to Delete selected record(s)?")) {
      /**
       * Create payload to be sent
       */
      var payload = {
-       tableName: catalog.catalogName,
-       primaryKey: catalog.primaryKey,
-       identityKey: catalog.identityKey
+       tableName: vm.catalog.catalogName,
+       primaryKey: vm.catalog.primaryKey,
+       identityKey: vm.catalog.identityKey
      };
 
      // Set DeleteRows
@@ -87,8 +87,8 @@ export default class GridCtrl {
 
      // Set primaryKey and/or identityKey as DeleteRows
      angular.forEach(selected, function(row, index) {
-       var identifier = row[catalog.primaryKey] ||
-                        row[catalog.identityKey];
+       var identifier = row[vm.catalog.primaryKey] ||
+                        row[vm.catalog.identityKey];
 
        payload.deleteRows[index] = {};
        if(payload.primaryKey)
