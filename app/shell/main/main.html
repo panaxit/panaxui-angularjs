@@ -12,9 +12,9 @@
 			<!-- <a class="navbar-brand" ui-sref="main.home">
 			<img alt="PanaxUI-NG" src="images/logo_fff_small.png" height="20">
 			</a> -->
-			<a class="navbar-brand" href ng-click="vm.selectHome()">
-			PANAX
-			</a>
+      <a class="navbar-brand" href ng-click="vm.selectHome()">
+        <strong>PANAX</strong>&nbsp;&nbsp;&nbsp; {{vm.currentUser.db.database}}
+      </a>
 		</div>
 
 		<div class="navbar-collapse collapse" id="navbar">
@@ -66,16 +66,18 @@
         <input type="text" class="form-control" placeholder="search..." ng-model="vm.treeSearch">
         </div>
 
-        <!-- Directive: angular-tree-control -->
-        <treecontrol class="pxTree"
-           tree-model="vm.treeData"
-           options="vm.treeOptions"
-           on-selection="vm.onSelection(node)"
-           filter-expression="vm.treeSearch"
-           selected-node="vm.treeSelected"
-           expanded-nodes="vm.treeExpanded">
-           {{node.label}}
-        </treecontrol>
+        <div class="pxTree">
+          <!-- Directive: angular-tree-control -->
+          <treecontrol
+             tree-model="vm.treeData"
+             options="vm.treeOptions"
+             on-selection="vm.onSelection(node)"
+             filter-expression="vm.treeSearch"
+             selected-node="vm.treeSelected"
+             expanded-nodes="vm.treeExpanded">
+             <span ng-class="{ pxTreeRoot: !$parentNode }">{{node.label}}</span>
+          </treecontrol>
+        </div>
 
       </div>
 

@@ -7,7 +7,7 @@
 
 /* Nav Brand */
 a.navbar-brand {
-  font-weight: bold;
+  /*font-weight: bold;*/
 }
 
 /*
@@ -15,6 +15,7 @@ angular-tree-control
  */
 
 .pxTree {
+  margin: 4px 0 4px 0;
 }
 
 .tree-expanded {

@@ -7,7 +7,6 @@ export default class MainCtrl {
 		/**********************
 		 * Nav-Tree & Sitemap *
 		 **********************/
-		vm.treeData = [];
     vm.treeOptions = {
       nodeChildren: "children",
       dirSelectable: true,
@@ -17,17 +16,13 @@ export default class MainCtrl {
           iLeaf: "glyphicon glyphicon-file"
       }
     };
-    vm.treeSelected = vm.treeData[0];
     vm.selectHome = function() {
-      vm.onSelection(vm.treeData[0]);
+      vm.goToState('main.home');
     };
 		// Populate nav-tree with sitemap data
 		AuthService.sitemap().then(function(res) {
-			vm.treeData.push({
-        label: vm.currentUser.db && vm.currentUser.db.database || 'Home',
-        children: res.data
-      });
-      vm.treeExpanded = [vm.treeData[0]];
+			vm.treeData = res.data;
+      vm.treeExpanded = [vm.treeData];
 		});
     vm.onSelection = function(node) {
       $scope.$emit('goToBranch', node);
@@ -45,9 +40,6 @@ export default class MainCtrl {
 		// Go to state of selected branch (nav-tree)
 		$scope.$on('goToBranch', function (event, branch) {
       $rootScope.currentNavBranch = branch;
-      if (branch === vm.treeData[0]) {
-        return vm.goToState('main.home');
-      }
       if (branch.children && branch.children.length) {
         return vm.goToState('main.panel.category', {
           name: urlifyFilter(branch.label)
