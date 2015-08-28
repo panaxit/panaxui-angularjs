@@ -22,7 +22,7 @@ export default class FormCtrl {
     var vm = this;
     vm.DebugService.show({
       catalog: vm.catalog,
-      form: vm.fields,
+      fields: vm.fields,
       model: vm.data
     });
   }
