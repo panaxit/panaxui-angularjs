@@ -21,7 +21,7 @@ export default class FormlyGridCtrl extends GridCtrl {
     var vm = this;
 
     vm.data = vm.$scope.model[vm.$scope.options.key] || [];
-    vm.grid = vm.$scope.options.data.grid;
+    vm.fields = vm.$scope.options.data.fields;
     vm.catalog = vm.$scope.options.data.catalog;
   }
 }

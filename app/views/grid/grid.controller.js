@@ -23,7 +23,7 @@ export default class GridCtrl {
     var vm = this;
     vm.DebugService.show({
       catalog: vm.catalog,
-      grid: vm.grid,
+      fields: vm.fields,
       model: vm.data
     });
   }
@@ -43,7 +43,7 @@ export default class GridCtrl {
     vm.CRUDService.read(params).then(function (res) {
       vm.catalog = res.data.catalog;
       vm.data = res.data.model || [];
-      vm.grid = res.data.grid;
+      vm.fields = res.data.fields;
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
   }

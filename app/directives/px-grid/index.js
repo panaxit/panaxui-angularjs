@@ -10,7 +10,7 @@ function pxGrid() {
     scope: {
       catalog: '=',
       data: '=',
-      grid: '=',
+      fields: '=',
       openHandler: '&',
       newHandler: '&',
       deleteHandler: '&',
@@ -44,7 +44,7 @@ function pxGrid() {
         });
       };
 
-      $scope.$watch('vm.grid', function(newGrid) {
+      $scope.$watch('vm.fields', function(newGrid) {
         if(newGrid) {
           // Column Defs
           vm.options.columnDefs = newGrid.columnDefs;

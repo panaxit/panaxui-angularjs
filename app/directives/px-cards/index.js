@@ -10,7 +10,7 @@ function pxCards() {
       mode: '@',
       data: '=',
       catalog: '=',
-      cards: '=',
+      fields: '=',
       openHandler: '&',
       nextHandler: '&',
       asyncPagination: '@?',
