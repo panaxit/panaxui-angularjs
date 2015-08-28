@@ -7,10 +7,7 @@ export default class MainCtrl {
 		/**********************
 		 * Nav-Tree & Sitemap *
 		 **********************/
-		vm.treeData = [{
-			label: 'Home'
-			//children: []
-		}];
+		vm.treeData = [];
     vm.treeOptions = {
       nodeChildren: "children",
       dirSelectable: true,
@@ -26,7 +23,10 @@ export default class MainCtrl {
     };
 		// Populate nav-tree with sitemap data
 		AuthService.sitemap().then(function(res) {
-			vm.treeData[0].children = res.data;
+			vm.treeData.push({
+        label: vm.currentUser.db && vm.currentUser.db.database || 'Home',
+        children: res.data
+      });
       vm.treeExpanded = [vm.treeData[0]];
 		});
     vm.onSelection = function(node) {
@@ -45,6 +45,14 @@ export default class MainCtrl {
 		// Go to state of selected branch (nav-tree)
 		$scope.$on('goToBranch', function (event, branch) {
       $rootScope.currentNavBranch = branch;
+      if (branch === vm.treeData[0]) {
+        return vm.goToState('main.home');
+      }
+      if (branch.children && branch.children.length) {
+        return vm.goToState('main.panel.category', {
+          name: urlifyFilter(branch.label)
+        });
+      }
       // Reset inherited query parameters
       // https://github.com/angular-ui/ui-router/wiki/Quick-Reference#toparams
       branch.data.id = branch.data.id || undefined;
@@ -53,19 +61,13 @@ export default class MainCtrl {
       branch.data.filters = branch.data.filters || undefined;
       branch.data.pageSize = branch.data.pageSize || undefined;
       branch.data.pageIndex = branch.data.pageIndex || undefined;
-      //goToState
-			if (branch === vm.treeData[0])
-				vm.goToState('main.home');
-      else if (branch.children && branch.children.length)
-				vm.goToState('main.panel.category', {
-					name: urlifyFilter(branch.label)
-				});
-      else if (branch.data.controlType === 'gridView')
-				vm.goToState('main.panel.grid', branch.data);
-      else if (branch.data.controlType === 'formView')
-        vm.goToState('main.panel.form', branch.data);
-      else if (branch.data.controlType === 'cardsView')
-        vm.goToState('main.panel.cards', branch.data);
+			if (branch.data.controlType === 'gridView') {
+				return vm.goToState('main.panel.grid', branch.data);
+      } else if (branch.data.controlType === 'formView') {
+        return vm.goToState('main.panel.form', branch.data);
+      } else if (branch.data.controlType === 'cardsView') {
+        return vm.goToState('main.panel.cards', branch.data);
+      }
 		});
 
     vm.logout = function() {
