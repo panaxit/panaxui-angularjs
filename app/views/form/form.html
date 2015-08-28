@@ -1,17 +1,13 @@
 <form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
 
-  <div class="panel-body">
-
-    <px-form
-      data="vm.data"
-      catalog="vm.catalog"
-      fields="vm.fields"
-      form="vm.form"
-      async-pagination="true"
-      pagination-change-handler="vm.onPaginationChange(newPage, newPageSize)">
-    </px-form>
-
-  </div>
+  <px-form
+    data="vm.data"
+    catalog="vm.catalog"
+    fields="vm.fields"
+    form="vm.form"
+    async-pagination="true"
+    pagination-change-handler="vm.onPaginationChange(newPage, newPageSize)">
+  </px-form>
 
   <div class="panel-footer clearfix">
 
