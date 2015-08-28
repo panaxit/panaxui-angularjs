@@ -113,7 +113,7 @@
 
         <accordion-heading>
         		<em class="glyphicon glyphicon-book"></em>
-            Catalog
+            Catalog (entity) metadata
         </accordion-heading>
 
         <pre>
@@ -121,15 +121,15 @@
         </pre>
 
 			</accordion-group>
-			<accordion-group ng-show="debugInfo.form">
+			<accordion-group ng-show="debugInfo.fields">
 
         <accordion-heading>
         		<em class="glyphicon glyphicon-tasks"></em>
-            Form (fields)
+            Fields
         </accordion-heading>
 
         <pre>
-          <json-formatter open="2" json="debugInfo.form"></json-formatter>
+          <json-formatter open="2" json="debugInfo.fields"></json-formatter>
         </pre>
 
 			</accordion-group>
@@ -142,18 +142,6 @@
 
         <pre>
           <json-formatter open="2" json="debugInfo.grid"></json-formatter>
-        </pre>
-
-      </accordion-group>
-      <accordion-group ng-show="debugInfo.cards">
-
-        <accordion-heading>
-            <em class="glyphicon glyphicon-th"></em>
-            Cards
-        </accordion-heading>
-
-        <pre>
-          <json-formatter open="2" json="debugInfo.cards"></json-formatter>
         </pre>
 
       </accordion-group>

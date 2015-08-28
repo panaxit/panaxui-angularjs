@@ -22,7 +22,7 @@ export default class CardsCtrl {
     var vm = this;
     vm.DebugService.show({
       catalog: vm.catalog,
-      cards: vm.cards,
+      fields: vm.fields,
       model: vm.data
     });
   }
@@ -42,7 +42,7 @@ export default class CardsCtrl {
     }).then(function (res) {
       vm.catalog = res.data.catalog || {};
       vm.data = res.data.model || [];
-      vm.cards = res.data.cards;
+      vm.fields = res.data.fields;
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
   }
