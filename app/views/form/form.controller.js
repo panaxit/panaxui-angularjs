@@ -55,6 +55,7 @@ export default class FormCtrl {
         if(vm.catalog.mode === 'insert') return 'New ';
         if(vm.catalog.mode === 'edit') return 'Edit ';
         if(vm.catalog.mode === 'readonly') return 'View ';
+        if(vm.catalog.mode === 'filters') return 'Filters ';
       })() + vm.catalog.tableName);
     });
   }
@@ -144,6 +145,23 @@ export default class FormCtrl {
               vm.form.$setUntouched();
               // ToDo: Reload form? (to retrieve saved data and spot glitches via: vm.loader(); ?
             }
+          } else {
+            // Do nothing. HTTP 500 responses handled by ErrorInterceptor
+          }
+        });
+      } else if(vm.catalog.mode === 'filters' && vm.form.$dirty) {
+        /**
+         * mode = FILTERS
+         */
+        // Backend filters call
+        vm.CRUDService.filters(payload).then(function (res) {
+          if(res.success === true) {
+              // Go to 'edit' mode of filtered records
+              vm.$scope.$emit('goToState', 'main.panel.grid', {
+                catalogName: vm.catalog.catalogName,
+                mode: 'edit',
+                filters:  '[' + res.data + ']'
+              });
           } else {
             // Do nothing. HTTP 500 responses handled by ErrorInterceptor
           }
