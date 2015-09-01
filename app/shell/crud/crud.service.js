@@ -70,21 +70,35 @@ class CRUDService {
     /**
      * DELETE /api/delete
      */
-  	vm.delete = function(payload) {
-	    var deferred = $q.defer();
+    vm.delete = function(payload) {
+      var deferred = $q.defer();
 
-	    // http://stackoverflow.com/questions/24829933/angularjs-delete-with-data-sets-wrong-content-type-header
+      // http://stackoverflow.com/questions/24829933/angularjs-delete-with-data-sets-wrong-content-type-header
       $http({
-      	url: "/api/delete",
-      	method: 'DELETE',
-      	data: payload,
-      	headers: {'Content-Type': 'application/json'}
+        url: "/api/delete",
+        method: 'DELETE',
+        data: payload,
+        headers: {'Content-Type': 'application/json'}
       })
-		    .then(function (response) {
-		      deferred.resolve(response.data);
-		    });
-	    return deferred.promise;
-		};
+        .then(function (response) {
+          deferred.resolve(response.data);
+        });
+      return deferred.promise;
+    };
+
+    /**
+     * POST /api/filters
+     */
+    vm.filters = function(payload) {
+      var deferred = $q.defer();
+
+      $http
+        .post("/api/filters", payload)
+        .then(function (response) {
+          deferred.resolve(response.data);
+        });
+      return deferred.promise;
+    };
 
     /**
      * Create data table payload to be sent
@@ -113,6 +127,7 @@ class CRUDService {
             var rowsType;
             if(el.data.catalog.mode === 'insert') rowsType = 'insertRows';
             if(el.data.catalog.mode === 'edit') rowsType = 'updateRows';
+            if(el.data.catalog.mode === 'filters') rowsType = 'dataRows';
             if(angular.isObject(orig_model[el.key])) {
               dirty_model[el.key][rowsType] = [{}];
               dirtyFieldsIterator(el.data.fields[0], dirty_model[el.key][rowsType][0], orig_model[el.key]);
@@ -162,6 +177,13 @@ class CRUDService {
             row[payload.identityKey] = record[payload.identityKey];
           }
           payload.updateRows.push(row);
+        });
+      } else if(catalog.mode === 'filters') {
+        payload.dataRows = [];
+        model.forEach((record, index) => {
+          var row = {};
+          dirtyFieldsIterator(fields[index], row, record);
+          payload.dataRows.push(row);
         });
       }
 
