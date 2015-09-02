@@ -18,6 +18,9 @@
 .form-login-heading {
   text-align: center;
 }
+.form-login-heading > img {
+  width: 246px;
+}
 .form-login .checkbox {
   font-weight: normal;
 }
