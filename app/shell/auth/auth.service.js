@@ -22,7 +22,7 @@ class AuthService {
 			$http
 				.get('/api/session/info')
 				.success(function (response) {
-					SessionService.create(response.data);
+					SessionService.create(response);
 					deferred.resolve();
 				})
         .error(function (response) {
@@ -46,11 +46,18 @@ class AuthService {
 		};
 
 		vm.logout = function() {
-			return $http
+      var deferred = $q.defer();
+			$http
 				.get('/api/session/logout')
 				.success(function (res) {
 					SessionService.destroy();
-				});
+          deferred.resolve(res);
+				})
+        .error(function() {
+          SessionService.destroy();
+          deferred.reject(res);
+        });
+      return deferred.promise;
 		};
   }
 }

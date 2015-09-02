@@ -6,7 +6,8 @@ class SessionService {
 
 		vm.create = function(user) {
 			//vm.id = user.sessionId;
-			vm.userId = user.data.userId;
+      vm.panax_instance = user.data.panax_instance;
+      vm.userId = user.data.userId;
 			vm.username = user.data.username;
 			vm.api_version = user.data.api_version;
 			vm.db = user.data.db;
