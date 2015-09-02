@@ -7,7 +7,8 @@ export default class IndexCtrl {
      */
     AuthService.sessionInfo().then(function () {
       $state.go("main.home");
-    }, function () {
+    }, function (res) {
+      $rootScope.panax_instances = res.data.instances;
       $state.go("login");
     });
 

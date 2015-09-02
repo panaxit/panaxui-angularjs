@@ -13,6 +13,14 @@ Based on: http://getbootstrap.com/examples/signin/
   <input ng-model="vm.credentials.username" type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
   <input ng-model="vm.credentials.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  <div class="checkbox">
+    <label for="inputInstance" class="sr-only">Instance</label>
+    <select ng-model="vm.credentials.instance" id="inputInstance" class="form-control" placeholder="Instance" required>
+      <option value="{{name}}" ng-repeat="name in vm.panax_instances">
+        {{name}}
+      </option>
+    </select>
+  </div>
   <!-- <div class="checkbox">
     <label><input type="checkbox" value="remember-me">Remember me</label>
   </div> -->

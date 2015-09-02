@@ -21,10 +21,13 @@ class AuthService {
 	    var deferred = $q.defer();
 			$http
 				.get('/api/session/info')
-				.then(function (response) {
+				.success(function (response) {
 					SessionService.create(response.data);
 					deferred.resolve();
-				});
+				})
+        .error(function (response) {
+          deferred.reject(response.error);
+        });
 			return deferred.promise;
 		};
 
