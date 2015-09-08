@@ -1,14 +1,16 @@
 export default class IndexCtrl {
   constructor($scope, $rootScope, $state, $q, AuthService, AlertService) {
-    var vm = this;
 
     /**
-     * Ensure it's already logged in (by getting session info)
+     * At first load ensure it's already logged in (by getting session info)
      */
+    var _firstLoad = true;
     AuthService.sessionInfo().then(function () {
+      _firstLoad = false;
       $state.go("main.home");
     }, function (res) {
       $rootScope.panax_instances = res.data.instances;
+      _firstLoad = false;
       $state.go("login");
     });
 
@@ -32,20 +34,26 @@ export default class IndexCtrl {
       console.info("#EVENT: auth-login-success");
       $state.go("main.home");
     });
-    //$scope.$on('auth-login-failed', function (event, next) {
-    //  console.info("#EVENT: auth-login-failed");
-    //});
-    $scope.$on('auth-session-timeout', function (event, next) {
-      console.info("#EVENT: auth-session-timeout");
-      $state.go("login");
-    });
     $scope.$on('auth-not-authenticated', function (event, next) {
       console.info("#EVENT: auth-not-authenticated");
-      AlertService.show('warning', 'Authentication', next.data.message);
+      // Avoid showing 'Session Timeout' on first load of app
+      if(!_firstLoad) {
+        AlertService.show('warning', 'Authentication', next.data.message);
+      }
+      // Force logout to get available panax instances
+      AuthService.logout().then(function (res) {
+        $rootScope.panax_instances = res.data.instances;
+      });
+      // Go to 'login' state
       $state.go("login");
     });
     $scope.$on('auth-logout-success', function (event, next) {
       console.info("#EVENT: auth-logout-success");
+      AlertService.show('success', 'Authentication', 'Succesfully Logged Out');
+      // Logout and get available panax instances
+      AuthService.logout().then(function (res) {
+        $rootScope.panax_instances = res.data.instances;
+      });
       $state.go("login");
     });
 

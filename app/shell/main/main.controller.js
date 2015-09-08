@@ -63,9 +63,6 @@ export default class MainCtrl {
 		});
 
     vm.logout = function() {
-      AuthService.logout().then(function (res) {
-        $rootScope.panax_instances = res.data.instances;
-      });
       $scope.$emit(AUTH_EVENTS.logoutSuccess);
     };
 
