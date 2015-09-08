@@ -9,7 +9,8 @@ class SessionService {
       vm.panax_instance = user.data.panax_instance;
       vm.userId = user.data.userId;
 			vm.username = user.data.username;
-			vm.api_version = user.data.api_version;
+      vm.api_version = user.data.api_version;
+      vm.node_version = user.data.node_version;
 			vm.db = user.data.db;
 			//vm.userRole = 'admin'; //user.userRole;
 		};
