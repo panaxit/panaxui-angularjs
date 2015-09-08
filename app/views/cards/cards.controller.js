@@ -31,7 +31,7 @@ export default class CardsCtrl {
     var vm = this;
 
     vm.CRUDService.read({
-      mode: 'readonly', //$stateParams.mode, // Is always readonly to get all records
+      mode: vm.$stateParams.mode,
       catalogName: vm.$stateParams.catalogName,
       filters: vm.$stateParams.filters || '',
       controlType: 'cardsView',
