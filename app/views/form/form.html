@@ -12,7 +12,7 @@
   <div class="panel-footer clearfix" ng-if="vm.catalog.mode !== 'readonly'">
 
     <div class="btn-toolbar">
-      <div class="pull-left" ng-if="vm.catalog.mode === 'edit'">
+      <div class="pull-left" ng-if="vm.catalog.mode === 'edit' || vm.catalog.mode === 'insert'">
         <div class="btn-group btn-group-md">
           <!-- <button class="btn btn-default" type="button" ng-click="vm.onCancel()">
             <em class="glyphicon glyphicon-ban-circle"></em>
