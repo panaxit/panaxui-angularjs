@@ -1,0 +1,22 @@
+<px-grid
+  data="vm.data"
+  catalog="vm.catalog"
+  fields="vm.fields.grid"
+  open-handler="vm.onOpen(selected)"
+  new-handler="vm.onNew(catalogName)"
+  delete-handler="vm.onDelete(selected)"
+  pagination-change-handler="vm.onPaginationChange(newPage, pageSize)"
+  row-change-promise="vm.onRowChange(rowEntity)"
+  next-handler="vm.onNext(selected)">
+</px-grid>
+
+<form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
+
+  <px-form
+    data="vm.data[0]"
+    catalog="vm.catalog"
+    fields="vm.fields.form[0]"
+    form="vm.form">
+  </px-form>
+
+</form>

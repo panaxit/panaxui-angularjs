@@ -13,10 +13,11 @@ import MainCategory from '../../shell/category';
 import MainPanel from '../../shell/panel';
 
 import GridView from '../../views/grid';
-import pxGrid from '../../directives/px-grid';
 import FormView from '../../views/form';
-import pxForm from '../../directives/px-form';
 import CardsView from '../../views/cards';
+import MasterDetail from '../../views/master-detail';
+import pxGrid from '../../directives/px-grid';
+import pxForm from '../../directives/px-form';
 import pxCards from '../../directives/px-cards';
 
 import routing from './main.routes';
@@ -34,10 +35,11 @@ export default angular.module('app.main', [
     MainPanel,
 
     GridView,
-    pxGrid,
     FormView,
-    pxForm,
     CardsView,
+    MasterDetail,
+    pxGrid,
+    pxForm,
     pxCards
 	])
 	.config(routing)
