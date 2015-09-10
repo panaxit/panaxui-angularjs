@@ -11,6 +11,7 @@ function pxGrid() {
       catalog: '=',
       data: '=',
       fields: '=',
+      options: '=',
       openHandler: '&',
       newHandler: '&',
       deleteHandler: '&',
@@ -24,15 +25,15 @@ function pxGrid() {
       var vm = this;
 
       // Default options
-      vm.options = {};
-      vm.options.rowHeight = 32;
-      vm.options.showGridFooter = false;
-      vm.options.enableFiltering = true;
+      vm.uigrid_options = {};
+      vm.uigrid_options.rowHeight = 32;
+      vm.uigrid_options.showGridFooter = false;
+      vm.uigrid_options.enableFiltering = true;
       // Pagination defaults
-      vm.options.paginationPageSizes = [5, 10, 25, 50, 100, 500];
-      vm.options.enablePaginationControls = false;
+      vm.uigrid_options.paginationPageSizes = [5, 10, 25, 50, 100, 500];
+      vm.uigrid_options.enablePaginationControls = false;
       // On Register API callback
-      vm.options.onRegisterApi = function(gridApi) {
+      vm.uigrid_options.onRegisterApi = function(gridApi) {
         vm.gridApi = gridApi;
         // Row edit
         vm.gridApi.rowEdit.on.saveRow($scope, function(rowEntity) {
@@ -47,8 +48,8 @@ function pxGrid() {
       $scope.$watch('vm.fields', function(newGrid) {
         if(newGrid) {
           // Column Defs
-          vm.options.columnDefs = newGrid.columnDefs;
-          vm.options.columnDefs.forEach(function (colDef, index) {
+          vm.uigrid_options.columnDefs = newGrid.columnDefs;
+          vm.uigrid_options.columnDefs.forEach(function (colDef, index) {
             colDef.enableFiltering = false;
             colDef.menuItems = [
               {
@@ -71,16 +72,16 @@ function pxGrid() {
         if(newCatalog) {
           // Selection
           var pxSelectionEnabled = (['edit', 'browse'].indexOf(newCatalog.mode) > -1);
-          vm.options.enableRowSelection = pxSelectionEnabled;
-          vm.options.enableRowHeaderSelection = pxSelectionEnabled;
-          vm.options.multiSelect = pxSelectionEnabled;
-          vm.options.enableSelectAll = pxSelectionEnabled;
+          vm.uigrid_options.enableRowSelection = pxSelectionEnabled;
+          vm.uigrid_options.enableRowHeaderSelection = pxSelectionEnabled;
+          vm.uigrid_options.multiSelect = pxSelectionEnabled;
+          vm.uigrid_options.enableSelectAll = pxSelectionEnabled;
           // Row edit
           var pxRowEditEnabled = (['edit'].indexOf(newCatalog.mode) > -1);
-          vm.options.enableCellEdit = pxRowEditEnabled;
+          vm.uigrid_options.enableCellEdit = pxRowEditEnabled;
           // Row actions
           if(['edit', 'readonly'].indexOf(newCatalog.mode) > -1) {
-            vm.options.columnDefs.push({
+            vm.uigrid_options.columnDefs.push({
               name: 'px-actions',
               displayName: '⚡',
               type: 'object',
@@ -97,10 +98,10 @@ function pxGrid() {
           }
           // External Pagination
           if(newCatalog.totalItems) {
-            vm.options.useExternalPagination = true;
-            vm.options.totalItems = newCatalog.totalItems;
-            vm.options.paginationPageSize = newCatalog.pageSize;
-            vm.options.paginationCurrentPage = newCatalog.pageIndex;
+            vm.uigrid_options.useExternalPagination = true;
+            vm.uigrid_options.totalItems = newCatalog.totalItems;
+            vm.uigrid_options.paginationPageSize = newCatalog.pageSize;
+            vm.uigrid_options.paginationCurrentPage = newCatalog.pageIndex;
           }
         }
         // Notify options change
@@ -109,7 +110,7 @@ function pxGrid() {
 
       $scope.$watch('vm.data', function(newData) {
         if(newData) {
-          vm.options.data = newData;
+          vm.uigrid_options.data = newData;
         }
       });
 

@@ -44,8 +44,19 @@ export default class GridCtrl {
       vm.catalog = res.data.catalog;
       vm.data = res.data.model || [];
       vm.fields = res.data.fields;
+
+      vm.setOptions();
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
+  }
+
+  setOptions() {
+    var vm = this;
+    vm.options = {
+      showAddRemoveRow: vm.catalog.mode === 'edit',
+      showNextRow: vm.catalog.mode === 'browse',
+      showPaginationRow: true
+    };
   }
 
   onOpen(selected) {
