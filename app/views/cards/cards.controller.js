@@ -7,8 +7,6 @@ export default class CardsCtrl {
     vm.CRUDService = CRUDService;
     vm.DebugService = DebugService;
 
-    vm.mode = $stateParams.mode;
-
     vm.loader();
 
     vm.$scope.$on('reloadData', function (event, next) {
@@ -43,8 +41,20 @@ export default class CardsCtrl {
       vm.catalog = res.data.catalog || {};
       vm.data = res.data.model || [];
       vm.fields = res.data.fields;
+
+      vm.setOptions();
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
+  }
+
+  setOptions() {
+    var vm = this;
+    vm.options = {
+      asyncPagination: true,
+      showPaginationRow: true,
+      showBrowseRow: vm.$stateParams.mode === 'browse',
+      showFilterRow: true
+    };
   }
 
   // ToDo: Use catalog parameter (as in GridCtrl) for nested cardsView
@@ -56,7 +66,7 @@ export default class CardsCtrl {
 
     vm.$scope.$emit('goToState', 'main.panel.form', {
       catalogName: vm.catalog.catalogName,
-      mode: vm.mode,
+      mode: vm.catalog.mode,
       [idType]: idKey,
       id: idValue
     });

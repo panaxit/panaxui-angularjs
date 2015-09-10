@@ -1,6 +1,6 @@
-<div class="panel-footer clearfix">
+<div class="panel-footer clearfix" ng-if="vm.options.showFilterRow">
   <!-- <label for="search">Search:</label> -->
-  <input ng-model="q" id="search" class="form-control" placeholder="Filter text">
+  <input ng-model="query" id="search" class="form-control" placeholder="Filter text">
 </div>
 
 <div class="panel-body">
@@ -8,15 +8,15 @@
   <div class="row clearfix">
 
     <!-- hack fix: https://github.com/michaelbromley/angularUtils/issues/157 -->
-    <div ng-switch on="vm.asyncPagination">
+    <div ng-switch on="vm.options.asyncPagination">
       <!-- Server side pagination -->
       <div ng-switch-when="true" class="flexcontainer">
 
         <div class="px-card"
-             dir-paginate="record in vm.data | filter:q | itemsPerPage: vm.options.paginationPageSize"
-             total-items="vm.options.totalItems"
-             current-page="vm.options.paginationCurrentPage"
-             pagination-id="vm.options.paginationId">
+             dir-paginate="record in vm.data | filter:query | itemsPerPage: vm.pagination_options.paginationPageSize"
+             total-items="vm.pagination_options.totalItems"
+             current-page="vm.pagination_options.paginationCurrentPage"
+             pagination-id="vm.pagination_options.paginationId">
 
           <ng-include src="'pxcards-layout'"></ng-include>
 
@@ -27,9 +27,9 @@
       <div ng-switch-default class="flexcontainer">
 
         <div class="px-card"
-             dir-paginate="record in vm.data | filter:q | itemsPerPage: vm.options.paginationPageSize"
-             current-page="vm.options.paginationCurrentPage"
-             pagination-id="vm.options.paginationId">
+             dir-paginate="record in vm.data | filter:query | itemsPerPage: vm.pagination_options.paginationPageSize"
+             current-page="vm.pagination_options.paginationCurrentPage"
+             pagination-id="vm.pagination_options.paginationId">
 
           <ng-include src="'pxcards-layout'"></ng-include>
 
@@ -42,16 +42,16 @@
 
 </div>
 
-<div class="panel-footer">
+<div class="panel-footer" ng-if="vm.options.showPaginationRow">
 
   <px-pagination
-    options="vm.options"
+    options="vm.pagination_options"
     ng-attr-on-pagination-change="vm.paginationChangeHandler({newPage: newPage, newPageSize: newPageSize})">
   </px-pagination>
 
 </div>
 
-<div class="panel-footer" ng-if="vm.mode == 'browse'">
+<div class="panel-footer" ng-if="vm.options.showBrowseRow">
   <div class="pull-left">
     {{vm.selectedRecords.length}} record(s) selected
   </div>
@@ -79,15 +79,15 @@
     <div class="btn-group btn-group-xs pull-right">
       <button class="btn" type="submit"
               ng-class="{
-                'btn-primary':(vm.mode === 'edit'),
-                'btn-default':(vm.mode !== 'edit')
+                'btn-primary':(vm.catalog.mode === 'edit'),
+                'btn-default':(vm.catalog.mode !== 'edit')
               }"
               ng-click="vm.onClick(record)">
-        {{vm.mode === 'edit' ? 'Edit' : ''}}
-        {{vm.mode === 'readonly' ? 'View' : ''}}
-        {{vm.mode === 'browse' ? '' : ''}}
-        <em ng-if="vm.mode === 'browse' && vm.selectedRecords.indexOf(record)==-1" class="glyphicon glyphicon-ok"></em>
-        <em ng-if="vm.mode === 'browse' && vm.selectedRecords.indexOf(record)>=0" class="glyphicon glyphicon-remove"></em>
+        {{vm.catalog.mode === 'edit' ? 'Edit' : ''}}
+        {{vm.catalog.mode === 'readonly' ? 'View' : ''}}
+        {{vm.catalog.mode === 'browse' ? '' : ''}}
+        <em ng-if="vm.catalog.mode === 'browse' && vm.selectedRecords.indexOf(record)==-1" class="glyphicon glyphicon-ok"></em>
+        <em ng-if="vm.catalog.mode === 'browse' && vm.selectedRecords.indexOf(record)>=0" class="glyphicon glyphicon-remove"></em>
       </button>
     </div>
   </div>
