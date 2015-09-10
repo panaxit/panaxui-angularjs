@@ -27,17 +27,17 @@ export default class CardsCtrl {
 
   loader(pageIndex, pageSize) {
     var vm = this;
-
-    vm.CRUDService.read({
-      mode: vm.$stateParams.mode,
+    var params = {
       catalogName: vm.$stateParams.catalogName,
-      filters: vm.$stateParams.filters || '',
       controlType: 'cardsView',
+      mode: vm.$stateParams.mode,
+      filters: vm.$stateParams.filters || '',
       getData: "1",
       getStructure: "1",
       pageIndex: pageIndex || parseInt(vm.$stateParams.pageIndex) || 1,
       pageSize: pageSize || parseInt(vm.$stateParams.pageSize) || 8
-    }).then(function (res) {
+    };
+    vm.CRUDService.read(params).then(function (res) {
       vm.catalog = res.data.catalog || {};
       vm.data = res.data.model || [];
       vm.fields = res.data.fields;

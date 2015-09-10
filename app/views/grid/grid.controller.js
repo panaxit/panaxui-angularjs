@@ -31,10 +31,10 @@ export default class GridCtrl {
   loader(pageIndex, pageSize) {
     var vm = this;
     var params = {
-      mode: vm.$stateParams.mode,
       catalogName: vm.$stateParams.catalogName,
-      filters: vm.$stateParams.filters || '',
       controlType: 'gridView',
+      mode: vm.$stateParams.mode,
+      filters: vm.$stateParams.filters || '',
       getData: "1",
       getStructure: "1",
       pageIndex: pageIndex || parseInt(vm.$stateParams.pageIndex) || 1,
