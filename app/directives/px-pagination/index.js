@@ -7,7 +7,7 @@ function pxPagination() {
     restrict: 'E',
     template: require('./pxpagination.html'),
     scope: {
-      options: '=',
+      pagination_options: '=options',
       onPaginationChange: '&?'
     },
     bindToController: true,
@@ -16,28 +16,28 @@ function pxPagination() {
       var vm = this;
 
       vm.getTotalPages = function() {
-        if (!vm.options.totalItems) { // (!vm.options.enablePagination) {
+        if (!vm.pagination_options.totalItems) { // (!vm.pagination_options.enablePagination) {
           return null;
         }
-        return (vm.options.totalItems === 0) ? 1 : Math.ceil(vm.options.totalItems / vm.options.paginationPageSize);
+        return (vm.pagination_options.totalItems === 0) ? 1 : Math.ceil(vm.pagination_options.totalItems / vm.pagination_options.paginationPageSize);
       };
 
-      $scope.$watch('vm.options.paginationCurrentPage + vm.options.paginationPageSize', (newValues, oldValues) => {
+      $scope.$watch('vm.pagination_options.paginationCurrentPage + vm.pagination_options.paginationPageSize', (newValues, oldValues) => {
         if (newValues === oldValues || oldValues === undefined) {
           return;
         }
-        if (!angular.isNumber(vm.options.paginationCurrentPage) || vm.options.paginationCurrentPage < 1) {
-          vm.options.paginationCurrentPage = 1;
+        if (!angular.isNumber(vm.pagination_options.paginationCurrentPage) || vm.pagination_options.paginationCurrentPage < 1) {
+          vm.pagination_options.paginationCurrentPage = 1;
           return;
         }
-        if (vm.options.totalItems > 0 && vm.options.paginationCurrentPage > vm.getTotalPages()) {
-          vm.options.paginationCurrentPage = vm.getTotalPages();
+        if (vm.pagination_options.totalItems > 0 && vm.pagination_options.paginationCurrentPage > vm.getTotalPages()) {
+          vm.pagination_options.paginationCurrentPage = vm.getTotalPages();
           return;
         }
 
         vm.onPaginationChange({
-          newPage: vm.options.paginationCurrentPage,
-          newPageSize: vm.options.paginationPageSize
+          newPage: vm.pagination_options.paginationCurrentPage,
+          newPageSize: vm.pagination_options.paginationPageSize
         });
       });
     }

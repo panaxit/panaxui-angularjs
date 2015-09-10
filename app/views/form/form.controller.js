@@ -51,6 +51,8 @@ export default class FormCtrl {
       vm.catalog = res.data.catalog;
       vm.data = res.data.model || [];
       vm.fields = res.data.fields || [];
+
+      vm.setOptions();
       vm.$scope.$emit('setPanelTitle', (function () {
         if(vm.catalog.mode === 'insert') return 'New ';
         if(vm.catalog.mode === 'edit') return 'Edit ';
@@ -58,6 +60,14 @@ export default class FormCtrl {
         if(vm.catalog.mode === 'filters') return 'Filters ';
       })() + vm.catalog.tableName);
     });
+  }
+
+  setOptions() {
+    var vm = this;
+    vm.options = {
+      asyncPagination: true,
+      showPaginationRow: true
+    };
   }
 
   isSubmitDisabled() {
@@ -85,7 +95,7 @@ export default class FormCtrl {
     // ToDo: Confirm
     if (vm.form) {
       // http://jsbin.com/zaqeke
-      vm.options.resetModel();
+      //vm.$scope.options.resetModel();
       vm.form.$setPristine();
       vm.form.$setUntouched();
     }

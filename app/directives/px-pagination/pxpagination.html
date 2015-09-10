@@ -3,8 +3,8 @@
   <div class="col-xs-4">
     <div clas="text-left">
       <select
-        ng-model="vm.options.paginationPageSize"
-        ng-options="o as o for o in vm.options.paginationPageSizes">
+        ng-model="vm.pagination_options.paginationPageSize"
+        ng-options="o as o for o in vm.pagination_options.paginationPageSizes">
       </select>
       records per page
     </div>
@@ -13,17 +13,17 @@
     <div class="row">
       <div class="col-md-4 col-md-push-8">
         <div class="text-right">
-          {{((vm.options.paginationCurrentPage - 1) * vm.options.paginationPageSize) + 1}}
+          {{((vm.pagination_options.paginationCurrentPage - 1) * vm.pagination_options.paginationPageSize) + 1}}
           &ndash;
-          {{[vm.options.paginationCurrentPage * vm.options.paginationPageSize, vm.options.totalItems] | min}}
-          of {{vm.options.totalItems}} records
+          {{[vm.pagination_options.paginationCurrentPage * vm.pagination_options.paginationPageSize, vm.pagination_options.totalItems] | min}}
+          of {{vm.pagination_options.totalItems}} records
         </div>
       </div>
       <div class="col-md-8 col-md-pull-4">
         <dir-pagination-controls
           boundary-links="true"
           template-url="directives/px-pagination/dirPagination.tpl.html"
-          pagination-id="vm.options.paginationId">
+          pagination-id="vm.pagination_options.paginationId">
         </dir-pagination-controls>
       </div>
     </div>

@@ -1,13 +1,13 @@
 <div class="panel-body">
   <!-- hack fix: https://github.com/michaelbromley/angularUtils/issues/157 -->
-  <div ng-switch on="vm.asyncPagination">
+  <div ng-switch on="vm.options.asyncPagination">
     <!-- Server side pagination (with total-items)-->
     <div ng-switch-when="true">
 
-      <div dir-paginate="record in vm.data | itemsPerPage: vm.options.paginationPageSize"
-           total-items="vm.options.totalItems"
-           current-page="vm.options.paginationCurrentPage"
-           pagination-id="vm.options.paginationId">
+      <div dir-paginate="record in vm.data | itemsPerPage: vm.pagination_options.paginationPageSize"
+           total-items="vm.pagination_options.totalItems"
+           current-page="vm.pagination_options.paginationCurrentPage"
+           pagination-id="vm.pagination_options.paginationId">
 
         <ng-include src="'pxform-layout'" class="pxrecord"></ng-include>
 
@@ -17,9 +17,9 @@
     <!-- Client side pagination (without total-items)-->
     <div ng-switch-default>
 
-      <div dir-paginate="record in vm.data | itemsPerPage: vm.options.paginationPageSize"
-           current-page="vm.options.paginationCurrentPage"
-           pagination-id="vm.options.paginationId">
+      <div dir-paginate="record in vm.data | itemsPerPage: vm.pagination_options.paginationPageSize"
+           current-page="vm.pagination_options.paginationCurrentPage"
+           pagination-id="vm.pagination_options.paginationId">
 
         <ng-include src="'pxform-layout'"></ng-include>
 
@@ -29,10 +29,10 @@
   </div>
 </div>
 
-<div class="panel-footer">
+<div class="panel-footer" ng-if="vm.options.showPaginationRow">
 
   <px-pagination
-    options="vm.options"
+    options="vm.pagination_options"
     ng-attr-on-pagination-change="vm.paginationChangeHandler({newPage: newPage, newPageSize: newPageSize})">
   </px-pagination>
 

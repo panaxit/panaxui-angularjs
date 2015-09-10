@@ -25,6 +25,16 @@ export default class FormlyFormCtrl extends FormCtrl {
     }
     vm.fields = vm.$scope.options.data.fields;
     vm.catalog = vm.$scope.options.data.catalog;
+
+    vm.setOptions();
+  }
+
+  setOptions() {
+    var vm = this;
+    vm.options = {
+      asyncPagination: false,
+      showPaginationRow: true
+    };
   }
 }
 
