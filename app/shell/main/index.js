@@ -19,9 +19,10 @@ import pxForm from '../../directives/px-form';
 import pxCards from '../../directives/px-cards';
 
 // Data Components
-import GridView from '../../views/grid';
-import FormView from '../../views/form';
-import CardsView from '../../views/cards';
+import Base from '../../views/grid';
+import Grid from '../../views/grid';
+import Form from '../../views/form';
+import Cards from '../../views/cards';
 import MasterDetail from '../../views/master-detail';
 
 import routing from './main.routes';
@@ -42,9 +43,10 @@ export default angular.module('app.main', [
     pxForm,
     pxCards,
 
-    GridView,
-    FormView,
-    CardsView,
+    Base,
+    Grid,
+    Form,
+    Cards,
     MasterDetail
 	])
 	.config(routing)

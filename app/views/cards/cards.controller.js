@@ -1,28 +1,8 @@
-export default class CardsCtrl {
-  constructor($scope, $stateParams, CRUDService, DebugService) {
-    var vm = this;
+import BaseCtrl from '../base/base.controller';
 
-    vm.$scope = $scope;
-    vm.$stateParams = $stateParams;
-    vm.CRUDService = CRUDService;
-    vm.DebugService = DebugService;
-
-    vm.loader();
-
-    vm.$scope.$on('reloadData', function (event, next) {
-      vm.loader();
-    });
-
-    vm.$scope.$on('openDebugModal', (event, next) => { vm.openDebugModal(); });
-  }
-
-  openDebugModal() {
-    var vm = this;
-    vm.DebugService.show({
-      catalog: vm.catalog,
-      fields: vm.fields,
-      model: vm.data
-    });
+export default class CardsCtrl extends BaseCtrl {
+  constructor($scope, DebugService, $stateParams, CRUDService) {
+    super($scope, DebugService, $stateParams, CRUDService);
   }
 
   loader(pageIndex, pageSize) {
@@ -97,5 +77,3 @@ export default class CardsCtrl {
     });
   }
 }
-
-CardsCtrl.$inject = ['$scope', '$stateParams', 'CRUDService', 'DebugService'];

@@ -1,18 +1,12 @@
 import CardsCtrl from './cards.controller';
 
 export default class FormlyCardsCtrl extends CardsCtrl {
-  constructor($scope, $stateParams, CRUDService, DebugService) {
-    super($scope, $stateParams, CRUDService, DebugService);
-    var vm = this;
-
-    vm.$scope = $scope;
-    vm.$stateParams = $stateParams;
-    vm.CRUDService = CRUDService;
-    vm.DebugService = DebugService;
+  constructor($scope, DebugService, $stateParams, CRUDService) {
+    super($scope, DebugService, $stateParams, CRUDService);
   }
 
   openDebugModal() {
-    // do not open debug modal for nested views
+    // do not open debug modal for nested components
   }
 
   loader() {
@@ -35,5 +29,3 @@ export default class FormlyCardsCtrl extends CardsCtrl {
     };
   }
 }
-
-FormlyCardsCtrl.$inject = ['$scope', '$stateParams', 'CRUDService', 'DebugService'];
