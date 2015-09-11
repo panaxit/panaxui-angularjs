@@ -29,6 +29,7 @@ function pxGrid() {
       newHandler: '&',
       deleteHandler: '&',
       paginationChangeHandler: '&',
+      rowSelectionHandler: '&',
       rowChangePromise: '&',
       nextHandler: '&'
     },
@@ -62,6 +63,11 @@ function pxGridCtrl($scope, uiGridConstants) {
     vm.gridApi.pagination.on.paginationChanged($scope, function(newPage, pageSize) {
       vm.paginationChangeHandler({newPage: newPage, pageSize: pageSize});
     });
+    vm.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+      if(row.isSelected) {
+        vm.rowSelectionHandler({row: row.entity});
+      }
+    });
   };
 
   $scope.$watch('vm.fields', function(newGrid) {
@@ -84,22 +90,22 @@ function pxGridCtrl($scope, uiGridConstants) {
     }
     // Notify all watchers
     // http://ui-grid.info/docs/#/api/ui.grid.class:Grid#methods_notifydatachange
+    vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
   });
 
-  $scope.$watch('vm.catalog', function(newCatalog) {
-    if(newCatalog) {
+  $scope.$watch('vm.options', function(newOptions) {
+    if(newOptions) {
       // Selection
-      var pxSelectionEnabled = (['edit', 'browse'].indexOf(newCatalog.mode) > -1);
-      vm.uigrid_options.enableRowSelection = pxSelectionEnabled;
-      vm.uigrid_options.enableRowHeaderSelection = pxSelectionEnabled;
-      vm.uigrid_options.multiSelect = pxSelectionEnabled;
-      vm.uigrid_options.enableSelectAll = pxSelectionEnabled;
+      vm.uigrid_options.enableRowSelection = newOptions.enableRowSelection;
+      vm.uigrid_options.enableRowHeaderSelection = newOptions.enableRowHeaderSelection;
+      vm.uigrid_options.enableFullRowSelection = newOptions.enableFullRowSelection;
+      vm.uigrid_options.multiSelect = newOptions.multiSelect;
+      vm.uigrid_options.enableSelectAll = newOptions.multiSelect;
       // Row edit
-      var pxRowEditEnabled = (['edit'].indexOf(newCatalog.mode) > -1);
-      vm.uigrid_options.enableCellEdit = pxRowEditEnabled;
+      vm.uigrid_options.enableCellEdit = newOptions.enableCellEdit;
       // Row actions
-      if(['edit', 'readonly'].indexOf(newCatalog.mode) > -1) {
+      if(newOptions.showRowActionsColumn) {
         vm.uigrid_options.columnDefs.push({
           name: 'px-actions',
           displayName: '⚡',
@@ -115,6 +121,14 @@ function pxGridCtrl($scope, uiGridConstants) {
         // Notify column change
         vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
       }
+    }
+    // Notify changes
+    vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
+    vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
+  });
+
+  $scope.$watch('vm.catalog', function(newCatalog) {
+    if(newCatalog) {
       // External Pagination
       if(newCatalog.totalItems) {
         vm.uigrid_options.useExternalPagination = true;
@@ -123,8 +137,9 @@ function pxGridCtrl($scope, uiGridConstants) {
         vm.uigrid_options.paginationCurrentPage = newCatalog.pageIndex;
       }
     }
-    // Notify options change
+    // Notify changes
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
+    vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
   });
 
   $scope.$watch('vm.data', function(newData) {

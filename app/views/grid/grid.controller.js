@@ -1,8 +1,8 @@
 import BaseCtrl from '../base/base.controller';
 
 export default class GridCtrl extends BaseCtrl {
-  constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
-    super($scope, DebugService, $stateParams, CRUDService, AlertService);
+  constructor($scope, DebugService, $stateParams, CRUDService, AlertService, $q) {
+    super($scope, DebugService, $stateParams, CRUDService, AlertService, $q);
   }
 
   loader(pageIndex, pageSize) {
@@ -32,7 +32,13 @@ export default class GridCtrl extends BaseCtrl {
     vm.options = {
       showAddRemoveRow: vm.catalog.mode === 'edit',
       showNextRow: vm.catalog.mode === 'browse',
-      showPaginationRow: true
+      showPaginationRow: true,
+      showRowActionsColumn: (['edit', 'readonly'].indexOf(vm.catalog.mode) > -1),
+      enableRowSelection: (['edit', 'browse'].indexOf(vm.catalog.mode) > -1),
+      enableRowHeaderSelection: (['edit', 'browse'].indexOf(vm.catalog.mode) > -1),
+      enableFullRowSelection: vm.catalog.mode === 'browse',
+      multiSelect: (['edit', 'browse'].indexOf(vm.catalog.mode) > -1),
+      enableCellEdit: vm.catalog.mode === 'edit'
     };
   }
 

@@ -1,8 +1,8 @@
 import GridCtrl from './grid.controller';
 
 export default class FormlyGridCtrl extends GridCtrl {
-  constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
-    super($scope, DebugService, $stateParams, CRUDService, AlertService);
+  constructor($scope, DebugService, $stateParams, CRUDService, AlertService, $q) {
+    super($scope, DebugService, $stateParams, CRUDService, AlertService, $q);
   }
 
   openDebugModal() {
@@ -21,10 +21,8 @@ export default class FormlyGridCtrl extends GridCtrl {
 
   setOptions() {
     var vm = this;
-    vm.options = {
-      showAddRemoveRow: vm.catalog.mode === 'edit',
-      showNextRow: vm.catalog.mode === 'browse',
-      showPaginationRow: true
-    };
+    // Reuse parent's options
+    super.setOptions();
+    // Override with vm.options.whatever = ...
   }
 }

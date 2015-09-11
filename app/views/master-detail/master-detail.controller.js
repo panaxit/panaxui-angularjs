@@ -28,10 +28,12 @@ export default class MasterDetailCtrl extends BaseCtrl {
     vm.CRUDService.read(params).then(function (res) {
       vm.catalog = res.data.catalog;
       vm.data = res.data.model || [];
+      vm.selected_record = {};
       vm.fields = {
         grid: res.data.fields.grid,
         form: res.data.fields.form
       };
+
       vm.setOptions();
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
@@ -43,10 +45,21 @@ export default class MasterDetailCtrl extends BaseCtrl {
       // Grid
       showAddRemoveRow: false,
       showNextRow: false,
+      showRowActionsColumn: false,
+      enableRowSelection: true,
+      enableRowHeaderSelection: false,
+      enableFullRowSelection: true,
+      multiSelect: false,
+      enableCellEdit: false,
       // Form
       asyncPagination: true,
       // Both
       showPaginationRow: true
     };
+  }
+
+  onSelectionChange(row) {
+    var vm = this;
+    vm.selected_record = row;
   }
 }
