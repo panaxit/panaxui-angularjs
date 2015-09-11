@@ -42,111 +42,136 @@ function pxGrid() {
 function pxGridCtrl($scope, uiGridConstants) {
   var vm = this;
 
+  /*
+  vm function assignments
+   */
+
   vm.getArray = getArray;
 
-  // Default options
-  vm.uigrid_options = {};
-  vm.uigrid_options.rowHeight = 32;
-  vm.uigrid_options.showGridFooter = false;
-  vm.uigrid_options.enableFiltering = true;
-  // Pagination defaults
-  vm.uigrid_options.paginationPageSizes = [5, 10, 25, 50, 100, 500];
-  vm.uigrid_options.enablePaginationControls = false;
-  // On Register API callback
-  vm.uigrid_options.onRegisterApi = function(gridApi) {
-    vm.gridApi = gridApi;
-    // Row edit
-    vm.gridApi.rowEdit.on.saveRow($scope, function(rowEntity) {
-      vm.gridApi.rowEdit.setSavePromise(rowEntity, vm.rowChangePromise({rowEntity: rowEntity}));
-    });
-    // External pagination
-    vm.gridApi.pagination.on.paginationChanged($scope, function(newPage, pageSize) {
-      vm.paginationChangeHandler({newPage: newPage, pageSize: pageSize});
-    });
-    vm.gridApi.selection.on.rowSelectionChanged($scope, function(row){
-      if(row.isSelected) {
-        vm.rowSelectionHandler({row: row.entity});
-      }
-    });
-  };
+  /*
+  initialization
+   */
 
-  $scope.$watch('vm.fields', function(newGrid) {
-    if(newGrid) {
-      // Column Defs
-      vm.uigrid_options.columnDefs = newGrid.columnDefs;
-      vm.uigrid_options.columnDefs.forEach(function (colDef, index) {
-        colDef.enableFiltering = false;
-        colDef.menuItems = [
-          {
-            title: 'Toggle Filter',
-            icon: 'ui-grid-icon-filter',
-            action: function() {
-              this.context.col.colDef.enableFiltering = !this.context.col.colDef.enableFiltering;
-              this.grid.api.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-            }
-          }
-        ];
+  initialize();
+
+  $scope.$watch('vm.data', function(newData) {
+    if(newData) initializeData(newData);
+  });
+
+  $scope.$watch('vm.fields', function(newFields) {
+    if(newFields) initializeFields(newFields);
+  });
+
+  $scope.$watch('vm.options', function(newOptions) {
+    if(newOptions) initializeOptions(newOptions);
+  });
+
+  $scope.$watch('vm.catalog', function(newCatalog) {
+    if(newCatalog) initializeCatalog(newCatalog);
+  });
+
+  /*
+  function declarations
+   */
+
+  function initialize() {
+    // Grit general defaults
+    vm.uigrid_options = {};
+    vm.uigrid_options.rowHeight = 32;
+    vm.uigrid_options.showGridFooter = false;
+    vm.uigrid_options.enableFiltering = true;
+    // Pagination defaults
+    vm.uigrid_options.paginationPageSizes = [5, 10, 25, 50, 100, 500];
+    vm.uigrid_options.enablePaginationControls = false;
+    // On Register API callback
+    vm.uigrid_options.onRegisterApi = function(gridApi) {
+      vm.gridApi = gridApi;
+      // Row edit
+      vm.gridApi.rowEdit.on.saveRow($scope, function(rowEntity) {
+        vm.gridApi.rowEdit.setSavePromise(rowEntity, vm.rowChangePromise({rowEntity: rowEntity}));
       });
-    }
+      // External pagination
+      vm.gridApi.pagination.on.paginationChanged($scope, function(newPage, pageSize) {
+        vm.paginationChangeHandler({newPage: newPage, pageSize: pageSize});
+      });
+      // Row Selection
+      vm.gridApi.selection.on.rowSelectionChanged($scope, function(row){
+        if(row.isSelected) {
+          vm.rowSelectionHandler({row: row.entity});
+        }
+      });
+    };
+  }
+
+  function initializeData(data) {
+    vm.uigrid_options.data = data;
+  }
+
+  function initializeFields(fields) {
+    // Column Defs
+    vm.uigrid_options.columnDefs = fields.columnDefs;
+    vm.uigrid_options.columnDefs.forEach(function (colDef, index) {
+      colDef.enableFiltering = false;
+      colDef.menuItems = [
+        {
+          title: 'Toggle Filter',
+          icon: 'ui-grid-icon-filter',
+          action: function() {
+            this.context.col.colDef.enableFiltering = !this.context.col.colDef.enableFiltering;
+            this.grid.api.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+          }
+        }
+      ];
+    });
     // Notify all watchers
     // http://ui-grid.info/docs/#/api/ui.grid.class:Grid#methods_notifydatachange
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
-  });
+  }
 
-  $scope.$watch('vm.options', function(newOptions) {
-    if(newOptions) {
-      // Selection
-      vm.uigrid_options.enableRowSelection = newOptions.enableRowSelection;
-      vm.uigrid_options.enableRowHeaderSelection = newOptions.enableRowHeaderSelection;
-      vm.uigrid_options.enableFullRowSelection = newOptions.enableFullRowSelection;
-      vm.uigrid_options.multiSelect = newOptions.multiSelect;
-      vm.uigrid_options.enableSelectAll = newOptions.multiSelect;
-      // Row edit
-      vm.uigrid_options.enableCellEdit = newOptions.enableCellEdit;
-      // Row actions
-      if(newOptions.showRowActionsColumn) {
-        vm.uigrid_options.columnDefs.push({
-          name: 'px-actions',
-          displayName: '⚡',
-          type: 'object',
-          cellTemplate: require('./pxgrid.row.actions.html'),
-          width: '34',
-          enableCellEdit: false,
-          enableColumnMenus: false,
-          enableFiltering: false,
-          enableHiding: false,
-          enableSorting: false,
-        });
-        // Notify column change
-        vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-      }
+  function initializeOptions(options) {
+    // Selection
+    vm.uigrid_options.enableRowSelection = options.enableRowSelection;
+    vm.uigrid_options.enableRowHeaderSelection = options.enableRowHeaderSelection;
+    vm.uigrid_options.enableFullRowSelection = options.enableFullRowSelection;
+    vm.uigrid_options.multiSelect = options.multiSelect;
+    vm.uigrid_options.enableSelectAll = options.multiSelect;
+    // Row edit
+    vm.uigrid_options.enableCellEdit = options.enableCellEdit;
+    // Row actions
+    if(options.showRowActionsColumn) {
+      vm.uigrid_options.columnDefs.push({
+        name: 'px-actions',
+        displayName: '⚡',
+        type: 'object',
+        cellTemplate: require('./pxgrid.row.actions.html'),
+        width: '34',
+        enableCellEdit: false,
+        enableColumnMenus: false,
+        enableFiltering: false,
+        enableHiding: false,
+        enableSorting: false,
+      });
+      // Notify column change
+      vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
     }
     // Notify changes
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
-  });
+  }
 
-  $scope.$watch('vm.catalog', function(newCatalog) {
-    if(newCatalog) {
-      // External Pagination
-      if(newCatalog.totalItems) {
-        vm.uigrid_options.useExternalPagination = true;
-        vm.uigrid_options.totalItems = newCatalog.totalItems;
-        vm.uigrid_options.paginationPageSize = newCatalog.pageSize;
-        vm.uigrid_options.paginationCurrentPage = newCatalog.pageIndex;
-      }
+  function initializeCatalog(catalog) {
+    // External Pagination
+    if(catalog.totalItems) {
+      vm.uigrid_options.useExternalPagination = true;
+      vm.uigrid_options.totalItems = catalog.totalItems;
+      vm.uigrid_options.paginationPageSize = catalog.pageSize;
+      vm.uigrid_options.paginationCurrentPage = catalog.pageIndex;
     }
     // Notify changes
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
-  });
-
-  $scope.$watch('vm.data', function(newData) {
-    if(newData) {
-      vm.uigrid_options.data = newData;
-    }
-  });
+  }
 
   function getArray(num) {
     return new Array(num);
