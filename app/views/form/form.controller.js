@@ -1,30 +1,8 @@
-export default class FormCtrl {
-  constructor($scope, $stateParams, CRUDService, AlertService, DebugService) {
-    var vm = this;
+import BaseCtrl from '../base/base.controller';
 
-    vm.$scope = $scope;
-    vm.$stateParams = $stateParams;
-    vm.CRUDService = CRUDService;
-    vm.AlertService = AlertService;
-    vm.DebugService = DebugService;
-
-    vm.loader();
-
-    vm.$scope.$on('reloadData', function (event, next) {
-      vm.loader();
-    });
-
-    // open Debug Modal and resolve `form-specific` objects
-    vm.$scope.$on('openDebugModal', (event, next) => { vm.openDebugModal(); });
-  }
-
-  openDebugModal() {
-    var vm = this;
-    vm.DebugService.show({
-      catalog: vm.catalog,
-      fields: vm.fields,
-      model: vm.data
-    });
+export default class FormCtrl extends BaseCtrl {
+  constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
+    super($scope, DebugService, $stateParams, CRUDService, AlertService);
   }
 
   loader(pageIndex, pageSize) {
@@ -189,5 +167,3 @@ export default class FormCtrl {
     vm.loader(newPage, newPageSize);
   }
 }
-
-FormCtrl.$inject = ['$scope', '$stateParams', 'CRUDService', 'AlertService', 'DebugService'];

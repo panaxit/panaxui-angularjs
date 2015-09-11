@@ -1,15 +1,8 @@
 import FormCtrl from './form.controller';
 
 export default class FormlyFormCtrl extends FormCtrl {
-  constructor($scope, $stateParams, CRUDService, AlertService, DebugService) {
-    super($scope, $stateParams, CRUDService, AlertService, DebugService);
-    var vm = this;
-
-    vm.$scope = $scope;
-    vm.$stateParams = $stateParams;
-    vm.CRUDService = CRUDService;
-    vm.AlertService = AlertService;
-    vm.DebugService = DebugService;
+  constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
+    super($scope, DebugService, $stateParams, CRUDService, AlertService);
   }
 
   openDebugModal() {
@@ -37,5 +30,3 @@ export default class FormlyFormCtrl extends FormCtrl {
     };
   }
 }
-
-FormlyFormCtrl.$inject = ['$scope', '$stateParams', 'CRUDService', 'AlertService', 'DebugService'];
