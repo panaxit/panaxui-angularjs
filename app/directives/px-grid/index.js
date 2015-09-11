@@ -1,5 +1,7 @@
 import angular from 'angular';
 
+import './pxgrid.css';
+
 import uigrid from 'angular-ui-grid/ui-grid.js';
 import 'angular-ui-grid/ui-grid.css';
 

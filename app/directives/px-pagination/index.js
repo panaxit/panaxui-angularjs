@@ -1,5 +1,7 @@
 import angular from 'angular';
 
+import './pxpagination.css';
+
 import dirPagination from 'angular-utils-pagination';
 
 function pxPagination() {

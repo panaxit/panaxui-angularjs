@@ -1,5 +1,7 @@
 import angular from 'angular';
 
+import './pxcards.css';
+
 import pxPagination from '../../directives/px-pagination';
 
 function pxCards() {
