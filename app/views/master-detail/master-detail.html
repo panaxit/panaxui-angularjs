@@ -7,7 +7,7 @@
   row-selection-handler="vm.onSelectionChange(row)">
 </px-grid>
 
-<form ng-submit="vm.onSubmit()" name="vm.form" novalidate>
+<form ng-submit="vm.onSubmit(vm.fields.form, [vm.selected_record])" name="vm.form" novalidate>
 
   <px-form
     data="[vm.selected_record]"

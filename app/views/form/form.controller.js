@@ -84,13 +84,13 @@ export default class FormCtrl extends BaseCtrl {
     console.log("CANCEL");
   }
 
-  onSubmit() {
+  onSubmit(fields, data) {
     var vm = this;
     if (vm.form.$valid) {
       /**
        * Create payload to be sent
        */
-      var payload = vm.CRUDService.buildPersistPayload(vm.fields, vm.data, vm.catalog);
+      var payload = vm.CRUDService.buildPersistPayload(fields || vm.fields, data || vm.data, vm.catalog);
       /**
        * Perform Insert/Update in backend
        */

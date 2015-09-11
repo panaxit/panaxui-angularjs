@@ -1,6 +1,6 @@
-import BaseCtrl from '../base/base.controller';
+import FormCtrl from '../form/form.controller';
 
-export default class MasterDetailCtrl extends BaseCtrl {
+export default class MasterDetailCtrl extends FormCtrl {
   constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
     super($scope, DebugService, $stateParams, CRUDService, AlertService);
   }
@@ -28,7 +28,6 @@ export default class MasterDetailCtrl extends BaseCtrl {
     vm.CRUDService.read(params).then(function (res) {
       vm.catalog = res.data.catalog;
       vm.data = res.data.model || [];
-      vm.selected_record = {};
       vm.fields = {
         grid: res.data.fields.grid,
         form: res.data.fields.form
@@ -60,6 +59,10 @@ export default class MasterDetailCtrl extends BaseCtrl {
 
   onSelectionChange(row) {
     var vm = this;
-    vm.selected_record = row;
+    if(row.isSelected) {
+      vm.selected_record = row.entity;
+    } else {
+      vm.selected_record = {};
+    }
   }
 }

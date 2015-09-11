@@ -96,9 +96,7 @@ function pxGridCtrl($scope, uiGridConstants) {
       });
       // Row Selection
       vm.gridApi.selection.on.rowSelectionChanged($scope, function(row){
-        if(row.isSelected) {
-          vm.rowSelectionHandler({row: row.entity});
-        }
+        vm.rowSelectionHandler({row: row});
       });
     };
   }
