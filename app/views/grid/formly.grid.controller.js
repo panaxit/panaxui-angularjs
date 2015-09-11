@@ -1,16 +1,8 @@
 import GridCtrl from './grid.controller';
 
 export default class FormlyGridCtrl extends GridCtrl {
-  constructor($scope, $stateParams, $q, CRUDService, DebugService, AlertService) {
-    super($scope, $stateParams, $q, CRUDService, DebugService, AlertService);
-    var vm = this;
-
-    vm.$scope = $scope;
-    vm.$stateParams = $stateParams;
-    vm.$q = $q;
-    vm.CRUDService = CRUDService;
-    vm.DebugService = DebugService;
-    vm.AlertService = AlertService;
+  constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
+    super($scope, DebugService, $stateParams, CRUDService, AlertService);
   }
 
   openDebugModal() {
@@ -36,5 +28,3 @@ export default class FormlyGridCtrl extends GridCtrl {
     };
   }
 }
-
-FormlyGridCtrl.$inject = ['$scope', '$stateParams', '$q', 'CRUDService', 'DebugService', 'AlertService'];

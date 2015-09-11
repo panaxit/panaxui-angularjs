@@ -1,31 +1,8 @@
-export default class GridCtrl {
-  constructor($scope, $stateParams, $q, CRUDService, DebugService, AlertService) {
-    var vm = this;
+import BaseCtrl from '../base/base.controller';
 
-    vm.$scope = $scope;
-    vm.$stateParams = $stateParams;
-    vm.$q = $q;
-    vm.CRUDService = CRUDService;
-    vm.DebugService = DebugService;
-    vm.AlertService = AlertService;
-
-    vm.loader();
-
-    vm.$scope.$on('reloadData', function (event, next) {
-      // ToDo: Redraw (re-render) grid. Ex.: when hiding, showing columns
-      vm.loader();
-    });
-
-    vm.$scope.$on('openDebugModal', (event, next) => { vm.openDebugModal(); });
-  }
-
-  openDebugModal() {
-    var vm = this;
-    vm.DebugService.show({
-      catalog: vm.catalog,
-      fields: vm.fields,
-      model: vm.data
-    });
+export default class GridCtrl extends BaseCtrl {
+  constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
+    super($scope, DebugService, $stateParams, CRUDService, AlertService);
   }
 
   loader(pageIndex, pageSize) {
@@ -194,5 +171,3 @@ export default class GridCtrl {
     });
   }
 }
-
-GridCtrl.$inject = ['$scope', '$stateParams', '$q', 'CRUDService', 'DebugService', 'AlertService'];
