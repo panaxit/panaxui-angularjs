@@ -27,11 +27,11 @@ export default class MasterDetailCtrl extends FormCtrl {
     }
     vm.CRUDService.read(params).then(function (res) {
       vm.catalog = res.data.catalog;
-      vm.data = res.data.model || [];
       vm.fields = {
         grid: res.data.fields.grid,
         form: res.data.fields.form
       };
+      vm.data = res.data.model || [];
 
       vm.setOptions();
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);

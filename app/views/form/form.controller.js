@@ -27,8 +27,8 @@ export default class FormCtrl extends BaseCtrl {
     }
     vm.CRUDService.read(params).then(function (res) {
       vm.catalog = res.data.catalog;
-      vm.data = res.data.model || [];
       vm.fields = res.data.fields || [];
+      vm.data = res.data.model || [];
 
       vm.setOptions();
       vm.$scope.$emit('setPanelTitle', (function () {

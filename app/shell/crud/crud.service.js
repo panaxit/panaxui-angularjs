@@ -111,10 +111,12 @@ class CRUDService {
           // fieldset / tab
           if(el.fields) {
             dirtyFieldsIterator(el.fields, dirty_model, orig_model);
+            return;
           }
           // tabs
           if(el.tabs) {
             dirtyFieldsIterator(el.tabs, dirty_model, orig_model);
+            return;
           }
           // Nested Form
           if(el.data && el.data.fields) {
@@ -131,18 +133,21 @@ class CRUDService {
             if(angular.isObject(orig_model[el.key])) {
               dirty_model[el.key][rowsType] = [{}];
               dirtyFieldsIterator(el.data.fields[0], dirty_model[el.key][rowsType][0], orig_model[el.key]);
+              return;
             } else if (isArray(orig_model[el.key])) {
               dirty_model[el.key][rowsType] = [];
               orig_model[el.key].forEach((record, index) => {
                 var row = {};
                 dirtyFieldsIterator(el.data.fields[index], row, record);
                 dirty_model[el.key][rowsType].push(row);
+                return;
               });
             }
           }
           // fieldGroup (async_select, ...)
           if(el.fieldGroup) {
             dirtyFieldsIterator(el.fieldGroup, dirty_model, orig_model);
+            return;
           }
           // Copy regular field's value
           if(el.formControl && el.formControl.$dirty && orig_model.hasOwnProperty(el.key)) {
