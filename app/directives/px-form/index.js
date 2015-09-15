@@ -63,11 +63,14 @@ function pxFormCtrl($scope) {
   }
 
   function initializeFields(fields, data) {
-    // Fields array initialization
-    // Based on: http://angular-formly.com/#/example/advanced/repeating-section
-    vm.fields = [];
-    for(var index=0;index<data.length;index++) {
-      vm.fields.push(copyFields(fields, index));
+    // Not already initialized? (as array)
+    if(!(vm.fields[0] && angular.isArray(vm.fields[0]))) {
+      // Fields array initialization
+      // Based on: http://angular-formly.com/#/example/advanced/repeating-section
+      vm.fields = [];
+      for(var index=0;index<data.length;index++) {
+        vm.fields.push(copyFields(fields, index));
+      }
     }
   }
 
