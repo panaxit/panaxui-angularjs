@@ -51,18 +51,18 @@ export default class MasterDetailCtrl extends FormCtrl {
       multiSelect: false,
       enableCellEdit: false,
       // Form
-      asyncPagination: true,
+      asyncPagination: false,
       // Both
-      showPaginationRow: true
+      showPaginationRow: false
     };
   }
 
   onSelectionChange(row) {
     var vm = this;
     if(row.isSelected) {
-      vm.selected_record = row.entity;
+      vm.selected_record = [row.entity];
     } else {
-      vm.selected_record = {};
+      vm.selected_record = [];
     }
   }
 }

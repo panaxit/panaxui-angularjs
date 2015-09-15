@@ -7,14 +7,13 @@
   row-selection-handler="vm.onSelectionChange(row)">
 </px-grid>
 
-<form ng-submit="vm.onSubmit(vm.fields.form, [vm.selected_record])" name="vm.form" novalidate>
+<form ng-submit="vm.onSubmit(vm.fields.form, vm.selected_record)" name="vm.form" novalidate>
 
   <px-form
-    data="[vm.selected_record]"
+    data="vm.selected_record"
     catalog="vm.catalog"
     fields="vm.fields.form"
     form="vm.form"
-    async-pagination="true"
     pagination-change-handler="vm.onPaginationChange(newPage, newPageSize)">
   </px-form>
 
