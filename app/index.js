@@ -19,7 +19,7 @@ import ShellLoading from './shell/loading';
 import ShellSession from './shell/session';
 import ShellAlert from './shell/alert';
 
-import routing from './core/config';
+import routing from './index.routes';
 
 import IndexCtrl from './index.controller';
 
