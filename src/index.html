@@ -1,19 +1,18 @@
 <!doctype html>
-<html class="no-js">
+<html ng-app="app">
   <head>
     <meta charset="utf-8">
     <title>PANAX</title> <!-- ToDo: Bind app.title to ApplicationCtrl -->
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
-    <script type="text/javascript" src="dist/bundle.js" charset="utf-8"></script>
   </head>
-  <body ng-app="app">
+  <body>
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ng-controller="IndexCtrl as vm">
+    <div ng-controller="AppCtrl as vm">
 
       <!-- ui.router view -->
       <div ui-view></div>

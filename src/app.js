@@ -1,8 +1,8 @@
 //mport 'bootstrap/dist/css/bootstrap.css';
-import 'panaxui-bootstrap/css/bootstrap.css';
+import 'panaxui-bootstrap/css/bootstrap.min.css';
 //import 'panaxui-bootstrap/css/bootstrap-theme.css';
 import 'panaxui-bootstrap/css/roboto.css';
-import './index.css';
+import './app.css';
 
 import angular from 'angular';
 import uibootstrap from 'angular-ui-bootstrap';
@@ -19,9 +19,8 @@ import ShellLoading from './shell/loading';
 import ShellSession from './shell/session';
 import ShellAlert from './shell/alert';
 
-import routing from './index.routes';
-
-import IndexCtrl from './index.controller';
+import routing from './app.routes';
+import AppCtrl from './app.controller';
 
 export default angular.module('app', [
 		uibootstrap,
@@ -39,5 +38,5 @@ export default angular.module('app', [
 		ShellAlert
 	])
 	.config(routing)
-  .controller('IndexCtrl', IndexCtrl)
+  .controller('AppCtrl', AppCtrl)
 	.name;
