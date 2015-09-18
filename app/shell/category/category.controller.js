@@ -21,5 +21,3 @@ export default class CategoryCtrl {
 
   }
 }
-
-CategoryCtrl.$inject = ['$rootScope', '$scope', 'DebugService'];

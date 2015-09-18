@@ -26,8 +26,6 @@ class SessionService {
   }
 }
 
-SessionService.$inject = [];
-
 export default angular.module('app.session.service', [])
   .service('SessionService', SessionService)
   .name;

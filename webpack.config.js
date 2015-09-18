@@ -7,9 +7,7 @@ var APP = path.join(__dirname, '/app');
 
 module.exports = {
 	context: APP,
-	entry: {
-		app: "./core/bootstrap.js"
-	},
+	entry: "./core/bootstrap.js",
 	output: {
 		path: path.join(APP, '/dist'),
 		filename: "bundle.js"

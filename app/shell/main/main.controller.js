@@ -74,5 +74,3 @@ export default class MainCtrl {
   	};
   }
 }
-
-MainCtrl.$inject = ['$rootScope', '$scope', '$state', 'urlifyFilter', 'AuthService', 'AUTH_EVENTS', 'SessionService'];

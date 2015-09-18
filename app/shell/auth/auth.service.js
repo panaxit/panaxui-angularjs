@@ -62,8 +62,6 @@ class AuthService {
   }
 }
 
-AuthService.$inject = ['$http', '$q', 'SessionService'];
-
 export default angular.module('app.auth.service', [])
   .service('AuthService', AuthService)
   .name;

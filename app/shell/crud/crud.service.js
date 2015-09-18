@@ -198,8 +198,6 @@ class CRUDService {
   }
 }
 
-CRUDService.$inject = ['$http', '$q'];
-
 export default angular.module('app.crud.service', [])
   .service('CRUDService', CRUDService)
   .name;

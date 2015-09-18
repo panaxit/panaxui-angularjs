@@ -14,8 +14,6 @@ class AuthInterceptor {
   }
 }
 
-AuthInterceptor.$inject = ['$rootScope', '$q', 'AUTH_EVENTS'];
-
 export default angular.module('app.auth.interceptor', [])
   .service('AuthInterceptor', AuthInterceptor)
   .name;

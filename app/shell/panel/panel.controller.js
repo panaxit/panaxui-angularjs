@@ -13,5 +13,3 @@ export default class PanelCtrl {
     };
   }
 }
-
-PanelCtrl.$inject = ['$scope'];

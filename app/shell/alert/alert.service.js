@@ -15,11 +15,9 @@ class AlertService {
         size: 'lg'
       });
     };
-    
+
   }
 }
-
-AlertService.$inject = ['$modal'];
 
 export default angular.module('app.alert.service', [])
   .service('AlertService', AlertService)

@@ -28,5 +28,3 @@ export default class LoginCtrl {
 		};
   }
 }
-
-LoginCtrl.$inject = ['$scope', '$rootScope', 'AUTH_EVENTS', 'AuthService', 'md5'];

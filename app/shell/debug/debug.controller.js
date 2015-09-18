@@ -19,5 +19,3 @@ export default class DebugCtrl {
 
   }
 }
-
-DebugCtrl.$inject = ['$scope', '$rootScope', '$stateParams', '$modalInstance', '$location', 'SessionService', 'formlyVersion', 'debugInfo'];

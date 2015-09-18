@@ -13,8 +13,6 @@ class ErrorInterceptor {
   }
 }
 
-ErrorInterceptor.$inject = ['$rootScope', '$q', 'ERROR_EVENTS'];
-
 export default angular.module('app.error.interceptor', [])
   .service('ErrorInterceptor', ErrorInterceptor)
   .name;

@@ -23,8 +23,6 @@ class DebugService {
   }
 }
 
-DebugService.$inject = ['$modal'];
-
 export default angular.module('app.debug.service', [])
   .service('DebugService', DebugService)
   .name;

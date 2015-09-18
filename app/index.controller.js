@@ -66,5 +66,3 @@ export default class IndexCtrl {
     });
   }
 }
-
-IndexCtrl.$inject = ['$scope', '$rootScope', '$state', '$q', 'AuthService', 'AlertService'];
