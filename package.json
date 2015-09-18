@@ -8,8 +8,8 @@
   "license": "Copyright 2015 PanaxIT (R)",
   "scripts": {
     "test": "echo \"Pending: Karma tests\" && exit 0",
-    "build": "webpack --progress --color",
-    "watch": "webpack --progress --color --watch"
+    "build": "webpack --progress --color --config webpack.config.js",
+    "build:watch": "webpack --progress --color --watch --config webpack.config.js"
   },
   "config": {
     "ghooks": {
@@ -42,8 +42,10 @@
     "ui-select": "^0.11.2"
   },
   "devDependencies": {
+    "angular-mocks": "^1.4.5",
     "babel-core": "^5.8.5",
     "babel-loader": "^5.3.2",
+    "chai": "^3.2.0",
     "css-loader": "^0.15.5",
     "eslint": "^0.24.1",
     "eslint-loader": "^0.14.2",
@@ -52,9 +54,14 @@
     "imports-loader": "^0.6.4",
     "jshint": "^2.8.0",
     "jshint-loader": "^0.8.3",
-    "karma": "^0.12.31",
+    "karma": "^0.13.9",
+    "karma-mocha": "^0.2.0",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-webpack": "^1.7.0",
+    "mocha": "^2.3.2",
     "ng-annotate-loader": "0.0.6",
     "node-sass": "^3.2.0",
+    "phantomjs": "^1.9.18",
     "raw-loader": "^0.5.1",
     "sass-loader": "^1.0.3",
     "style-loader": "^0.12.3",
