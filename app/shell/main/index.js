@@ -7,23 +7,23 @@ import ngTreeControl from 'angular-tree-control';
 import 'angular-tree-control/css/tree-control.css';
 
 // Shell Components
-import MainCRUD from '../../shell/crud';
-import MainDebug from '../../shell/debug';
-import MainHome from '../../shell/home';
-import MainCategory from '../../shell/category';
-import MainPanel from '../../shell/panel';
+import CRUD from '../../shell/crud';
+import Debug from '../../shell/debug';
+import Home from '../../shell/home';
+import Category from '../../shell/category';
+import Panel from '../../shell/panel';
+
+// Data Views
+import Base from '../../views/base';
+import Grid from '../../views/grid';
+import Form from '../../views/form';
+import Cards from '../../views/cards';
+import MasterDetail from '../../views/master-detail';
 
 // Panax Directives
 import pxGrid from '../../directives/px-grid';
 import pxForm from '../../directives/px-form';
 import pxCards from '../../directives/px-cards';
-
-// Data Components
-import Base from '../../views/grid';
-import Grid from '../../views/grid';
-import Form from '../../views/form';
-import Cards from '../../views/cards';
-import MasterDetail from '../../views/master-detail';
 
 import routing from './main.routes';
 import MainCtrl from './main.controller';
@@ -33,21 +33,24 @@ export default angular.module('app.main', [
 		ngUrlify,
     ngTreeControl,
 
-    MainCRUD,
-		MainDebug,
-    MainHome,
-    MainCategory,
-    MainPanel,
+    // Shell Components
+    CRUD,
+		Debug,
+    Home,
+    Category,
+    Panel,
 
-    pxGrid,
-    pxForm,
-    pxCards,
-
+    // Data Views
     Base,
     Grid,
     Form,
     Cards,
-    MasterDetail
+    MasterDetail,
+
+    // Panax Directives
+    pxGrid,
+    pxForm,
+    pxCards
 	])
 	.config(routing)
 	.controller('MainCtrl', MainCtrl)
