@@ -1,8 +1,7 @@
 import angular from 'angular';
+import dirPagination from 'angular-utils-pagination';
 
 import './pxpagination.css';
-
-import dirPagination from 'angular-utils-pagination';
 
 export default angular.module('app.directives.pxpagination', [
     dirPagination
