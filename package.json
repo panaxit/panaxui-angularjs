@@ -14,7 +14,6 @@
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run test"
     }
   },
   "repository": {
@@ -52,9 +51,16 @@
     "file-loader": "^0.8.4",
     "ghooks": "^0.3.2",
     "html-webpack-plugin": "^1.6.1",
+    "isparta-instrumenter-loader": "^0.2.1",
     "jshint": "^2.8.0",
     "jshint-loader": "^0.8.3",
     "karma": "^0.13.9",
+    "karma-coverage": "^0.5.2",
+    "karma-mocha": "^0.2.0",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-sourcemap-loader": "^0.3.5",
+    "karma-spec-reporter": "0.0.20",
+    "karma-webpack": "^1.7.0",
     "ng-annotate-loader": "0.0.6",
     "postcss-loader": "^0.6.0",
     "raw-loader": "^0.5.1",
