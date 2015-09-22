@@ -1,4 +1,4 @@
-export default class IndexCtrl {
+export default class AppCtrl {
   constructor($scope, $rootScope, $state, $q, AuthService, AlertService) {
 
     /**
