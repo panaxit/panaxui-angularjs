@@ -1,6 +1,6 @@
 import module from './payload.service';
 
-describe('Service: Payload', function() {
+describe('Service: Payload', () => {
   var PayloadService;
 
   beforeEach(angular.mock.module(module));
@@ -9,17 +9,39 @@ describe('Service: Payload', function() {
     PayloadService = _PayloadService_;
   }));
 
-  it('should return empty payload with build()', function() {
-    var payload;
+  describe('#build()', () => {
 
-    payload = PayloadService.build();
-    expect(payload).to.deep.equal({});
+    it('should return empty payload with empty arguments', () => {
+      var payload;
 
-    payload = PayloadService.build([], [], {});
-    expect(payload).to.deep.equal({
-      tableName: undefined,
-      primaryKey: undefined,
-      identityKey: undefined
+      payload = PayloadService.build();
+      expect(payload).to.deep.equal({});
+
+      payload = PayloadService.build([], [], {});
+      expect(payload).to.deep.equal({
+        tableName: undefined,
+        primaryKey: undefined,
+        identityKey: undefined
+      });
     });
+
+    describe(`catalog.mode = 'insert'`, () => {
+
+      it('should return simple payload');
+
+    });
+
+    describe(`catalog.mode = 'edit'`, () => {
+
+      it('should return simple payload');
+
+    });
+
+    describe(`catalog.mode = 'filters'`, () => {
+
+      it('should return simple payload');
+
+    });
+
   });
 });
