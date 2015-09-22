@@ -9,15 +9,17 @@ import uibootstrap from 'angular-ui-bootstrap';
 import uirouter from 'angular-ui-router';
 import azPromiseShow from  'az-promise-show';
 
+// Core Components
 import CoreFilters from './core/filters';
 
-import ShellLogin from './shell/login';
-import ShellMain from './shell/main';
-import ShellError from './shell/error';
-import ShellAuth from './shell/auth';
-import ShellLoading from './shell/loading';
-import ShellSession from './shell/session';
-import ShellAlert from './shell/alert';
+// Shell Components
+import Login from './shell/login';
+import Main from './shell/main';
+import Errors from './shell/error';
+import Auth from './shell/auth';
+import Loading from './shell/loading';
+import Session from './shell/session';
+import Alert from './shell/alert';
 
 import routing from './app.routes';
 import AppCtrl from './app.controller';
@@ -29,13 +31,13 @@ export default angular.module('app', [
 
     CoreFilters,
 
-		ShellLogin,
-		ShellMain,
-		ShellError,
-		ShellAuth,
-		ShellLoading,
-		ShellSession,
-		ShellAlert
+		Login,
+		Main,
+		Errors,
+		Auth,
+		Loading,
+		Session,
+		Alert
 	])
 	.config(routing)
   .controller('AppCtrl', AppCtrl)
