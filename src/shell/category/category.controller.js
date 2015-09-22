@@ -7,8 +7,13 @@ export default class CategoryCtrl {
 
     vm.categoryChildren = [];
     var chunk = 5;
-    for(var i=0;i < $rootScope.currentNavBranch.children.length; i+=chunk)
-      vm.categoryChildren.push($rootScope.currentNavBranch.children.slice(i, i+chunk));
+    for(var i=0;i < $rootScope.currentNavBranch.children.length; i+=chunk) {
+      var row = $rootScope.currentNavBranch.children.slice(i, i+chunk);
+      vm.categoryChildren.push(row);
+      for(var j=0;j < row.length;j++) {
+        row[j].image = require('./img/' + (row[j].data.controlType || 'category') + '.png');
+      }
+    }
 
     vm.onClick = function(node) {
       $scope.$emit('goToBranch', node);
