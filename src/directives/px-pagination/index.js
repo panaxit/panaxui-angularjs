@@ -2,10 +2,14 @@ import angular from 'angular';
 import dirPagination from 'angular-utils-pagination';
 
 import './pxpagination.css';
+import dirPaginationTpl from 'ngtemplate!./dirPagination.tpl.html';
 
 export default angular.module('app.directives.pxpagination', [
     dirPagination
   ])
+  .config(function(paginationTemplateProvider) {
+      paginationTemplateProvider.setPath(dirPaginationTpl);
+  })
   .directive('pxPagination', pxPagination)
   .name;
 
