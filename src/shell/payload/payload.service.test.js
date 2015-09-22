@@ -9,12 +9,17 @@ describe('Service: Payload', function() {
     PayloadService = _PayloadService_;
   }));
 
-  it('should set name with constructor and get it with #getName()', function() {
-    var name = PayloadService.getName();
-    expect(name).to.equal(undefined);
+  it('should return empty payload with build()', function() {
+    var payload;
 
-    PayloadService.setName('pedro');
-    name = PayloadService.getName();
-    expect(name).to.equal('pedro');
+    payload = PayloadService.build();
+    expect(payload).to.deep.equal({});
+
+    payload = PayloadService.build([], [], {});
+    expect(payload).to.deep.equal({
+      tableName: undefined,
+      primaryKey: undefined,
+      identityKey: undefined
+    });
   });
 });

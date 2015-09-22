@@ -1,8 +1,8 @@
 import BaseCtrl from '../base/base.controller';
 
 export default class FormCtrl extends BaseCtrl {
-  constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
-    super($scope, DebugService, $stateParams, CRUDService, AlertService);
+  constructor($scope, DebugService, $stateParams, CRUDService, AlertService, PayloadService) {
+    super($scope, DebugService, $stateParams, CRUDService, AlertService, undefined, PayloadService);
   }
 
   loader(pageIndex, pageSize) {
@@ -90,7 +90,7 @@ export default class FormCtrl extends BaseCtrl {
       /**
        * Create payload to be sent
        */
-      var payload = vm.CRUDService.buildPersistPayload(fields || vm.fields, data || vm.data, vm.catalog);
+      var payload = vm.PayloadService.buildPersistPayload(fields || vm.fields, data || vm.data, vm.catalog);
       /**
        * Perform Insert/Update in backend
        */
