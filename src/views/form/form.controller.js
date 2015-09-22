@@ -90,7 +90,7 @@ export default class FormCtrl extends BaseCtrl {
       /**
        * Create payload to be sent
        */
-      var payload = vm.PayloadService.buildPersistPayload(fields || vm.fields, data || vm.data, vm.catalog);
+      var payload = vm.PayloadService.build(fields || vm.fields, data || vm.data, vm.catalog);
       /**
        * Perform Insert/Update in backend
        */

@@ -36,6 +36,7 @@ export default angular.module('app.main', [
 
     // Shell Components
     CRUD,
+    Payload,
 		Debug,
     Home,
     Category,
