@@ -2,6 +2,7 @@
   "esnext": true,
   "node": true,
   "unused": false,
+  "newcap": false,
   "globals": {
     "angular": true,
     "console": true
