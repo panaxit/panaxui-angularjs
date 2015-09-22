@@ -8,6 +8,7 @@ import 'angular-tree-control/css/tree-control.css';
 
 // Shell Components
 import CRUD from '../../shell/crud';
+import Payload from '../../shell/payload';
 import Debug from '../../shell/debug';
 import Home from '../../shell/home';
 import Category from '../../shell/category';
