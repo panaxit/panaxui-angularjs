@@ -89,13 +89,13 @@ function pxFormCtrl($scope) {
     }
   }
 
-  function copyFields(fields, seed) {
+  function copyFields(fields) {
     fields = angular.copy(fields);
-    addRandomIds(fields, seed);
+    addRandomIds(fields);
     return fields;
   }
 
-  function addRandomIds(fields, seed) {
+  function addRandomIds(fields) {
     angular.forEach(fields, function (field, index) {
       if (field.fields) {
         addRandomIds(field.fields);
@@ -114,7 +114,7 @@ function pxFormCtrl($scope) {
         return; // nested fields don't need an ID
       }
 
-      field.id = field.id || (field.key + '_' + index + '_' + seed + getRandomInt(0, 9999));
+      field.id = field.id || (field.key + '_' + index + '_' + getRandomInt(0, 9999));
     });
   }
 
