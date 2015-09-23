@@ -25,22 +25,62 @@ describe('Service: Payload', () => {
       });
     });
 
-    describe(`catalog.mode = 'insert'`, () => {
+    describe('Simple fieldset', () => {
+      var model = [{
+        "Text": "test"
+      }];
+      var fields = [[{
+        "type": "fieldset",
+        "fields": [{
+          "key": "Text",
+          "type": "input",
+          "formControl": {
+            "$viewValue": "test",
+            "$modelValue": "test",
+            "$dirty": true,
+          }
+        }]
+      }]];
+      var catalog = {
+        "catalogName": "TestSchema.TestTable",
+        "mode": undefined
+      }
 
-      it('should return simple payload');
+      it(`Payload when catalog.mode = 'insert'`, () => {
+        catalog.mode = "insert";
+        var payload = PayloadService.build(fields, model, catalog);
+        expect(payload).to.deep.equal({
+          tableName: catalog.catalogName,
+          primaryKey: catalog.primaryKey,
+          identityKey: catalog.identityKey,
+          insertRows: model
+        });
+      });
 
-    });
+      it(`Payload when catalog.mode = 'filters'`, () => {
+        catalog.mode = "filters";
+        var payload = PayloadService.build(fields, model, catalog);
+        expect(payload).to.deep.equal({
+          tableName: catalog.catalogName,
+          primaryKey: catalog.primaryKey,
+          identityKey: catalog.identityKey,
+          dataRows: model
+        });
+      });
 
-    describe(`catalog.mode = 'edit'`, () => {
-
-      it('should return simple payload');
-
-    });
-
-    describe(`catalog.mode = 'filters'`, () => {
-
-      it('should return simple payload');
-
+      it(`Payload when catalog.mode = 'edit'`, () => {
+        catalog.mode = "edit";
+        catalog.primaryKey = "Id";
+        catalog.identityKey = "Id";
+        model[0][catalog.primaryKey] = "1";
+        var payload = PayloadService.build(fields, model, catalog);
+        expect(payload).to.deep.equal({
+          tableName: catalog.catalogName,
+          primaryKey: catalog.primaryKey,
+          identityKey: catalog.identityKey,
+          updateRows: model
+        });
+      });
     });
 
   });
