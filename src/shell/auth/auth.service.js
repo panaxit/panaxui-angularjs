@@ -3,10 +3,15 @@ import angular from 'angular';
 class AuthService {
   constructor($http, $q, SessionService) {
   	var vm = this;
+    vm.base_url = '';
+
+    vm.setBaseURL = function(url) {
+      vm.base_url = url;
+    }
 
 	  vm.login = function(credentials) {
 			return $http
-				.post('/api/session/login', credentials)
+				.post(vm.base_url + '/api/session/login', credentials)
 				.then(function (res) {
 					SessionService.create(res.data);
 					return res.data;
@@ -20,7 +25,7 @@ class AuthService {
 		vm.sessionInfo = function() {
 	    var deferred = $q.defer();
 			$http
-				.get('/api/session/info')
+				.get(vm.base_url + '/api/session/info')
 				.success(function (response) {
 					SessionService.create(response);
 					deferred.resolve();
@@ -34,7 +39,7 @@ class AuthService {
 		vm.sitemap = function() {
 	    var deferred = $q.defer();
 	    $http
-		    .get("/api/session/sitemap", {
+		    .get(vm.base_url + "/api/session/sitemap", {
 		    	params: {
 		    		gui: 'ng'
 		    	}
@@ -48,7 +53,7 @@ class AuthService {
 		vm.logout = function() {
       var deferred = $q.defer();
 			$http
-				.get('/api/session/logout')
+				.get(vm.base_url + '/api/session/logout')
 				.success(function (res) {
 					SessionService.destroy();
           deferred.resolve(res);
