@@ -39,11 +39,24 @@ module.exports = function karmaConfig (config) {
       'PhantomJS'
     ],
 
+    // If browser does not capture in given timeout [ms], kill it
+    captureTimeout: 60000,
+    // to avoid DISCONNECTED messages
+    browserDisconnectTimeout : 10000, // default 2000
+    browserDisconnectTolerance : 1, // default 0
+    browserNoActivityTimeout : 60000, //default 10000
+
     singleRun: true,
 
     // Configure html reporter
     htmlReporter: {
       outputDir: 'build/tests/'
+    },
+
+    client: {
+      mocha: {
+        timeout: 240000
+      }
     },
 
     // Configure code coverage reporter

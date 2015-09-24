@@ -4,6 +4,15 @@ class CRUDService {
   constructor($http, $q) {
   	var vm = this;
 
+    /*
+    Set base URL if needed (ex. when testing)
+     */
+    vm.base_url = '';
+
+    vm.setBaseURL = function(url) {
+      vm.base_url = url;
+    };
+
     /**
      * GET /api/read
      */
@@ -13,7 +22,7 @@ class CRUDService {
 	    params.output = 'json';
 
 	    $http
-		    .get("/api/read", {params: params})
+		    .get(vm.base_url + "/api/read", {params: params})
 		    .then(function (response) {
 		      deferred.resolve(response.data);
 		    });
@@ -32,7 +41,7 @@ class CRUDService {
         params.filters = "["+params.foreignKey+"='"+params.foreignValue+"']";
 
       $http
-        .get("/api/options", {params: params})
+        .get(vm.base_url + "/api/options", {params: params})
         .then(function (response) {
           deferred.resolve(response.data);
         });
@@ -46,7 +55,7 @@ class CRUDService {
 	    var deferred = $q.defer();
 
 	    $http
-	    	.post("/api/create", payload)
+	    	.post(vm.base_url + "/api/create", payload)
 		    .then(function (response) {
 		      deferred.resolve(response.data);
 		    });
@@ -60,7 +69,7 @@ class CRUDService {
 	    var deferred = $q.defer();
 
 	    $http
-	    	.put("/api/update", payload)
+	    	.put(vm.base_url + "/api/update", payload)
 		    .then(function (response) {
 		      deferred.resolve(response.data);
 		    });
@@ -75,7 +84,7 @@ class CRUDService {
 
       // http://stackoverflow.com/questions/24829933/angularjs-delete-with-data-sets-wrong-content-type-header
       $http({
-        url: "/api/delete",
+        url: vm.base_url + "/api/delete",
         method: 'DELETE',
         data: payload,
         headers: {'Content-Type': 'application/json'}
@@ -93,7 +102,7 @@ class CRUDService {
       var deferred = $q.defer();
 
       $http
-        .post("/api/filters", payload)
+        .post(vm.base_url + "/api/filters", payload)
         .then(function (response) {
           deferred.resolve(response.data);
         });

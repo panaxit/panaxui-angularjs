@@ -4,6 +4,7 @@
 
 import 'angular';
 import 'angular-mocks/angular-mocks';
+import './core/ngMockHttp.js';
 
 var testsContext = require.context(".", true, /.test$/);
 testsContext.keys().forEach(testsContext);
