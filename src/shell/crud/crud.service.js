@@ -2,23 +2,32 @@ import angular from 'angular';
 
 class CRUDService {
   constructor($http, $q) {
-  	var vm = this;
+    var vm = this;
+
+    /*
+    Set base URL if needed (ex. when testing)
+     */
+    vm.base_url = '';
+
+    vm.setBaseURL = function(url) {
+      vm.base_url = url;
+    };
 
     /**
      * GET /api/read
      */
-  	vm.read = function(params) {
-	    var deferred = $q.defer();
-	    params.gui = 'ng';
-	    params.output = 'json';
+    vm.read = function(params) {
+      var deferred = $q.defer();
+      params.gui = 'ng';
+      params.output = 'json';
 
-	    $http
-		    .get("/api/read", {params: params})
-		    .then(function (response) {
-		      deferred.resolve(response.data);
-		    });
-	    return deferred.promise;
-		};
+      $http
+        .get(vm.base_url + "/api/read", {params: params})
+        .then(function (response) {
+          deferred.resolve(response.data);
+        });
+      return deferred.promise;
+    };
 
     /**
      * GET /api/options
@@ -28,11 +37,11 @@ class CRUDService {
       params.gui = 'ng';
       params.array = true;
 
-      if(params.foreignEntity)
+      if(params.foreignEntity && params.foreignKey && params.foreignValue)
         params.filters = "["+params.foreignKey+"='"+params.foreignValue+"']";
 
       $http
-        .get("/api/options", {params: params})
+        .get(vm.base_url + "/api/options", {params: params})
         .then(function (response) {
           deferred.resolve(response.data);
         });
@@ -42,30 +51,30 @@ class CRUDService {
     /**
      * POST /api/create
      */
-  	vm.create = function(payload) {
-	    var deferred = $q.defer();
+    vm.create = function(payload) {
+      var deferred = $q.defer();
 
-	    $http
-	    	.post("/api/create", payload)
-		    .then(function (response) {
-		      deferred.resolve(response.data);
-		    });
-	    return deferred.promise;
-		};
+      $http
+        .post(vm.base_url + "/api/create", payload)
+        .then(function (response) {
+          deferred.resolve(response.data);
+        });
+      return deferred.promise;
+    };
 
     /**
      * PUT /api/update
      */
-  	vm.update = function(payload) {
-	    var deferred = $q.defer();
+    vm.update = function(payload) {
+      var deferred = $q.defer();
 
-	    $http
-	    	.put("/api/update", payload)
-		    .then(function (response) {
-		      deferred.resolve(response.data);
-		    });
-	    return deferred.promise;
-		};
+      $http
+        .put(vm.base_url + "/api/update", payload)
+        .then(function (response) {
+          deferred.resolve(response.data);
+        });
+      return deferred.promise;
+    };
 
     /**
      * DELETE /api/delete
@@ -75,7 +84,7 @@ class CRUDService {
 
       // http://stackoverflow.com/questions/24829933/angularjs-delete-with-data-sets-wrong-content-type-header
       $http({
-        url: "/api/delete",
+        url: vm.base_url + "/api/delete",
         method: 'DELETE',
         data: payload,
         headers: {'Content-Type': 'application/json'}
@@ -93,7 +102,7 @@ class CRUDService {
       var deferred = $q.defer();
 
       $http
-        .post("/api/filters", payload)
+        .post(vm.base_url + "/api/filters", payload)
         .then(function (response) {
           deferred.resolve(response.data);
         });
