@@ -16,7 +16,8 @@ class PayloadService {
     var payload = {
       tableName: catalog.catalogName,
       primaryKey: catalog.primaryKey,
-      identityKey: catalog.identityKey
+      identityKey: catalog.identityKey,
+      foreignReference: catalog.foreignReference
     };
 
     if(catalog.mode === 'insert') {
@@ -52,54 +53,39 @@ class PayloadService {
     return payload;
   }
 
-  dirtyFieldsIterator(fields, dirty_model, orig_model) {
+  dirtyFieldsIterator(fields, payload, orig_model) {
     var vm = this;
 
     angular.forEach(fields, function (el) {
-      // fieldset / tab
       if(el.fields) {
-        vm.dirtyFieldsIterator(el.fields, dirty_model, orig_model);
+        /*
+        fieldset / tab
+         */
+        vm.dirtyFieldsIterator(el.fields, payload, orig_model);
+        return;
+      } else if(el.tabs) {
+        /*
+        tabs
+         */
+        vm.dirtyFieldsIterator(el.tabs, payload, orig_model);
+        return;
+      } else if(el.fieldGroup) {
+        /*
+        fieldGroup (async_select, ...)
+         */
+        vm.dirtyFieldsIterator(el.fieldGroup, payload, orig_model);
+        return;
+      } else if(el.data && el.data.fields) {
+        /*
+        nested
+         */
+        payload[el.key] = vm.build([el.data.fields], [orig_model[el.key]], el.data.catalog);
         return;
       }
-      // tabs
-      if(el.tabs) {
-        vm.dirtyFieldsIterator(el.tabs, dirty_model, orig_model);
-        return;
-      }
-      // Nested Form
-      if(el.data && el.data.fields) {
-        dirty_model[el.key] = {
-          tableName: el.data.catalog.catalogName,
-          primaryKey: el.data.catalog.primaryKey,
-          identityKey: el.data.catalog.identityKey,
-          foreignReference: el.data.catalog.foreignReference
-        };
-        var rowsType;
-        if(el.data.catalog.mode === 'insert') rowsType = 'insertRows';
-        if(el.data.catalog.mode === 'edit') rowsType = 'updateRows';
-        if(el.data.catalog.mode === 'filters') rowsType = 'dataRows';
-        if(angular.isObject(orig_model[el.key])) {
-          dirty_model[el.key][rowsType] = [{}];
-          vm.dirtyFieldsIterator(el.data.fields[0], dirty_model[el.key][rowsType][0], orig_model[el.key]);
-          return;
-        } else if (angular.isArray(orig_model[el.key])) {
-          dirty_model[el.key][rowsType] = [];
-          orig_model[el.key].forEach((record, index) => {
-            var row = {};
-            vm.dirtyFieldsIterator(el.data.fields[index], row, record);
-            dirty_model[el.key][rowsType].push(row);
-            return;
-          });
-        }
-      }
-      // fieldGroup (async_select, ...)
-      if(el.fieldGroup) {
-        vm.dirtyFieldsIterator(el.fieldGroup, dirty_model, orig_model);
-        return;
-      }
-      // Copy regular field's value
-      if(el.formControl && el.formControl.$dirty && orig_model.hasOwnProperty(el.key)) {
-        dirty_model[el.key] = el.formControl.$modelValue || el.formControl.$viewValue;
+
+      // Copy field's value
+      if(orig_model.hasOwnProperty(el.key) && (el.formControl && el.formControl.$dirty)) {
+        payload[el.key] = el.formControl.$viewValue || el.formControl.$modelValue;
       }
     });
   }
