@@ -18,10 +18,6 @@ class AuthService {
 				});
 	  };
 
-		vm.isAuthenticated = function() {
-			return !!SessionService.userId;
-		};
-
 		vm.sessionInfo = function() {
 	    var deferred = $q.defer();
 			$http
@@ -58,7 +54,7 @@ class AuthService {
 					SessionService.destroy();
           deferred.resolve(res);
 				})
-        .error(function() {
+        .error(function(res) {
           SessionService.destroy();
           deferred.reject(res);
         });
@@ -66,6 +62,8 @@ class AuthService {
 		};
   }
 }
+
+AuthService.$inject = ['$http', '$q', 'SessionService'];
 
 export default angular.module('app.auth.service', [])
   .service('AuthService', AuthService)
