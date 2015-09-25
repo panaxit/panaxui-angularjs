@@ -5,11 +5,13 @@ import './pxform.css';
 import formly from 'angular-formly';
 import formlyBootstrap from 'angular-formly-templates-bootstrap';
 import pxPagination from '../../directives/px-pagination';
+import coreFilters from '../../core/filters';
 
 export default angular.module('app.directives.pxform', [
     formly,
     formlyBootstrap,
-    pxPagination
+    pxPagination,
+    coreFilters
   ])
   .directive('pxForm', pxForm)
   .name;
