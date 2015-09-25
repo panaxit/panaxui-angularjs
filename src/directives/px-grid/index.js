@@ -4,6 +4,7 @@ import './pxgrid.css';
 
 import uigrid from 'angular-ui-grid/ui-grid.js';
 import 'angular-ui-grid/ui-grid.css';
+import coreFilters from '../../core/filters';
 
 export default angular.module('app.directives.pxgrid', [
     'ui.grid',
@@ -11,7 +12,8 @@ export default angular.module('app.directives.pxgrid', [
     'ui.grid.selection',
     'ui.grid.edit',
     'ui.grid.rowEdit',
-    'ui.grid.pagination'
+    'ui.grid.pagination',
+    coreFilters
   ])
   .directive('pxGrid', pxGrid)
   .name;
