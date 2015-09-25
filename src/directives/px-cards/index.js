@@ -3,9 +3,11 @@ import angular from 'angular';
 import './pxcards.css';
 
 import pxPagination from '../../directives/px-pagination';
+import coreFilters from '../../core/filters';
 
 export default angular.module('app.directives.pxcards', [
-    pxPagination
+    pxPagination,
+    coreFilters
   ])
   .directive('pxCards', pxCards)
   .name;
