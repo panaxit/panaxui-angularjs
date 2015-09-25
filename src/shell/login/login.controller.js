@@ -1,5 +1,5 @@
 export default class LoginCtrl {
-  constructor($scope, $rootScope, AUTH_EVENTS, AuthService, md5) {
+  constructor($rootScope, AUTH_EVENTS, AuthService, md5) {
   	var vm = this;
 
     $rootScope.$watch('panax_instances', function (instances) {
