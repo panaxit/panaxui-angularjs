@@ -3,9 +3,11 @@ import dirPagination from 'angular-utils-pagination';
 
 import './pxpagination.css';
 import dirPaginationTpl from 'ngtemplate!./dirPagination.tpl.html';
+import coreFilters from '../../core/filters';
 
 export default angular.module('app.directives.pxpagination', [
-    dirPagination
+    dirPagination,
+    coreFilters
   ])
   .config(function(paginationTemplateProvider) {
       paginationTemplateProvider.setPath(dirPaginationTpl);
