@@ -57,6 +57,7 @@ import pxPanel from './wrappers/px-panel';
 import pxForm from './types/px-form';
 import pxGrid from './types/px-grid';
 import pxCards from './types/px-cards';
+import pxAgGrid from './types/px-ag-grid';
 
 export default angular.module('app.main.form.formly', [
     formly,
@@ -84,4 +85,5 @@ export default angular.module('app.main.form.formly', [
   .config(pxForm)
   .config(pxGrid)
   .config(pxCards)
+  .config(pxAgGrid)
   .name;

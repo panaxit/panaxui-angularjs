@@ -25,6 +25,7 @@ import MasterDetail from '../../views/master-detail';
 import pxGrid from '../../directives/px-grid';
 import pxForm from '../../directives/px-form';
 import pxCards from '../../directives/px-cards';
+import pxAgGrid from '../../directives/px-ag-grid';
 
 import routing from './main.routes';
 import MainCtrl from './main.controller';
@@ -52,7 +53,8 @@ export default angular.module('app.main', [
     // Panax Directives
     pxGrid,
     pxForm,
-    pxCards
+    pxCards,
+    pxAgGrid
 	])
 	.config(routing)
 	.controller('MainCtrl', MainCtrl)
