@@ -22,6 +22,7 @@
     "url": "https://benoror@bitbucket.org/benoror/panaxui-angularjs.git"
   },
   "dependencies": {
+    "ag-grid": "^2.1.1",
     "angular": "~1.3.15",
     "angular-color-picker": "git+https://github.com/benoror/angular-color-picker.git",
     "angular-formly": "^6.21.0",
