@@ -5,7 +5,7 @@ export default function(formlyConfigProvider) {
   formlyConfigProvider.setType({
     name: 'px-cards',
     template: require('./px-cards.html'),
-    wrapper: ['px-panel', 'bootstrapHasError'],
+    wrapper: ['panel', 'bootstrapHasError'],
     controller: 'FormlyCardsCtrl as vm'
   });
 }

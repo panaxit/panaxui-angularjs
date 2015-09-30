@@ -52,12 +52,11 @@ import color from './types/colorpicker';
 import date from './types/datepicker';
 import time from './types/timepicker';
 import datetime from './types/datetime';
-
-import pxPanel from './wrappers/px-panel';
+import panel from './wrappers/panel';
 import pxForm from './types/px-form';
 import pxGrid from './types/px-grid';
 import pxCards from './types/px-cards';
-import pxAgGrid from './types/px-ag-grid';
+import junction_table from './types/junction_table';
 
 export default angular.module('app.main.form.formly', [
     formly,
@@ -65,7 +64,10 @@ export default angular.module('app.main.form.formly', [
     ngSanitize,
     'ui.select',
 
-    'color.picker'
+    'color.picker',
+
+
+    panel
   ])
   .config(input)
   .config(_default)
@@ -81,9 +83,8 @@ export default angular.module('app.main.form.formly', [
   .config(date)
   .config(time)
   .config(datetime)
-  .config(pxPanel)
   .config(pxForm)
   .config(pxGrid)
   .config(pxCards)
-  .config(pxAgGrid)
+  .config(junction_table)
   .name;

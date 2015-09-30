@@ -5,7 +5,7 @@ export default function(formlyConfigProvider) {
   formlyConfigProvider.setType({
     name: 'px-grid',
     template: require('./px-grid.html'),
-    wrapper: ['px-panel', 'bootstrapHasError'],
+    wrapper: ['panel', 'bootstrapHasError'],
     controller: 'FormlyGridCtrl as vm'
   });
 

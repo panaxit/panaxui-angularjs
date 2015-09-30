@@ -5,7 +5,7 @@ export default function(formlyConfigProvider) {
   formlyConfigProvider.setType({
     name: 'px-form',
     template: require('./px-form.html'),
-    wrapper: ['px-panel', 'bootstrapHasError'],
+    wrapper: ['panel', 'bootstrapHasError'],
     controller: 'FormlyFormCtrl as vm'
   });
 }
