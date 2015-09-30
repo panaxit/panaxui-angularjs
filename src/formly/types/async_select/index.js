@@ -1,4 +1,11 @@
-export default angular.module('app.main.form.formly.type.async_select', [])
+import ngSanitize from 'angular-sanitize';
+import uiselect from 'ui-select';
+import 'ui-select/dist/select.css';
+
+export default angular.module('app.main.form.formly.type.async_select', [
+    ngSanitize,
+    'ui.select'
+  ])
   .config(async_select)
   .name;
 

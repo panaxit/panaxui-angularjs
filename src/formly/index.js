@@ -29,10 +29,6 @@
 
 import formly from 'angular-formly';
 
-import ngSanitize from 'angular-sanitize';
-import uiselect from 'ui-select';
-import 'ui-select/dist/select.css';
-
 // http://webpack.github.io/docs/shimming-modules.html#imports-loader
 import colorpicker from 'imports?tinycolor=tinycolor2!angular-color-picker/angularjs-color-picker.js';
 import 'angular-color-picker/angularjs-color-picker.css';
@@ -58,12 +54,10 @@ import color from './types/color';
 import date from './types/date';
 import time from './types/time';
 import datetime from './types/datetime';
+import form from './types/form';
 
 export default angular.module('app.main.form.formly', [
     formly,
-
-    ngSanitize,
-    'ui.select',
 
     'color.picker',
 
