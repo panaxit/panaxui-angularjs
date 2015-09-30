@@ -23,6 +23,12 @@ module.exports = function karmaConfig (config) {
     ],
 
     files: [
+      // Reference:
+      //  - https://www.npmjs.com/package/phantomjs-polyfill
+      //  - https://github.com/ceolter/ag-grid/issues/420
+      //    - http://www.ag-grid.com/forum/showthread.php?tid=2516
+      // Function.prototype.bind polyfill for PhantomJS
+      'node_modules/phantomjs-polyfill/bind-polyfill.js',
       // Grab all files in the app folder that contain .test.
       'src/tests.webpack.js'
     ],
