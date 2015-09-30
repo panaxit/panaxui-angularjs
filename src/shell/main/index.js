@@ -15,11 +15,11 @@ import Category from '../../shell/category';
 import Panel from '../../shell/panel';
 
 // Data Views
-import Base from '../../views/base';
-import Grid from '../../views/grid';
-import Form from '../../views/form';
-import Cards from '../../views/cards';
-import MasterDetail from '../../views/master-detail';
+import Base from '../../shell/base';
+import Grid from '../../shell/grid';
+import Form from '../../shell/form';
+import Cards from '../../shell/cards';
+import MasterDetail from '../../shell/master-detail';
 
 // Panax Directives
 import pxGrid from '../../directives/px-grid';
