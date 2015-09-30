@@ -1,4 +1,4 @@
-import GridCtrl from './grid.controller';
+import GridCtrl from '../../../shell/grid/grid.controller';
 
 export default class FormlyGridCtrl extends GridCtrl {
   constructor($scope, DebugService, $stateParams, CRUDService, AlertService, $q) {
