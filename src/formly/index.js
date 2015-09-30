@@ -37,8 +37,6 @@ import 'ui-select/dist/select.css';
 import colorpicker from 'imports?tinycolor=tinycolor2!angular-color-picker/angularjs-color-picker.js';
 import 'angular-color-picker/angularjs-color-picker.css';
 
-import number from './types/number';
-import money from './types/money';
 import select from './types/select';
 import async_select from './types/async_select';
 import color from './types/colorpicker';
@@ -58,6 +56,8 @@ import password from './types/password';
 import email from './types/email';
 import file from './types/file';
 import url from './types/url';
+import number from './types/number';
+import money from './types/money';
 
 export default angular.module('app.main.form.formly', [
     formly,
@@ -74,10 +74,10 @@ export default angular.module('app.main.form.formly', [
     password,
     email,
     file,
-    url
+    url,
+    number,
+    money
   ])
-  .config(number)
-  .config(money)
   .config(select)
   .config(async_select)
   .config(color)
