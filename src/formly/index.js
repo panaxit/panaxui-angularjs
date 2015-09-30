@@ -38,7 +38,6 @@ import colorpicker from 'imports?tinycolor=tinycolor2!angular-color-picker/angul
 import 'angular-color-picker/angularjs-color-picker.css';
 
 
-import password from './types/password';
 import email from './types/email';
 import file from './types/file';
 import url from './types/url';
@@ -59,6 +58,7 @@ import junction_table from './types/junction_table';
 import panel from './wrappers/panel';
 import input from './types/input';
 import _default from './types/default';
+import password from './types/password';
 
 export default angular.module('app.main.form.formly', [
     formly,
@@ -71,9 +71,9 @@ export default angular.module('app.main.form.formly', [
 
     panel,
     input,
-    _default
+    _default,
+    password
   ])
-  .config(password)
   .config(email)
   .config(file)
   .config(url)
