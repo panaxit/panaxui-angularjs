@@ -37,10 +37,6 @@ import 'ui-select/dist/select.css';
 import colorpicker from 'imports?tinycolor=tinycolor2!angular-color-picker/angularjs-color-picker.js';
 import 'angular-color-picker/angularjs-color-picker.css';
 
-import color from './types/colorpicker';
-import date from './types/datepicker';
-import time from './types/timepicker';
-import datetime from './types/datetime';
 import pxForm from './types/px-form';
 import pxGrid from './types/px-grid';
 import pxCards from './types/px-cards';
@@ -58,6 +54,10 @@ import number from './types/number';
 import money from './types/money';
 import select from './types/select';
 import async_select from './types/async_select';
+import color from './types/color';
+import date from './types/date';
+import time from './types/time';
+import datetime from './types/datetime';
 
 export default angular.module('app.main.form.formly', [
     formly,
@@ -78,12 +78,12 @@ export default angular.module('app.main.form.formly', [
     number,
     money,
     select,
-    async_select
+    async_select,
+    color,
+    date,
+    time,
+    datetime
   ])
-  .config(color)
-  .config(date)
-  .config(time)
-  .config(datetime)
   .config(pxForm)
   .config(pxGrid)
   .config(pxCards)

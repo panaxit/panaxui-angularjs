@@ -1,4 +1,8 @@
-export default function(formlyConfigProvider) {
+export default angular.module('app.main.form.formly.type.date', [])
+  .config(date)
+  .name;
+
+function date(formlyConfigProvider) {
   /*
   ngModelAttrs stuff
    */
@@ -60,7 +64,7 @@ export default function(formlyConfigProvider) {
 
   formlyConfigProvider.setType({
     name: 'date',
-    template: require('./datepicker.html'),
+    template: require('./template.html'),
     wrapper: ['bootstrapLabel', 'bootstrapHasError'],
     defaultOptions: {
       ngModelAttrs: ngModelAttrs,

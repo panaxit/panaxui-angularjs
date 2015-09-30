@@ -1,4 +1,8 @@
-export default function(formlyConfigProvider) {
+export default angular.module('app.main.form.formly.type.color', [])
+  .config(color)
+  .name;
+
+function color(formlyConfigProvider) {
   /*
   ngModelAttrs stuff
    */
@@ -15,38 +19,44 @@ export default function(formlyConfigProvider) {
   }
 
   /*
-  timepicker
-  https://github.com/formly-js/angular-formly-website/issues/23
+  colorpicker
   */
 
   ngModelAttrs = {};
 
   // attributes
   angular.forEach([
-    'meridians',
-    'readonly-input',
-    'mousewheel',
-    'arrowkeys'
+    'color-picker-format',
+    'color-picker-alpha',
+    'color-picker-swatch',
+    'color-picker-swatch-pos',
+    'color-picker-swatch-bootstrap',
+    'color-picker-swatch-only',
+    'color-picker-pos',
+    'color-picker-case'
   ], function(attr) {
     ngModelAttrs[camelize(attr)] = {attribute: attr};
   });
 
   // bindings
   angular.forEach([
-    'hour-step',
-    'minute-step',
-    'show-meridian'
   ], function(binding) {
     ngModelAttrs[camelize(binding)] = {bound: binding};
   });
 
   formlyConfigProvider.setType({
-    name: 'time',
-    template: require('./timepicker.html'),
+    name: 'color',
+    template: '<color-picker ng-model="model[options.key]" color-picker-swatch-bootstrap="false"></color-picker>',
     wrapper: ['bootstrapLabel', 'bootstrapHasError'],
     defaultOptions: {
       ngModelAttrs: ngModelAttrs,
       templateOptions: {
+        "colorPickerFormat": "'hex'",
+        "colorPickerAlpha": false,
+        "colorPickerPos": "'top left'",
+        "colorPickerSwatchOnly": false,
+        "colorPickerSwatchBootstrap": false,
+        "colorPickerSwatchPos": "'left'"
       }
     }
   });
