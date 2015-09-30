@@ -29,11 +29,6 @@
 
 import formly from 'angular-formly';
 
-// http://webpack.github.io/docs/shimming-modules.html#imports-loader
-import colorpicker from 'imports?tinycolor=tinycolor2!angular-color-picker/angularjs-color-picker.js';
-import 'angular-color-picker/angularjs-color-picker.css';
-
-import pxForm from './types/px-form';
 import pxGrid from './types/px-grid';
 import pxCards from './types/px-cards';
 import junction_table from './types/junction_table';
@@ -58,8 +53,6 @@ import form from './types/form';
 
 export default angular.module('app.main.form.formly', [
     formly,
-
-    'color.picker',
 
 
     panel,

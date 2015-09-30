@@ -1,4 +1,10 @@
-export default angular.module('app.main.form.formly.type.color', [])
+// http://webpack.github.io/docs/shimming-modules.html#imports-loader
+import colorpicker from 'imports?tinycolor=tinycolor2!angular-color-picker/angularjs-color-picker.js';
+import 'angular-color-picker/angularjs-color-picker.css';
+
+export default angular.module('app.main.form.formly.type.color', [
+    'color.picker'
+  ])
   .config(color)
   .name;
 
