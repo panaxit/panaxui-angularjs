@@ -1,4 +1,8 @@
-export default function(formlyConfigProvider) {
+export default angular.module('app.main.form.formly.type.async_select', [])
+  .config(async_select)
+  .name;
+
+function async_select(formlyConfigProvider) {
   /*
     async_select
     Extends select
@@ -7,7 +11,7 @@ export default function(formlyConfigProvider) {
   formlyConfigProvider.setType({
     name: 'async_select',
     extends: 'select',
-    template: require('./async_select.html'),
+    template: require('./template.html'),
     defaultOptions: {
       templateOptions: {
         options: [],
