@@ -1,4 +1,4 @@
-import FormCtrl from './form.controller';
+import FormCtrl from '../../../shell/form/form.controller';
 
 export default class FormlyFormCtrl extends FormCtrl {
   constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {

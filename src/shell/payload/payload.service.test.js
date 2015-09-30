@@ -235,7 +235,7 @@ describe('Service: Payload', () => {
           }
         }, {
           "key": "Nested",
-          "type": "px-form",
+          "type": "form",
           "formControl": {
             "$viewValue": {"Inner": "test_nested"},
             "$modelValue": {"Inner": "test_nested"},

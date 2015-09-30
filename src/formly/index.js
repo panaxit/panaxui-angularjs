@@ -33,7 +33,6 @@ import pxGrid from './types/px-grid';
 import pxCards from './types/px-cards';
 import junction_table from './types/junction_table';
 
-
 import panel from './wrappers/panel';
 import input from './types/input';
 import _default from './types/default';
@@ -69,9 +68,9 @@ export default angular.module('app.main.form.formly', [
     color,
     date,
     time,
-    datetime
+    datetime,
+    form
   ])
-  .config(pxForm)
   .config(pxGrid)
   .config(pxCards)
   .config(junction_table)
