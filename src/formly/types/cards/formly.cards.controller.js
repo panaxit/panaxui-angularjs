@@ -1,4 +1,4 @@
-import CardsCtrl from './cards.controller';
+import CardsCtrl from '../../../shell/cards/cards.controller';
 
 export default class FormlyCardsCtrl extends CardsCtrl {
   constructor($scope, DebugService, $stateParams, CRUDService) {
