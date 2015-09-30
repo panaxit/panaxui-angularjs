@@ -1,4 +1,8 @@
-export default function(formlyConfigProvider) {
+export default angular.module('app.main.form.formly.type.file', [])
+  .config(file)
+  .name;
+
+function file(formlyConfigProvider) {
   /*
     file
     ToDo: Improve
