@@ -56,27 +56,37 @@ function pxAgGridCtrl($scope) {
 
   initialize();
 
+  $scope.$watch('vm.data', function(newData) {
+    if(newData) initializeData(newData);
+  });
+
+  $scope.$watch('vm.fields', function(newFields) {
+    if(newFields) initializeFields(newFields);
+  });
+
   /*
   function declarations
    */
 
   function initialize() {
-    var columnDefs = [
-        {headerName: "Make", field: "make"},
-        {headerName: "Model", field: "model"},
-        {headerName: "Price", field: "price"}
-    ];
+    vm.gridOptions = {};
+    // ToDo: Exclusive to junction table
+    vm.gridOptions.headerHeight = 0;
+    vm.gridOptions.rowSelection = 'multiple';
+  }
 
-    var rowData = [
-        {make: "Toyota", model: "Celica", price: 35000},
-        {make: "Ford", model: "Mondeo", price: 32000},
-        {make: "Porsche", model: "Boxter", price: 72000}
-    ];
+  function initializeData(data) {
+    // Row Data
+    vm.gridOptions.api.setRowData(data);
+  }
 
-    vm.gridOptions = {
-        columnDefs: columnDefs,
-        rowData: rowData
-    };
+  function initializeFields(fields) {
+    // Column Defs
+    fields.forEach(function(colDef, index) {
+      colDef.checkboxSelection = true;
+    });
+    vm.gridOptions.api.setColumnDefs(fields);
+    vm.gridOptions.api.sizeColumnsToFit();
   }
 
 }

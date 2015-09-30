@@ -29,8 +29,6 @@
 
 import formly from 'angular-formly';
 
-import junction_table from './types/junction_table';
-
 import panel from './wrappers/panel';
 import input from './types/input';
 import _default from './types/default';
@@ -50,6 +48,7 @@ import datetime from './types/datetime';
 import form from './types/form';
 import cards from './types/cards';
 import grid from './types/grid';
+import junction from './types/junction';
 
 export default angular.module('app.main.form.formly', [
     formly,
@@ -72,7 +71,7 @@ export default angular.module('app.main.form.formly', [
 
     form,
     cards,
-    grid
+    grid,
+    junction
   ])
-  .config(junction_table)
   .name;
