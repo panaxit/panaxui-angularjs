@@ -23,8 +23,9 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
   initialize() {
     var vm = this;
     // Checkboxes
-    vm.fields.forEach(function(colDef, index) {
+    vm.fields.forEach((colDef, index) => {
       colDef.checkboxSelection = true;
+      colDef.cellRenderer = params => params.value.text;
     });
   }
 
