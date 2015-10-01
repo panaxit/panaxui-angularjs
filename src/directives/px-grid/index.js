@@ -77,7 +77,7 @@ function pxGridCtrl($scope, uiGridConstants) {
    */
 
   function initialize() {
-    // Grit general defaults
+    // Grid general defaults
     vm.uigrid_options = {};
     vm.uigrid_options.rowHeight = 32;
     vm.uigrid_options.showGridFooter = false;

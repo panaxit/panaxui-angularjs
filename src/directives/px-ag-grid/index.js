@@ -64,15 +64,17 @@ function pxAgGridCtrl($scope) {
     if(newFields) initializeFields(newFields);
   });
 
+  $scope.$watch('vm.options', function(newOptions) {
+    if(newOptions) initializeOptions(newOptions);
+  });
+
   /*
   function declarations
    */
 
   function initialize() {
+    // Grid general defaults
     vm.gridOptions = {};
-    // ToDo: Exclusive to junction table
-    vm.gridOptions.headerHeight = 0;
-    vm.gridOptions.rowSelection = 'multiple';
   }
 
   function initializeData(data) {
@@ -82,11 +84,20 @@ function pxAgGridCtrl($scope) {
 
   function initializeFields(fields) {
     // Column Defs
-    fields.forEach(function(colDef, index) {
-      colDef.checkboxSelection = true;
-    });
     vm.gridOptions.api.setColumnDefs(fields);
+    // Fit Columns
     vm.gridOptions.api.sizeColumnsToFit();
+  }
+
+  function initializeOptions(options) {
+    // Header
+    vm.gridOptions.api.setHeaderHeight(options.headerHeight);
+    vm.gridOptions.api.sizeColumnsToFit();
+    // Selection
+    vm.gridOptions.rowSelection = options.rowSelection;
+    // Refresh View
+    // vm.gridOptions.api.refreshHeader();
+    // vm.gridOptions.api.refreshView();
   }
 
 }

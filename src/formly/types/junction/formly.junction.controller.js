@@ -14,6 +14,9 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
 
     vm.data = vm.$scope.model[vm.$scope.options.key] || [];
     vm.fields = vm.$scope.options.data.fields;
+    vm.fields.forEach(function(colDef, index) {
+      colDef.checkboxSelection = true;
+    });
     vm.catalog = vm.$scope.options.data.catalog;
 
     vm.setOptions();
@@ -22,7 +25,8 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
   setOptions() {
     var vm = this;
     vm.options = {
-
+      headerHeight: 0,
+      rowSelection: 'multiple'
     };
   }
 }
