@@ -38,8 +38,20 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
   }
 
   onRowSelectionChange(selectedRows) {
-    var vm = this;
-    // vm.data.indexOf()
-    // debugger;
+    let vm = this;
+    // Update model
+    let pKey = vm.catalog.primaryKey;
+    let refA = vm.catalog.foreignReference;
+    let refB = pKey.replace(refA, '').replace(',', '');
+    angular.forEach(vm.data, (row) => {
+      if(selectedRows.indexOf(row) > -1) {
+        // Selected
+        let combinedKey =
+        row[pKey] = row[pKey] || row[refA] + ' ' + row[refB].value;
+      } else {
+        // not selected
+        delete row[vm.catalog.primaryKey];
+      }
+    });
   }
 }

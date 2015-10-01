@@ -36,7 +36,8 @@ function pxAgGrid() {
       catalog: '=',
       data: '=',
       fields: '=',
-      options: '='
+      options: '=',
+      rowSelectionHandler: '&'
     },
     bindToController: true,
     controllerAs: 'vm',
@@ -107,6 +108,10 @@ function pxAgGridCtrl($scope) {
           vm.gridOptions.api.deselectNode(node);
         }
       });
+      // Register API callback
+      vm.gridOptions.onSelectionChanged = (event) => {
+        vm.rowSelectionHandler({selectedRows: event.selectedRows});
+      };
     }
     // Refresh View
     // vm.gridOptions.api.refreshHeader();
