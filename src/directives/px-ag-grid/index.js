@@ -95,6 +95,19 @@ function pxAgGridCtrl($scope) {
     vm.gridOptions.api.sizeColumnsToFit();
     // Selection
     vm.gridOptions.rowSelection = options.rowSelection;
+    // Junction table specifics
+    if(options.isJunctionTable) {
+      // Select junction rows
+      vm.gridOptions.api.forEachNode((node) => {
+        let isMulti = (options.rowSelection === 'multiple');
+        if(!!node.data[vm.catalog.primaryKey]) {
+          vm.gridOptions.api.selectNode(node, isMulti);
+        }
+        else {
+          vm.gridOptions.api.deselectNode(node);
+        }
+      });
+    }
     // Refresh View
     // vm.gridOptions.api.refreshHeader();
     // vm.gridOptions.api.refreshView();
