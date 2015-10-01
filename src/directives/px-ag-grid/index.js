@@ -48,6 +48,7 @@ function pxAgGrid() {
 /**
  * Directive's Controller
  */
+
 function pxAgGridCtrl($scope) {
   var vm = this;
 

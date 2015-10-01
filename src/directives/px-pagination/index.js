@@ -1,9 +1,22 @@
+/**
+ * Dependencies
+ */
+
 import angular from 'angular';
 import dirPagination from 'angular-utils-pagination';
-
-import './pxpagination.css';
-import dirPaginationTpl from 'ngtemplate!./dirPagination.tpl.html';
 import coreFilters from '../../core/filters';
+
+/**
+ * Resources
+ */
+
+import style from './style.css';
+import template from './template.html';
+import dirPaginationTpl from 'ngtemplate!./dirPagination.tpl.html';
+
+/**
+ * Module
+ */
 
 export default angular.module('app.directives.pxpagination', [
     dirPagination,
@@ -15,10 +28,14 @@ export default angular.module('app.directives.pxpagination', [
   .directive('pxPagination', pxPagination)
   .name;
 
+/**
+ * Directive
+ */
+
 function pxPagination() {
   return {
     restrict: 'E',
-    template: require('./pxpagination.html'),
+    template: template,
     scope: {
       pagination_options: '=options',
       onPaginationChange: '&?'
@@ -28,6 +45,10 @@ function pxPagination() {
     controller: pxPaginationCtrl
   };
 }
+
+/**
+ * Directive's Controller
+ */
 
 function pxPaginationCtrl($scope) {
   var vm = this;

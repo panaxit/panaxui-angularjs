@@ -1,9 +1,21 @@
+/**
+ * Dependencies
+ */
+
 import angular from 'angular';
-
-import './pxcards.css';
-
 import pxPagination from '../../directives/px-pagination';
 import coreFilters from '../../core/filters';
+
+/**
+ * Resources
+ */
+
+import style from './style.css';
+import template from './template.html';
+
+/**
+ * Module
+ */
 
 export default angular.module('app.directives.pxcards', [
     pxPagination,
@@ -12,10 +24,14 @@ export default angular.module('app.directives.pxcards', [
   .directive('pxCards', pxCards)
   .name;
 
+/**
+ * Directive
+ */
+
 function pxCards() {
   return {
     restrict: 'E',
-    template: require('./pxcards.html'),
+    template: template,
     scope: {
       data: '=',
       catalog: '=',
@@ -30,6 +46,10 @@ function pxCards() {
     controller: pxCardsCtrl
   };
 }
+
+/**
+ * Directive's Controller
+ */
 
 function pxCardsCtrl($scope) {
   var vm = this;

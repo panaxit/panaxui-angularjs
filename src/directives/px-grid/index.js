@@ -1,10 +1,23 @@
+/**
+ * Dependencies
+ */
+
 import angular from 'angular';
-
-import './pxgrid.css';
-
 import uigrid from 'angular-ui-grid/ui-grid.js';
 import 'angular-ui-grid/ui-grid.css';
 import coreFilters from '../../core/filters';
+
+/**
+ * Resources
+ */
+
+import style from './style.css';
+import template from './template.html';
+import templateRowActions from './template.row.actions.html';
+
+/**
+ * Module
+ */
 
 export default angular.module('app.directives.pxgrid', [
     'ui.grid',
@@ -18,10 +31,14 @@ export default angular.module('app.directives.pxgrid', [
   .directive('pxGrid', pxGrid)
   .name;
 
+/**
+ * Directive
+ */
+
 function pxGrid() {
   return {
     restrict: 'E',
-    template: require('./pxgrid.html'),
+    template: template,
     scope: {
       catalog: '=',
       data: '=',
@@ -40,6 +57,10 @@ function pxGrid() {
     controller: pxGridCtrl
   };
 }
+
+/**
+ * Directive's Controller
+ */
 
 function pxGridCtrl($scope, uiGridConstants) {
   var vm = this;
@@ -144,7 +165,7 @@ function pxGridCtrl($scope, uiGridConstants) {
         name: 'px-actions',
         displayName: '⚡',
         type: 'object',
-        cellTemplate: require('./pxgrid.row.actions.html'),
+        cellTemplate: templateRowActions,
         width: '34',
         enableCellEdit: false,
         enableColumnMenus: false,

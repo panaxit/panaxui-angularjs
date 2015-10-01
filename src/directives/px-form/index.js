@@ -1,11 +1,23 @@
+/**
+ * Dependencies
+ */
+
 import angular from 'angular';
-
-import './pxform.css';
-
 import formly from 'angular-formly';
 import formlyBootstrap from 'angular-formly-templates-bootstrap';
 import pxPagination from '../../directives/px-pagination';
 import coreFilters from '../../core/filters';
+
+/**
+ * Resources
+ */
+
+import style from './style.css';
+import template from './template.html';
+
+/**
+ * Module
+ */
 
 export default angular.module('app.directives.pxform', [
     formly,
@@ -16,10 +28,14 @@ export default angular.module('app.directives.pxform', [
   .directive('pxForm', pxForm)
   .name;
 
+/**
+ * Directive
+ */
+
 function pxForm() {
   return {
     restrict: 'E',
-    template: require('./pxform.html'),
+    template: template,
     scope: {
       catalog: '=',
       data: '=',
@@ -33,6 +49,10 @@ function pxForm() {
     controller: pxFormCtrl
   };
 }
+
+/**
+ * Directive's Controller
+ */
 
 function pxFormCtrl($scope) {
   var vm = this;
