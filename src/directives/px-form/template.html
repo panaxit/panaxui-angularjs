@@ -40,6 +40,12 @@
 
 <script type="text/ng-template" id="pxform-layout">
 
+  <formly-form model="record"
+               fields="vm.fields[$index]"
+               ng-attr-form="vm.form">
+  </formly-form>
+
+<!--
   <fieldset ng-repeat="fieldset in vm.fields[$index] | filter:{type:'fieldset'}" class="pxrecord">
     <formly-form model="record"
                  fields="fieldset.fields"
@@ -64,5 +70,6 @@
 
     </tab>
   </tabset>
+-->
 
 </script>
