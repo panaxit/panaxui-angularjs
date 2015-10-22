@@ -31,7 +31,7 @@
     "angular-sanitize": "^1.4.3",
     "angular-tree-control": "git+https://github.com/benoror/angular-tree-control.git",
     "angular-ui-bootstrap": "^0.13.1",
-    "angular-ui-grid": "^3.0.4",
+    "angular-ui-grid": "3.0.4",
     "angular-ui-router": "^0.2.15",
     "angular-urlify": "*",
     "angular-utils-pagination": "^0.8.2",
