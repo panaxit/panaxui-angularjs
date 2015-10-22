@@ -100,7 +100,7 @@ describe('Directive: pxForm', () => {
       ];
       compileAndSetupStuff({data, fields, catalog: {}});
       expect(vm.fields).to.have.length(2);
-      fields = [[{name: {}, last: {}}, {name: {}, last: {}}]];
+      fields = [];
       compileAndSetupStuff({data, fields, catalog: {}});
       expect(vm.fields).to.have.length(2);
     });
