@@ -1,0 +1,12 @@
+<tabset>
+  <tab ng-repeat="tab in options.data.tabs"
+       heading="{{tab.title}}"
+       active="tab.active"
+       disable="tab.disabled">
+
+      <formly-form model="model"
+                   fields="tab.fields">
+      </formly-form>
+
+  </tab>
+</tabset>

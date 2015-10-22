@@ -30,6 +30,7 @@
 import formly from 'angular-formly';
 
 import panel from './wrappers/panel';
+import tabpanel from './types/tabpanel';
 import input from './types/input';
 import _default from './types/default';
 import password from './types/password';
@@ -54,6 +55,7 @@ export default angular.module('app.main.form.formly', [
     formly,
 
     panel,
+    tabpanel,
     input,
     _default,
     password,

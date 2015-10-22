@@ -45,31 +45,4 @@
                ng-attr-form="vm.form">
   </formly-form>
 
-<!--
-  <fieldset ng-repeat="fieldset in vm.fields[$index] | filter:{type:'fieldset'}" class="pxrecord">
-    <formly-form model="record"
-                 fields="fieldset.fields"
-                 ng-attr-form="vm.form"
-                 heading="{{fieldset.title}}"
-                 active="fieldset.active"
-                 disable="fieldset.disabled">
-    </formly-form>
-  </fieldset>
-
-  <tabset ng-repeat="tabpanel in vm.fields[$index] | filter:{type:'tabpanel'}">
-    <tab ng-repeat="tab in tabpanel.tabs | filter:{type:'tab'}"
-         heading="{{tab.title}}"
-         active="tab.active"
-         disable="tab.disabled">
-
-        <formly-form
-                  model="record"
-                  fields="tab.fields"
-                  ng-attr-form="vm.form">
-        </formly-form>
-
-    </tab>
-  </tabset>
--->
-
 </script>
