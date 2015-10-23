@@ -85,7 +85,7 @@ class PayloadService {
 
       // Copy field's value
       if(orig_model.hasOwnProperty(el.key) && (el.formControl && el.formControl.$dirty)) {
-        payload[el.key] = el.formControl.$viewValue || el.formControl.$modelValue;
+        payload[el.key] = el.formControl.$modelValue || el.formControl.$viewValue;
       }
     });
   }
