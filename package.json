@@ -29,7 +29,7 @@
     "angular-formly-templates-bootstrap": "^6.0.0",
     "angular-md5": "^0.1.8",
     "angular-sanitize": "^1.4.3",
-    "angular-tree-control": "git+https://github.com/benoror/angular-tree-control.git",
+    "angular-tree-control": "0.2.21",
     "angular-ui-bootstrap": "^0.13.1",
     "angular-ui-grid": "3.0.4",
     "angular-ui-router": "^0.2.15",
