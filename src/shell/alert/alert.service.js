@@ -6,7 +6,7 @@ class AlertService {
 
     vm.show = function(type, title, body) {
       $uibModal.open({
-        template: '<alert class="px-alert" type="{{type}}"><strong>{{title}}</strong>: {{body}}</alert>',
+        template: '<uib-alert class="px-alert" type="{{type}}"><strong>{{title}}</strong>: {{body}}</uib-alert>',
         controller: function ($scope) {
         	$scope.type = type;
         	$scope.title = title;
