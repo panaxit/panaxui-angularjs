@@ -1,5 +1,5 @@
 export default class DebugCtrl {
-  constructor($scope, $rootScope, $stateParams, $modalInstance, $location, SessionService, formlyVersion, debugInfo) {
+  constructor($scope, $rootScope, $stateParams, $uibModalInstance, $location, SessionService, formlyVersion, debugInfo) {
 
 		// Set debugInfo provider
 		$scope.debugInfo = debugInfo || {};
@@ -14,7 +14,7 @@ export default class DebugCtrl {
 
 		// Ok clicked
 		$scope.okClick = function() {
-			$modalInstance.close(); // promise fulfilled
+			$uibModalInstance.close(); // promise fulfilled
 		};
 
   }

@@ -22,17 +22,17 @@
 			     <a href="#">Other</a>
 				</li> -->
 
-			    <li dropdown is-open="status.isopen">
+			    <li uib-dropdown is-open="status.isopen">
 
-			      <a href="#" class="dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+			      <a href="#" class="uib-dropdown-toggle" uib-dropdown-toggle ng-disabled="disabled">
 			        {{vm.currentUser.username}} <span class="caret"></span>
 			      </a>
-			      <ul class="dropdown-menu" role="menu">
+			      <ul class="uib-dropdown-menu" role="menu">
 						<li>
 							<a href="#">Settings</a>
 						</li>
 						<li class="divider"></li>
-						<li role="presentation" class="dropdown-header"><span class="label label-info">Dev Tools</span></li>
+						<li role="presentation" class="uib-dropdown-header"><span class="label label-info">Dev Tools</span></li>
 						<li>
 							<a ng-click="vm.cliClick()">&nbsp;PanaxCLI</a>
 						</li>

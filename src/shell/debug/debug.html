@@ -4,25 +4,25 @@
 	</div>
 	<div class="panel-body">
 
-		<accordion>
-			<accordion-group ng-show="debugInfo.env">
+		<uib-accordion>
+			<uib-accordion-group ng-show="debugInfo.env">
 
-        <accordion-heading>
+        <uib-accordion-heading>
         		<em class="glyphicon glyphicon-tree-deciduous"></em>
             Environment
-        </accordion-heading>
+        </uib-accordion-heading>
 
         <pre>
           <json-formatter open="2" json="debugInfo.env"></json-formatter>
         </pre>
 
-			</accordion-group>
-			<accordion-group ng-show="debugInfo.currentUser">
+			</uib-accordion-group>
+			<uib-accordion-group ng-show="debugInfo.currentUser">
 
-        <accordion-heading>
+        <uib-accordion-heading>
         		<em class="glyphicon glyphicon-user"></em>
             Session (info)
-        </accordion-heading>
+        </uib-accordion-heading>
 
         <table class="table table-bordered table-condensed">
           <tr>
@@ -108,56 +108,56 @@
 				    </td>
 				  </tr>
 				</table>
-			</accordion-group>
-			<accordion-group ng-show="debugInfo.stateParams">
+			</uib-accordion-group>
+			<uib-accordion-group ng-show="debugInfo.stateParams">
 
-        <accordion-heading>
+        <uib-accordion-heading>
         		<em class="glyphicon glyphicon-leaf"></em>
             State (parameters)
-        </accordion-heading>
+        </uib-accordion-heading>
 
         <pre>
           <json-formatter open="2" json="debugInfo.stateParams"></json-formatter>
         </pre>
 
-			</accordion-group>
-			<accordion-group ng-show="debugInfo.catalog">
+			</uib-accordion-group>
+			<uib-accordion-group ng-show="debugInfo.catalog">
 
-        <accordion-heading>
+        <uib-accordion-heading>
         		<em class="glyphicon glyphicon-book"></em>
             Catalog (entity) metadata
-        </accordion-heading>
+        </uib-accordion-heading>
 
         <pre>
           <json-formatter open="2" json="debugInfo.catalog"></json-formatter>
         </pre>
 
-			</accordion-group>
-			<accordion-group ng-show="debugInfo.fields">
+			</uib-accordion-group>
+			<uib-accordion-group ng-show="debugInfo.fields">
 
-        <accordion-heading>
+        <uib-accordion-heading>
         		<em class="glyphicon glyphicon-tasks"></em>
             Fields
-        </accordion-heading>
+        </uib-accordion-heading>
 
         <pre>
           <json-formatter open="2" json="debugInfo.fields"></json-formatter>
         </pre>
 
-			</accordion-group>
-			<accordion-group ng-show="debugInfo.model">
+			</uib-accordion-group>
+			<uib-accordion-group ng-show="debugInfo.model">
 
-        <accordion-heading>
+        <uib-accordion-heading>
         		<em class="glyphicon glyphicon-download-alt"></em>
             Model (data)
-        </accordion-heading>
+        </uib-accordion-heading>
 
         <pre>
           <json-formatter open="2" json="debugInfo.model"></json-formatter>
         </pre>
 
-			</accordion-group>
-		</accordion>
+			</uib-accordion-group>
+		</uib-accordion>
 
 	</div>
 	<div class="panel-footer clearfix">

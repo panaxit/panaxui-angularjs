@@ -1,5 +1,5 @@
-<tabset>
-  <tab ng-repeat="tab in options.data.tabs"
+<uib-tabset>
+  <uib-tab ng-repeat="tab in options.data.tabs"
        heading="{{tab.title}}"
        active="tab.active"
        disable="tab.disabled">
@@ -8,5 +8,5 @@
                    fields="tab.fields">
       </formly-form>
 
-  </tab>
-</tabset>
+  </uib-tab>
+</uib-tabset>

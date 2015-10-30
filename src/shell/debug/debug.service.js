@@ -1,11 +1,11 @@
 import angular from 'angular';
 
 class DebugService {
-  constructor($modal) {
+  constructor($uibModal) {
   	var vm = this;
 
   	vm.show = function(debugInfo) {
-			var debugModalInstance = $modal.open({
+			var debugModalInstance = $uibModal.open({
 				template: require('./debug.html'),
 				controller: 'DebugCtrl',
 				size: 'lg',

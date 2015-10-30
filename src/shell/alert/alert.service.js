@@ -1,11 +1,11 @@
 import angular from 'angular';
 
 class AlertService {
-  constructor($modal) {
+  constructor($uibModal) {
   	var vm = this;
 
     vm.show = function(type, title, body) {
-      $modal.open({
+      $uibModal.open({
         template: '<alert class="px-alert" type="{{type}}"><strong>{{title}}</strong>: {{body}}</alert>',
         controller: function ($scope) {
         	$scope.type = type;
