@@ -13,26 +13,36 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
     var vm = this;
 
     vm.data = vm.$scope.model[vm.$scope.options.key] || [];
-    vm.fields = vm.$scope.options.data.fields;
     vm.catalog = vm.$scope.options.data.catalog;
-
-    vm.initialize();
+    vm.initializeFields(vm.$scope.options.data.fields);
     vm.setOptions();
   }
 
-  initialize() {
+  initializeFields(fields) {
     var vm = this;
-    // Checkboxes
-    vm.fields.forEach((colDef, index) => {
-      colDef.checkboxSelection = true;
-      colDef.cellRenderer = params => params.value.text;
+    // Checkboxes & Row Grouping
+    // http://www.ag-grid.com/example-file-browser/index.php
+    var innerCellRenderer = function(params) {
+      return params.value.text;
+    }
+    fields.forEach((colDef, index) => {
+      if(index) {
+        colDef.cellRenderer = innerCellRenderer;
+      } else {
+        colDef.cellRenderer = {
+          renderer: 'group',
+          checkbox: true,
+          innerRenderer: innerCellRenderer
+        };
+      }
     });
+    // Set fields
+    vm.fields = fields;
   }
 
   setOptions() {
     var vm = this;
     vm.options = {
-      headerHeight: 0,
       rowSelection: 'multiple',
       isJunctionTable: true
     };
@@ -47,7 +57,6 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
     angular.forEach(vm.data, (row) => {
       if(selectedRows.indexOf(row) > -1) {
         // Selected
-        let combinedKey =
         row[pKey] = row[pKey] || row[refA] + ' ' + row[refB].value;
       } else {
         // not selected
