@@ -22,7 +22,7 @@
     "url": "https://benoror@bitbucket.org/benoror/panaxui-angularjs.git"
   },
   "dependencies": {
-    "ag-grid": "^2.3.4",
+    "ag-grid": "git+https://github.com/benoror/ag-grid.git",
     "angular": "^1.4.7",
     "angular-formly": "^7.3.0",
     "angular-formly-templates-bootstrap": "^6.1.5",
