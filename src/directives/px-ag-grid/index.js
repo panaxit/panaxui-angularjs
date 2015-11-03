@@ -37,7 +37,8 @@ function pxAgGrid() {
       data: '=',
       fields: '=',
       options: '=',
-      rowSelectionHandler: '&'
+      rowSelectedHandler: '&',
+      rowDeselectedHandler: '&'
     },
     bindToController: true,
     controllerAs: 'vm',
@@ -101,6 +102,7 @@ function pxAgGridCtrl($scope) {
     }
     // Selection
     vm.gridOptions.rowSelection = options.rowSelection;
+    vm.gridOptions.suppressRowClickSelection = true;
     // Junction table specifics
     if(options.isJunctionTable) {
       // Set rows grouping & Reload data
@@ -117,9 +119,16 @@ function pxAgGridCtrl($scope) {
           vm.gridOptions.api.deselectNode(node);
         }
       });
-      // Register API callback
-      vm.gridOptions.onSelectionChanged = (event) => {
-        vm.rowSelectionHandler({selectedRows: event.selectedRows});
+      // Register API callbacks
+      vm.gridOptions.onRowSelected = (event) => {
+        console.log(event)
+        // Call rowSelectedHandler
+        vm.rowSelectedHandler({node: event.node});
+      };
+      vm.gridOptions.onRowDeselected = (event) => {
+        console.log(event)
+        // Call rowSelectedHandler
+        vm.rowDeselectedHandler({node: event.node});
       };
     }
     // Refresh View
