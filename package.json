@@ -24,7 +24,7 @@
   "dependencies": {
     "ag-grid": "git+https://github.com/benoror/ag-grid.git",
     "angular": "^1.4.7",
-    "angular-formly": "^7.3.0",
+    "angular-formly": "^7.3.2",
     "angular-formly-templates-bootstrap": "^6.1.5",
     "angular-md5": "^0.1.8",
     "angular-sanitize": "^1.4.7",
