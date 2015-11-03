@@ -3,6 +3,8 @@
  */
 
 import angular from 'angular';
+import uibootstrap from 'angular-ui-bootstrap';
+import Alert from '../../shell/alert';
 import agGrid from 'ag-grid/dist/ag-grid.js';
 import 'ag-grid/dist/ag-grid.css';
 import 'ag-grid/dist/theme-fresh.css';
@@ -19,7 +21,9 @@ import template from './template.html';
  */
 
 export default angular.module('app.directives.px-ag-grid', [
-    'agGrid'
+    'agGrid',
+    uibootstrap,
+    Alert
   ])
   .directive('pxAgGrid', pxAgGrid)
   .name;
@@ -50,7 +54,7 @@ function pxAgGrid() {
  * Directive's Controller
  */
 
-function pxAgGridCtrl($scope) {
+function pxAgGridCtrl($scope, AlertService) {
   var vm = this;
 
   /*
@@ -121,14 +125,23 @@ function pxAgGridCtrl($scope) {
       });
       // Register API callbacks
       vm.gridOptions.onRowSelected = (event) => {
-        console.log(event)
         // Call rowSelectedHandler
         vm.rowSelectedHandler({node: event.node});
       };
       vm.gridOptions.onRowDeselected = (event) => {
-        console.log(event)
         // Call rowSelectedHandler
         vm.rowDeselectedHandler({node: event.node});
+      };
+      vm.gridOptions.onSelectionChanged = (event) => {
+        // Check boundaries (minSelections, maxSelections)
+        // ToDo: https://bitbucket.org/panaxit/panaxui-angularjs/issues/53/angular-formly-junction-type-validate
+        var numSelected = event.selectedRows.length;
+        if(options.minSelections && numSelected < options.minSelections) {
+          AlertService.show('warning', 'Junction Table Validation', 'You cannot select less than ' + options.minSelections + ' records.');
+        }
+        if(options.maxSelections && numSelected > options.maxSelections) {
+          AlertService.show('warning', 'Junction Table Validation', 'You cannot select more than ' + options.maxSelections + ' records.');
+        }
       };
     }
     // Refresh View
