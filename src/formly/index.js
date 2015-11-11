@@ -36,6 +36,7 @@ import _default from './types/default';
 import password from './types/password';
 import email from './types/email';
 import file from './types/file';
+import picture from './types/picture';
 import url from './types/url';
 import number from './types/number';
 import money from './types/money';
