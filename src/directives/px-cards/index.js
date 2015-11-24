@@ -38,6 +38,7 @@ function pxCards() {
       fields: '=',
       options: '=',
       openHandler: '&',
+      newHandler: '&',
       nextHandler: '&',
       paginationChangeHandler: '&?'
     },

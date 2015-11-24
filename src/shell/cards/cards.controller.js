@@ -33,6 +33,7 @@ export default class CardsCtrl extends BaseCtrl {
       asyncPagination: true,
       showPaginationRow: true,
       showBrowseRow: vm.$stateParams.mode === 'browse',
+      showAddRemoveRow: vm.catalog.mode === 'edit',
       showFilterRow: true
     };
   }
@@ -49,6 +50,14 @@ export default class CardsCtrl extends BaseCtrl {
       mode: vm.catalog.mode,
       [idType]: idKey,
       id: idValue
+    });
+  }
+
+  onNew(catalogName) {
+    this.$scope.$emit('goToState', 'main.panel.form', {
+      catalogName: catalogName,
+      mode: 'insert',
+      id: undefined
     });
   }
 

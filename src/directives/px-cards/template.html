@@ -1,3 +1,29 @@
+<div class="panel-footer clearfix" ng-if="vm.options.showAddRemoveRow">
+  <div class="btn-toolbar">
+    <div class="pull-left">
+      <div class="btn-group btn-group-md">
+        <button class="btn btn-primary" type="submit"
+          ng-click="vm.newHandler({catalogName: vm.catalog.catalogName})">
+          <em class="glyphicon glyphicon-plus"></em>
+          Add
+        </button>
+      </div>
+    </div>
+
+<!-- ToDo:
+    <div class="pull-right">
+      <div class="btn-group btn-group-md">
+        <button class="btn btn-danger" type="submit"
+          ng-click="vm.deleteHandler({selected: vm.gridApi.selection.getSelectedRows()})"
+          ng-disabled="!vm.gridApi.grid.selection.selectedCount">
+          <em class="glyphicon glyphicon-minus"></em>
+          Remove
+        </button>
+      </div>
+    </div> -->
+  </div>
+</div>
+
 <div class="panel-footer clearfix" ng-if="vm.options.showFilterRow">
   <!-- <label for="search">Search:</label> -->
   <input ng-model="query" id="search" class="form-control" placeholder="Filter text">
