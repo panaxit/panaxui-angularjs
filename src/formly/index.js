@@ -62,6 +62,7 @@ export default angular.module('app.main.form.formly', [
     password,
     email,
     file,
+    picture,
     url,
     number,
     money,

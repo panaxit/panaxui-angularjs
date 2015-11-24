@@ -32,6 +32,7 @@
     "angular-ui-bootstrap": "^0.14.3",
     "angular-ui-grid": "^3.0.7",
     "angular-ui-router": "^0.2.15",
+    "angular-upload": "^1.0.13",
     "angular-urlify": "*",
     "angular-utils-pagination": "^0.8.2",
     "angularjs-color-picker": "^0.6.10",
