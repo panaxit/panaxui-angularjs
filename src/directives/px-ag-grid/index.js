@@ -119,9 +119,9 @@ function pxAgGridCtrl($scope, AlertService) {
         if(!!node.data[vm.catalog.primaryKey]) {
           vm.gridOptions.api.selectNode(node, isMulti);
         }
-        else {
-          vm.gridOptions.api.deselectNode(node);
-        }
+        // else {
+        //   vm.gridOptions.api.deselectNode(node);
+        // }
       });
       // Register API callbacks
       vm.gridOptions.onRowSelected = (event) => {
@@ -134,7 +134,9 @@ function pxAgGridCtrl($scope, AlertService) {
       };
       vm.gridOptions.onSelectionChanged = (event) => {
         // Check boundaries (minSelections, maxSelections)
-        // ToDo: https://bitbucket.org/panaxit/panaxui-angularjs/issues/53/angular-formly-junction-type-validate
+        // ToDo:
+        //  - https://bitbucket.org/panaxit/panaxui-angularjs/issues/53/angular-formly-junction-type-validate
+        //  - https://github.com/ceolter/ag-grid/issues/549
         var numSelected = event.selectedRows.length;
         if(options.minSelections && numSelected < options.minSelections) {
           AlertService.show('warning', 'Junction Table Validation', 'You cannot select less than ' + options.minSelections + ' records.');
