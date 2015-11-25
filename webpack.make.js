@@ -51,7 +51,7 @@ module.exports = function makeWebpackConfig (options) {
 
       // Output path from the view of the page
       // Uses webpack-dev-server in development
-      publicPath: BUILD ? '/' : 'http://localhost:3000/gui/ng/',
+      //publicPath: BUILD ? '/' : 'http://10.1.1.114:3000/gui/ng/',
 
       // Filename for entry points
       // Only adds hash in build mode
