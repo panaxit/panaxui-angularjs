@@ -61,6 +61,8 @@ export default class MainCtrl {
         return vm.goToState('main.panel.cards', branch.data);
       } else if (branch.data.controlType === 'masterDetail') {
         return vm.goToState('main.panel.master-detail', branch.data);
+      } else if (branch.data.controlType === 'fileTemplate') {
+        return vm.goToState('main.panel.template', branch.data);
       }
 		});
 

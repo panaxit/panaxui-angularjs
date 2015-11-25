@@ -1,0 +1,25 @@
+<div class="panel-body px-template">
+
+  <div class="row clearfix">
+
+    <div ng-switch on="vm.contentType">
+
+      <div ng-switch-when="image/svg+xml">
+        <div ng-bind-html="vm.content"></div>
+      </div>
+
+      <div ng-switch-when="text/html">
+        <div ng-bind-html="vm.content"></div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="panel-footer clearfix">
+  <div class="pull-right">
+    <p>Content-Type: {{vm.contentType || json}}</p>
+  </div>
+</div>

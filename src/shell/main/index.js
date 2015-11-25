@@ -20,12 +20,14 @@ import Grid from '../../shell/grid';
 import Form from '../../shell/form';
 import Cards from '../../shell/cards';
 import MasterDetail from '../../shell/master-detail';
+import Template from '../../shell/template';
 
 // Panax Directives
 import pxGrid from '../../directives/px-grid';
 import pxForm from '../../directives/px-form';
 import pxCards from '../../directives/px-cards';
 import pxAgGrid from '../../directives/px-ag-grid';
+import pxTemplate from '../../directives/px-template';
 
 import routing from './main.routes';
 import MainCtrl from './main.controller';
@@ -49,12 +51,14 @@ export default angular.module('app.main', [
     Form,
     Cards,
     MasterDetail,
+    Template,
 
     // Panax Directives
     pxGrid,
     pxForm,
     pxCards,
-    pxAgGrid
+    pxAgGrid,
+    pxTemplate
 	])
 	.config(routing)
 	.controller('MainCtrl', MainCtrl)
