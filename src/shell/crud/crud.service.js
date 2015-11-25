@@ -28,7 +28,7 @@ class CRUDService {
     vm.$http
       .get(vm.base_url + "/api/read", {params: params})
       .then(function (response) {
-        deferred.resolve(response.data);
+        deferred.resolve(response);
       });
     return deferred.promise;
   }

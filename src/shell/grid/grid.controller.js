@@ -18,9 +18,9 @@ export default class GridCtrl extends BaseCtrl {
       pageSize: pageSize || parseInt(vm.$stateParams.pageSize) || 25
     };
     vm.CRUDService.read(params).then(function (res) {
-      vm.catalog = res.data.catalog;
-      vm.data = res.data.model || [];
-      vm.fields = res.data.fields;
+      vm.catalog = res.data.data.catalog;
+      vm.data = res.data.data.model || [];
+      vm.fields = res.data.data.fields;
 
       vm.setOptions();
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
