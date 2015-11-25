@@ -23,7 +23,7 @@ class CRUDService {
     var vm = this;
     var deferred = vm.$q.defer();
     params.gui = 'ng';
-    params.output = 'json';
+    params.output = params.output || 'json';
 
     vm.$http
       .get(vm.base_url + "/api/read", {params: params})
