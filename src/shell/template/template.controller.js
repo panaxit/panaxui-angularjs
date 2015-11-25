@@ -32,6 +32,7 @@ export default class TemplateCtrl extends BaseCtrl {
   setOptions() {
     var vm = this;
     vm.options = {
+      showPrintRow: true
     };
   }
 

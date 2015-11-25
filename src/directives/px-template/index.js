@@ -34,9 +34,8 @@ function pxTemplate() {
     template: template,
     scope: {
       data: '=',
-      catalog: '='
-      // fields: '=',
-      // options: '='
+      catalog: '=',
+      options: '='
     },
     bindToController: true,
     controllerAs: 'vm',
@@ -48,7 +47,7 @@ function pxTemplate() {
  * Directive's Controller
  */
 
-function pxTemplateCtrl($scope, $sce) {
+function pxTemplateCtrl($scope, $window, $sce) {
   var vm = this;
 
   /*
@@ -80,4 +79,11 @@ function pxTemplateCtrl($scope, $sce) {
     // Security issue? Do it only for SVGs?
     vm.content = $sce.trustAsHtml(vm.data);
   }
+
+  vm.printHandler = function() {
+    var printArea = vm.content; //document.getElementById('px-printArea').innerHTML;
+    var myWindow = $window.open('', '', 'width=1024, height=768');
+    myWindow.document.write(printArea);
+    myWindow.print();
+  };
 }

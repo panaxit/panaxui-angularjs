@@ -1,5 +1,5 @@
 export default class BaseCtrl {
-  constructor($scope, DebugService, $stateParams, CRUDService, AlertService, $q, PayloadService) {
+  constructor($scope, DebugService, $stateParams, CRUDService, AlertService, $q, PayloadService, $window) {
     var vm = this;
 
     // Injectables
@@ -10,6 +10,7 @@ export default class BaseCtrl {
     vm.AlertService = AlertService;
     vm.$q = $q;
     vm.PayloadService = PayloadService;
+    vm.$window = $window;
 
     // Loader
     vm.loader();
