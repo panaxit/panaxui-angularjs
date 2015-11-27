@@ -21,11 +21,11 @@ export default class FormlyCardsCtrl extends CardsCtrl {
 
   setOptions() {
     var vm = this;
-    vm.options = {
-      asyncPagination: false,
-      showPaginationRow: true,
-      showBrowseRow: false,
-      showFilterRow: false
-    };
+    // Reuse parent's options
+    super.setOptions();
+    // Override with vm.options.whatever = ...
+    vm.options.asyncPagination = false;
+    vm.options.showBrowseRow = false;
+    vm.options.showFilterRow = false;
   }
 }
