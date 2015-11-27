@@ -16,7 +16,7 @@ function picture(formlyConfigProvider) {
     template: `
       <div class="form-group">
         <img class="px-upload-picture-img img-rounded"
-             ng-src="{{clientPath || '/images/noimg.png'}}" />
+             ng-src="{{uploadPath || '/images/noimg.png'}}" />
         <input class="form-control"
                placeholder="{{::to.placeholder}}"
                type="text"
@@ -42,12 +42,12 @@ function picture(formlyConfigProvider) {
       var fieldName = $scope.options.key;
       $scope.upload_url = '/api/upload?catalogName=' + catalogName + '&fieldName=' + fieldName;
 
-      // Update path if model already set
-      updateClientPath($scope.model[$scope.options.key]);
+      // Update upload path if model already set
+      updateUploadPath($scope.model[$scope.options.key]);
 
-      function updateClientPath(filename) {
+      function updateUploadPath(filename) {
         if(filename) {
-          $scope.clientPath = '/uploads/' + SessionService.panax_instance
+          $scope.uploadPath = '/uploads/' + SessionService.panax_instance
                               + '/' + catalogName
                               + '/' + fieldName
                               + '/' + filename;
@@ -59,8 +59,8 @@ function picture(formlyConfigProvider) {
         // Update model
         var originalname = res.data.data.file.originalname;
         $scope.model[$scope.options.key] = originalname;
-        // Update clientPath
-        updateClientPath(res.data.data.file.originalname);
+        // Update uploadPath
+        updateUploadPath(res.data.data.file.originalname);
         // Use AlertService? Maybe not since it's an external dependency?
       };
     }

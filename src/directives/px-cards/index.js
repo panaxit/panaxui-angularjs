@@ -85,6 +85,8 @@ function pxCardsCtrl($scope) {
   }
 
   function initializeCatalog(catalog) {
+    // Default Upload Path (for Images)
+    vm.uploadPath = catalog.dbId + '/' + catalog.catalogName + '/' + catalog.customAttrs.iconField + '/';
     // Pagination
     if(catalog.totalItems) {
       // Server-side Pagination
