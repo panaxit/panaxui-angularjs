@@ -60,6 +60,10 @@ function pxTemplateCtrl($scope, $window, $sce) {
 
   initialize();
 
+  $scope.$watch('vm.data', function(newData) {
+    if(newData) initializeData(newData);
+  });
+
   $scope.$watch('vm.catalog', function(newCatalog) {
     if(newCatalog) initializeCatalog(newCatalog);
   });
@@ -71,13 +75,18 @@ function pxTemplateCtrl($scope, $window, $sce) {
   function initialize() {
   }
 
-  function initializeCatalog(catalog) {
-    // Set Content-Type
-    vm.contentType = vm.catalog.contentType.split(';')[0];
+  function initializeData(data) {
     // Set Content
     // https://docs.angularjs.org/api/ng/service/$sce#show-me-an-example-using-sce-
     // Security issue? Do it only for SVGs?
-    vm.content = $sce.trustAsHtml(vm.data);
+    vm.content = $sce.trustAsHtml(data);
+  }
+
+  function initializeCatalog(catalog) {
+    // Set Content-Type
+    if(catalog.contentType) {
+      vm.contentType = catalog.contentType.split(';')[0];
+    }
   }
 
   vm.printHandler = function() {

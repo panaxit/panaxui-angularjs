@@ -51,6 +51,7 @@ import form from './types/form';
 import cards from './types/cards';
 import grid from './types/grid';
 import junction from './types/junction';
+import template from './types/template';
 
 export default angular.module('app.main.form.formly', [
     formly,
@@ -76,6 +77,7 @@ export default angular.module('app.main.form.formly', [
     form,
     cards,
     grid,
-    junction
+    junction,
+    template
   ])
   .name;

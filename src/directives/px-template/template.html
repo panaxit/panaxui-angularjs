@@ -16,17 +16,7 @@
 
   <div class="row clearfix">
 
-    <div ng-switch on="vm.contentType" class="px-template-content">
-
-      <div ng-switch-when="image/svg+xml">
-        <div ng-bind-html="vm.content"></div>
-      </div>
-
-      <div ng-switch-when="text/html">
-        <div ng-bind-html="vm.content"></div>
-      </div>
-
-    </div>
+    <div ng-bind-html="vm.content" class="px-template-content"></div>
 
   </div>
 
