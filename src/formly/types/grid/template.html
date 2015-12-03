@@ -1,10 +1,10 @@
 <px-grid
   data="vm.data"
-  catalog="vm.catalog"
+  metadata="vm.metadata"
   fields="vm.fields"
   options="vm.options"
-  open-handler="vm.onOpen(selected, catalog)"
+  open-handler="vm.onOpen(selected, metadata)"
   new-handler="vm.onNew(catalogName)"
-  delete-handler="vm.onDelete(selected, catalog)"
-  row-change-promise="vm.onRowChange(rowEntity, catalog)">
+  delete-handler="vm.onDelete(selected, metadata)"
+  row-change-promise="vm.onRowChange(rowEntity, metadata)">
 </px-grid>

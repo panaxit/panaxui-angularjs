@@ -34,7 +34,7 @@ function pxTemplate() {
     template: template,
     scope: {
       data: '=',
-      catalog: '=',
+      metadata: '=',
       options: '='
     },
     bindToController: true,
@@ -64,8 +64,8 @@ function pxTemplateCtrl($scope, $window, $sce) {
     if(newData) initializeData(newData);
   });
 
-  $scope.$watch('vm.catalog', function(newCatalog) {
-    if(newCatalog) initializeCatalog(newCatalog);
+  $scope.$watch('vm.metadata', function(newMetadata) {
+    if(newMetadata) initializeMetadata(newMetadata);
   });
 
   /*
@@ -82,10 +82,10 @@ function pxTemplateCtrl($scope, $window, $sce) {
     vm.content = $sce.trustAsHtml(data);
   }
 
-  function initializeCatalog(catalog) {
+  function initializeMetadata(metadata) {
     // Set Content-Type
-    if(catalog.contentType) {
-      vm.contentType = catalog.contentType.split(';')[0];
+    if(metadata.contentType) {
+      vm.contentType = metadata.contentType.split(';')[0];
     }
   }
 

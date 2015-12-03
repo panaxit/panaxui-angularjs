@@ -26,7 +26,7 @@ export default class MasterDetailCtrl extends FormCtrl {
       params.filters += '[' + idKey + '=' + vm.$stateParams.id + ']';
     }
     vm.CRUDService.read(params).then(function (res) {
-      vm.catalog = res.data.data.catalog;
+      vm.metadata = res.data.data.metadata;
       vm.fields = {
         grid: res.data.data.fields.grid,
         form: res.data.data.fields.form

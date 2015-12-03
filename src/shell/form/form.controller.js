@@ -26,17 +26,17 @@ export default class FormCtrl extends BaseCtrl {
       params.filters += '[' + idKey + '=' + vm.$stateParams.id + ']';
     }
     vm.CRUDService.read(params).then(function (res) {
-      vm.catalog = res.data.data.catalog;
+      vm.metadata = res.data.data.metadata;
       vm.fields = res.data.data.fields || [];
       vm.data = res.data.data.model || [];
 
       vm.setOptions();
       vm.$scope.$emit('setPanelTitle', (function () {
-        if(vm.catalog.mode === 'insert') return 'New ';
-        if(vm.catalog.mode === 'edit') return 'Edit ';
-        if(vm.catalog.mode === 'readonly') return 'View ';
-        if(vm.catalog.mode === 'filters') return 'Filters ';
-      })() + vm.catalog.tableName);
+        if(vm.metadata.mode === 'insert') return 'New ';
+        if(vm.metadata.mode === 'edit') return 'Edit ';
+        if(vm.metadata.mode === 'readonly') return 'View ';
+        if(vm.metadata.mode === 'filters') return 'Filters ';
+      })() + vm.metadata.tableName);
     });
   }
 
@@ -50,12 +50,12 @@ export default class FormCtrl extends BaseCtrl {
 
   isSubmitDisabled() {
     var vm = this;
-    if(vm.catalog && vm.catalog.mode !== 'readonly') {
-      if(vm.catalog.mode === 'insert') {
+    if(vm.metadata && vm.metadata.mode !== 'readonly') {
+      if(vm.metadata.mode === 'insert') {
         if(vm.form.$invalid)
           return true;
         return false;
-      } else if(vm.catalog.mode === 'edit') {
+      } else if(vm.metadata.mode === 'edit') {
         if(vm.form.$pristine)
           return true;
         if(vm.form.$invalid)
@@ -90,11 +90,11 @@ export default class FormCtrl extends BaseCtrl {
       /**
        * Create payload to be sent
        */
-      var payload = vm.PayloadService.build(fields || vm.fields, data || vm.data, vm.catalog);
+      var payload = vm.PayloadService.build(fields || vm.fields, data || vm.data, vm.metadata);
       /**
        * Perform Insert/Update in backend
        */
-      if(vm.catalog.mode === 'insert') {
+      if(vm.metadata.mode === 'insert') {
         /**
          * mode = INSERT
          */
@@ -116,7 +116,7 @@ export default class FormCtrl extends BaseCtrl {
             // Do nothing. HTTP 500 responses handled by ErrorInterceptor
           }
         });
-      } else if(vm.catalog.mode === 'edit' && vm.form.$dirty) {
+      } else if(vm.metadata.mode === 'edit' && vm.form.$dirty) {
         /**
          * mode = EDIT
          */
@@ -137,7 +137,7 @@ export default class FormCtrl extends BaseCtrl {
             // Do nothing. HTTP 500 responses handled by ErrorInterceptor
           }
         });
-      } else if(vm.catalog.mode === 'filters' && vm.form.$dirty) {
+      } else if(vm.metadata.mode === 'filters' && vm.form.$dirty) {
         /**
          * mode = FILTERS
          */
@@ -146,7 +146,7 @@ export default class FormCtrl extends BaseCtrl {
           if(res.success === true) {
               // Go to 'edit' mode of filtered records
               vm.$scope.$emit('goToState', 'main.panel.grid', {
-                catalogName: vm.catalog.catalogName,
+                catalogName: vm.metadata.catalogName,
                 mode: 'edit',
                 filters:  '[' + res.data + ']'
               });

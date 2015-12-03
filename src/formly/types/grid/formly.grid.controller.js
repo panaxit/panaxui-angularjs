@@ -12,7 +12,7 @@ export default class FormlyGridCtrl extends GridCtrl {
   loader() {
     var vm = this;
 
-    vm.catalog = vm.$scope.options.data.catalog;
+    vm.metadata = vm.$scope.options.data.metadata;
     vm.data = vm.$scope.model[vm.$scope.options.key] || [];
     vm.fields = vm.$scope.options.data.fields;
 

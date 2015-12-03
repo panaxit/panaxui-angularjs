@@ -40,7 +40,7 @@ function pxGrid() {
     restrict: 'E',
     template: template,
     scope: {
-      catalog: '=',
+      metadata: '=',
       data: '=',
       fields: '=',
       options: '=',
@@ -89,8 +89,8 @@ function pxGridCtrl($scope, uiGridConstants) {
     if(newOptions) initializeOptions(newOptions);
   });
 
-  $scope.$watch('vm.catalog', function(newCatalog) {
-    if(newCatalog) initializeCatalog(newCatalog);
+  $scope.$watch('vm.metadata', function(newMetadata) {
+    if(newMetadata) initializeMetadata(newMetadata);
   });
 
   /*
@@ -181,13 +181,13 @@ function pxGridCtrl($scope, uiGridConstants) {
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
   }
 
-  function initializeCatalog(catalog) {
+  function initializeMetadata(metadata) {
     // External Pagination
-    if(catalog.totalItems) {
+    if(metadata.totalItems) {
       vm.uigrid_options.useExternalPagination = true;
-      vm.uigrid_options.totalItems = catalog.totalItems;
-      vm.uigrid_options.paginationPageSize = catalog.pageSize;
-      vm.uigrid_options.paginationCurrentPage = catalog.pageIndex;
+      vm.uigrid_options.totalItems = metadata.totalItems;
+      vm.uigrid_options.paginationPageSize = metadata.pageSize;
+      vm.uigrid_options.paginationCurrentPage = metadata.pageIndex;
     }
     // Notify changes
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);

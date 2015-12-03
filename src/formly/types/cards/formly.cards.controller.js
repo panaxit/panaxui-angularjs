@@ -14,7 +14,7 @@ export default class FormlyCardsCtrl extends CardsCtrl {
 
     vm.data = vm.$scope.model[vm.$scope.options.key] || [];
     vm.fields = vm.$scope.options.data.fields;
-    vm.catalog = vm.$scope.options.data.catalog;
+    vm.metadata = vm.$scope.options.data.metadata;
 
     vm.setOptions();
   }

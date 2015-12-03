@@ -8,7 +8,7 @@ describe('Directive: pxGrid', () => {
   var basicTemplate = `
     <px-grid
       data="data"
-      catalog="catalog"
+      metadata="metadata"
       fields="fields"
       options="options"
       open-handler="onOpen(selected)"
@@ -71,7 +71,7 @@ describe('Directive: pxGrid', () => {
         {field: "name", type: "string", displayName: "Name"},
         {field: "last", type: "string", displayName: "Last"}
       ]};
-      compileAndSetupStuff({data, fields, catalog: {}});
+      compileAndSetupStuff({data, fields, metadata: {}});
       expect(vm.uigrid_options.columnDefs).to.exist;
       expect(vm.uigrid_options.columnDefs).to.have.length(2);
     });
@@ -96,7 +96,7 @@ describe('Directive: pxGrid', () => {
         multiSelect: false,
         showRowActionsColumn: true
       };
-      compileAndSetupStuff({data, fields, catalog: {}, options});
+      compileAndSetupStuff({data, fields, metadata: {}, options});
       expect(vm.uigrid_options.enableRowSelection).to.exist;
       expect(vm.uigrid_options.enableRowHeaderSelection).to.exist;
       expect(vm.uigrid_options.enableFullRowSelection).to.exist;
@@ -107,19 +107,19 @@ describe('Directive: pxGrid', () => {
 
   });
 
-  describe('Catalog Initialization', () => {
+  describe('Metadata Initialization', () => {
 
     it('should initialize external pagination', () => {
-      let catalog = {
+      let metadata = {
         totalItems: 10,
         pageSize: 5,
         pageIndex: 1
       };
-      compileAndSetupStuff({catalog});
+      compileAndSetupStuff({metadata});
       expect(vm.uigrid_options.useExternalPagination).to.equal(true);
-      expect(vm.uigrid_options.totalItems).to.equal(catalog.totalItems);
-      expect(vm.uigrid_options.paginationPageSize ).to.equal(catalog.pageSize);
-      expect(vm.uigrid_options.paginationCurrentPage).to.equal(catalog.pageIndex);
+      expect(vm.uigrid_options.totalItems).to.equal(metadata.totalItems);
+      expect(vm.uigrid_options.paginationPageSize ).to.equal(metadata.pageSize);
+      expect(vm.uigrid_options.paginationCurrentPage).to.equal(metadata.pageIndex);
     });
 
   });

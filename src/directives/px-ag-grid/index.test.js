@@ -8,7 +8,7 @@ describe('Directive: pxAgGrid', () => {
   var basicTemplate = `
     <px-ag-grid
       data="data"
-      catalog="catalog"
+      metadata="metadata"
       fields="fields"
       options="options">
     </px-ag-grid>
@@ -53,7 +53,7 @@ describe('Directive: pxAgGrid', () => {
 
   });
 
-  describe('Catalog Initialization', () => {
+  describe('Metadata Initialization', () => {
 
     it('PENDING');
 

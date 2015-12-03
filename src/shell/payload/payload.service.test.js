@@ -42,46 +42,46 @@ describe('Service: Payload', () => {
           }
         }]
       }]];
-      var catalog = {
+      var metadata = {
         "catalogName": "TestSchema.TestTable",
         "mode": undefined
       }
 
-      it(`Payload when catalog.mode = 'insert'`, () => {
-        catalog.mode = "insert";
-        var payload = PayloadService.build(fields, model, catalog);
+      it(`Payload when metadata.mode = 'insert'`, () => {
+        metadata.mode = "insert";
+        var payload = PayloadService.build(fields, model, metadata);
         expect(payload).to.deep.equal({
-          tableName: catalog.catalogName,
-          primaryKey: catalog.primaryKey,
-          identityKey: catalog.identityKey,
-          foreignReference: catalog.foreignReference,
+          tableName: metadata.catalogName,
+          primaryKey: metadata.primaryKey,
+          identityKey: metadata.identityKey,
+          foreignReference: metadata.foreignReference,
           insertRows: model
         });
       });
 
-      it(`Payload when catalog.mode = 'filters'`, () => {
-        catalog.mode = "filters";
-        var payload = PayloadService.build(fields, model, catalog);
+      it(`Payload when metadata.mode = 'filters'`, () => {
+        metadata.mode = "filters";
+        var payload = PayloadService.build(fields, model, metadata);
         expect(payload).to.deep.equal({
-          tableName: catalog.catalogName,
-          primaryKey: catalog.primaryKey,
-          identityKey: catalog.identityKey,
-          foreignReference: catalog.foreignReference,
+          tableName: metadata.catalogName,
+          primaryKey: metadata.primaryKey,
+          identityKey: metadata.identityKey,
+          foreignReference: metadata.foreignReference,
           dataRows: model
         });
       });
 
-      it(`Payload when catalog.mode = 'edit'`, () => {
-        catalog.mode = "edit";
-        catalog.primaryKey = "Id";
-        catalog.identityKey = "Id";
-        model[0][catalog.primaryKey] = "1";
-        var payload = PayloadService.build(fields, model, catalog);
+      it(`Payload when metadata.mode = 'edit'`, () => {
+        metadata.mode = "edit";
+        metadata.primaryKey = "Id";
+        metadata.identityKey = "Id";
+        model[0][metadata.primaryKey] = "1";
+        var payload = PayloadService.build(fields, model, metadata);
         expect(payload).to.deep.equal({
-          tableName: catalog.catalogName,
-          primaryKey: catalog.primaryKey,
-          identityKey: catalog.identityKey,
-          foreignReference: catalog.foreignReference,
+          tableName: metadata.catalogName,
+          primaryKey: metadata.primaryKey,
+          identityKey: metadata.identityKey,
+          foreignReference: metadata.foreignReference,
           updateRows: model
         });
       });
@@ -106,46 +106,46 @@ describe('Service: Payload', () => {
           }]
         }]
       }]];
-      var catalog = {
+      var metadata = {
         "catalogName": "TestSchema.TestTable",
         "mode": undefined
       }
 
-      it(`Payload when catalog.mode = 'insert'`, () => {
-        catalog.mode = "insert";
-        var payload = PayloadService.build(fields, model, catalog);
+      it(`Payload when metadata.mode = 'insert'`, () => {
+        metadata.mode = "insert";
+        var payload = PayloadService.build(fields, model, metadata);
         expect(payload).to.deep.equal({
-          tableName: catalog.catalogName,
-          primaryKey: catalog.primaryKey,
-          identityKey: catalog.identityKey,
-          foreignReference: catalog.foreignReference,
+          tableName: metadata.catalogName,
+          primaryKey: metadata.primaryKey,
+          identityKey: metadata.identityKey,
+          foreignReference: metadata.foreignReference,
           insertRows: model
         });
       });
 
-      it(`Payload when catalog.mode = 'filters'`, () => {
-        catalog.mode = "filters";
-        var payload = PayloadService.build(fields, model, catalog);
+      it(`Payload when metadata.mode = 'filters'`, () => {
+        metadata.mode = "filters";
+        var payload = PayloadService.build(fields, model, metadata);
         expect(payload).to.deep.equal({
-          tableName: catalog.catalogName,
-          primaryKey: catalog.primaryKey,
-          identityKey: catalog.identityKey,
-          foreignReference: catalog.foreignReference,
+          tableName: metadata.catalogName,
+          primaryKey: metadata.primaryKey,
+          identityKey: metadata.identityKey,
+          foreignReference: metadata.foreignReference,
           dataRows: model
         });
       });
 
-      it(`Payload when catalog.mode = 'edit'`, () => {
-        catalog.mode = "edit";
-        catalog.primaryKey = "Id";
-        catalog.identityKey = "Id";
-        model[0][catalog.primaryKey] = "1";
-        var payload = PayloadService.build(fields, model, catalog);
+      it(`Payload when metadata.mode = 'edit'`, () => {
+        metadata.mode = "edit";
+        metadata.primaryKey = "Id";
+        metadata.identityKey = "Id";
+        model[0][metadata.primaryKey] = "1";
+        var payload = PayloadService.build(fields, model, metadata);
         expect(payload).to.deep.equal({
-          tableName: catalog.catalogName,
-          primaryKey: catalog.primaryKey,
-          identityKey: catalog.identityKey,
-          foreignReference: catalog.foreignReference,
+          tableName: metadata.catalogName,
+          primaryKey: metadata.primaryKey,
+          identityKey: metadata.identityKey,
+          foreignReference: metadata.foreignReference,
           updateRows: model
         });
       });
@@ -169,46 +169,46 @@ describe('Service: Payload', () => {
           }]
         }]
       }]];
-      var catalog = {
+      var metadata = {
         "catalogName": "TestSchema.TestTable",
         "mode": undefined
       }
 
-      it(`Payload when catalog.mode = 'insert'`, () => {
-        catalog.mode = "insert";
-        var payload = PayloadService.build(fields, model, catalog);
+      it(`Payload when metadata.mode = 'insert'`, () => {
+        metadata.mode = "insert";
+        var payload = PayloadService.build(fields, model, metadata);
         expect(payload).to.deep.equal({
-          tableName: catalog.catalogName,
-          primaryKey: catalog.primaryKey,
-          identityKey: catalog.identityKey,
-          foreignReference: catalog.foreignReference,
+          tableName: metadata.catalogName,
+          primaryKey: metadata.primaryKey,
+          identityKey: metadata.identityKey,
+          foreignReference: metadata.foreignReference,
           insertRows: model
         });
       });
 
-      it(`Payload when catalog.mode = 'filters'`, () => {
-        catalog.mode = "filters";
-        var payload = PayloadService.build(fields, model, catalog);
+      it(`Payload when metadata.mode = 'filters'`, () => {
+        metadata.mode = "filters";
+        var payload = PayloadService.build(fields, model, metadata);
         expect(payload).to.deep.equal({
-          tableName: catalog.catalogName,
-          primaryKey: catalog.primaryKey,
-          identityKey: catalog.identityKey,
-          foreignReference: catalog.foreignReference,
+          tableName: metadata.catalogName,
+          primaryKey: metadata.primaryKey,
+          identityKey: metadata.identityKey,
+          foreignReference: metadata.foreignReference,
           dataRows: model
         });
       });
 
-      it(`Payload when catalog.mode = 'edit'`, () => {
-        catalog.mode = "edit";
-        catalog.primaryKey = "Id";
-        catalog.identityKey = "Id";
-        model[0][catalog.primaryKey] = "1";
-        var payload = PayloadService.build(fields, model, catalog);
+      it(`Payload when metadata.mode = 'edit'`, () => {
+        metadata.mode = "edit";
+        metadata.primaryKey = "Id";
+        metadata.identityKey = "Id";
+        model[0][metadata.primaryKey] = "1";
+        var payload = PayloadService.build(fields, model, metadata);
         expect(payload).to.deep.equal({
-          tableName: catalog.catalogName,
-          primaryKey: catalog.primaryKey,
-          identityKey: catalog.identityKey,
-          foreignReference: catalog.foreignReference,
+          tableName: metadata.catalogName,
+          primaryKey: metadata.primaryKey,
+          identityKey: metadata.identityKey,
+          foreignReference: metadata.foreignReference,
           updateRows: model
         });
       });
@@ -219,7 +219,7 @@ describe('Service: Payload', () => {
         "Text": "test",
         "Nested": {"Inner": "test_nested"}
       }];
-      var catalog = {
+      var metadata = {
         "catalogName": "TestSchema.TestTable",
         "mode": undefined
       }
@@ -242,7 +242,7 @@ describe('Service: Payload', () => {
             "$dirty": true,
           },
           "data": {
-            "catalog": {
+            "metadata": {
               "catalogName": "TestSchema.NestedTable",
               "mode": undefined
             },
@@ -262,22 +262,22 @@ describe('Service: Payload', () => {
         }]
       }]];
 
-      it(`Payload when catalog.mode = 'insert'`, () => {
-        catalog.mode = "insert";
-        fields[0][0].fields[1].data.catalog.mode = "insert";
-        var payload = PayloadService.build(fields, model, catalog);
+      it(`Payload when metadata.mode = 'insert'`, () => {
+        metadata.mode = "insert";
+        fields[0][0].fields[1].data.metadata.mode = "insert";
+        var payload = PayloadService.build(fields, model, metadata);
         var eq = {
-          tableName: catalog.catalogName,
-          primaryKey: catalog.primaryKey,
-          identityKey: catalog.identityKey,
-          foreignReference: catalog.foreignReference,
+          tableName: metadata.catalogName,
+          primaryKey: metadata.primaryKey,
+          identityKey: metadata.identityKey,
+          foreignReference: metadata.foreignReference,
           insertRows: [{
             "Text": "test",
             "Nested": {
-              tableName: fields[0][0].fields[1].data.catalog.catalogName,
-              primaryKey: fields[0][0].fields[1].data.catalog.primaryKey,
-              identityKey: fields[0][0].fields[1].data.catalog.identityKey,
-              foreignReference: fields[0][0].fields[1].data.catalog.foreignReference,
+              tableName: fields[0][0].fields[1].data.metadata.catalogName,
+              primaryKey: fields[0][0].fields[1].data.metadata.primaryKey,
+              identityKey: fields[0][0].fields[1].data.metadata.identityKey,
+              foreignReference: fields[0][0].fields[1].data.metadata.foreignReference,
               insertRows: [{
                 "Inner": "test_nested"
               }]
@@ -287,33 +287,33 @@ describe('Service: Payload', () => {
         expect(payload).to.deep.equal(eq);
       });
 
-      it(`Payload when catalog.mode = 'edit'`, () => {
-        catalog.mode = "edit";
-        catalog.primaryKey = "Id";
-        catalog.identityKey = "Id";
-        catalog.foreignReference = undefined;
-        fields[0][0].fields[1].data.catalog.mode = catalog.mode;
-        fields[0][0].fields[1].data.catalog.primaryKey = catalog.primaryKey;
-        fields[0][0].fields[1].data.catalog.identityKey = catalog.identityKey;
-        fields[0][0].fields[1].data.catalog.foreignReference = "Id";
-        model[0][catalog.primaryKey] = "1";
-        model[0]["Nested"][catalog.primaryKey] = "1";
-        var payload = PayloadService.build(fields, model, catalog);
+      it(`Payload when metadata.mode = 'edit'`, () => {
+        metadata.mode = "edit";
+        metadata.primaryKey = "Id";
+        metadata.identityKey = "Id";
+        metadata.foreignReference = undefined;
+        fields[0][0].fields[1].data.metadata.mode = metadata.mode;
+        fields[0][0].fields[1].data.metadata.primaryKey = metadata.primaryKey;
+        fields[0][0].fields[1].data.metadata.identityKey = metadata.identityKey;
+        fields[0][0].fields[1].data.metadata.foreignReference = "Id";
+        model[0][metadata.primaryKey] = "1";
+        model[0]["Nested"][metadata.primaryKey] = "1";
+        var payload = PayloadService.build(fields, model, metadata);
         var eq = {
-          tableName: catalog.catalogName,
-          primaryKey: catalog.primaryKey,
-          identityKey: catalog.identityKey,
-          foreignReference: catalog.foreignReference,
+          tableName: metadata.catalogName,
+          primaryKey: metadata.primaryKey,
+          identityKey: metadata.identityKey,
+          foreignReference: metadata.foreignReference,
           updateRows: [{
-            "Id": model[0][catalog.primaryKey],
+            "Id": model[0][metadata.primaryKey],
             "Text": "test",
             "Nested": {
-              tableName: fields[0][0].fields[1].data.catalog.catalogName,
-              primaryKey: fields[0][0].fields[1].data.catalog.primaryKey,
-              identityKey: fields[0][0].fields[1].data.catalog.identityKey,
-              foreignReference: fields[0][0].fields[1].data.catalog.foreignReference,
+              tableName: fields[0][0].fields[1].data.metadata.catalogName,
+              primaryKey: fields[0][0].fields[1].data.metadata.primaryKey,
+              identityKey: fields[0][0].fields[1].data.metadata.identityKey,
+              foreignReference: fields[0][0].fields[1].data.metadata.foreignReference,
               updateRows: [{
-                "Id": model[0]["Nested"][catalog.primaryKey],
+                "Id": model[0]["Nested"][metadata.primaryKey],
                 "Inner": "test_nested"
               }]
             }

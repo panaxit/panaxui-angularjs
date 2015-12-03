@@ -18,7 +18,7 @@ export default class CardsCtrl extends BaseCtrl {
       pageSize: pageSize || parseInt(vm.$stateParams.pageSize) || 8
     };
     vm.CRUDService.read(params).then(function (res) {
-      vm.catalog = res.data.data.catalog || {};
+      vm.metadata = res.data.data.metadata || {};
       vm.data = res.data.data.model || [];
       vm.fields = res.data.data.fields;
 
@@ -33,21 +33,21 @@ export default class CardsCtrl extends BaseCtrl {
       asyncPagination: true,
       showPaginationRow: true,
       showBrowseRow: vm.$stateParams.mode === 'browse',
-      showAddRemoveRow: vm.catalog.mode === 'edit',
+      showAddRemoveRow: vm.metadata.mode === 'edit',
       showFilterRow: true
     };
   }
 
-  // ToDo: Use catalog parameter (as in GridCtrl) for nested cardsView
+  // ToDo: Use metadata parameter (as in GridCtrl) for nested cardsView
   onOpen(selected) {
     var vm = this;
-    var idType = (!!vm.catalog.identityKey) ? 'identityKey' : 'primaryKey';
-    var idKey = vm.catalog[idType];
+    var idType = (!!vm.metadata.identityKey) ? 'identityKey' : 'primaryKey';
+    var idKey = vm.metadata[idType];
     var idValue = selected[idKey];
 
     vm.$scope.$emit('goToState', 'main.panel.form', {
-      catalogName: vm.catalog.catalogName,
-      mode: vm.catalog.mode,
+      catalogName: vm.metadata.catalogName,
+      mode: vm.metadata.mode,
       [idType]: idKey,
       id: idValue
     });
@@ -69,7 +69,7 @@ export default class CardsCtrl extends BaseCtrl {
   onNext(selected) {
     var vm = this;
     var len = selected.length,
-        idKey = vm.catalog.identityKey || vm.catalog.primaryKey,
+        idKey = vm.metadata.identityKey || vm.metadata.primaryKey,
         filters = '[' + idKey + ' IN (';
     angular.forEach(selected, function(row, index) {
       filters += `'${row[idKey]}'`;
@@ -80,7 +80,7 @@ export default class CardsCtrl extends BaseCtrl {
     filters += ')]';
     // ToDo: PanaxDB Routes
     vm.$scope.$emit('goToState', 'main.panel.form', {
-      catalogName: vm.catalog.catalogName,
+      catalogName: vm.metadata.catalogName,
       mode: 'edit',
       filters: filters
     });

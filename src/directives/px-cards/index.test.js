@@ -8,7 +8,7 @@ describe('Directive: pxCards', () => {
   var basicTemplate = `
     <px-cards
       data="data"
-      catalog="catalog"
+      metadata="metadata"
       fields="fields"
       options="options"
       open-handler="onOpen(selected)"
@@ -49,23 +49,23 @@ describe('Directive: pxCards', () => {
 
   });
 
-  describe('Catalog Initialization', () => {
+  describe('Metadata Initialization', () => {
 
     it('should initialize server-side pagination', () => {
-      let catalog = {
+      let metadata = {
         totalItems: 10,
         pageSize: 5,
         pageIndex: 1
       };
-      compileAndSetupStuff({catalog});
-      expect(vm.pagination_options.totalItems).to.equal(catalog.totalItems);
-      expect(vm.pagination_options.paginationPageSize ).to.equal(catalog.pageSize);
-      expect(vm.pagination_options.paginationCurrentPage).to.equal(catalog.pageIndex);
+      compileAndSetupStuff({metadata});
+      expect(vm.pagination_options.totalItems).to.equal(metadata.totalItems);
+      expect(vm.pagination_options.paginationPageSize ).to.equal(metadata.pageSize);
+      expect(vm.pagination_options.paginationCurrentPage).to.equal(metadata.pageIndex);
     });
 
     it('should initialize client-side pagination', () => {
       let data = ["a", "b"];
-      compileAndSetupStuff({data, catalog: {}});
+      compileAndSetupStuff({data, metadata: {}});
       expect(vm.pagination_options.totalItems).to.equal(data.length);
       expect(vm.pagination_options.paginationPageSize ).to.equal(8);
       expect(vm.pagination_options.paginationCurrentPage).to.equal(1);

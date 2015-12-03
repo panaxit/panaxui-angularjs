@@ -37,7 +37,7 @@ function pxForm() {
     restrict: 'E',
     template: template,
     scope: {
-      catalog: '=',
+      metadata: '=',
       data: '=',
       fields: '=',
       options: '=',
@@ -63,8 +63,8 @@ function pxFormCtrl($scope) {
 
   initialize();
 
-  $scope.$watch('vm.catalog', (newCatalog) => {
-    if(newCatalog) initializeCatalog(newCatalog);
+  $scope.$watch('vm.metadata', (newMetadata) => {
+    if(newMetadata) initializeMetadata(newMetadata);
   });
 
   $scope.$watchCollection('vm.data', (newValues, oldValues) => {
@@ -96,18 +96,18 @@ function pxFormCtrl($scope) {
     }
   }
 
-  function initializeCatalog(catalog) {
+  function initializeMetadata(metadata) {
     // Pagination
-    if(catalog.totalItems) {
+    if(metadata.totalItems) {
       // Server-side Pagination
-      vm.pagination_options.totalItems = catalog.totalItems;
-      vm.pagination_options.paginationPageSize = catalog.pageSize;
-      vm.pagination_options.paginationCurrentPage = catalog.pageIndex;
+      vm.pagination_options.totalItems = metadata.totalItems;
+      vm.pagination_options.paginationPageSize = metadata.pageSize;
+      vm.pagination_options.paginationCurrentPage = metadata.pageIndex;
     } else {
       // Client-side Pagination
       vm.pagination_options.totalItems = vm.data.length;
-      vm.pagination_options.paginationPageSize = vm.catalog.pageSize || 1;
-      vm.pagination_options.paginationCurrentPage = vm.catalog.pageIndex || 1;
+      vm.pagination_options.paginationPageSize = vm.metadata.pageSize || 1;
+      vm.pagination_options.paginationCurrentPage = vm.metadata.pageIndex || 1;
     }
   }
 

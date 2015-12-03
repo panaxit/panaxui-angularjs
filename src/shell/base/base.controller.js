@@ -28,7 +28,7 @@ export default class BaseCtrl {
   openDebugModal() {
     var vm = this;
     vm.DebugService.show({
-      catalog: vm.catalog,
+      metadata: vm.metadata,
       fields: vm.fields,
       model: vm.data
     });

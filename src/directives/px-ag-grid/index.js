@@ -37,7 +37,7 @@ function pxAgGrid() {
     restrict: 'E',
     template: template,
     scope: {
-      catalog: '=',
+      metadata: '=',
       data: '=',
       fields: '=',
       options: '=',
@@ -116,7 +116,7 @@ function pxAgGridCtrl($scope, AlertService) {
       // Select junction rows
       vm.gridOptions.api.forEachNode((node) => {
         let isMulti = (options.rowSelection === 'multiple');
-        if(!!node.data[vm.catalog.primaryKey]) {
+        if(!!node.data[vm.metadata.primaryKey]) {
           vm.gridOptions.api.selectNode(node, isMulti);
         }
         // else {

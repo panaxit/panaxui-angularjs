@@ -29,12 +29,12 @@ export default class MainCtrl {
     };
 
 		// Go to arbitriary state
-		vm.goToState = function(state, catalog) {
-			$state.go(state, catalog);
+		vm.goToState = function(state, metadata) {
+			$state.go(state, metadata);
 		};
 		// Go to arbitriary state and unselect nav-tree
-		$scope.$on('goToState', function (event, state, catalog) {
-			vm.goToState(state, catalog);
+		$scope.$on('goToState', function (event, state, metadata) {
+			vm.goToState(state, metadata);
 			//vm.navMenuControl.select_branch(null);
 		});
 		// Go to state of selected branch (nav-tree)

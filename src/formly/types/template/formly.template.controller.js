@@ -11,8 +11,8 @@ export default class FormlyTemplateCtrl extends TemplateCtrl {
 
   loader(pageIndex, pageSize) {
     var vm = this;
-    // Override catalog from field's data
-    super.loader(undefined, undefined, vm.$scope.options.data.catalog);
+    // Override metadata from field's data
+    super.loader(undefined, undefined, vm.$scope.options.data.metadata);
   }
 
   setOptions() {

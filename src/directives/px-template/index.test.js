@@ -8,7 +8,7 @@ describe('Directive: pxTemplate', () => {
   var basicTemplate = `
     <px-template
       data="data"
-      catalog="catalog">
+      metadata="metadata">
     </px-template>
   `;
 
@@ -33,7 +33,7 @@ describe('Directive: pxTemplate', () => {
 
   });
 
-  describe('Catalog Initialization', () => {
+  describe('Metadata Initialization', () => {
 
     it('PENDING');
 

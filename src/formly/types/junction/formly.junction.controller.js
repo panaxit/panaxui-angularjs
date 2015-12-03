@@ -13,7 +13,7 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
     var vm = this;
 
     vm.data = vm.$scope.model[vm.$scope.options.key] || [];
-    vm.catalog = vm.$scope.options.data.catalog;
+    vm.metadata = vm.$scope.options.data.metadata;
     vm.initializeFields(vm.$scope.options.data.fields);
     vm.setOptions();
   }
@@ -53,8 +53,8 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
   onRowSelected(node) {
     let vm = this;
     // Update model
-    let pKey = vm.catalog.primaryKey;
-    let refA = vm.catalog.foreignReference;
+    let pKey = vm.metadata.primaryKey;
+    let refA = vm.metadata.foreignReference;
     let refB = pKey.replace(refA, '').replace(',', '')
     // Add pKey value
     node.data[pKey] = node.data[pKey] || node.data[refA] + ' ' + node.data[refB].value;
@@ -64,6 +64,6 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
     let vm = this;
     // Update model
     // Remove pKey value
-    delete node.data[vm.catalog.primaryKey];
+    delete node.data[vm.metadata.primaryKey];
   }
 }

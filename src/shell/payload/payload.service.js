@@ -8,26 +8,26 @@ class PayloadService {
    * Create data table payload to be sent
    * Used by: Form
    */
-  build(fields, model, catalog) {
-    if(!catalog) return {};
+  build(fields, model, metadata) {
+    if(!metadata) return {};
 
     var vm = this;
 
     var payload = {
-      tableName: catalog.catalogName,
-      primaryKey: catalog.primaryKey,
-      identityKey: catalog.identityKey,
-      foreignReference: catalog.foreignReference
+      tableName: metadata.catalogName,
+      primaryKey: metadata.primaryKey,
+      identityKey: metadata.identityKey,
+      foreignReference: metadata.foreignReference
     };
 
-    if(catalog.mode === 'insert') {
+    if(metadata.mode === 'insert') {
       payload.insertRows = [];
       model.forEach((record, index) => {
         var row = {};
         vm.dirtyFieldsIterator(fields[index], row, record);
         payload.insertRows.push(row);
       });
-    } else if(catalog.mode === 'edit') {
+    } else if(metadata.mode === 'edit') {
       payload.updateRows = [];
       model.forEach((record, index) => {
         var row = {};
@@ -41,7 +41,7 @@ class PayloadService {
         }
         payload.updateRows.push(row);
       });
-    } else if(catalog.mode === 'filters') {
+    } else if(metadata.mode === 'filters') {
       payload.dataRows = [];
       model.forEach((record, index) => {
         var row = {};
@@ -79,7 +79,7 @@ class PayloadService {
         /*
         nested
          */
-        payload[el.key] = vm.build([el.data.fields], [orig_model[el.key]], el.data.catalog);
+        payload[el.key] = vm.build([el.data.fields], [orig_model[el.key]], el.data.metadata);
         return;
       }
 

@@ -34,7 +34,7 @@ function pxCards() {
     template: template,
     scope: {
       data: '=',
-      catalog: '=',
+      metadata: '=',
       fields: '=',
       options: '=',
       openHandler: '&',
@@ -67,8 +67,8 @@ function pxCardsCtrl($scope) {
 
   initialize();
 
-  $scope.$watch('vm.catalog', function(newCatalog) {
-    if(newCatalog) initializeCatalog(newCatalog);
+  $scope.$watch('vm.metadata', function(newMetadata) {
+    if(newMetadata) initializeMetadata(newMetadata);
   });
 
   /*
@@ -84,27 +84,27 @@ function pxCardsCtrl($scope) {
     vm.selectedRecords = [];
   }
 
-  function initializeCatalog(catalog) {
+  function initializeMetadata(metadata) {
     // Default Upload Path (for Images)
-    vm.uploadPath = catalog.dbId + '/' + catalog.catalogName + '/' + catalog.customAttrs.iconField + '/';
+    vm.uploadPath = metadata.dbId + '/' + metadata.catalogName + '/' + metadata.customAttrs.iconField + '/';
     // Pagination
-    if(catalog.totalItems) {
+    if(metadata.totalItems) {
       // Server-side Pagination
-      vm.pagination_options.totalItems = catalog.totalItems;
-      vm.pagination_options.paginationPageSize = catalog.pageSize;
-      vm.pagination_options.paginationCurrentPage = catalog.pageIndex;
+      vm.pagination_options.totalItems = metadata.totalItems;
+      vm.pagination_options.paginationPageSize = metadata.pageSize;
+      vm.pagination_options.paginationCurrentPage = metadata.pageIndex;
     } else {
       // Client-side Pagination
       vm.pagination_options.totalItems = vm.data.length;
-      vm.pagination_options.paginationPageSize = vm.catalog.pageSize || 8;
-      vm.pagination_options.paginationCurrentPage = vm.catalog.pageIndex || 1;
+      vm.pagination_options.paginationPageSize = vm.metadata.pageSize || 8;
+      vm.pagination_options.paginationCurrentPage = vm.metadata.pageIndex || 1;
     }
   }
 
   function onClick(record) {
-    if (['edit', 'readonly'].indexOf(vm.catalog.mode) > -1) {
+    if (['edit', 'readonly'].indexOf(vm.metadata.mode) > -1) {
       vm.openHandler({selected: record});
-    } else if (vm.catalog.mode === 'browse') {
+    } else if (vm.metadata.mode === 'browse') {
       var index = vm.selectedRecords.indexOf(record);
       if(index > -1) {
         vm.selectedRecords.splice(index, 1);

@@ -18,7 +18,7 @@ export default class GridCtrl extends BaseCtrl {
       pageSize: pageSize || parseInt(vm.$stateParams.pageSize) || 25
     };
     vm.CRUDService.read(params).then(function (res) {
-      vm.catalog = res.data.data.catalog;
+      vm.metadata = res.data.data.metadata;
       vm.data = res.data.data.model || [];
       vm.fields = res.data.data.fields;
 
@@ -30,27 +30,27 @@ export default class GridCtrl extends BaseCtrl {
   setOptions() {
     var vm = this;
     vm.options = {
-      showAddRemoveRow: vm.catalog.mode === 'edit',
-      showNextRow: vm.catalog.mode === 'browse',
+      showAddRemoveRow: vm.metadata.mode === 'edit',
+      showNextRow: vm.metadata.mode === 'browse',
       showPaginationRow: true,
-      showRowActionsColumn: (['edit', 'readonly'].indexOf(vm.catalog.mode) > -1),
-      enableRowSelection: (['edit', 'browse'].indexOf(vm.catalog.mode) > -1),
-      enableRowHeaderSelection: (['edit', 'browse'].indexOf(vm.catalog.mode) > -1),
-      enableFullRowSelection: vm.catalog.mode === 'browse',
-      multiSelect: (['edit', 'browse'].indexOf(vm.catalog.mode) > -1),
-      enableCellEdit: vm.catalog.mode === 'edit'
+      showRowActionsColumn: (['edit', 'readonly'].indexOf(vm.metadata.mode) > -1),
+      enableRowSelection: (['edit', 'browse'].indexOf(vm.metadata.mode) > -1),
+      enableRowHeaderSelection: (['edit', 'browse'].indexOf(vm.metadata.mode) > -1),
+      enableFullRowSelection: vm.metadata.mode === 'browse',
+      multiSelect: (['edit', 'browse'].indexOf(vm.metadata.mode) > -1),
+      enableCellEdit: vm.metadata.mode === 'edit'
     };
   }
 
   onOpen(selected) {
     var vm = this;
-    var idType = (!!vm.catalog.identityKey) ? 'identityKey' : 'primaryKey';
-    var idKey = vm.catalog[idType];
+    var idType = (!!vm.metadata.identityKey) ? 'identityKey' : 'primaryKey';
+    var idKey = vm.metadata[idType];
     var idValue = selected[idKey];
 
     vm.$scope.$emit('goToState', 'main.panel.form', {
-      catalogName: vm.catalog.catalogName,
-      mode: vm.catalog.mode,
+      catalogName: vm.metadata.catalogName,
+      mode: vm.metadata.mode,
       [idType]: idKey,
       id: idValue
     });
@@ -71,9 +71,9 @@ export default class GridCtrl extends BaseCtrl {
       * Create payload to be sent
       */
      var payload = {
-       tableName: vm.catalog.catalogName,
-       primaryKey: vm.catalog.primaryKey,
-       identityKey: vm.catalog.identityKey
+       tableName: vm.metadata.catalogName,
+       primaryKey: vm.metadata.primaryKey,
+       identityKey: vm.metadata.identityKey
      };
 
      // Set DeleteRows
@@ -81,8 +81,8 @@ export default class GridCtrl extends BaseCtrl {
 
      // Set primaryKey and/or identityKey as DeleteRows
      angular.forEach(selected, function(row, index) {
-       var identifier = row[vm.catalog.primaryKey] ||
-                        row[vm.catalog.identityKey];
+       var identifier = row[vm.metadata.primaryKey] ||
+                        row[vm.metadata.identityKey];
 
        payload.deleteRows[index] = {};
        if(payload.primaryKey)
@@ -122,7 +122,7 @@ export default class GridCtrl extends BaseCtrl {
     var promise = vm.$q.defer();
 
     // Do not update if not in edit mode
-    if(vm.catalog.mode !== 'edit') {
+    if(vm.metadata.mode !== 'edit') {
       promise.reject();
       return promise.promise;
     }
@@ -131,9 +131,9 @@ export default class GridCtrl extends BaseCtrl {
     * Create payload to be sent
     */
     var payload = {
-     tableName: vm.catalog.catalogName,
-     primaryKey: vm.catalog.primaryKey,
-     identityKey: vm.catalog.identityKey
+     tableName: vm.metadata.catalogName,
+     primaryKey: vm.metadata.primaryKey,
+     identityKey: vm.metadata.identityKey
     };
 
     // Set DataRows
@@ -160,7 +160,7 @@ export default class GridCtrl extends BaseCtrl {
   onNext(selected) {
     var vm = this;
     var len = selected.length,
-        idKey = vm.catalog.identityKey || vm.catalog.primaryKey,
+        idKey = vm.metadata.identityKey || vm.metadata.primaryKey,
         filters = '[' + idKey + ' IN (';
     angular.forEach(selected, function(row, index) {
       filters += `'${row[idKey]}'`;
@@ -171,7 +171,7 @@ export default class GridCtrl extends BaseCtrl {
     filters += ')]';
     // ToDo: PanaxDB Routes
     vm.$scope.$emit('goToState', 'main.panel.form', {
-      catalogName: vm.catalog.catalogName,
+      catalogName: vm.metadata.catalogName,
       mode: 'edit',
       filters: filters
     });
