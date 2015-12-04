@@ -86,7 +86,9 @@ function pxCardsCtrl($scope) {
 
   function initializeMetadata(metadata) {
     // Default Upload Path (for Images)
-    vm.uploadPath = metadata.dbId + '/' + metadata.catalogName + '/' + metadata.customAttrs.iconField + '/';
+    if(metadata.customAttrs && metadata.customAttrs.iconField) {
+      vm.uploadPath = metadata.dbId + '/' + metadata.catalogName + '/' + metadata.customAttrs.iconField + '/';
+    }
     // Pagination
     if(metadata.totalItems) {
       // Server-side Pagination
