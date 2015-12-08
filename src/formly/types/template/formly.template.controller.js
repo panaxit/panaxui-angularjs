@@ -15,11 +15,11 @@ export default class FormlyTemplateCtrl extends TemplateCtrl {
     super.loader(undefined, undefined, vm.$scope.options.data.metadata);
   }
 
-  setOptions() {
+  setOpts() {
     var vm = this;
     // Reuse parent's options
-    super.setOptions();
+    super.setOpts();
     // Override with vm.options.whatever = ...
-    //vm.options.asyncPagination = false;
+    //vm.options.opts.asyncPagination = false;
   }
 }

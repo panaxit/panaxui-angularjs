@@ -1,4 +1,5 @@
 import BaseCtrl from '../base/base.controller';
+import _ from 'lodash';
 
 export default class TemplateCtrl extends BaseCtrl {
   constructor($scope, DebugService, $stateParams, CRUDService) {
@@ -22,18 +23,23 @@ export default class TemplateCtrl extends BaseCtrl {
       pageSize: pageSize || parseInt(metadata.pageSize || vm.$stateParams.pageSize) || 1
     };
     vm.CRUDService.read(params).then(function (res) {
-      vm.data = res.data || '';
-      vm.metadata = metadata;
-      vm.metadata.contentType = res.headers('Content-Type');
-      vm.setOptions();
+      // First-class options
+      vm.options = {
+        metadata: _.extend(metadata, { contentType: res.headers('Content-Type') }),
+        fields: undefined,
+        data: res.data || ''
+      };
+      // Other options
+      vm.setOpts();
+
       if(!metadata.catalogName) // Hacky way to know if directed is not nested
         vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
   }
 
-  setOptions() {
+  setOpts() {
     var vm = this;
-    vm.options = {
+    vm.options.opts = {
       showPrintRow: true
     };
   }

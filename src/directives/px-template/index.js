@@ -33,8 +33,6 @@ function pxTemplate() {
     restrict: 'E',
     template: template,
     scope: {
-      data: '=',
-      metadata: '=',
       options: '='
     },
     bindToController: true,
@@ -55,34 +53,37 @@ function pxTemplateCtrl($scope, $window, $sce) {
    */
 
   /*
-  initialization
+  Sync initialization
    */
 
-  initialize();
+  init();
 
-  $scope.$watch('vm.data', function(newData) {
-    if(newData) initializeData(newData);
-  });
+  /*
+  Async initialization
+   */
 
-  $scope.$watch('vm.metadata', function(newMetadata) {
-    if(newMetadata) initializeMetadata(newMetadata);
+  $scope.$watch('vm.options', function(newOptions) {
+    if(newOptions) {
+      initData(newOptions.data);
+      initMetadata(newOptions.metadata);
+    }
   });
 
   /*
   function declarations
    */
 
-  function initialize() {
+  function init() {
   }
 
-  function initializeData(data) {
+  function initData(data) {
     // Set Content
     // https://docs.angularjs.org/api/ng/service/$sce#show-me-an-example-using-sce-
     // Security issue? Do it only for SVGs?
     vm.content = $sce.trustAsHtml(data);
   }
 
-  function initializeMetadata(metadata) {
+  function initMetadata(metadata) {
     // Set Content-Type
     if(metadata.contentType) {
       vm.contentType = metadata.contentType.split(';')[0];
