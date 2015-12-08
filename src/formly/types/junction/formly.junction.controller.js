@@ -12,10 +12,14 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
   loader() {
     var vm = this;
 
-    vm.data = vm.$scope.model[vm.$scope.options.key] || [];
-    vm.metadata = vm.$scope.options.data.metadata;
-    vm.initializeFields(vm.$scope.options.data.fields);
-    vm.setOptions();
+    // First-class options
+    vm.options = {
+      data: vm.$scope.model[vm.$scope.options.key] || [],
+      metadata: vm.$scope.options.data.metadata,
+      fields: vm.initializeFields(vm.$scope.options.data.fields)
+    };
+    // Other options
+    vm.setOpts();
   }
 
   initializeFields(fields) {
@@ -36,13 +40,13 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
         };
       }
     });
-    // Set fields
-    vm.fields = fields;
+    // Return fields
+    return fields;
   }
 
-  setOptions() {
+  setOpts() {
     var vm = this;
-    vm.options = {
+    vm.options.opts = {
       rowSelection: 'multiple',
       isJunctionTable: true,
       minSelections: vm.$scope.to.minSelections,
@@ -53,8 +57,8 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
   onRowSelected(node) {
     let vm = this;
     // Update model
-    let pKey = vm.metadata.primaryKey;
-    let refA = vm.metadata.foreignReference;
+    let pKey = vm.options.metadata.primaryKey;
+    let refA = vm.options.metadata.foreignReference;
     let refB = pKey.replace(refA, '').replace(',', '')
     // Add pKey value
     node.data[pKey] = node.data[pKey] || node.data[refA] + ' ' + node.data[refB].value;
@@ -64,6 +68,6 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
     let vm = this;
     // Update model
     // Remove pKey value
-    delete node.data[vm.metadata.primaryKey];
+    delete node.data[vm.options.metadata.primaryKey];
   }
 }

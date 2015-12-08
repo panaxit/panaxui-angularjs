@@ -37,9 +37,6 @@ function pxAgGrid() {
     restrict: 'E',
     template: template,
     scope: {
-      metadata: '=',
-      data: '=',
-      fields: '=',
       options: '=',
       rowSelectedHandler: '&',
       rowDeselectedHandler: '&'
@@ -58,65 +55,68 @@ function pxAgGridCtrl($scope, AlertService) {
   var vm = this;
 
   /*
-  initialization
+  Sync initialization
    */
 
-  initialize();
+  init();
 
-  $scope.$watch('vm.data', function(newData) {
-    if(newData) initializeData(newData);
-  });
-
-  $scope.$watch('vm.fields', function(newFields) {
-    if(newFields) initializeFields(newFields);
-  });
+  /*
+  Async initialization
+   */
 
   $scope.$watch('vm.options', function(newOptions) {
-    if(newOptions) initializeOptions(newOptions);
+    if(newOptions) {
+      initData(newOptions.data, newOptions.opts);
+      initFields(newOptions.fields);
+      initOpts(newOptions.opts, newOptions.metadata);
+    }
   });
 
   /*
   function declarations
    */
 
-  function initialize() {
+  function init() {
     // Grid general defaults
     vm.gridOptions = {};
   }
 
-  function initializeData(data) {
+  function initData(data, opts) {
+    if(!data) return;
     // Row Data
-    if(!vm.options.isJunctionTable) { // Re-Load it later for junction tables
+    if(!opts.isJunctionTable) { // Re-Load it later for junction tables
       vm.gridOptions.api.setRowData(data);
     }
   }
 
-  function initializeFields(fields) {
+  function initFields(fields) {
+    if(!fields) return;
     // Column Defs
     vm.gridOptions.api.setColumnDefs(fields);
     // Fit Columns
     vm.gridOptions.api.sizeColumnsToFit();
   }
 
-  function initializeOptions(options) {
+  function initOpts(opts, metadata) {
+    if(!opts) return;
     // Header
-    if(options.headerHeight) {
-      vm.gridOptions.api.setHeaderHeight(options.headerHeight);
+    if(opts.headerHeight) {
+      vm.gridOptions.api.setHeaderHeight(opts.headerHeight);
       vm.gridOptions.api.sizeColumnsToFit();
     }
     // Selection
-    vm.gridOptions.rowSelection = options.rowSelection;
+    vm.gridOptions.rowSelection = opts.rowSelection;
     vm.gridOptions.suppressRowClickSelection = true;
     // Junction table specifics
-    if(options.isJunctionTable) {
+    if(opts.isJunctionTable) {
       // Set rows grouping & Reload data
       // https://github.com/ceolter/ag-grid/issues/483
       vm.gridOptions.rowsAlreadyGrouped = true;
-      vm.gridOptions.api.setRowData(vm.data);
+      vm.gridOptions.api.setRowData(vm.options.data);
       // Select junction rows
       vm.gridOptions.api.forEachNode((node) => {
-        let isMulti = (options.rowSelection === 'multiple');
-        if(!!node.data[vm.metadata.primaryKey]) {
+        let isMulti = (opts.rowSelection === 'multiple');
+        if(!!node.data[metadata.primaryKey]) {
           vm.gridOptions.api.selectNode(node, isMulti);
         }
         // else {
@@ -138,11 +138,11 @@ function pxAgGridCtrl($scope, AlertService) {
         //  - https://bitbucket.org/panaxit/panaxui-angularjs/issues/53/angular-formly-junction-type-validate
         //  - https://github.com/ceolter/ag-grid/issues/549
         var numSelected = event.selectedRows.length;
-        if(options.minSelections && numSelected < options.minSelections) {
-          AlertService.show('warning', 'Junction Table Validation', 'You cannot select less than ' + options.minSelections + ' records.');
+        if(opts.minSelections && numSelected < opts.minSelections) {
+          AlertService.show('warning', 'Junction Table Validation', 'You cannot select less than ' + opts.minSelections + ' records.');
         }
-        if(options.maxSelections && numSelected > options.maxSelections) {
-          AlertService.show('warning', 'Junction Table Validation', 'You cannot select more than ' + options.maxSelections + ' records.');
+        if(opts.maxSelections && numSelected > opts.maxSelections) {
+          AlertService.show('warning', 'Junction Table Validation', 'You cannot select more than ' + opts.maxSelections + ' records.');
         }
       };
     }

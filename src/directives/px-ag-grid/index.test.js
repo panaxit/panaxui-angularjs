@@ -7,9 +7,6 @@ describe('Directive: pxAgGrid', () => {
 
   var basicTemplate = `
     <px-ag-grid
-      data="data"
-      metadata="metadata"
-      fields="fields"
       options="options">
     </px-ag-grid>
   `;
