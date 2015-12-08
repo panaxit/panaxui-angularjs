@@ -1,9 +1,9 @@
 export default angular.module('app.main.form.formly.type.number', [])
-  .config(number)
+  .run(number)
   .name;
 
-function number(formlyConfigProvider) {
-  formlyConfigProvider.setType({
+function number(formlyConfig) {
+  formlyConfig.setType({
     name: 'number',
     extends: 'input',
     defaultOptions: {

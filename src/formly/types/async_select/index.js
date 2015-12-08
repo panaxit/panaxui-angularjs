@@ -6,16 +6,16 @@ export default angular.module('app.main.form.formly.type.async_select', [
     ngSanitize,
     'ui.select'
   ])
-  .config(async_select)
+  .run(async_select)
   .name;
 
-function async_select(formlyConfigProvider) {
+function async_select(formlyConfig) {
   /*
     async_select
     Extends select
     use ui-select (https://github.com/angular-ui/ui-select)
    */
-  formlyConfigProvider.setType({
+  formlyConfig.setType({
     name: 'async_select',
     extends: 'select',
     template: require('./template.html'),

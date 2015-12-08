@@ -1,9 +1,9 @@
 export default angular.module('app.main.form.formly.type.money', [])
-  .config(money)
+  .run(money)
   .name;
 
-function money(formlyConfigProvider) {
-  formlyConfigProvider.setType({
+function money(formlyConfig) {
+  formlyConfig.setType({
     name: 'money',
     extends: 'number',
     template: require('./template.html')

@@ -1,8 +1,8 @@
 export default angular.module('app.main.form.formly.type.date', [])
-  .config(date)
+  .run(date)
   .name;
 
-function date(formlyConfigProvider) {
+function date(formlyConfig) {
   /*
   ngModelAttrs stuff
    */
@@ -62,7 +62,7 @@ function date(formlyConfigProvider) {
     ngModelAttrs[camelize(binding)] = {bound: binding};
   });
 
-  formlyConfigProvider.setType({
+  formlyConfig.setType({
     name: 'date',
     template: require('./template.html'),
     wrapper: ['bootstrapLabel', 'bootstrapHasError'],

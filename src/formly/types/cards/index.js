@@ -1,15 +1,15 @@
 import FormlyCardsCtrl from './formly.cards.controller';
 
 export default angular.module('app.main.form.formly.type.cards', [])
-  .config(cards)
+  .run(cards)
   .controller('FormlyCardsCtrl', FormlyCardsCtrl)
   .name;
 
-function cards(formlyConfigProvider) {
+function cards(formlyConfig) {
   /*
     cards (nested)
    */
-  formlyConfigProvider.setType({
+  formlyConfig.setType({
     name: 'cards',
     template: require('./template.html'),
     wrapper: ['panel', 'bootstrapHasError'],

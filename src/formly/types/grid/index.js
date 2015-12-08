@@ -1,15 +1,15 @@
 import FormlyGridCtrl from './formly.grid.controller';
 
 export default angular.module('app.main.form.formly.type.grid', [])
-  .config(grid)
+  .run(grid)
   .controller('FormlyGridCtrl', FormlyGridCtrl)
   .name;
 
-function grid(formlyConfigProvider) {
+function grid(formlyConfig) {
   /*
     grid (nested)
    */
-  formlyConfigProvider.setType({
+  formlyConfig.setType({
     name: 'grid',
     template: require('./template.html'),
     wrapper: ['panel', 'bootstrapHasError'],

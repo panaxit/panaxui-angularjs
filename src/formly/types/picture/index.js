@@ -6,11 +6,11 @@ import './style.css';
 export default angular.module('app.main.form.formly.type.picture', [
     'lr.upload'
   ])
-  .config(picture)
+  .run(picture)
   .name;
 
-function picture(formlyConfigProvider) {
-  formlyConfigProvider.setType({
+function picture(formlyConfig) {
+  formlyConfig.setType({
     name: 'picture',
     extends: 'input',
     template: `

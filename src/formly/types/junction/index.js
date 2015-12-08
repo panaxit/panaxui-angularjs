@@ -1,15 +1,15 @@
 import FormlyJunctionCtrl from './formly.junction.controller';
 
 export default angular.module('app.main.form.formly.type.junction', [])
-  .config(junction)
+  .run(junction)
   .controller('FormlyJunctionCtrl', FormlyJunctionCtrl)
   .name;
 
-function junction(formlyConfigProvider) {
+function junction(formlyConfig) {
   /*
     junction (nested)
    */
-  formlyConfigProvider.setType({
+  formlyConfig.setType({
     name: 'junction',
     template: require('./template.html'),
     wrapper: ['panel', 'bootstrapHasError'],

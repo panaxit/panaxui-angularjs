@@ -1,9 +1,9 @@
 export default angular.module('app.main.form.formly.type.url', [])
-  .config(url)
+  .run(url)
   .name;
 
-function url(formlyConfigProvider) {
-  formlyConfigProvider.setType({
+function url(formlyConfig) {
+  formlyConfig.setType({
     name: 'url',
     extends: 'input',
     defaultOptions: {

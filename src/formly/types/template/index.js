@@ -1,15 +1,15 @@
 import FormlyTemplateCtrl from './formly.template.controller';
 
 export default angular.module('app.main.form.formly.type.template', [])
-  .config(template)
+  .run(template)
   .controller('FormlyTemplateCtrl', FormlyTemplateCtrl)
   .name;
 
-function template(formlyConfigProvider) {
+function template(formlyConfig) {
   /*
     template (nested)
    */
-  formlyConfigProvider.setType({
+  formlyConfig.setType({
     name: 'template',
     template: require('./template.html'),
     wrapper: ['panel', 'bootstrapHasError'],

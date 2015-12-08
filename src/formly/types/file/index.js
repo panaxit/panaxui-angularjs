@@ -4,11 +4,11 @@ import 'angular-upload/src/directives/btnUpload.min.css';
 export default angular.module('app.main.form.formly.type.file', [
     'lr.upload'
   ])
-  .config(file)
+  .run(file)
   .name;
 
-function file(formlyConfigProvider) {
-  formlyConfigProvider.setType({
+function file(formlyConfig) {
+  formlyConfig.setType({
     name: 'file',
     extends: 'input',
     template: `

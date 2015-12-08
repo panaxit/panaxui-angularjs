@@ -1,9 +1,9 @@
 export default angular.module('app.main.form.formly.type.input', [])
-  .config(input)
+  .run(input)
   .name;
 
-function input(formlyConfigProvider) {
-  formlyConfigProvider.setType({
+function input(formlyConfig) {
+  formlyConfig.setType({
     name: 'input',
     overwriteOk: true,
     template: require('./template.html'),

@@ -5,10 +5,10 @@ import 'angularjs-color-picker/angularjs-color-picker.css';
 export default angular.module('app.main.form.formly.type.color', [
     'color.picker'
   ])
-  .config(color)
+  .run(color)
   .name;
 
-function color(formlyConfigProvider) {
+function color(formlyConfig) {
   /*
   ngModelAttrs stuff
    */
@@ -50,7 +50,7 @@ function color(formlyConfigProvider) {
     ngModelAttrs[camelize(binding)] = {bound: binding};
   });
 
-  formlyConfigProvider.setType({
+  formlyConfig.setType({
     name: 'color',
     template: '<color-picker ng-model="model[options.key]" color-picker-swatch-bootstrap="false"></color-picker>',
     wrapper: ['bootstrapLabel', 'bootstrapHasError'],

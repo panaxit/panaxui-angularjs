@@ -1,8 +1,8 @@
 export default angular.module('app.main.form.formly.type.time', [])
-  .config(time)
+  .run(time)
   .name;
 
-function time(formlyConfigProvider) {
+function time(formlyConfig) {
   /*
   ngModelAttrs stuff
    */
@@ -44,7 +44,7 @@ function time(formlyConfigProvider) {
     ngModelAttrs[camelize(binding)] = {bound: binding};
   });
 
-  formlyConfigProvider.setType({
+  formlyConfig.setType({
     name: 'time',
     template: require('./template.html'),
     wrapper: ['bootstrapLabel', 'bootstrapHasError'],

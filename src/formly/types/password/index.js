@@ -1,9 +1,9 @@
 export default angular.module('app.main.form.formly.type.password', [])
-  .config(password)
+  .run(password)
   .name;
 
-function password(formlyConfigProvider) {
-  formlyConfigProvider.setType({
+function password(formlyConfig) {
+  formlyConfig.setType({
     name: 'password',
     extends: 'input',
     defaultOptions: {

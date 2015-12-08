@@ -1,12 +1,12 @@
 export default angular.module('app.main.form.formly.type.tabpanel', [])
-  .config(tabpanel)
+  .run(tabpanel)
   .name
 
-function tabpanel(formlyConfigProvider) {
+function tabpanel(formlyConfig) {
   /*
     tabpanel
    */
-  formlyConfigProvider.setType({
+  formlyConfig.setType({
     name: 'tabpanel',
     template: require('./template.html')
   });

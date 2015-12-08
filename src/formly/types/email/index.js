@@ -1,9 +1,9 @@
 export default angular.module('app.main.form.formly.type.email', [])
-  .config(email)
+  .run(email)
   .name;
 
-function email(formlyConfigProvider) {
-  formlyConfigProvider.setType({
+function email(formlyConfig) {
+  formlyConfig.setType({
     name: 'email',
     extends: 'input',
     defaultOptions: {

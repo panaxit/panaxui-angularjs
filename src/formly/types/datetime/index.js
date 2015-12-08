@@ -1,12 +1,12 @@
 export default angular.module('app.main.form.formly.type.datetime', [])
-  .config(datetime)
+  .run(datetime)
   .name;
 
-function datetime(formlyConfigProvider) {
+function datetime(formlyConfig) {
   /*
     datetime
    */
-  formlyConfigProvider.setType({
+  formlyConfig.setType({
     name: 'datetime',
     extends: 'input',
     defaultOptions: {
