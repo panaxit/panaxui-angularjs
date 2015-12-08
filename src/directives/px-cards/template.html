@@ -1,9 +1,9 @@
-<div class="panel-footer clearfix" ng-if="vm.options.showAddRemoveRow">
+<div class="panel-footer clearfix" ng-if="vm.options.opts.showAddRemoveRow">
   <div class="btn-toolbar">
     <div class="pull-left">
       <div class="btn-group btn-group-md">
         <button class="btn btn-primary" type="submit"
-          ng-click="vm.newHandler({catalogName: vm.metadata.catalogName})">
+          ng-click="vm.newHandler({catalogName: vm.options.metadata.catalogName})">
           <em class="glyphicon glyphicon-plus"></em>
           Add
         </button>
@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div class="panel-footer clearfix" ng-if="vm.options.showFilterRow">
+<div class="panel-footer clearfix" ng-if="vm.options.opts.showFilterRow">
   <!-- <label for="search">Search:</label> -->
   <input ng-model="query" id="search" class="form-control" placeholder="Filter text">
 </div>
@@ -34,12 +34,12 @@
   <div class="row clearfix">
 
     <!-- hack fix: https://github.com/michaelbromley/angularUtils/issues/157 -->
-    <div ng-switch on="vm.options.asyncPagination">
+    <div ng-switch on="vm.options.opts.asyncPagination">
       <!-- Server side pagination -->
       <div ng-switch-when="true" class="flexcontainer">
 
         <div class="px-card"
-             dir-paginate="record in vm.data | filter:query | itemsPerPage: vm.pagination_options.paginationPageSize"
+             dir-paginate="record in vm.options.data | filter:query | itemsPerPage: vm.pagination_options.paginationPageSize"
              total-items="vm.pagination_options.totalItems"
              current-page="vm.pagination_options.paginationCurrentPage"
              pagination-id="vm.pagination_options.paginationId">
@@ -53,7 +53,7 @@
       <div ng-switch-default class="flexcontainer">
 
         <div class="px-card"
-             dir-paginate="record in vm.data | filter:query | itemsPerPage: vm.pagination_options.paginationPageSize"
+             dir-paginate="record in vm.options.data | filter:query | itemsPerPage: vm.pagination_options.paginationPageSize"
              current-page="vm.pagination_options.paginationCurrentPage"
              pagination-id="vm.pagination_options.paginationId">
 
@@ -68,7 +68,7 @@
 
 </div>
 
-<div class="panel-footer" ng-if="vm.options.showPaginationRow">
+<div class="panel-footer" ng-if="vm.options.opts.showPaginationRow">
 
   <px-pagination
     options="vm.pagination_options"
@@ -77,7 +77,7 @@
 
 </div>
 
-<div class="panel-footer" ng-if="vm.options.showBrowseRow">
+<div class="panel-footer" ng-if="vm.options.opts.showBrowseRow">
   <div class="pull-left">
     {{vm.selectedRecords.length}} record(s) selected
   </div>
@@ -100,38 +100,38 @@
 <div class="panel" ng-class="(vm.selectedRecords.indexOf(record)>=0) ? 'panel-primary' : 'panel-default'">
   <div class="panel-heading clearfix">
     <h3 class="panel-title pull-left">
-    {{ record[vm.metadata.customAttrs.titleField] || '&nbsp;'}}
+    {{ record[vm.options.metadata.customAttrs.titleField] || '&nbsp;'}}
     </h3>
     <div class="btn-group btn-group-xs pull-right">
       <button class="btn" type="submit"
               ng-class="{
-                'btn-primary':(vm.metadata.mode === 'edit'),
-                'btn-default':(vm.metadata.mode !== 'edit')
+                'btn-primary':(vm.options.metadata.mode === 'edit'),
+                'btn-default':(vm.options.metadata.mode !== 'edit')
               }"
               ng-click="vm.onClick(record)">
-        {{vm.metadata.mode === 'edit' ? 'Edit' : ''}}
-        {{vm.metadata.mode === 'readonly' ? 'View' : ''}}
-        {{vm.metadata.mode === 'browse' ? '' : ''}}
-        <em ng-if="vm.metadata.mode === 'browse' && vm.selectedRecords.indexOf(record)==-1" class="glyphicon glyphicon-ok"></em>
-        <em ng-if="vm.metadata.mode === 'browse' && vm.selectedRecords.indexOf(record)>=0" class="glyphicon glyphicon-remove"></em>
+        {{vm.options.metadata.mode === 'edit' ? 'Edit' : ''}}
+        {{vm.options.metadata.mode === 'readonly' ? 'View' : ''}}
+        {{vm.options.metadata.mode === 'browse' ? '' : ''}}
+        <em ng-if="vm.options.metadata.mode === 'browse' && vm.selectedRecords.indexOf(record)==-1" class="glyphicon glyphicon-ok"></em>
+        <em ng-if="vm.options.metadata.mode === 'browse' && vm.selectedRecords.indexOf(record)>=0" class="glyphicon glyphicon-remove"></em>
       </button>
     </div>
   </div>
   <div class="list-group">
     <div class="list-group-item">
-      <img ng-src="{{ record[vm.metadata.customAttrs.iconField] ? '/uploads/' + vm.uploadPath + record[vm.metadata.customAttrs.iconField] : '/images/noimg.png' }}"
+      <img ng-src="{{ record[vm.options.metadata.customAttrs.iconField] ? '/uploads/' + vm.uploadPath + record[vm.options.metadata.customAttrs.iconField] : '/images/noimg.png' }}"
            class="px-card-img img-rounded pull-left">
       <label>
-      {{ vm.metadata.customAttrs.descField1 || '&nbsp;' }}
+      {{ vm.options.metadata.customAttrs.descField1 || '&nbsp;' }}
       </label>
       <h5 class="list-group-item-heading">
-      {{ record[vm.metadata.customAttrs.descField1] || '&nbsp;' }}
+      {{ record[vm.options.metadata.customAttrs.descField1] || '&nbsp;' }}
       </h5>
       <label>
-      {{ vm.metadata.customAttrs.descField2 || '&nbsp;' }}
+      {{ vm.options.metadata.customAttrs.descField2 || '&nbsp;' }}
       </label>
       <h5 class="list-group-item-heading">
-      {{ record[vm.metadata.customAttrs.descField2]  || '&nbsp;' }}
+      {{ record[vm.options.metadata.customAttrs.descField2]  || '&nbsp;' }}
       </h5>
     </div>
   </div>

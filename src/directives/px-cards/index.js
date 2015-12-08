@@ -33,9 +33,6 @@ function pxCards() {
     restrict: 'E',
     template: template,
     scope: {
-      data: '=',
-      metadata: '=',
-      fields: '=',
       options: '=',
       openHandler: '&',
       newHandler: '&',
@@ -62,20 +59,27 @@ function pxCardsCtrl($scope) {
   vm.onClick = onClick;
 
   /*
-  initialization
+  Sync initialization
    */
 
-  initialize();
+  init();
 
-  $scope.$watch('vm.metadata', function(newMetadata) {
-    if(newMetadata) initializeMetadata(newMetadata);
+  /*
+  Async initialization
+   */
+
+  $scope.$watch('vm.options', function(newOptions) {
+    if(newOptions) {
+      initData(newOptions.data);
+      initMetadata(newOptions.metadata);
+    }
   });
 
   /*
   function declarations
    */
 
-  function initialize() {
+  function init() {
     // Default pagination options
     vm.pagination_options = {};
     vm.pagination_options.paginationPageSizes = [4, 8, 16, 32, 64, 128];
@@ -84,7 +88,14 @@ function pxCardsCtrl($scope) {
     vm.selectedRecords = [];
   }
 
-  function initializeMetadata(metadata) {
+  function initData(data) {
+    if(data) {
+      vm.pagination_options.totalItems = data.length;
+    }
+  }
+
+  function initMetadata(metadata) {
+    if(!metadata) return;
     // Default Upload Path (for Images)
     if(metadata.customAttrs && metadata.customAttrs.iconField) {
       vm.uploadPath = metadata.dbId + '/' + metadata.catalogName + '/' + metadata.customAttrs.iconField + '/';
@@ -97,16 +108,16 @@ function pxCardsCtrl($scope) {
       vm.pagination_options.paginationCurrentPage = metadata.pageIndex;
     } else {
       // Client-side Pagination
-      vm.pagination_options.totalItems = vm.data.length;
-      vm.pagination_options.paginationPageSize = vm.metadata.pageSize || 8;
-      vm.pagination_options.paginationCurrentPage = vm.metadata.pageIndex || 1;
+      //vm.pagination_options.totalItems = data.length;
+      vm.pagination_options.paginationPageSize = metadata.pageSize || 8;
+      vm.pagination_options.paginationCurrentPage = metadata.pageIndex || 1;
     }
   }
 
   function onClick(record) {
-    if (['edit', 'readonly'].indexOf(vm.metadata.mode) > -1) {
+    if (['edit', 'readonly'].indexOf(vm.options.metadata.mode) > -1) {
       vm.openHandler({selected: record});
-    } else if (vm.metadata.mode === 'browse') {
+    } else if (vm.options.metadata.mode === 'browse') {
       var index = vm.selectedRecords.indexOf(record);
       if(index > -1) {
         vm.selectedRecords.splice(index, 1);

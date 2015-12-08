@@ -12,20 +12,23 @@ export default class FormlyCardsCtrl extends CardsCtrl {
   loader() {
     var vm = this;
 
-    vm.data = vm.$scope.model[vm.$scope.options.key] || [];
-    vm.fields = vm.$scope.options.data.fields;
-    vm.metadata = vm.$scope.options.data.metadata;
-
-    vm.setOptions();
+    // First-class options
+   vm.options = {
+      metadata: vm.$scope.options.data.metadata,
+      fields: vm.$scope.options.data.fields,
+      data: vm.$scope.model[vm.$scope.options.key] || []
+    };
+    // Other options
+    vm.setOpts();
   }
 
-  setOptions() {
+  setOpts() {
     var vm = this;
     // Reuse parent's options
-    super.setOptions();
+    super.setOpts();
     // Override with vm.options.whatever = ...
-    vm.options.asyncPagination = false;
-    vm.options.showBrowseRow = false;
-    vm.options.showFilterRow = false;
+    vm.options.opts.asyncPagination = false;
+    vm.options.opts.showBrowseRow = false;
+    vm.options.opts.showFilterRow = false;
   }
 }

@@ -59,7 +59,7 @@ function pxGrid() {
  * Directive's Controller
  */
 
-function pxGridCtrl($scope, $document, uiGridConstants) {
+function pxGridCtrl($scope, uiGridConstants) {
   var vm = this;
 
   /*

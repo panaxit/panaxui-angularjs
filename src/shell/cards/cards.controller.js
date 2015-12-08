@@ -18,22 +18,26 @@ export default class CardsCtrl extends BaseCtrl {
       pageSize: pageSize || parseInt(vm.$stateParams.pageSize) || 8
     };
     vm.CRUDService.read(params).then(function (res) {
-      vm.metadata = res.data.data.metadata || {};
-      vm.data = res.data.data.model || [];
-      vm.fields = res.data.data.fields;
+      // First-class options
+      vm.options = {
+        metadata: res.data.data.metadata,
+        fields: res.data.data.fields,
+        data: res.data.data.model || []
+      };
+      // Other options
+      vm.setOpts();
 
-      vm.setOptions();
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
   }
 
-  setOptions() {
+  setOpts() {
     var vm = this;
-    vm.options = {
+    vm.options.opts = {
       asyncPagination: true,
       showPaginationRow: true,
       showBrowseRow: vm.$stateParams.mode === 'browse',
-      showAddRemoveRow: vm.metadata.mode === 'edit',
+      showAddRemoveRow: vm.options.metadata.mode === 'edit',
       showFilterRow: true
     };
   }
@@ -41,13 +45,13 @@ export default class CardsCtrl extends BaseCtrl {
   // ToDo: Use metadata parameter (as in GridCtrl) for nested cardsView
   onOpen(selected) {
     var vm = this;
-    var idType = (!!vm.metadata.identityKey) ? 'identityKey' : 'primaryKey';
-    var idKey = vm.metadata[idType];
+    var idType = (!!vm.options.metadata.identityKey) ? 'identityKey' : 'primaryKey';
+    var idKey = vm.options.metadata[idType];
     var idValue = selected[idKey];
 
     vm.$scope.$emit('goToState', 'main.panel.form', {
-      catalogName: vm.metadata.catalogName,
-      mode: vm.metadata.mode,
+      catalogName: vm.options.metadata.catalogName,
+      mode: vm.options.metadata.mode,
       [idType]: idKey,
       id: idValue
     });
@@ -69,7 +73,7 @@ export default class CardsCtrl extends BaseCtrl {
   onNext(selected) {
     var vm = this;
     var len = selected.length,
-        idKey = vm.metadata.identityKey || vm.metadata.primaryKey,
+        idKey = vm.options.metadata.identityKey || vm.options.metadata.primaryKey,
         filters = '[' + idKey + ' IN (';
     angular.forEach(selected, function(row, index) {
       filters += `'${row[idKey]}'`;
@@ -80,7 +84,7 @@ export default class CardsCtrl extends BaseCtrl {
     filters += ')]';
     // ToDo: PanaxDB Routes
     vm.$scope.$emit('goToState', 'main.panel.form', {
-      catalogName: vm.metadata.catalogName,
+      catalogName: vm.options.metadata.catalogName,
       mode: 'edit',
       filters: filters
     });
