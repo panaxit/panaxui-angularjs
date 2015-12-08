@@ -7,9 +7,6 @@ describe('Directive: pxGrid', () => {
 
   var basicTemplate = `
     <px-grid
-      data="data"
-      metadata="metadata"
-      fields="fields"
       options="options"
       open-handler="onOpen(selected)"
       new-handler="onNew(catalogName)"
@@ -39,9 +36,9 @@ describe('Directive: pxGrid', () => {
 
     it('should initialize uigrid options', () => {
       compileAndSetupStuff();
-      expect(vm.uigrid_options).to.exist;
-      expect(vm.uigrid_options.paginationPageSizes).to.exist;
-      expect(vm.uigrid_options.onRegisterApi).to.exist;
+      expect(vm.uiGrid).to.exist;
+      expect(vm.uiGrid.paginationPageSizes).to.exist;
+      expect(vm.uiGrid.onRegisterApi).to.exist;
     });
 
   });
@@ -49,13 +46,15 @@ describe('Directive: pxGrid', () => {
   describe('Data Initialization', () => {
 
     it('should initialize data', () => {
-      let data = [
-        {name: "Don", last: "Draper"},
-        {name: "Pete", last: "Campbell"}
-      ];
-      compileAndSetupStuff({data});
-      expect(vm.uigrid_options.data).to.exist;
-      expect(vm.uigrid_options.data).to.have.length(2);
+      let options = {
+        data: [
+          {name: "Don", last: "Draper"},
+          {name: "Pete", last: "Campbell"}
+        ]
+      };
+      compileAndSetupStuff({options});
+      expect(vm.uiGrid.data).to.exist;
+      expect(vm.uiGrid.data).to.have.length(2);
     });
 
   });
@@ -63,17 +62,19 @@ describe('Directive: pxGrid', () => {
   describe('Fields Initialization', () => {
 
     it('should initialize fields', () => {
-      let data = [
-        {name: "Don", last: "Draper"},
-        {name: "Pete", last: "Campbell"}
-      ];
-      let fields = { columnDefs: [
-        {field: "name", type: "string", displayName: "Name"},
-        {field: "last", type: "string", displayName: "Last"}
-      ]};
-      compileAndSetupStuff({data, fields, metadata: {}});
-      expect(vm.uigrid_options.columnDefs).to.exist;
-      expect(vm.uigrid_options.columnDefs).to.have.length(2);
+      let options = {
+        data: [
+          {name: "Don", last: "Draper"},
+          {name: "Pete", last: "Campbell"}
+        ],
+        fields: { columnDefs: [
+          {field: "name", type: "string", displayName: "Name"},
+          {field: "last", type: "string", displayName: "Last"}
+        ]}
+      }
+      compileAndSetupStuff({options});
+      expect(vm.uiGrid.columnDefs).to.exist;
+      expect(vm.uiGrid.columnDefs).to.have.length(2);
     });
 
   });
@@ -81,28 +82,28 @@ describe('Directive: pxGrid', () => {
   describe('Options Initialization', () => {
 
     it('should initialize fields', () => {
-      let data = [
-        {name: "Don", last: "Draper"},
-        {name: "Pete", last: "Campbell"}
-      ];
-      let fields = { columnDefs: [
-        {field: "name", type: "string", displayName: "Name"},
-        {field: "last", type: "string", displayName: "Last"}
-      ]};
       let options = {
+        data: [
+          {name: "Don", last: "Draper"},
+          {name: "Pete", last: "Campbell"}
+        ],
+        fields: { columnDefs: [
+          {field: "name", type: "string", displayName: "Name"},
+          {field: "last", type: "string", displayName: "Last"}
+        ]},
         enableRowSelection: true,
         enableRowHeaderSelection: false,
         enableFullRowSelection: true,
         multiSelect: false,
         showRowActionsColumn: true
       };
-      compileAndSetupStuff({data, fields, metadata: {}, options});
-      expect(vm.uigrid_options.enableRowSelection).to.exist;
-      expect(vm.uigrid_options.enableRowHeaderSelection).to.exist;
-      expect(vm.uigrid_options.enableFullRowSelection).to.exist;
-      expect(vm.uigrid_options.multiSelect).to.exist;
-      expect(vm.uigrid_options.enableSelectAll).to.exist;
-      expect(vm.uigrid_options.columnDefs).to.have.length(3);
+      compileAndSetupStuff({options});
+      expect(vm.uiGrid.enableRowSelection).to.exist;
+      expect(vm.uiGrid.enableRowHeaderSelection).to.exist;
+      expect(vm.uiGrid.enableFullRowSelection).to.exist;
+      expect(vm.uiGrid.multiSelect).to.exist;
+      expect(vm.uiGrid.enableSelectAll).to.exist;
+      expect(vm.uiGrid.columnDefs).to.have.length(2);
     });
 
   });
@@ -110,16 +111,18 @@ describe('Directive: pxGrid', () => {
   describe('Metadata Initialization', () => {
 
     it('should initialize external pagination', () => {
-      let metadata = {
-        totalItems: 10,
-        pageSize: 5,
-        pageIndex: 1
+      let options = {
+        metadata: {
+          totalItems: 10,
+          pageSize: 5,
+          pageIndex: 1
+        }
       };
-      compileAndSetupStuff({metadata});
-      expect(vm.uigrid_options.useExternalPagination).to.equal(true);
-      expect(vm.uigrid_options.totalItems).to.equal(metadata.totalItems);
-      expect(vm.uigrid_options.paginationPageSize ).to.equal(metadata.pageSize);
-      expect(vm.uigrid_options.paginationCurrentPage).to.equal(metadata.pageIndex);
+      compileAndSetupStuff({options});
+      expect(vm.uiGrid.useExternalPagination).to.equal(true);
+      expect(vm.uiGrid.totalItems).to.equal(10);
+      expect(vm.uiGrid.paginationPageSize ).to.equal(5);
+      expect(vm.uiGrid.paginationCurrentPage).to.equal(1);
     });
 
   });

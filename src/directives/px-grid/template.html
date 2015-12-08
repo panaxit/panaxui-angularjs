@@ -1,9 +1,9 @@
-<div class="panel-footer clearfix" ng-if="vm.options.showAddRemoveRow">
+<div class="panel-footer clearfix" ng-if="vm.options.opts.showAddRemoveRow">
   <div class="btn-toolbar">
     <div class="pull-left">
       <div class="btn-group btn-group-md">
         <button class="btn btn-primary" type="submit"
-          ng-click="vm.newHandler({catalogName: vm.metadata.catalogName})">
+          ng-click="vm.newHandler({catalogName: vm.options.metadata.catalogName})">
           <em class="glyphicon glyphicon-plus"></em>
           Add
         </button>
@@ -25,26 +25,26 @@
 
 <div class="panel-body">
 
-  <div ui-grid="vm.uigrid_options"
-    ui-grid-auto-resize
-    ui-grid-pagination
-    ui-grid-selection
-    ui-grid-edit
-    ui-grid-row-edit
-    class="px-ui-grid">
+  <div ui-grid="vm.uiGrid"
+      ui-grid-auto-resize
+      ui-grid-pagination
+      ui-grid-selection
+      ui-grid-edit ui-grid-row-edit
+    class="px-ui-grid"
+    id="px-ui-grid">
   </div>
 
 </div>
 
-<div class="panel-footer" ng-if="vm.options.showPaginationRow">
+<div class="panel-footer" ng-if="vm.options.opts.showPaginationRow">
 
   <!-- http://stackoverflow.com/questions/19929213/bootstrap-change-div-order-with-pull-right-pull-left-3-columns -->
   <div class="row">
     <div class="col-xs-4">
       <div clas="text-left">
         <select
-          ng-model="vm.uigrid_options.paginationPageSize"
-          ng-options="o as o for o in vm.uigrid_options.paginationPageSizes">
+          ng-model="vm.uiGrid.paginationPageSize"
+          ng-options="o as o for o in vm.uiGrid.paginationPageSizes">
         </select>
         records per page
       </div>
@@ -53,10 +53,10 @@
       <div class="row">
         <div class="col-md-4 col-md-push-8">
           <div class="text-right">
-            {{((vm.uigrid_options.paginationCurrentPage - 1) * vm.uigrid_options.paginationPageSize) + 1}}
+            {{((vm.uiGrid.paginationCurrentPage - 1) * vm.uiGrid.paginationPageSize) + 1}}
             &ndash;
-            {{[vm.uigrid_options.paginationCurrentPage * vm.uigrid_options.paginationPageSize, vm.uigrid_options.totalItems] | min}}
-            of {{vm.uigrid_options.totalItems}} records
+            {{[vm.uiGrid.paginationCurrentPage * vm.uiGrid.paginationPageSize, vm.uiGrid.totalItems] | min}}
+            of {{vm.uiGrid.totalItems}} records
           </div>
         </div>
         <div class="col-md-8 col-md-pull-4">
@@ -64,13 +64,13 @@
           <!-- <div class="btn-group btn-group-md pagination"> -->
           <div class="btn-group btn-group-md">
             <button class="btn btn-default" type="button"
-              ng-class="{ disabled : vm.uigrid_options.paginationCurrentPage == 1 }"
+              ng-class="{ disabled : vm.uiGrid.paginationCurrentPage == 1 }"
               ng-click="vm.gridApi.pagination.seek(1)">
               <em class="glyphicon glyphicon-step-backward"></em>
               First
             </button>
             <button class="btn btn-default" type="button"
-              ng-class="{ disabled : vm.uigrid_options.paginationCurrentPage == 1 }"
+              ng-class="{ disabled : vm.uiGrid.paginationCurrentPage == 1 }"
               ng-click="vm.gridApi.pagination.previousPage()">
               <em class="glyphicon glyphicon-triangle-left"></em>
               Prev
@@ -82,13 +82,13 @@
               {{$index+1}}
             </button>
             <button class="btn btn-default" type="button"
-              ng-class="{ disabled : vm.uigrid_options.paginationCurrentPage == vm.gridApi.pagination.getTotalPages() }"
+              ng-class="{ disabled : vm.uiGrid.paginationCurrentPage == vm.gridApi.pagination.getTotalPages() }"
               ng-click="vm.gridApi.pagination.nextPage()">
               Next
               <em class="glyphicon glyphicon-triangle-right"></em>
             </button>
             <button class="btn btn-default" type="button"
-              ng-class="{ disabled : vm.uigrid_options.paginationCurrentPage == vm.gridApi.pagination.getTotalPages() }"
+              ng-class="{ disabled : vm.uiGrid.paginationCurrentPage == vm.gridApi.pagination.getTotalPages() }"
               ng-click="vm.gridApi.pagination.seek(vm.gridApi.pagination.getTotalPages())">
               <em class="glyphicon glyphicon-step-forward"></em>
               Last
@@ -103,7 +103,7 @@
 </div>
 
 
-<div class="panel-footer" ng-if="vm.options.showNextRow">
+<div class="panel-footer" ng-if="vm.options.opts.showNextRow">
   <div class="pull-left">
     {{vm.gridApi.selection.getSelectedRows().length}} record(s) selected
   </div>

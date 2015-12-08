@@ -11,18 +11,20 @@ export default class FormlyGridCtrl extends GridCtrl {
 
   loader() {
     var vm = this;
-
-    vm.metadata = vm.$scope.options.data.metadata;
-    vm.data = vm.$scope.model[vm.$scope.options.key] || [];
-    vm.fields = vm.$scope.options.data.fields;
-
-    vm.setOptions();
+    // First-class options
+    vm.options = {
+      metadata: vm.$scope.options.data.metadata,
+      fields: vm.$scope.options.data.fields,
+      data: vm.$scope.model[vm.$scope.options.key]
+    };
+    // Other options
+    vm.setOpts();
   }
 
-  setOptions() {
+  setOpts() {
     var vm = this;
     // Reuse parent's options
-    super.setOptions();
+    super.setOpts();
     // Override with vm.options.whatever = ...
   }
 }

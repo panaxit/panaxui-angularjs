@@ -22,10 +22,10 @@ import templateRowActions from './template.row.actions.html';
 export default angular.module('app.directives.pxgrid', [
     'ui.grid',
     'ui.grid.autoResize',
+    'ui.grid.pagination',
     'ui.grid.selection',
     'ui.grid.edit',
     'ui.grid.rowEdit',
-    'ui.grid.pagination',
     coreFilters
   ])
   .directive('pxGrid', pxGrid)
@@ -40,9 +40,6 @@ function pxGrid() {
     restrict: 'E',
     template: template,
     scope: {
-      metadata: '=',
-      data: '=',
-      fields: '=',
       options: '=',
       openHandler: '&',
       newHandler: '&',
@@ -62,7 +59,7 @@ function pxGrid() {
  * Directive's Controller
  */
 
-function pxGridCtrl($scope, uiGridConstants) {
+function pxGridCtrl($scope, $document, uiGridConstants) {
   var vm = this;
 
   /*
@@ -72,42 +69,40 @@ function pxGridCtrl($scope, uiGridConstants) {
   vm.getArray = getArray;
 
   /*
-  initialization
+  Sync initialization
    */
 
-  initialize();
+  init();
 
-  $scope.$watch('vm.data', function(newData) {
-    if(newData) initializeData(newData);
-  });
-
-  $scope.$watch('vm.fields', function(newFields) {
-    if(newFields) initializeFields(newFields);
-  });
+  /*
+  Async initialization
+   */
 
   $scope.$watch('vm.options', function(newOptions) {
-    if(newOptions) initializeOptions(newOptions);
-  });
-
-  $scope.$watch('vm.metadata', function(newMetadata) {
-    if(newMetadata) initializeMetadata(newMetadata);
+    if(newOptions) {
+      initData(newOptions.data);
+      initMetadata(newOptions.metadata);
+      initFields(newOptions.fields);
+      initOpts(newOptions.opts);
+    }
   });
 
   /*
   function declarations
    */
 
-  function initialize() {
+  function init() {
+    // UI Grid
+    vm.uiGrid = {};
     // Grid general defaults
-    vm.uigrid_options = {};
-    vm.uigrid_options.rowHeight = 32;
-    vm.uigrid_options.showGridFooter = false;
-    vm.uigrid_options.enableFiltering = true;
+    vm.uiGrid.rowHeight = 32;
+    vm.uiGrid.showGridFooter = false;
+    vm.uiGrid.enableFiltering = true;
     // Pagination defaults
-    vm.uigrid_options.paginationPageSizes = [5, 10, 25, 50, 100, 500];
-    vm.uigrid_options.enablePaginationControls = false;
+    vm.uiGrid.paginationPageSizes = [5, 10, 25, 50, 100, 500];
+    vm.uiGrid.enablePaginationControls = false;
     // On Register API callback
-    vm.uigrid_options.onRegisterApi = function(gridApi) {
+    vm.uiGrid.onRegisterApi = function(gridApi) {
       vm.gridApi = gridApi;
       // Row edit
       vm.gridApi.rowEdit.on.saveRow($scope, function(rowEntity) {
@@ -124,14 +119,27 @@ function pxGridCtrl($scope, uiGridConstants) {
     };
   }
 
-  function initializeData(data) {
-    vm.uigrid_options.data = data;
+  function initData(data) {
+    if(!data) return;
+    vm.uiGrid.data = data;
   }
 
-  function initializeFields(fields) {
+  function initMetadata(metadata) {
+    if(!metadata) return;
+    // External Pagination
+    if(metadata.totalItems) {
+      vm.uiGrid.useExternalPagination = true;
+      vm.uiGrid.totalItems = metadata.totalItems;
+      vm.uiGrid.paginationPageSize = metadata.pageSize;
+      vm.uiGrid.paginationCurrentPage = metadata.pageIndex;
+    }
+  }
+
+  function initFields(fields) {
+    if(!fields) return;
     // Column Defs
-    vm.uigrid_options.columnDefs = fields.columnDefs;
-    vm.uigrid_options.columnDefs.forEach(function (colDef, index) {
+    vm.uiGrid.columnDefs = fields.columnDefs;
+    vm.uiGrid.columnDefs.forEach(function (colDef, index) {
       colDef.enableFiltering = false;
       colDef.menuItems = [
         {
@@ -139,29 +147,29 @@ function pxGridCtrl($scope, uiGridConstants) {
           icon: 'ui-grid-icon-filter',
           action: function() {
             this.context.col.colDef.enableFiltering = !this.context.col.colDef.enableFiltering;
-            this.grid.api.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
           }
         }
       ];
     });
-    // Notify all watchers
-    // http://ui-grid.info/docs/#/api/ui.grid.class:Grid#methods_notifydatachange
-    vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
-    vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
   }
 
-  function initializeOptions(options) {
+  function initOpts(opts) {
+    if(!opts) return;
     // Selection
-    vm.uigrid_options.enableRowSelection = options.enableRowSelection;
-    vm.uigrid_options.enableRowHeaderSelection = options.enableRowHeaderSelection;
-    vm.uigrid_options.enableFullRowSelection = options.enableFullRowSelection;
-    vm.uigrid_options.multiSelect = options.multiSelect;
-    vm.uigrid_options.enableSelectAll = options.multiSelect;
+    if(opts.enableRowSelection) {
+      vm.uiGrid.enableRowSelection = opts.enableRowSelection;
+      vm.uiGrid.enableRowHeaderSelection = opts.enableRowHeaderSelection;
+      vm.uiGrid.enableFullRowSelection = opts.enableFullRowSelection;
+      vm.uiGrid.multiSelect = opts.multiSelect;
+      vm.uiGrid.enableSelectAll = opts.multiSelect;
+    }
     // Row edit
-    vm.uigrid_options.enableCellEdit = options.enableCellEdit;
+    if(opts.enableCellEdit) {
+      vm.uiGrid.enableCellEdit = opts.enableCellEdit;
+    }
     // Row actions
-    if(options.showRowActionsColumn) {
-      vm.uigrid_options.columnDefs.push({
+    if(opts.showRowActionsColumn) {
+      vm.uiGrid.columnDefs.push({
         name: 'px-actions',
         displayName: '⚡',
         type: 'object',
@@ -173,24 +181,9 @@ function pxGridCtrl($scope, uiGridConstants) {
         enableHiding: false,
         enableSorting: false,
       });
-      // Notify column change
-      vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
     }
-    // Notify changes
-    vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
-    vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
-  }
-
-  function initializeMetadata(metadata) {
-    // External Pagination
-    if(metadata.totalItems) {
-      vm.uigrid_options.useExternalPagination = true;
-      vm.uigrid_options.totalItems = metadata.totalItems;
-      vm.uigrid_options.paginationPageSize = metadata.pageSize;
-      vm.uigrid_options.paginationCurrentPage = metadata.pageIndex;
-    }
-    // Notify changes
-    vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.OPTIONS);
+    // Notify all watchers
+    // http://ui-grid.info/docs/#/api/ui.grid.class:Grid#methods_notifydatachange
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
   }
 
