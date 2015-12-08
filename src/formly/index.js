@@ -33,6 +33,7 @@ import panel from './wrappers/panel';
 import tabpanel from './types/tabpanel';
 import input from './types/input';
 import _default from './types/default';
+import checkbox from './types/checkbox';
 import password from './types/password';
 import email from './types/email';
 import file from './types/file';
@@ -60,6 +61,7 @@ export default angular.module('app.main.form.formly', [
     tabpanel,
     input,
     _default,
+    checkbox,
     password,
     email,
     file,
