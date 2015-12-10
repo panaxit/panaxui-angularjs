@@ -39,6 +39,7 @@ function pxForm() {
     scope: {
       options: '=',
       form: '=?',
+      submitHandler: '&?',
       paginationChangeHandler: '&?'
     },
     bindToController: true,
@@ -53,6 +54,12 @@ function pxForm() {
 
 function pxFormCtrl($scope) {
   var vm = this;
+
+  /*
+  vm function assignments
+   */
+
+  vm.isSubmitDisabled = isSubmitDisabled;
 
   /*
   Sync initialization
@@ -142,5 +149,25 @@ function pxFormCtrl($scope) {
 
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+  function isSubmitDisabled() {
+    var vm = this;
+    if(vm.form) {
+      if(vm.options.metadata && vm.options.metadata.mode !== 'readonly') {
+        if(vm.options.metadata.mode === 'insert') {
+          if(vm.form.$invalid)
+            return true;
+          return false;
+        } else if(vm.options.metadata.mode === 'edit') {
+          if(vm.form.$pristine)
+            return true;
+          if(vm.form.$invalid)
+            return true;
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }

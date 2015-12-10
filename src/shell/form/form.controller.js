@@ -48,27 +48,10 @@ export default class FormCtrl extends BaseCtrl {
     var vm = this;
     vm.options.opts = {
       asyncPagination: true,
-      showPaginationRow: true
+      showPaginationRow: true,
+      showSaveRow: vm.options.metadata.mode === 'edit' || vm.options.metadata.mode === 'insert',
+      showFilterRow: vm.options.metadata.mode === 'filters'
     };
-  }
-
-  isSubmitDisabled() {
-    var vm = this;
-    console.log(vm.form)
-    if(vm.options.metadata && vm.options.metadata.mode !== 'readonly') {
-      if(vm.options.metadata.mode === 'insert') {
-        if(vm.form.$invalid)
-          return true;
-        return false;
-      } else if(vm.options.metadata.mode === 'edit') {
-        if(vm.form.$pristine)
-          return true;
-        if(vm.form.$invalid)
-          return true;
-        return false;
-      }
-    }
-    return true;
   }
 
   onReset() {

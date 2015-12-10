@@ -29,7 +29,9 @@ export default class FormlyFormCtrl extends FormCtrl {
     var vm = this;
     vm.options.opts = {
       asyncPagination: false,
-      showPaginationRow: true
+      showPaginationRow: true,
+      showSaveRow: false,
+      showFilterRow: false
     };
   }
 }

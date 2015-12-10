@@ -55,6 +55,8 @@ export default class MasterDetailCtrl extends FormCtrl {
       enableCellEdit: false,
       // Form
       asyncPagination: false,
+      showSaveRow: false,
+      showFilterRow: false,
       // Both
       showPaginationRow: false
     };
