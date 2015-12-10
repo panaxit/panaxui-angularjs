@@ -12,19 +12,22 @@ export default class FormlyFormCtrl extends FormCtrl {
   loader() {
     var vm = this;
 
-    vm.metadata = vm.$scope.options.data.metadata;
-    vm.fields = vm.$scope.options.data.fields;
-    vm.data = vm.$scope.model[vm.$scope.options.key] || [];
-    if(!angular.isArray(vm.data)) { // If single record
-      vm.data = [vm.data];
+    // First-class options
+    vm.options = {
+      metadata: vm.$scope.options.data.metadata,
+      fields: vm.$scope.options.data.fields,
+      data: vm.$scope.model[vm.$scope.options.key] || []
+    };
+    if(!angular.isArray(vm.options.data)) { // If single record // ToDo: Fix in Backend
+      vm.options.data = [vm.options.data];
     }
-
-    vm.setOptions();
+    // Other options
+    vm.setOpts();
   }
 
-  setOptions() {
+  setOpts() {
     var vm = this;
-    vm.options = {
+    vm.options.opts = {
       asyncPagination: false,
       showPaginationRow: true
     };

@@ -26,23 +26,27 @@ export default class FormCtrl extends BaseCtrl {
       params.filters += '[' + idKey + '=' + vm.$stateParams.id + ']';
     }
     vm.CRUDService.read(params).then(function (res) {
-      vm.metadata = res.data.data.metadata;
-      vm.fields = res.data.data.fields || [];
-      vm.data = res.data.data.model || [];
+      // First-class options
+      vm.options = {
+        metadata: res.data.data.metadata,
+        fields: res.data.data.fields,
+        data: res.data.data.model || []
+      };
+      // Other options
+      vm.setOpts();
 
-      vm.setOptions();
       vm.$scope.$emit('setPanelTitle', (function () {
-        if(vm.metadata.mode === 'insert') return 'New ';
-        if(vm.metadata.mode === 'edit') return 'Edit ';
-        if(vm.metadata.mode === 'readonly') return 'View ';
-        if(vm.metadata.mode === 'filters') return 'Filters ';
-      })() + vm.metadata.tableName);
+        if(vm.options.metadata.mode === 'insert') return 'New ';
+        if(vm.options.metadata.mode === 'edit') return 'Edit ';
+        if(vm.options.metadata.mode === 'readonly') return 'View ';
+        if(vm.options.metadata.mode === 'filters') return 'Filters ';
+      })() + vm.options.metadata.tableName);
     });
   }
 
-  setOptions() {
+  setOpts() {
     var vm = this;
-    vm.options = {
+    vm.options.opts = {
       asyncPagination: true,
       showPaginationRow: true
     };
@@ -50,12 +54,13 @@ export default class FormCtrl extends BaseCtrl {
 
   isSubmitDisabled() {
     var vm = this;
-    if(vm.metadata && vm.metadata.mode !== 'readonly') {
-      if(vm.metadata.mode === 'insert') {
+    console.log(vm.form)
+    if(vm.options.metadata && vm.options.metadata.mode !== 'readonly') {
+      if(vm.options.metadata.mode === 'insert') {
         if(vm.form.$invalid)
           return true;
         return false;
-      } else if(vm.metadata.mode === 'edit') {
+      } else if(vm.options.metadata.mode === 'edit') {
         if(vm.form.$pristine)
           return true;
         if(vm.form.$invalid)
@@ -90,11 +95,11 @@ export default class FormCtrl extends BaseCtrl {
       /**
        * Create payload to be sent
        */
-      var payload = vm.PayloadService.build(fields || vm.fields, data || vm.data, vm.metadata);
+      var payload = vm.PayloadService.build(fields || vm.options.fields, data || vm.options.data, vm.options.metadata);
       /**
        * Perform Insert/Update in backend
        */
-      if(vm.metadata.mode === 'insert') {
+      if(vm.options.metadata.mode === 'insert') {
         /**
          * mode = INSERT
          */
@@ -116,7 +121,7 @@ export default class FormCtrl extends BaseCtrl {
             // Do nothing. HTTP 500 responses handled by ErrorInterceptor
           }
         });
-      } else if(vm.metadata.mode === 'edit' && vm.form.$dirty) {
+      } else if(vm.options.metadata.mode === 'edit' && vm.form.$dirty) {
         /**
          * mode = EDIT
          */
@@ -137,7 +142,7 @@ export default class FormCtrl extends BaseCtrl {
             // Do nothing. HTTP 500 responses handled by ErrorInterceptor
           }
         });
-      } else if(vm.metadata.mode === 'filters' && vm.form.$dirty) {
+      } else if(vm.options.metadata.mode === 'filters' && vm.form.$dirty) {
         /**
          * mode = FILTERS
          */
@@ -146,7 +151,7 @@ export default class FormCtrl extends BaseCtrl {
           if(res.success === true) {
               // Go to 'edit' mode of filtered records
               vm.$scope.$emit('goToState', 'main.panel.grid', {
-                catalogName: vm.metadata.catalogName,
+                catalogName: vm.options.metadata.catalogName,
                 mode: 'edit',
                 filters:  '[' + res.data + ']'
               });

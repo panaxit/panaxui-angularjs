@@ -30,7 +30,7 @@ export default class MasterDetailCtrl extends FormCtrl {
       // First-class options
       vm.options = {
         metadata: res.data.data.metadata,
-        fields: res.data.data.fields.grid,
+        fields_grid: res.data.data.fields.grid,
         fields_form: res.data.data.fields.form,
         data: res.data.data.model || []
       };

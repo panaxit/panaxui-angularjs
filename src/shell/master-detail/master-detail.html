@@ -1,15 +1,13 @@
 <px-grid
-  options="vm.options"
+  options="{data: vm.options.data, metadata: vm.options.metadata, fields: vm.options.fields_grid, opts: vm.options.opts}"
   pagination-change-handler="vm.onPaginationChange(newPage, pageSize)"
   row-selection-handler="vm.onSelectionChange(row)">
 </px-grid>
 
-<form ng-submit="vm.onSubmit(vm.fields.form, vm.selected_record)" name="vm.form" novalidate>
+<form ng-submit="vm.onSubmit(vm.options.fields_form, vm.selected_record)" name="vm.form" novalidate>
 
   <px-form
-    data="vm.selected_record"
-    metadata="vm.options.metadata"
-    fields="vm.options.fields_form"
+    options="{data: vm.selected_record, metadata: vm.options.metadata, fields: vm.options.fields_form, opts: vm.options.opts}"
     form="vm.form"
     pagination-change-handler="vm.onPaginationChange(newPage, newPageSize)">
   </px-form>

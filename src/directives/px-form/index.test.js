@@ -7,9 +7,6 @@ describe('Directive: pxForm', () => {
 
   var basicTemplate = `
     <px-form
-      data="data"
-      metadata="metadata"
-      fields="fields"
       options="options"
       form="form"
       pagination-change-handler="onPaginationChange(newPage, newPageSize)">
@@ -45,21 +42,26 @@ describe('Directive: pxForm', () => {
   describe('Metadata Initialization', () => {
 
     it('should initialize server-side pagination', () => {
-      let metadata = {
-        totalItems: 10,
-        pageSize: 5,
-        pageIndex: 1
+      let options = {
+        metadata: {
+          totalItems: 10,
+          pageSize: 5,
+          pageIndex: 1
+        }
       };
-      compileAndSetupStuff({metadata});
-      expect(vm.pagination_options.totalItems).to.equal(metadata.totalItems);
-      expect(vm.pagination_options.paginationPageSize ).to.equal(metadata.pageSize);
-      expect(vm.pagination_options.paginationCurrentPage).to.equal(metadata.pageIndex);
+      compileAndSetupStuff({options});
+      expect(vm.pagination_options.totalItems).to.equal(10);
+      expect(vm.pagination_options.paginationPageSize ).to.equal(5);
+      expect(vm.pagination_options.paginationCurrentPage).to.equal(1);
     });
 
     it('should initialize client-side pagination', () => {
-      let data = ["a", "b"];
-      compileAndSetupStuff({data, metadata: {}});
-      expect(vm.pagination_options.totalItems).to.equal(data.length);
+      let options = {
+        metadata: {},
+        data: ["a", "b"]
+      };
+      compileAndSetupStuff({options});
+      expect(vm.pagination_options.totalItems).to.equal(2);
       expect(vm.pagination_options.paginationPageSize).to.equal(1);
       expect(vm.pagination_options.paginationCurrentPage).to.equal(1);
     });
@@ -69,15 +71,17 @@ describe('Directive: pxForm', () => {
   describe('Fields Initialization', () => {
 
     it('should initialize fields', () => {
-      let data = [
-        {name: "Don", last: "Draper"},
-        {name: "Pete", last: "Campbell"}
-      ];
-      let fields = [
-        {key: "name", type: "input"},
-        {key: "last", type: "input"}
-      ];
-      compileAndSetupStuff({data, fields, metadata: {}});
+      let options = {
+        data: [
+          {name: "Don", last: "Draper"},
+          {name: "Pete", last: "Campbell"}
+        ],
+        fields: [
+          {key: "name", type: "input"},
+          {key: "last", type: "input"}
+        ]
+      };
+      compileAndSetupStuff({options});
       expect(vm.fields).to.have.length(2);
       let ids = [];
       _.forEach(vm.fields, (fieldset) => {
@@ -90,18 +94,21 @@ describe('Directive: pxForm', () => {
     });
 
     it('should not initialize when already initialized', () => {
-      let data = [
-        {name: "Don", last: "Draper"},
-        {name: "Pete", last: "Campbell"}
-      ];
-      let fields = [
-        {key: "name", type: "input"},
-        {key: "last", type: "input"}
-      ];
-      compileAndSetupStuff({data, fields, metadata: {}});
+      let options = {
+        metadata: {},
+        data: [
+          {name: "Don", last: "Draper"},
+          {name: "Pete", last: "Campbell"}
+        ],
+        fields: [
+          {key: "name", type: "input"},
+          {key: "last", type: "input"}
+        ]
+      };
+      compileAndSetupStuff({options});
       expect(vm.fields).to.have.length(2);
-      fields = [];
-      compileAndSetupStuff({data, fields, metadata: {}});
+      options.fields = [];
+      compileAndSetupStuff({options});
       expect(vm.fields).to.have.length(2);
     });
 

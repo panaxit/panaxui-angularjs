@@ -37,9 +37,6 @@ function pxForm() {
     restrict: 'E',
     template: template,
     scope: {
-      metadata: '=',
-      data: '=',
-      fields: '=',
       options: '=',
       form: '=?',
       paginationChangeHandler: '&?'
@@ -58,63 +55,66 @@ function pxFormCtrl($scope) {
   var vm = this;
 
   /*
-  initialization
+  Sync initialization
    */
 
-  initialize();
+  init();
 
-  $scope.$watch('vm.metadata', (newMetadata) => {
-    if(newMetadata) initializeMetadata(newMetadata);
-  });
+  /*
+  Async initialization
+   */
 
-  $scope.$watchCollection('vm.data', (newValues, oldValues) => {
-    // Warning: Make sure to have vm.fields already loaded (loader())
-    if(newValues && vm.fields)
-      initializeFields(vm.fields, newValues);
-  });
+  $scope.$watch('vm.options', function(newOptions) {
+    if(newOptions) {
+      initMetadata(newOptions.metadata, newOptions.data);
+      initFields(newOptions.fields, newOptions.data);
+    }
+   });
 
   /*
   function declarations
    */
 
-  function initialize() {
+  function init() {
     // Default options
     vm.pagination_options = {};
     vm.pagination_options.paginationPageSizes = [1, 2, 3, 5, 8, 13];
     vm.pagination_options.paginationId = 'pagination' + getRandomInt(0, 9999);
   }
 
-  function initializeFields(fields, data) {
-    // Not already initialized? (as array)
-    if(!(vm.fields[0] && angular.isArray(vm.fields[0]))) {
+  function initFields(fields, data) {
+    if(!fields || !data) return;
+    // // Not already initd? (as array)
+    // if(!(fields[0] && angular.isArray(fields[0]))) {
       // Fields array initialization
       // Based on: http://angular-formly.com/#/example/advanced/repeating-section
       vm.fields = [];
       for(var index=0;index<data.length;index++) {
         vm.fields.push(copyFields(fields, index));
       }
-    }
+    // }
   }
 
-  function initializeMetadata(metadata) {
+  function initMetadata(metadata, data) {
+    if(!metadata) return;
     // Pagination
     if(metadata.totalItems) {
-      // Server-side Pagination
+      // Server-side Paginationa
       vm.pagination_options.totalItems = metadata.totalItems;
       vm.pagination_options.paginationPageSize = metadata.pageSize;
       vm.pagination_options.paginationCurrentPage = metadata.pageIndex;
     } else {
       // Client-side Pagination
-      vm.pagination_options.totalItems = vm.data.length;
-      vm.pagination_options.paginationPageSize = vm.metadata.pageSize || 1;
-      vm.pagination_options.paginationCurrentPage = vm.metadata.pageIndex || 1;
+      vm.pagination_options.totalItems = data.length;
+      vm.pagination_options.paginationPageSize = metadata.pageSize || 1;
+      vm.pagination_options.paginationCurrentPage = metadata.pageIndex || 1;
     }
   }
 
   function copyFields(fields) {
-    fields = angular.copy(fields);
-    addRandomIds(fields);
-    return fields;
+    var newFields = angular.copy(fields);
+    addRandomIds(newFields);
+    return newFields;
   }
 
   function addRandomIds(fields) {
