@@ -63,17 +63,17 @@ class PayloadService {
          */
         vm.dirtyFieldsIterator(el.fields, payload, orig_model);
         return;
-      } else if(el.tabs) {
-        /*
-        tabs
-         */
-        vm.dirtyFieldsIterator(el.tabs, payload, orig_model);
-        return;
       } else if(el.fieldGroup) {
         /*
         fieldGroup (async_select, ...)
          */
         vm.dirtyFieldsIterator(el.fieldGroup, payload, orig_model);
+        return;
+      } else if(el.type && el.type === "tabpanel" && el.data && el.data.tabs) {
+        /*
+        tabPanel
+         */
+        vm.dirtyFieldsIterator(el.data.tabs, payload, orig_model);
         return;
       } else if(el.data && el.data.fields) {
         /*

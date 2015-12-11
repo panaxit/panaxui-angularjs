@@ -39,7 +39,6 @@ function pxForm() {
     scope: {
       options: '=',
       form: '=?',
-      submitHandler: '&?',
       paginationChangeHandler: '&?'
     },
     bindToController: true,
@@ -91,15 +90,15 @@ function pxFormCtrl($scope) {
 
   function initFields(fields, data) {
     if(!fields || !data) return;
-    // // Not already initd? (as array)
-    // if(!(fields[0] && angular.isArray(fields[0]))) {
+    // Not already initd? (as array)
+    if(!(fields[0] && angular.isArray(fields[0]))) {
       // Fields array initialization
       // Based on: http://angular-formly.com/#/example/advanced/repeating-section
-      vm.fields = [];
+      vm.options.fields = [];
       for(var index=0;index<data.length;index++) {
-        vm.fields.push(copyFields(fields, index));
+        vm.options.fields.push(copyFields(fields, index));
       }
-    // }
+    }
   }
 
   function initMetadata(metadata, data) {
@@ -130,13 +129,13 @@ function pxFormCtrl($scope) {
         addRandomIds(field.fields);
         return; // fieldsets/tab don't need an ID
       }
-      if (field.tabs) {
-        addRandomIds(field.tabs);
-        return; // tabs don't need an ID
-      }
       if (field.fieldGroup) {
         addRandomIds(field.fieldGroup);
         return; // fieldGroups don't need an ID
+      }
+      if (field.type && field.type === "tabPanel" && field.data && field.data.tabs) {
+        addRandomIds(field.data.tabs);
+        return; // tabPanel don't need an ID
       }
       if (field.data && field.data.fields) {
         addRandomIds(field.data.fields);

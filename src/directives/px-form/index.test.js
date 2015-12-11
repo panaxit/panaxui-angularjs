@@ -82,9 +82,9 @@ describe('Directive: pxForm', () => {
         ]
       };
       compileAndSetupStuff({options});
-      expect(vm.fields).to.have.length(2);
+      expect(vm.options.fields).to.have.length(2);
       let ids = [];
-      _.forEach(vm.fields, (fieldset) => {
+      _.forEach(vm.options.fields, (fieldset) => {
          _.forEach(fieldset, (field) => {
           expect(field.id).to.exist;
           ids.push(field.id);
@@ -106,10 +106,10 @@ describe('Directive: pxForm', () => {
         ]
       };
       compileAndSetupStuff({options});
-      expect(vm.fields).to.have.length(2);
+      expect(vm.options.fields).to.have.length(2);
       options.fields = [];
       compileAndSetupStuff({options});
-      expect(vm.fields).to.have.length(2);
+      expect(vm.options.fields).to.have.length(2);
     });
 
     describe('should initialize nested fields', () => {
@@ -127,7 +127,7 @@ describe('Directive: pxForm', () => {
       //     ]
       //   }];
       //   compileAndSetupStuff({data, fields, metadata: {}});
-      //   expect(vm.fields).to.have.length(2);
+      //   expect(vm.options.fields).to.have.length(2);
       // });
 
       it('in a tabPanel');
