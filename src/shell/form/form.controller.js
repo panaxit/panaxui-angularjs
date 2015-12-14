@@ -26,31 +26,31 @@ export default class FormCtrl extends BaseCtrl {
       params.filters += '[' + idKey + '=' + vm.$stateParams.id + ']';
     }
     vm.CRUDService.read(params).then(function (res) {
-      // First-class options
+      // Main `options' object
+      // to be consumed by directive(s)
       vm.options = {
         metadata: res.data.data.metadata,
         fields: res.data.data.fields,
-        data: res.data.data.model || []
+        data: res.data.data.model || [],
+        opts: vm.getOpts()
       };
-      // Other options
-      vm.setOpts();
 
       vm.$scope.$emit('setPanelTitle', (function () {
-        if(vm.options.metadata.mode === 'insert') return 'New ';
-        if(vm.options.metadata.mode === 'edit') return 'Edit ';
-        if(vm.options.metadata.mode === 'readonly') return 'View ';
-        if(vm.options.metadata.mode === 'filters') return 'Filters ';
+        if(vm.$stateParams.mode === 'insert') return 'New ';
+        if(vm.$stateParams.mode === 'edit') return 'Edit ';
+        if(vm.$stateParams.mode === 'readonly') return 'View ';
+        if(vm.$stateParams.mode === 'filters') return 'Filters ';
       })() + vm.options.metadata.tableName);
     });
   }
 
-  setOpts() {
+  getOpts() {
     var vm = this;
-    vm.options.opts = {
+    return {
       asyncPagination: true,
       showPaginationRow: true,
-      showSaveRow: vm.options.metadata.mode === 'edit' || vm.options.metadata.mode === 'insert',
-      showFilterRow: vm.options.metadata.mode === 'filters'
+      showSaveRow: vm.$stateParams.mode === 'edit' || vm.$stateParams.mode === 'insert',
+      showFilterRow: vm.$stateParams.mode === 'filters'
     };
   }
 

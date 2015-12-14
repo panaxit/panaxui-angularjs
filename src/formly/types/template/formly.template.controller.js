@@ -1,4 +1,5 @@
 import TemplateCtrl from '../../../shell/template/template.controller';
+import _ from 'lodash';
 
 export default class FormlyTemplateCtrl extends TemplateCtrl {
   constructor($scope, DebugService, $stateParams, CRUDService) {
@@ -15,11 +16,9 @@ export default class FormlyTemplateCtrl extends TemplateCtrl {
     super.loader(undefined, undefined, vm.$scope.options.data.metadata);
   }
 
-  setOpts() {
-    var vm = this;
+  getOpts() {
     // Reuse parent's options
-    super.setOpts();
-    // Override with vm.options.whatever = ...
-    //vm.options.opts.asyncPagination = false;
+    // And override the ones needed
+    return _.extend(super.getOpts(), {});
   }
 }

@@ -1,4 +1,5 @@
 import FormCtrl from '../../../shell/form/form.controller';
+import _ from 'lodash';
 
 export default class FormlyFormCtrl extends FormCtrl {
   constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
@@ -11,27 +12,27 @@ export default class FormlyFormCtrl extends FormCtrl {
 
   loader() {
     var vm = this;
-
-    // First-class options
+    // Main `options' object
+    // to be consumed by directive(s)
     vm.options = {
       metadata: vm.$scope.options.data.metadata,
       fields: vm.$scope.options.data.fields,
-      data: vm.$scope.model[vm.$scope.options.key] || []
+      data: vm.$scope.model[vm.$scope.options.key] || [],
+      opts: vm.getOpts()
     };
     if(!angular.isArray(vm.options.data)) { // If single record // ToDo: Fix in Backend
       vm.options.data = [vm.options.data];
     }
-    // Other options
-    vm.setOpts();
   }
 
-  setOpts() {
-    var vm = this;
-    vm.options.opts = {
+  getOpts() {
+    // Reuse parent's options
+    // And override the ones needed
+    return _.extend(super.getOpts(), {
       asyncPagination: false,
       showPaginationRow: true,
       showSaveRow: false,
       showFilterRow: false
-    };
+    });
   }
 }

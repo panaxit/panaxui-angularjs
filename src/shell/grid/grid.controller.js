@@ -18,31 +18,31 @@ export default class GridCtrl extends BaseCtrl {
       pageSize: pageSize || parseInt(vm.$stateParams.pageSize) || 25
     };
     vm.CRUDService.read(params).then(function (res) {
-      // First-class options
+      // Main `options' object
+      // to be consumed by directive(s)
       vm.options = {
         metadata: res.data.data.metadata,
         fields: res.data.data.fields,
-        data: res.data.data.model || []
+        data: res.data.data.model || [],
+        opts: vm.getOpts()
       };
-      // Other options
-      vm.setOpts();
 
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
   }
 
-  setOpts() {
+  getOpts() {
     var vm = this;
-    vm.options.opts = {
-      showAddRemoveRow: vm.options.metadata.mode === 'edit',
-      showNextRow: vm.options.metadata.mode === 'browse',
+    return {
+      showAddRemoveRow: vm.$stateParams.mode === 'edit',
+      showNextRow: vm.$stateParams.mode === 'browse',
       showPaginationRow: true,
-      showRowActionsColumn: (['edit', 'readonly'].indexOf(vm.options.metadata.mode) > -1),
-      enableRowSelection: (['edit', 'browse'].indexOf(vm.options.metadata.mode) > -1),
-      enableRowHeaderSelection: (['edit', 'browse'].indexOf(vm.options.metadata.mode) > -1),
-      enableFullRowSelection: vm.options.metadata.mode === 'browse',
-      multiSelect: (['edit', 'browse'].indexOf(vm.options.metadata.mode) > -1),
-      enableCellEdit: vm.options.metadata.mode === 'edit'
+      showRowActionsColumn: (['edit', 'readonly'].indexOf(vm.$stateParams.mode) > -1),
+      enableRowSelection: (['edit', 'browse'].indexOf(vm.$stateParams.mode) > -1),
+      enableRowHeaderSelection: (['edit', 'browse'].indexOf(vm.$stateParams.mode) > -1),
+      enableFullRowSelection: vm.$stateParams.mode === 'browse',
+      multiSelect: (['edit', 'browse'].indexOf(vm.$stateParams.mode) > -1),
+      enableCellEdit: vm.$stateParams.mode === 'edit'
     };
   }
 

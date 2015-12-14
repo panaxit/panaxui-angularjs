@@ -23,23 +23,23 @@ export default class TemplateCtrl extends BaseCtrl {
       pageSize: pageSize || parseInt(metadata.pageSize || vm.$stateParams.pageSize) || 1
     };
     vm.CRUDService.read(params).then(function (res) {
-      // First-class options
+      // Main `options' object
+      // to be consumed by directive(s)
       vm.options = {
         metadata: _.extend(metadata, { contentType: res.headers('Content-Type') }),
         fields: undefined,
-        data: res.data || ''
+        data: res.data || '',
+        opts: vm.getOpts()
       };
-      // Other options
-      vm.setOpts();
 
       if(!metadata.catalogName) // Hacky way to know if directed is not nested
         vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
   }
 
-  setOpts() {
+  getOpts() {
     var vm = this;
-    vm.options.opts = {
+    return {
       showPrintRow: true
     };
   }

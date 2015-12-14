@@ -1,4 +1,5 @@
 import BaseCtrl from '../../../shell/base/base.controller';
+import _ from 'lodash';
 
 export default class FormlyJunctionCtrl extends BaseCtrl {
   constructor($scope, DebugService, $stateParams, CRUDService, AlertService, $q) {
@@ -11,15 +12,14 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
 
   loader() {
     var vm = this;
-
-    // First-class options
+    // Main `options' object
+    // to be consumed by directive(s)
     vm.options = {
       data: vm.$scope.model[vm.$scope.options.key] || [],
       metadata: vm.$scope.options.data.metadata,
-      fields: vm.initializeFields(vm.$scope.options.data.fields)
+      fields: vm.initializeFields(vm.$scope.options.data.fields),
+      opts: vm.getOpts()
     };
-    // Other options
-    vm.setOpts();
   }
 
   initializeFields(fields) {
@@ -44,9 +44,9 @@ export default class FormlyJunctionCtrl extends BaseCtrl {
     return fields;
   }
 
-  setOpts() {
+  getOpts() {
     var vm = this;
-    vm.options.opts = {
+    return {
       rowSelection: 'multiple',
       isJunctionTable: true,
       minSelections: vm.$scope.to.minSelections,

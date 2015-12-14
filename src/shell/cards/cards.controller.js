@@ -18,26 +18,26 @@ export default class CardsCtrl extends BaseCtrl {
       pageSize: pageSize || parseInt(vm.$stateParams.pageSize) || 8
     };
     vm.CRUDService.read(params).then(function (res) {
-      // First-class options
+      // Main `options' object
+      // to be consumed by directive(s)
       vm.options = {
         metadata: res.data.data.metadata,
         fields: res.data.data.fields,
-        data: res.data.data.model || []
+        data: res.data.data.model || [],
+        opts: vm.getOpts()
       };
-      // Other options
-      vm.setOpts();
 
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
   }
 
-  setOpts() {
+  getOpts() {
     var vm = this;
-    vm.options.opts = {
+    return {
       asyncPagination: true,
       showPaginationRow: true,
       showBrowseRow: vm.$stateParams.mode === 'browse',
-      showAddRemoveRow: vm.options.metadata.mode === 'edit',
+      showAddRemoveRow: vm.$stateParams.mode === 'edit',
       showFilterRow: true
     };
   }

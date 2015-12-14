@@ -1,5 +1,4 @@
 import FormCtrl from '../form/form.controller';
-import _ from 'lodash';
 
 export default class MasterDetailCtrl extends FormCtrl {
   constructor($scope, DebugService, $stateParams, CRUDService, AlertService, PayloadService) {
@@ -27,24 +26,23 @@ export default class MasterDetailCtrl extends FormCtrl {
       params.filters += '[' + idKey + '=' + vm.$stateParams.id + ']';
     }
     vm.CRUDService.read(params).then(function (res) {
-      // First-class options
+      // Main `options' object
+      // to be consumed by directive(s)
       vm.options = {
         metadata: res.data.data.metadata,
         fields_grid: res.data.data.fields.grid,
         fields: res.data.data.fields.form,
         data_grid: res.data.data.model || [],
-        data: []
+        data: [],
+        opts: vm.getOpts()
       };
-      // Other options
-      vm.setOpts();
 
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
     });
   }
 
-  setOpts() {
-    var vm = this;
-    vm.options.opts = {
+  getOpts() {
+    return {
       // Grid
       showAddRemoveRow: false,
       showNextRow: false,
