@@ -95,7 +95,9 @@ function pxFormCtrl($scope) {
       // Fields array initialization
       // Based on: http://angular-formly.com/#/example/advanced/repeating-section
       vm.options.fields = [];
-      for(var index=0;index<data.length;index++) {
+      // Get total number of records (multiple paginated), at least create One
+      var countRecords = data.length || 1;
+      for(var index=0;index<countRecords;index++) {
         vm.options.fields.push(copyFields(fields, index));
       }
     }

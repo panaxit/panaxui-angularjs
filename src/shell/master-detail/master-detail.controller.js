@@ -2,8 +2,8 @@ import FormCtrl from '../form/form.controller';
 import _ from 'lodash';
 
 export default class MasterDetailCtrl extends FormCtrl {
-  constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
-    super($scope, DebugService, $stateParams, CRUDService, AlertService);
+  constructor($scope, DebugService, $stateParams, CRUDService, AlertService, PayloadService) {
+    super($scope, DebugService, $stateParams, CRUDService, AlertService, PayloadService);
   }
 
   loader(pageIndex, pageSize) {
@@ -31,8 +31,9 @@ export default class MasterDetailCtrl extends FormCtrl {
       vm.options = {
         metadata: res.data.data.metadata,
         fields_grid: res.data.data.fields.grid,
-        fields_form: res.data.data.fields.form,
-        data: res.data.data.model || []
+        fields: res.data.data.fields.form,
+        data_grid: res.data.data.model || [],
+        data: []
       };
       // Other options
       vm.setOpts();
@@ -55,7 +56,7 @@ export default class MasterDetailCtrl extends FormCtrl {
       enableCellEdit: false,
       // Form
       asyncPagination: false,
-      showSaveRow: false,
+      showSaveRow: true,
       showFilterRow: false,
       // Both
       showPaginationRow: false
@@ -65,9 +66,9 @@ export default class MasterDetailCtrl extends FormCtrl {
   onSelectionChange(row) {
     var vm = this;
     if(row.isSelected) {
-      vm.selected_record = [row.entity];
+      vm.options.data = [row.entity];
     } else {
-      vm.selected_record = [];
+      vm.options.data = [];
     }
   }
 }
