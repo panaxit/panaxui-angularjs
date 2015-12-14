@@ -28,6 +28,8 @@ export default class CardsCtrl extends BaseCtrl {
       };
 
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
+      // Set `vm.loaderOnce` at first `vm.loader()` call
+      vm.loadedOnce = true;
     });
   }
 
@@ -67,6 +69,11 @@ export default class CardsCtrl extends BaseCtrl {
 
   onPaginationChange(newPage, newPageSize) {
     var vm = this;
+    // Avoid double call to `vm.loader()` when first loaded
+    if(vm.loadedOnce === true) {
+      vm.loadedOnce = false;
+      return;
+    }
     vm.loader(newPage, newPageSize);
   }
 

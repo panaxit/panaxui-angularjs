@@ -38,6 +38,8 @@ export default class MasterDetailCtrl extends FormCtrl {
       };
 
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
+      // Set `vm.loaderOnce` at first `vm.loader()` call
+      vm.loadedOnce = true;
     });
   }
 

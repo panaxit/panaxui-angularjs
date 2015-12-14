@@ -32,8 +32,11 @@ export default class TemplateCtrl extends BaseCtrl {
         opts: vm.getOpts()
       };
 
-      if(!metadata.catalogName) // Hacky way to know if directed is not nested
+      if(!metadata.catalogName) {// Hacky way to know if directed is not nested
         vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
+      }
+      // Set `vm.loaderOnce` at first `vm.loader()` call
+      vm.loadedOnce = true;
     });
   }
 

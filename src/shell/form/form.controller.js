@@ -41,6 +41,8 @@ export default class FormCtrl extends BaseCtrl {
         if(vm.$stateParams.mode === 'readonly') return 'View ';
         if(vm.$stateParams.mode === 'filters') return 'Filters ';
       })() + vm.options.metadata.tableName);
+      // Set `vm.loaderOnce` at first `vm.loader()` call
+      vm.loadedOnce = true;
     });
   }
 
@@ -152,6 +154,11 @@ export default class FormCtrl extends BaseCtrl {
 
   onPaginationChange(newPage, newPageSize) {
     var vm = this;
+    // Avoid double call to `vm.loader()` when first loaded
+    if(vm.loadedOnce === true) {
+      vm.loadedOnce = false;
+      return;
+    }
     vm.loader(newPage, newPageSize);
   }
 }
