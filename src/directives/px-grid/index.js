@@ -156,13 +156,11 @@ function pxGridCtrl($scope, uiGridConstants) {
   function initOpts(opts) {
     if(!opts) return;
     // Selection
-    if(opts.enableRowSelection) {
-      vm.uiGrid.enableRowSelection = opts.enableRowSelection;
-      vm.uiGrid.enableRowHeaderSelection = opts.enableRowHeaderSelection;
-      vm.uiGrid.enableFullRowSelection = opts.enableFullRowSelection;
-      vm.uiGrid.multiSelect = opts.multiSelect;
-      vm.uiGrid.enableSelectAll = opts.multiSelect;
-    }
+    vm.uiGrid.enableRowSelection = opts.enableRowSelection;
+    vm.uiGrid.isRowSelectable = () => { return vm.uiGrid.enableRowSelection; };
+    vm.uiGrid.enableRowHeaderSelection = opts.enableRowHeaderSelection;
+    vm.uiGrid.enableFullRowSelection = opts.enableFullRowSelection;
+    vm.uiGrid.multiSelect = opts.multiSelect;
     // Row edit
     if(opts.enableCellEdit) {
       vm.uiGrid.enableCellEdit = opts.enableCellEdit;
