@@ -44,9 +44,10 @@ export default class MasterDetailCtrl extends FormCtrl {
   }
 
   getOpts() {
+    var vm = this;
     return {
       // Grid
-      showAddRemoveRow: false,
+      showAddRemoveRow: vm.$stateParams.mode === 'edit',
       showNextRow: false,
       showRowActionsColumn: false,
       enableRowSelection: true,
@@ -59,7 +60,7 @@ export default class MasterDetailCtrl extends FormCtrl {
       showSaveRow: true,
       showFilterRow: false,
       // Both
-      showPaginationRow: false
+      showPaginationRow: true
     };
   }
 
