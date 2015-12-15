@@ -67,10 +67,10 @@ describe('Directive: pxGrid', () => {
           {name: "Don", last: "Draper"},
           {name: "Pete", last: "Campbell"}
         ],
-        fields: { columnDefs: [
+        fields: [
           {field: "name", type: "string", displayName: "Name"},
           {field: "last", type: "string", displayName: "Last"}
-        ]}
+        ]
       }
       compileAndSetupStuff({options});
       expect(vm.uiGrid.columnDefs).to.exist;
@@ -87,23 +87,25 @@ describe('Directive: pxGrid', () => {
           {name: "Don", last: "Draper"},
           {name: "Pete", last: "Campbell"}
         ],
-        fields: { columnDefs: [
+        fields: [
           {field: "name", type: "string", displayName: "Name"},
           {field: "last", type: "string", displayName: "Last"}
-        ]},
-        enableRowSelection: true,
-        enableRowHeaderSelection: false,
-        enableFullRowSelection: true,
-        multiSelect: false,
-        showRowActionsColumn: true
+        ],
+        opts: {
+          enableRowSelection: true,
+          enableRowHeaderSelection: false,
+          enableFullRowSelection: true,
+          multiSelect: false,
+          showRowActionsColumn: true
+        }
       };
       compileAndSetupStuff({options});
-      expect(vm.uiGrid.enableRowSelection).to.exist;
-      expect(vm.uiGrid.enableRowHeaderSelection).to.exist;
-      expect(vm.uiGrid.enableFullRowSelection).to.exist;
-      expect(vm.uiGrid.multiSelect).to.exist;
-      expect(vm.uiGrid.enableSelectAll).to.exist;
-      expect(vm.uiGrid.columnDefs).to.have.length(2);
+      expect(vm.uiGrid.enableRowSelection).to.equal(true);
+      expect(vm.uiGrid.enableRowHeaderSelection).to.equal(false);
+      expect(vm.uiGrid.enableFullRowSelection).to.equal(true);
+      expect(vm.uiGrid.multiSelect).to.equal(false);
+      expect(vm.uiGrid.enableSelectAll).to.equal(true);
+      expect(vm.uiGrid.columnDefs).to.have.length(3);
     });
 
   });

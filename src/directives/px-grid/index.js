@@ -138,7 +138,7 @@ function pxGridCtrl($scope, uiGridConstants) {
   function initFields(fields) {
     if(!fields) return;
     // Column Defs
-    vm.uiGrid.columnDefs = fields.columnDefs;
+    vm.uiGrid.columnDefs = fields;
     vm.uiGrid.columnDefs.forEach(function (colDef, index) {
       colDef.enableFiltering = false;
       colDef.menuItems = [

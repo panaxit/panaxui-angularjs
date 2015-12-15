@@ -30,9 +30,7 @@ export default class MasterDetailCtrl extends FormCtrl {
       // to be consumed by directive(s)
       vm.options = {
         metadata: res.data.data.metadata,
-        fields_grid: {
-          columnDefs: res.data.data.fields.grid.columnDefs.slice(0,5)
-        },
+        fields_grid: res.data.data.fields.grid.slice(0,5),
         fields: res.data.data.fields.form,
         data_grid: res.data.data.model || [],
         data: [],
