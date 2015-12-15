@@ -43,7 +43,7 @@
   <div class="btn-toolbar">
     <div class="pull-left" ng-if="vm.options.opts.showSaveRow">
       <div class="btn-group btn-group-md">
-        <!-- <button class="btn btn-default" type="button" ng-click="vm.onCancel()">
+        <!-- <button class="btn btn-default" type="button" ng-click="$event.preventDefault(); vm.onCancel();">
           <em class="glyphicon glyphicon-ban-circle"></em>
           Cancel
         </button> -->
@@ -61,7 +61,7 @@
           <em class="glyphicon glyphicon-arrow-right"></em>
           Filter
         </button>
-        <!-- <button class="btn btn-info" type="button" ng-click="vm.onReset({form: form})">
+        <!-- <button class="btn btn-info" type="button" ng-click="$event.preventDefault(); vm.onReset({form: form});">
           <em class="glyphicon glyphicon-retweet"></em>
           Reset
         </button> -->

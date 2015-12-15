@@ -1,7 +1,7 @@
 <div class="btn-group btn-group-sm">
-	<button class="btn" type="submit"
+	<button class="btn" type="button"
     ng-class="{'btn-default':(grid.appScope.vm.options.metadata.mode !== 'edit'), 'btn-primary':(grid.appScope.vm.options.metadata.mode === 'edit')}"
-		ng-click="grid.appScope.vm.openHandler({selected: row.entity})">
+		ng-click="$event.preventDefault(); grid.appScope.vm.openHandler({selected: row.entity});">
 		<em class="glyphicon glyphicon-folder-open"></em>
 	</button>
 </div>

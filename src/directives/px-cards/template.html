@@ -2,8 +2,8 @@
   <div class="btn-toolbar">
     <div class="pull-left">
       <div class="btn-group btn-group-md">
-        <button class="btn btn-primary" type="submit"
-          ng-click="vm.newHandler({catalogName: vm.options.metadata.catalogName})">
+        <button class="btn btn-primary" type="button"
+          ng-click="$event.preventDefault(); vm.newHandler({catalogName: vm.options.metadata.catalogName});">
           <em class="glyphicon glyphicon-plus"></em>
           Add
         </button>
@@ -13,8 +13,8 @@
 <!-- ToDo:
     <div class="pull-right">
       <div class="btn-group btn-group-md">
-        <button class="btn btn-danger" type="submit"
-          ng-click="vm.deleteHandler({selected: vm.gridApi.selection.getSelectedRows()})"
+        <button class="btn btn-danger" type="button"
+          ng-click="$event.preventDefault(); vm.deleteHandler({selected: vm.gridApi.selection.getSelectedRows()});"
           ng-disabled="!vm.gridApi.grid.selection.selectedCount">
           <em class="glyphicon glyphicon-minus"></em>
           Remove
@@ -84,8 +84,8 @@
   <div class="btn-toolbar">
     <div class="pull-right">
       <div class="btn-group btn-group-md">
-        <button class="btn btn-primary" type="submit"
-          ng-click="vm.nextHandler({selected: vm.selectedRecords})"
+        <button class="btn btn-primary" type="button"
+          ng-click="$event.preventDefault(); vm.nextHandler({selected: vm.selectedRecords});"
           ng-disabled="!vm.selectedRecords.length">
           <em class="glyphicon glyphicon-arrow-right"></em>
           Edit <!-- ToDo: PanaxDB Routes -->
@@ -103,12 +103,12 @@
     {{ record[vm.options.metadata.customAttrs.titleField] || '&nbsp;'}}
     </h3>
     <div class="btn-group btn-group-xs pull-right">
-      <button class="btn" type="submit"
+      <button class="btn" type="button"
               ng-class="{
                 'btn-primary':(vm.options.metadata.mode === 'edit'),
                 'btn-default':(vm.options.metadata.mode !== 'edit')
               }"
-              ng-click="vm.onClick(record)">
+              ng-click="$event.preventDefault(); vm.onClick(record)">
         {{vm.options.metadata.mode === 'edit' ? 'Edit' : ''}}
         {{vm.options.metadata.mode === 'readonly' ? 'View' : ''}}
         {{vm.options.metadata.mode === 'browse' ? '' : ''}}
