@@ -28,7 +28,8 @@ export default class FormlyCardsCtrl extends CardsCtrl {
     return _.extend(super.getOpts(), {
       asyncPagination: false,
       showBrowseRow: false,
-      showFilterRow: false
+      showFilterRow: false,
+      showSelection: vm.$stateParams.mode !== 'readonly'
     });
   }
 }

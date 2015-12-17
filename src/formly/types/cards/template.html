@@ -1,3 +1,6 @@
 <px-cards
-  options="vm.options">
+  options="vm.options"
+  open-handler="vm.onOpen(selected)"
+  new-handler="vm.onNew(catalogName)"
+  delete-handler="vm.onDelete(selected)">
 </px-cards>

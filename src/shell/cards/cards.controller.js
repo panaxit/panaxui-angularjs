@@ -1,8 +1,8 @@
 import BaseCtrl from '../base/base.controller';
 
 export default class CardsCtrl extends BaseCtrl {
-  constructor($scope, DebugService, $stateParams, CRUDService) {
-    super($scope, DebugService, $stateParams, CRUDService);
+  constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
+    super($scope, DebugService, $stateParams, CRUDService, AlertService);
   }
 
   loader(pageIndex, pageSize) {
@@ -40,7 +40,8 @@ export default class CardsCtrl extends BaseCtrl {
       showPaginationRow: true,
       showBrowseRow: vm.$stateParams.mode === 'browse',
       showAddRemoveRow: vm.$stateParams.mode === 'edit',
-      showFilterRow: true
+      showFilterRow: true,
+      showSelection: vm.$stateParams.mode !== 'readonly'
     };
   }
 

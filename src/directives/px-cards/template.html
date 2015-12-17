@@ -9,18 +9,16 @@
         </button>
       </div>
     </div>
-
-<!-- ToDo:
     <div class="pull-right">
       <div class="btn-group btn-group-md">
         <button class="btn btn-danger" type="button"
-          ng-click="$event.preventDefault(); vm.deleteHandler({selected: vm.gridApi.selection.getSelectedRows()});"
-          ng-disabled="!vm.gridApi.grid.selection.selectedCount">
+          ng-click="$event.preventDefault(); vm.deleteHandler({selected: vm.selectedRecords});"
+          ng-disabled="!vm.selectedRecords.length">
           <em class="glyphicon glyphicon-minus"></em>
           Remove
         </button>
       </div>
-    </div> -->
+    </div>
   </div>
 </div>
 
@@ -99,23 +97,29 @@
 <script type="text/ng-template" id="pxcards-layout">
 <div class="panel" ng-class="(vm.selectedRecords.indexOf(record)>=0) ? 'panel-primary' : 'panel-default'">
   <div class="panel-heading clearfix">
-    <h3 class="panel-title pull-left">
-    {{ record[vm.options.metadata.customAttrs.titleField] || '&nbsp;'}}
-    </h3>
-    <div class="btn-group btn-group-xs pull-right">
-      <button class="btn" type="button"
-              ng-class="{
-                'btn-primary':(vm.options.metadata.mode === 'edit'),
-                'btn-default':(vm.options.metadata.mode !== 'edit')
-              }"
-              ng-click="$event.preventDefault(); vm.onClick(record)">
-        {{vm.options.metadata.mode === 'edit' ? 'Edit' : ''}}
-        {{vm.options.metadata.mode === 'readonly' ? 'View' : ''}}
-        {{vm.options.metadata.mode === 'browse' ? '' : ''}}
-        <em ng-if="vm.options.metadata.mode === 'browse' && vm.selectedRecords.indexOf(record)==-1" class="glyphicon glyphicon-ok"></em>
-        <em ng-if="vm.options.metadata.mode === 'browse' && vm.selectedRecords.indexOf(record)>=0" class="glyphicon glyphicon-remove"></em>
+    <span ng-if="vm.options.opts.showSelection" class="btn-group btn-group-xs pull-left">
+      <button class="btn btn-default" type="button"
+              ng-click="$event.preventDefault(); vm.onSelect(record)">
+        <em ng-if="vm.selectedRecords.indexOf(record)==-1" class="glyphicon glyphicon-ok"></em>
+        <em ng-if="vm.selectedRecords.indexOf(record)>=0" class="glyphicon glyphicon-remove"></em>
       </button>
-    </div>
+    </span>
+    <span>
+      <h3 class="panel-title px-cards-title">
+      {{ record[vm.options.metadata.customAttrs.titleField] || '&nbsp;'}}
+      </h3>
+    </span>
+    <span class="btn-group btn-group-xs pull-right">
+      <button class="btn" type="button" ng-hide="vm.selectedRecords.indexOf(record)>=0"
+              ng-class="{
+                'btn-default':(vm.options.metadata.mode === 'readonly'),
+                'btn-primary':(vm.options.metadata.mode !== 'readonly')
+              }"
+              ng-click="$event.preventDefault(); vm.openHandler({selected: record});">
+        {{vm.options.metadata.mode === 'readonly' ? 'View' : ''}}
+        {{vm.options.metadata.mode !== 'readonly' ? 'Edit' : ''}}
+      </button>
+    </span>
   </div>
   <div class="list-group">
     <div class="list-group-item">

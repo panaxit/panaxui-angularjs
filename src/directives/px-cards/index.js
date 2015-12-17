@@ -36,6 +36,7 @@ function pxCards() {
       options: '=',
       openHandler: '&',
       newHandler: '&',
+      deleteHandler: '&',
       nextHandler: '&',
       paginationChangeHandler: '&?'
     },
@@ -56,7 +57,7 @@ function pxCardsCtrl($scope) {
   vm function assignments
    */
 
-  vm.onClick = onClick;
+  vm.onSelect = onSelect;
 
   /*
   Sync initialization
@@ -114,16 +115,12 @@ function pxCardsCtrl($scope) {
     }
   }
 
-  function onClick(record) {
-    if (['edit', 'readonly'].indexOf(vm.options.metadata.mode) > -1) {
-      vm.openHandler({selected: record});
-    } else if (vm.options.metadata.mode === 'browse') {
-      var index = vm.selectedRecords.indexOf(record);
-      if(index > -1) {
-        vm.selectedRecords.splice(index, 1);
-      } else {
-        vm.selectedRecords.push(record);
-      }
+  function onSelect(record) {
+    var index = vm.selectedRecords.indexOf(record);
+    if(index > -1) {
+      vm.selectedRecords.splice(index, 1);
+    } else {
+      vm.selectedRecords.push(record);
     }
   }
 }
