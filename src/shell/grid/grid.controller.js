@@ -98,24 +98,4 @@ export default class GridCtrl extends BaseCtrl {
 
     return promise.promise;
   }
-
-  onNext(selected) {
-    var vm = this;
-    var len = selected.length,
-        idKey = vm.options.metadata.identityKey || vm.options.metadata.primaryKey,
-        filters = '[' + idKey + ' IN (';
-    angular.forEach(selected, function(row, index) {
-      filters += `'${row[idKey]}'`;
-      if(index !== len-1) {
-        filters += ', ';
-      }
-    });
-    filters += ')]';
-    // ToDo: PanaxDB Routes
-    vm.$scope.$emit('goToState', 'main.panel.form', {
-      catalogName: vm.options.metadata.catalogName,
-      mode: 'edit',
-      filters: filters
-    });
-  }
 }
