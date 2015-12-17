@@ -36,7 +36,9 @@ export default class TemplateCtrl extends BaseCtrl {
         vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
       }
       // Set `vm.loaderOnce` at first `vm.loader()` call
-      vm.loadedOnce = true;
+      if(vm.loadedOnce === undefined) {
+        vm.loadedOnce = true;
+      }
     });
   }
 

@@ -29,7 +29,9 @@ export default class GridCtrl extends BaseCtrl {
 
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
       // Set `vm.loaderOnce` at first `vm.loader()` call
-      vm.loadedOnce = true;
+      if(vm.loadedOnce === undefined) {
+        vm.loadedOnce = true;
+      }
     });
   }
 
@@ -48,15 +50,10 @@ export default class GridCtrl extends BaseCtrl {
     };
   }
 
-  onPaginationChange(newPage, newPageSize) {
-    var vm = this;
-    // Avoid double call to `vm.loader()` when first loaded
-    if(vm.loadedOnce === true) {
-      vm.loadedOnce = false;
-      return;
-    }
-    vm.loader(newPage, newPageSize);
-  }
+  /*
+  Common Handlers
+  (unique & overriden from BaseCtrl)
+   */
 
   onRowChange(rowEntity) {
     // Save Row handler

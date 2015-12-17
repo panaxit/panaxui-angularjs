@@ -39,7 +39,9 @@ export default class MasterDetailCtrl extends FormCtrl {
 
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label);
       // Set `vm.loaderOnce` at first `vm.loader()` call
-      vm.loadedOnce = true;
+      if(vm.loadedOnce === undefined) {
+        vm.loadedOnce = true;
+      }
     });
   }
 
@@ -63,6 +65,11 @@ export default class MasterDetailCtrl extends FormCtrl {
       showPaginationRow: true
     };
   }
+
+  /*
+  Common Handlers
+  (unique & overriden from BaseCtrl)
+   */
 
   onSelectionChange(row) {
     var vm = this;
