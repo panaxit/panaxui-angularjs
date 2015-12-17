@@ -87,6 +87,14 @@ export default class BaseCtrl {
     }
   }
 
+  onNew(catalogName) {
+    this.$scope.$emit('goToState', 'main.panel.form', {
+      catalogName: catalogName,
+      mode: 'insert',
+      id: undefined
+    });
+  }
+
   loader() {
     // Declare but leave empty to be used by child controllers
     console.warn('BaseController.loader() called (not overriden)');

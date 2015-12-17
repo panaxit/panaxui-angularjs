@@ -60,14 +60,6 @@ export default class CardsCtrl extends BaseCtrl {
     });
   }
 
-  onNew(catalogName) {
-    this.$scope.$emit('goToState', 'main.panel.form', {
-      catalogName: catalogName,
-      mode: 'insert',
-      id: undefined
-    });
-  }
-
   onPaginationChange(newPage, newPageSize) {
     var vm = this;
     // Avoid double call to `vm.loader()` when first loaded

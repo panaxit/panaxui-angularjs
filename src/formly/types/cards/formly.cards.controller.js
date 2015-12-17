@@ -23,6 +23,7 @@ export default class FormlyCardsCtrl extends CardsCtrl {
   }
 
   getOpts() {
+    var vm = this;
     // Reuse parent's options
     // And override the ones needed
     return _.extend(super.getOpts(), {
