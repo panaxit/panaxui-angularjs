@@ -29,7 +29,11 @@
 
 import formly from 'angular-formly';
 
+// Wrappers
 import panel from './wrappers/panel';
+import image from './wrappers/image';
+
+// Types
 import tabpanel from './types/tabpanel';
 import input from './types/input';
 import _default from './types/default';
@@ -48,6 +52,7 @@ import date from './types/date';
 import time from './types/time';
 import datetime from './types/datetime';
 
+// Nested types
 import form from './types/form';
 import cards from './types/cards';
 import grid from './types/grid';
@@ -58,6 +63,8 @@ export default angular.module('app.main.form.formly', [
     formly,
 
     panel,
+    image,
+
     tabpanel,
     input,
     _default,

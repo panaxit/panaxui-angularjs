@@ -1,6 +1,8 @@
 import angularUpload from 'angular-upload';
 import 'angular-upload/src/directives/btnUpload.min.css';
 
+import './style.css';
+
 export default angular.module('app.main.form.formly.type.file', [
     'lr.upload'
   ])
@@ -13,7 +15,8 @@ function file(formlyConfig) {
     extends: 'input',
     template: `
       <div class="form-group">
-        <input class=""
+        <input class="form-control"
+               name="{{::id}}"
                placeholder="{{::to.placeholder}}"
                type="text"
                value="{{model[options.key]}}"
@@ -21,7 +24,7 @@ function file(formlyConfig) {
         <div
           class="btn btn-primary btn-upload"
           upload-button
-          url="{{upload_url}}"
+          url="{{::to.url}}"
           on-success="onSuccess(response)"
           param="file"
           data="formData"
@@ -30,19 +33,33 @@ function file(formlyConfig) {
         >Upload</div>
       </div>
     `,
-    defaultOptions: {
-      templateOptions: {
-        type: 'file'
-      }
-    },
-    controller: function($scope, $rootScope) {
+    controller: function($scope, $rootScope, SessionService) {
       var catalogName = $rootScope.currentNavBranch.data.catalogName;
       var fieldName = $scope.options.key;
-      $scope.upload_url = '/api/upload?catalogName=' + catalogName + '&fieldName=' + fieldName;
+      // Set Upload URL
+      $scope.to.url = $scope.to.url || '/api/upload?catalogName=' + catalogName + '&fieldName=' + fieldName;
+
+      // Update upload path if model already set
+      $scope.to.uploadPath = $scope.to.uploadPath || getUploadPath($scope.model[$scope.options.key]);
+
+      function getUploadPath(filename) {
+        if(filename) {
+          return '/uploads/' + SessionService.panax_instance
+                              + '/' + catalogName
+                              + '/' + fieldName
+                              + '/' + filename;
+        }
+      }
+
+      // On Success Callback
       $scope.onSuccess = function(res) {
-        // Update model
         var originalname = res.data.data.file.originalname;
+        // Update model
         $scope.model[$scope.options.key] = originalname;
+        // Set dirty
+        $scope.options.formControl.$setDirty();
+        // Update uploadPath
+        $scope.to.uploadPath = getUploadPath(originalname);
         // Use AlertService. Maybe not since it's an external dependency?
       };
     }
