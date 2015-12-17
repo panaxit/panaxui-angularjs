@@ -45,21 +45,6 @@ export default class CardsCtrl extends BaseCtrl {
     };
   }
 
-  // ToDo: Use metadata parameter (as in GridCtrl) for nested cardsView
-  onOpen(selected) {
-    var vm = this;
-    var idType = (!!vm.options.metadata.identityKey) ? 'identityKey' : 'primaryKey';
-    var idKey = vm.options.metadata[idType];
-    var idValue = selected[idKey];
-
-    vm.$scope.$emit('goToState', 'main.panel.form', {
-      catalogName: vm.options.metadata.catalogName,
-      mode: vm.options.metadata.mode,
-      [idType]: idKey,
-      id: idValue
-    });
-  }
-
   onPaginationChange(newPage, newPageSize) {
     var vm = this;
     // Avoid double call to `vm.loader()` when first loaded

@@ -39,7 +39,6 @@ export default class BaseCtrl {
   (override if needed)
    */
 
-  // Delete Handler
   onDelete(selected) {
     var vm = this;
     if(confirm("Are your sure to Delete selected record(s)?")) {
@@ -92,6 +91,20 @@ export default class BaseCtrl {
       catalogName: catalogName,
       mode: 'insert',
       id: undefined
+    });
+  }
+
+  onOpen(selected) {
+    var vm = this;
+    var idType = (!!vm.options.metadata.identityKey) ? 'identityKey' : 'primaryKey';
+    var idKey = vm.options.metadata[idType];
+    var idValue = selected[idKey];
+
+    vm.$scope.$emit('goToState', 'main.panel.form', {
+      catalogName: vm.options.metadata.catalogName,
+      mode: vm.options.metadata.mode,
+      [idType]: idKey,
+      id: idValue
     });
   }
 
