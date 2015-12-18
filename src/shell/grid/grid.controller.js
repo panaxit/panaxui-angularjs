@@ -46,7 +46,8 @@ export default class GridCtrl extends BaseCtrl {
       enableRowHeaderSelection: (['edit', 'browse'].indexOf(vm.$stateParams.mode) > -1),
       enableFullRowSelection: vm.$stateParams.mode === 'browse',
       multiSelect: (['edit', 'browse'].indexOf(vm.$stateParams.mode) > -1),
-      enableCellEdit: vm.$stateParams.mode === 'edit'
+      enableCellEdit: vm.$stateParams.mode === 'edit',
+      enableFiltering: vm.$stateParams.mode === 'filters'
     };
   }
 

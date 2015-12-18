@@ -66,6 +66,7 @@ function pxGridCtrl($scope, uiGridConstants) {
   vm function assignments
    */
 
+  vm.toggleFiltering = toggleFiltering;
   vm.getArray = getArray;
 
   /*
@@ -97,7 +98,6 @@ function pxGridCtrl($scope, uiGridConstants) {
     // Grid general defaults
     vm.uiGrid.rowHeight = 32;
     vm.uiGrid.showGridFooter = false;
-    vm.uiGrid.enableFiltering = true;
     // Pagination defaults
     vm.uiGrid.paginationPageSizes = [5, 10, 25, 50, 100, 500];
     vm.uiGrid.enablePaginationControls = false;
@@ -140,13 +140,13 @@ function pxGridCtrl($scope, uiGridConstants) {
     // Column Defs
     vm.uiGrid.columnDefs = fields;
     vm.uiGrid.columnDefs.forEach(function (colDef, index) {
-      colDef.enableFiltering = false;
+      colDef.enableFiltering = true;
       colDef.menuItems = [
         {
           title: 'Toggle Filter',
           icon: 'ui-grid-icon-filter',
           action: function() {
-            this.context.col.colDef.enableFiltering = !this.context.col.colDef.enableFiltering;
+            vm.toggleFiltering();
           }
         }
       ];
@@ -161,6 +161,10 @@ function pxGridCtrl($scope, uiGridConstants) {
     vm.uiGrid.enableRowHeaderSelection = opts.enableRowHeaderSelection;
     vm.uiGrid.enableFullRowSelection = opts.enableFullRowSelection;
     vm.uiGrid.multiSelect = opts.multiSelect;
+    // Filtering
+    if(opts.enableFiltering) {
+      vm.uiGrid.enableFiltering = opts.enableFiltering
+    }
     // Row edit
     if(opts.enableCellEdit) {
       vm.uiGrid.enableCellEdit = opts.enableCellEdit;
@@ -184,6 +188,12 @@ function pxGridCtrl($scope, uiGridConstants) {
     // http://ui-grid.info/docs/#/api/ui.grid.class:Grid#methods_notifydatachange
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
   }
+
+  function toggleFiltering(){
+    vm.uiGrid.enableFiltering = !vm.uiGrid.enableFiltering;
+    vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
+    vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
+  };
 
   function getArray(num) {
     return new Array(num);
