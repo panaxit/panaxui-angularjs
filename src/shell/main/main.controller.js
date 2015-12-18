@@ -53,6 +53,8 @@ export default class MainCtrl {
       branch.data.filters = branch.data.filters || undefined;
       branch.data.pageSize = branch.data.pageSize || undefined;
       branch.data.pageIndex = branch.data.pageIndex || undefined;
+      branch.data.ref = branch.data.ref || undefined;
+      branch.data.refId = branch.data.refId || undefined;
 			if (branch.data.controlType === 'gridView') {
 				return vm.goToState('main.panel.grid', branch.data);
       } else if (branch.data.controlType === 'formView') {

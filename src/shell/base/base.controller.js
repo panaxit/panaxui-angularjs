@@ -92,10 +92,13 @@ export default class BaseCtrl {
   }
 
   onNew(catalogName) {
+    var vm = this;
     this.$scope.$emit('goToState', 'main.panel.form', {
       catalogName: catalogName,
       mode: 'insert',
-      id: undefined
+      id: undefined,
+      ref: vm.options.metadata.foreignReference || undefined,
+      refId: vm.$stateParams.id || undefined
     });
   }
 
@@ -109,7 +112,9 @@ export default class BaseCtrl {
       catalogName: vm.options.metadata.catalogName,
       mode: vm.options.metadata.mode,
       [idType]: idKey,
-      id: idValue
+      id: idValue,
+      ref: vm.options.metadata.foreignReference || undefined,
+      refId: vm.$stateParams.id || undefined
     });
   }
 
@@ -129,7 +134,9 @@ export default class BaseCtrl {
     vm.$scope.$emit('goToState', 'main.panel.form', {
       catalogName: vm.options.metadata.catalogName,
       mode: 'edit',
-      filters: filters
+      filters: filters,
+      ref: vm.options.metadata.foreignReference || undefined,
+      refId: vm.$stateParams.id || undefined
     });
   }
 
