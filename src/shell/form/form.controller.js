@@ -31,7 +31,7 @@ export default class FormCtrl extends BaseCtrl {
       vm.options = {
         metadata: res.data.data.metadata,
         fields: res.data.data.fields,
-        data: res.data.data.model || [],
+        data: vm.setReferrerValue(res.data.data.model) || [],
         opts: vm.getOpts()
       };
 
@@ -46,6 +46,17 @@ export default class FormCtrl extends BaseCtrl {
         vm.loadedOnce = true;
       }
     });
+  }
+
+  setReferrerValue(model) {
+    var vm = this;
+    // Set Referrer property in model
+    var ref = vm.$stateParams.ref;
+    var refId = vm.$stateParams.refId;
+    if(ref && refId && model[0][ref] !== undefined) {
+      model[0][ref] = refId;
+    }
+    return model;
   }
 
   getOpts() {
