@@ -14,6 +14,7 @@ import coreFilters from '../../core/filters';
 import style from './style.css';
 import template from './template.html';
 import templateRowActions from './template.row.actions.html';
+import templateViewOptions from './template.view.options.html';
 
 /**
  * Module
@@ -21,7 +22,7 @@ import templateRowActions from './template.row.actions.html';
 
 export default angular.module('app.directives.pxgrid', [
     'ui.grid',
-    'ui.grid.autoResize',
+    //'ui.grid.autoResize',
     'ui.grid.pagination',
     'ui.grid.selection',
     'ui.grid.edit',
@@ -95,12 +96,6 @@ function pxGridCtrl($scope, uiGridConstants) {
   function init() {
     // UI Grid
     vm.uiGrid = {};
-    // Grid general defaults
-    vm.uiGrid.rowHeight = 32;
-    vm.uiGrid.showGridFooter = false;
-    // Pagination defaults
-    vm.uiGrid.paginationPageSizes = [5, 10, 25, 50, 100, 500];
-    vm.uiGrid.enablePaginationControls = false;
     // On Register API callback
     vm.uiGrid.onRegisterApi = function(gridApi) {
       vm.gridApi = gridApi;
@@ -140,7 +135,6 @@ function pxGridCtrl($scope, uiGridConstants) {
     // Column Defs
     vm.uiGrid.columnDefs = fields;
     vm.uiGrid.columnDefs.forEach(function (colDef, index) {
-      colDef.enableFiltering = true;
       colDef.menuItems = [
         {
           title: 'Toggle Filter',
@@ -155,6 +149,12 @@ function pxGridCtrl($scope, uiGridConstants) {
 
   function initOpts(opts) {
     if(!opts) return;
+    // Grid general defaults
+    vm.uiGrid.rowHeight = 32;
+    vm.uiGrid.showGridFooter = false;
+    // Pagination defaults
+    vm.uiGrid.paginationPageSizes = [5, 10, 25, 50, 100, 500];
+    vm.uiGrid.enablePaginationControls = false;
     // Selection
     vm.uiGrid.enableRowSelection = opts.enableRowSelection;
     vm.uiGrid.isRowSelectable = () => { return vm.uiGrid.enableRowSelection; };
@@ -162,28 +162,25 @@ function pxGridCtrl($scope, uiGridConstants) {
     vm.uiGrid.enableFullRowSelection = opts.enableFullRowSelection;
     vm.uiGrid.multiSelect = opts.multiSelect;
     // Filtering
-    if(opts.enableFiltering) {
-      vm.uiGrid.enableFiltering = opts.enableFiltering
-    }
+    vm.uiGrid.enableFiltering = opts.enableFiltering || false;
     // Row edit
     if(opts.enableCellEdit) {
       vm.uiGrid.enableCellEdit = opts.enableCellEdit;
     }
     // Row actions
-    if(opts.showRowActionsColumn) {
-      vm.uiGrid.columnDefs.push({
-        name: 'px-actions',
-        displayName: '⚡',
-        type: 'object',
-        cellTemplate: templateRowActions,
-        width: '34',
-        enableCellEdit: false,
-        enableColumnMenus: false,
-        enableFiltering: false,
-        enableHiding: false,
-        enableSorting: false,
-      });
-    }
+    vm.uiGrid.columnDefs.push({
+      name: 'px-actions',
+      displayName: '⚡',
+      type: 'object',
+      headerCellTemplate: templateViewOptions,
+      cellTemplate: opts.showRowActionsColumn ? templateRowActions : undefined,
+      width: '34',
+      enableCellEdit: false,
+      enableColumnMenus: false,
+      enableFiltering: false,
+      enableHiding: false,
+      enableSorting: false,
+    });
     // Notify all watchers
     // http://ui-grid.info/docs/#/api/ui.grid.class:Grid#methods_notifydatachange
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
@@ -192,7 +189,6 @@ function pxGridCtrl($scope, uiGridConstants) {
   function toggleFiltering(){
     vm.uiGrid.enableFiltering = !vm.uiGrid.enableFiltering;
     vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.COLUMN);
-    vm.gridApi.core.notifyDataChange(uiGridConstants.dataChange.ALL);
   };
 
   function getArray(num) {

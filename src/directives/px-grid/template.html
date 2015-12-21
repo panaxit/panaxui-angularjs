@@ -40,6 +40,27 @@
 
 </div>
 
+<div class="panel-footer">
+
+  <div class="pull-left">
+    {{vm.gridApi.selection.getSelectedRows().length}} record(s) selected
+  </div>
+
+  <div class="btn-toolbar">
+    <div class="pull-right">
+      <div class="btn-group btn-group-md">
+        <button class="btn btn-primary" type="submit"
+          ng-if="vm.options.opts.showNextRow"
+          ng-click="vm.nextHandler({selected: vm.gridApi.selection.getSelectedRows()})"
+          ng-disabled="!vm.gridApi.grid.selection.selectedCount">
+          <em class="glyphicon glyphicon-arrow-right"></em>
+          Edit <!-- ToDo: PanaxDB Routes -->
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="panel-footer" ng-if="vm.options.opts.showPaginationRow">
 
   <!-- http://stackoverflow.com/questions/19929213/bootstrap-change-div-order-with-pull-right-pull-left-3-columns -->
@@ -104,23 +125,4 @@
     </div>
   </div>
 
-</div>
-
-
-<div class="panel-footer" ng-if="vm.options.opts.showNextRow">
-  <div class="pull-left">
-    {{vm.gridApi.selection.getSelectedRows().length}} record(s) selected
-  </div>
-  <div class="btn-toolbar">
-    <div class="pull-right">
-      <div class="btn-group btn-group-md">
-        <button class="btn btn-primary" type="submit"
-          ng-click="vm.nextHandler({selected: vm.gridApi.selection.getSelectedRows()})"
-          ng-disabled="!vm.gridApi.grid.selection.selectedCount">
-          <em class="glyphicon glyphicon-arrow-right"></em>
-          Edit <!-- ToDo: PanaxDB Routes -->
-        </button>
-      </div>
-    </div>
-  </div>
 </div>
