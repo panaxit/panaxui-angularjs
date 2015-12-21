@@ -109,7 +109,7 @@ function pxCardsCtrl($scope) {
       vm.pagination_options.paginationCurrentPage = metadata.pageIndex;
     } else {
       // Client-side Pagination
-      //vm.pagination_options.totalItems = data.length;
+      //vm.pagination_options.totalItems = data.length; // ToDo: Move back here?
       vm.pagination_options.paginationPageSize = metadata.pageSize || 8;
       vm.pagination_options.paginationCurrentPage = metadata.pageIndex || 1;
     }
