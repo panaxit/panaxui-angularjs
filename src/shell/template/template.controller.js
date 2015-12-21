@@ -22,13 +22,14 @@ export default class TemplateCtrl extends BaseCtrl {
       pageIndex: pageIndex || parseInt(metadata.pageIndex || vm.$stateParams.pageIndex) || 1,
       pageSize: pageSize || parseInt(metadata.pageSize || vm.$stateParams.pageSize) || 1
     };
+    debugger;
     vm.CRUDService.read(params).then(function (res) {
       // Main `options' object
       // to be consumed by directive(s)
       vm.options = {
-        metadata: _.extend(metadata, { contentType: res.headers('Content-Type') }),
+        metadata: res.data.data.metadata,
         fields: undefined,
-        data: res.data || '',
+        data: res.data.template || '',
         opts: vm.getOpts()
       };
 
