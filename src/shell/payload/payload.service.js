@@ -75,9 +75,9 @@ class PayloadService {
          */
         vm.dirtyFieldsIterator(el.data.tabs, payload, orig_model);
         return;
-      } else if(el.data && el.data.fields) {
+      } else if(el.data && el.data.fields && el.type === 'form') {
         /*
-        nested
+        nested form
          */
         payload[el.key] = vm.build([el.data.fields], [orig_model[el.key]], el.data.metadata);
         return;
