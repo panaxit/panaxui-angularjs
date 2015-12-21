@@ -4,9 +4,6 @@ export default function routes($stateProvider) {
    */
 
   var queryParams = [
-    'identityKey',
-    'primaryKey',
-    'id',
     'filters',
     'pageSize',
     'pageIndex',

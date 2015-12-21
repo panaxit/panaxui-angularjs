@@ -93,12 +93,16 @@ export default class BaseCtrl {
 
   onNew(catalogName) {
     var vm = this;
+    var idType = (!!vm.options.metadata.identityKey) ? 'identityKey' : 'primaryKey';
+    var idKey = vm.options.metadata[idType];
+    // Get  id value from nested formly template
+    var idValue = vm.$scope.model[idKey];
     this.$scope.$emit('goToState', 'main.panel.form', {
       catalogName: catalogName,
       mode: 'insert',
       id: undefined,
       ref: vm.options.metadata.foreignReference || undefined,
-      refId: vm.$stateParams.id || undefined
+      refId: idValue || undefined
     });
   }
 
@@ -107,22 +111,23 @@ export default class BaseCtrl {
     var idType = (!!vm.options.metadata.identityKey) ? 'identityKey' : 'primaryKey';
     var idKey = vm.options.metadata[idType];
     var idValue = selected[idKey];
-
+    var filters = `'${idKey}=${idValue}'`;
     vm.$scope.$emit('goToState', 'main.panel.form', {
       catalogName: vm.options.metadata.catalogName,
       mode: vm.options.metadata.mode,
-      [idType]: idKey,
-      id: idValue,
+      filters: filters,
       ref: vm.options.metadata.foreignReference || undefined,
-      refId: vm.$stateParams.id || undefined
+      //refId: idValue || undefined
     });
   }
 
   onNext(selected) {
     var vm = this;
-    var len = selected.length,
-        idKey = vm.options.metadata.identityKey || vm.options.metadata.primaryKey,
-        filters = '[' + idKey + ' IN (';
+    var len = selected.length;
+    var idType = (!!vm.options.metadata.identityKey) ? 'identityKey' : 'primaryKey';
+    var idKey = vm.options.metadata[idType];
+    var idValue = vm.options.metadata[idKey];
+    var filters = '[' + idKey + ' IN (';
     angular.forEach(selected, function(row, index) {
       filters += `'${row[idKey]}'`;
       if(index !== len-1) {
@@ -136,7 +141,7 @@ export default class BaseCtrl {
       mode: 'edit',
       filters: filters,
       ref: vm.options.metadata.foreignReference || undefined,
-      refId: vm.$stateParams.id || undefined
+      refId: idValue || undefined
     });
   }
 

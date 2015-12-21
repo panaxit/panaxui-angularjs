@@ -17,14 +17,6 @@ export default class FormCtrl extends BaseCtrl {
       pageIndex: pageIndex || parseInt(vm.$stateParams.pageIndex) || 1,
       pageSize: pageSize || parseInt(vm.$stateParams.pageSize) || 1
     };
-    if(vm.$stateParams.id) {
-      // Fallback options
-      var idKey = vm.$stateParams.identityKey ||
-                  vm.$stateParams.primaryKey ||
-                  '$identity' || // Supported in SQL Server only for tables
-                  'id';       // Last resort
-      params.filters += '[' + idKey + '=' + vm.$stateParams.id + ']';
-    }
     vm.CRUDService.read(params).then(function (res) {
       // Main `options' object
       // to be consumed by directive(s)

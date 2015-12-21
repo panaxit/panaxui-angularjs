@@ -47,9 +47,6 @@ export default class MainCtrl {
       }
       // Reset inherited query parameters
       // https://github.com/angular-ui/ui-router/wiki/Quick-Reference#toparams
-      branch.data.id = branch.data.id || undefined;
-      branch.data.identityKey = branch.data.identityKey || undefined;
-      branch.data.primaryKey = branch.data.primaryKey || undefined;
       branch.data.filters = branch.data.filters || undefined;
       branch.data.pageSize = branch.data.pageSize || undefined;
       branch.data.pageIndex = branch.data.pageIndex || undefined;
