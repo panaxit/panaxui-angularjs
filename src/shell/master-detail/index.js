@@ -1,17 +1,17 @@
-import './master-detail.css';
+import './master-detail.css'
 
-import angular from 'angular';
-import uirouter from 'angular-ui-router';
+import angular from 'angular'
+import uirouter from 'angular-ui-router'
 
-import routing from './master-detail.routes';
-import MasterDetailCtrl from './master-detail.controller';
+import routing from './master-detail.routes'
+import MasterDetailCtrl from './master-detail.controller'
 
-import formlyTypes from '../../formly';
+import formlyTypes from '../../formly'
 
 export default angular.module('app.main.master-detail', [
-    uirouter,
-    formlyTypes
-  ])
+  uirouter,
+  formlyTypes,
+])
   .config(routing)
   .controller('MasterDetailCtrl', MasterDetailCtrl)
-  .name;
+  .name

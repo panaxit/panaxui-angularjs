@@ -1,124 +1,124 @@
-import module from './crud.service';
+import module from './crud.service'
 
 describe('Service: CRUD', () => {
   var $httpBackend,
-      CRUDService;
+    CRUDService
 
-  var baseURL =   'http://localhost:3001';
+  var baseURL = 'http://localhost:3001'
 
-  beforeEach(angular.mock.module(module));
+  beforeEach(angular.mock.module(module))
 
   beforeEach(angular.mock.inject(function(_$httpBackend_, _CRUDService_) {
-    $httpBackend = _$httpBackend_;
-    CRUDService = _CRUDService_;
-    CRUDService.setBaseURL(baseURL);
-  }));
+    $httpBackend = _$httpBackend_
+    CRUDService = _CRUDService_
+    CRUDService.setBaseURL(baseURL)
+  }))
 
   afterEach(function() {
-    $httpBackend.verifyNoOutstandingExpectation();
-    $httpBackend.verifyNoOutstandingRequest();
-  });
+    $httpBackend.verifyNoOutstandingExpectation()
+    $httpBackend.verifyNoOutstandingRequest()
+  })
 
   describe('#read()', () => {
 
-    let url = baseURL + '/api/read';
+    let url = baseURL + '/api/read'
 
     it('should call with no params', function() {
-      $httpBackend.expectGET(url + '?gui=ng&output=json').respond(200, {});
+      $httpBackend.expectGET(url + '?gui=ng&output=json').respond(200, {})
 
-      CRUDService.read({});
+      CRUDService.read({})
 
-      $httpBackend.flush();
-    });
+      $httpBackend.flush()
+    })
 
     it('should call with arbitrary params', function() {
-      $httpBackend.expectGET(url + '?a=b&c=d&gui=ng&output=json').respond(200, {});
+      $httpBackend.expectGET(url + '?a=b&c=d&gui=ng&output=json').respond(200, {})
 
       CRUDService.read({
         a: 'b',
         c: 'd'
-      });
+      })
 
-      $httpBackend.flush();
-    });
+      $httpBackend.flush()
+    })
 
-  });
+  })
 
   describe('#options()', () => {
 
-    let url = baseURL + '/api/options';
+    let url = baseURL + '/api/options'
 
     it('should call with foreignEntity params', function() {
-      let filters = encodeURIComponent(`[Id='1']`);
+      let filters = encodeURIComponent(`[Id='1']`)
       let expectedParams = '?array=true&filters=' + filters +
-                           '&foreignEntity=Parent&foreignKey=Id&foreignValue=1&gui=ng';
-      $httpBackend.expectGET(url + expectedParams).respond(200, {});
+        '&foreignEntity=Parent&foreignKey=Id&foreignValue=1&gui=ng'
+      $httpBackend.expectGET(url + expectedParams).respond(200, {})
 
       CRUDService.options({
         foreignEntity: 'Parent',
         foreignKey: 'Id',
         foreignValue: '1'
-      });
+      })
 
-      $httpBackend.flush();
-    });
+      $httpBackend.flush()
+    })
 
-  });
+  })
 
   describe('#create()', () => {
 
-    let url = baseURL + '/api/create';
+    let url = baseURL + '/api/create'
 
     it('should call with any payload', function() {
-      $httpBackend.expectPOST(url).respond(200, {});
+      $httpBackend.expectPOST(url).respond(200, {})
 
-      CRUDService.create({});
+      CRUDService.create({})
 
-      $httpBackend.flush();
-    });
+      $httpBackend.flush()
+    })
 
-  });
+  })
 
   describe('#update()', () => {
 
-    let url = baseURL + '/api/update';
+    let url = baseURL + '/api/update'
 
     it('should call with any payload', function() {
-      $httpBackend.expectPUT(url).respond(200, {});
+      $httpBackend.expectPUT(url).respond(200, {})
 
-      CRUDService.update({});
+      CRUDService.update({})
 
-      $httpBackend.flush();
-    });
+      $httpBackend.flush()
+    })
 
-  });
+  })
 
   describe('#delete()', () => {
 
-    let url = baseURL + '/api/delete';
+    let url = baseURL + '/api/delete'
 
     it('should call with any payload', function() {
-      $httpBackend.expectDELETE(url).respond(200, {});
+      $httpBackend.expectDELETE(url).respond(200, {})
 
-      CRUDService.delete({});
+      CRUDService.delete({})
 
-      $httpBackend.flush();
-    });
+      $httpBackend.flush()
+    })
 
-  });
+  })
 
   describe('#filters()', () => {
 
-    let url = baseURL + '/api/filters';
+    let url = baseURL + '/api/filters'
 
     it('should call with any payload', function() {
-      $httpBackend.expectPOST(url).respond(200, {});
+      $httpBackend.expectPOST(url).respond(200, {})
 
-      CRUDService.filters({});
+      CRUDService.filters({})
 
-      $httpBackend.flush();
-    });
+      $httpBackend.flush()
+    })
 
-  });
+  })
 
-});
+})

@@ -1,8 +1,8 @@
-import angular from 'angular';
+import angular from 'angular'
 
-import AlertService from './alert.service';
+import AlertService from './alert.service'
 
 export default angular.module('app.alert', [
-		AlertService
-	])
-	.name;
+  AlertService,
+])
+  .name

@@ -1,34 +1,36 @@
+import angular from 'angular'
+
 // http://webpack.github.io/docs/shimming-modules.html#imports-loader
-import colorpicker from 'imports?tinycolor=tinycolor2!angularjs-color-picker/angularjs-color-picker.js';
-import 'angularjs-color-picker/angularjs-color-picker.css';
+import 'imports?tinycolor=tinycolor2!angularjs-color-picker/angularjs-color-picker.js'
+import 'angularjs-color-picker/angularjs-color-picker.css'
 
 export default angular.module('app.main.form.formly.type.color', [
-    'color.picker'
-  ])
+  'color.picker',
+])
   .run(color)
-  .name;
+  .name
 
 function color(formlyConfig) {
   /*
   ngModelAttrs stuff
    */
-  var ngModelAttrs = {};
+  var ngModelAttrs = {}
 
   function camelize(string) {
     string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
-      return chr ? chr.toUpperCase() : '';
-    });
-    // Ensure 1st char is always lowercase
+      return chr ? chr.toUpperCase() : ''
+    })
+      // Ensure 1st char is always lowercase
     return string.replace(/^([A-Z])/, function(match, chr) {
-      return chr ? chr.toLowerCase() : '';
-    });
+      return chr ? chr.toLowerCase() : ''
+    })
   }
 
   /*
   colorpicker
   */
 
-  ngModelAttrs = {};
+  ngModelAttrs = {}
 
   // attributes
   angular.forEach([
@@ -39,16 +41,19 @@ function color(formlyConfig) {
     'color-picker-swatch-bootstrap',
     'color-picker-swatch-only',
     'color-picker-pos',
-    'color-picker-case'
+    'color-picker-case',
   ], function(attr) {
-    ngModelAttrs[camelize(attr)] = {attribute: attr};
-  });
+    ngModelAttrs[camelize(attr)] = {
+      attribute: attr,
+    }
+  })
 
   // bindings
-  angular.forEach([
-  ], function(binding) {
-    ngModelAttrs[camelize(binding)] = {bound: binding};
-  });
+  angular.forEach([], function(binding) {
+    ngModelAttrs[camelize(binding)] = {
+      bound: binding,
+    }
+  })
 
   formlyConfig.setType({
     name: 'color',
@@ -57,13 +62,13 @@ function color(formlyConfig) {
     defaultOptions: {
       ngModelAttrs: ngModelAttrs,
       templateOptions: {
-        "colorPickerFormat": "'hex'",
-        "colorPickerAlpha": false,
-        "colorPickerPos": "'top left'",
-        "colorPickerSwatchOnly": false,
-        "colorPickerSwatchBootstrap": false,
-        "colorPickerSwatchPos": "'left'"
-      }
-    }
-  });
+        colorPickerFormat: "'hex'",
+        colorPickerAlpha: false,
+        colorPickerPos: "'top left'",
+        colorPickerSwatchOnly: false,
+        colorPickerSwatchBootstrap: false,
+        colorPickerSwatchPos: "'left'",
+      },
+    },
+  })
 }

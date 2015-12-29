@@ -1,7 +1,9 @@
+import angular from 'angular'
+
 export default angular.module('app.filters.min', [])
-  .filter('min', function() {
+  .filter('min', function($window) {
     return function(a) {
-      return Math.min.apply(this, a);
-    };
+      return $window.Math.min.apply($window.Math, a)
+    }
   })
-  .name;
+  .name

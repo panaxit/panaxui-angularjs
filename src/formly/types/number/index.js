@@ -1,6 +1,8 @@
+import angular from 'angular'
+
 export default angular.module('app.main.form.formly.type.number', [])
   .run(number)
-  .name;
+  .name
 
 function number(formlyConfig) {
   formlyConfig.setType({
@@ -8,8 +10,8 @@ function number(formlyConfig) {
     extends: 'input',
     defaultOptions: {
       templateOptions: {
-        type: 'number'
-      }
-    }
-  });
+        type: 'number',
+      },
+    },
+  })
 }

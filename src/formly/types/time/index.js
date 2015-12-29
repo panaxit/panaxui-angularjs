@@ -1,21 +1,23 @@
+import angular from 'angular'
+
 export default angular.module('app.main.form.formly.type.time', [])
   .run(time)
-  .name;
+  .name
 
 function time(formlyConfig) {
   /*
   ngModelAttrs stuff
    */
-  var ngModelAttrs = {};
+  var ngModelAttrs = {}
 
   function camelize(string) {
     string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
-      return chr ? chr.toUpperCase() : '';
-    });
-    // Ensure 1st char is always lowercase
+      return chr ? chr.toUpperCase() : ''
+    })
+      // Ensure 1st char is always lowercase
     return string.replace(/^([A-Z])/, function(match, chr) {
-      return chr ? chr.toLowerCase() : '';
-    });
+      return chr ? chr.toLowerCase() : ''
+    })
   }
 
   /*
@@ -23,26 +25,30 @@ function time(formlyConfig) {
   https://github.com/formly-js/angular-formly-website/issues/23
   */
 
-  ngModelAttrs = {};
+  ngModelAttrs = {}
 
   // attributes
   angular.forEach([
     'meridians',
     'readonly-input',
     'mousewheel',
-    'arrowkeys'
+    'arrowkeys',
   ], function(attr) {
-    ngModelAttrs[camelize(attr)] = {attribute: attr};
-  });
+    ngModelAttrs[camelize(attr)] = {
+      attribute: attr,
+    }
+  })
 
   // bindings
   angular.forEach([
     'hour-step',
     'minute-step',
-    'show-meridian'
+    'show-meridian',
   ], function(binding) {
-    ngModelAttrs[camelize(binding)] = {bound: binding};
-  });
+    ngModelAttrs[camelize(binding)] = {
+      bound: binding,
+    }
+  })
 
   formlyConfig.setType({
     name: 'time',
@@ -50,8 +56,7 @@ function time(formlyConfig) {
     wrapper: ['bootstrapLabel', 'bootstrapHasError'],
     defaultOptions: {
       ngModelAttrs: ngModelAttrs,
-      templateOptions: {
-      }
-    }
-  });
+      templateOptions: {},
+    },
+  })
 }

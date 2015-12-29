@@ -1,8 +1,8 @@
-import angular from 'angular';
+import angular from 'angular'
 
-import PayloadService from './payload.service';
+import PayloadService from './payload.service'
 
 export default angular.module('app.payload', [
-    PayloadService
-  ])
-  .name;
+  PayloadService,
+])
+  .name

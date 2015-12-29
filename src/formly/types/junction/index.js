@@ -1,9 +1,11 @@
-import FormlyJunctionCtrl from './formly.junction.controller';
+import angular from 'angular'
+
+import FormlyJunctionCtrl from './formly.junction.controller'
 
 export default angular.module('app.main.form.formly.type.junction', [])
   .run(junction)
   .controller('FormlyJunctionCtrl', FormlyJunctionCtrl)
-  .name;
+  .name
 
 function junction(formlyConfig) {
   /*
@@ -13,7 +15,7 @@ function junction(formlyConfig) {
     name: 'junction',
     template: require('./template.html'),
     wrapper: ['panel', 'bootstrapHasError'],
-    controller: 'FormlyJunctionCtrl as vm'
-  });
+    controller: 'FormlyJunctionCtrl as vm',
+  })
 
 }

@@ -6,6 +6,6 @@ export default function routes($stateProvider) {
     .state('main.panel.template', {
       url: 'template/{catalogName}/{mode}?filters&pageSize&pageIndex',
       template: require('./template.html'),
-      controller: 'TemplateCtrl as vm'
-    });
+      controller: 'TemplateCtrl as vm',
+    })
 }

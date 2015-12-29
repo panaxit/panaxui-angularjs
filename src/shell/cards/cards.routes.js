@@ -6,6 +6,6 @@ export default function routes($stateProvider) {
     .state('main.panel.cards', {
       url: 'cards/{catalogName}/{mode}?filters&pageSize&pageIndex',
       template: require('./cards.html'),
-      controller: 'CardsCtrl as vm'
-    });
+      controller: 'CardsCtrl as vm',
+    })
 }

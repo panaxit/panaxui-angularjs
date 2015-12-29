@@ -1,14 +1,14 @@
-import './cards.css';
+import angular from 'angular'
+import './cards.css'
 
-import angular from 'angular';
-import uirouter from 'angular-ui-router';
+import uirouter from 'angular-ui-router'
 
-import routing from './cards.routes';
-import CardsCtrl from './cards.controller';
+import routing from './cards.routes'
+import CardsCtrl from './cards.controller'
 
 export default angular.module('app.main.cards', [
-    uirouter
-  ])
+  uirouter,
+])
   .config(routing)
   .controller('CardsCtrl', CardsCtrl)
-  .name;
+  .name

@@ -1,6 +1,8 @@
+import angular from 'angular'
+
 export default angular.module('app.main.form.formly.type.password', [])
   .run(password)
-  .name;
+  .name
 
 function password(formlyConfig) {
   formlyConfig.setType({
@@ -8,8 +10,8 @@ function password(formlyConfig) {
     extends: 'input',
     defaultOptions: {
       templateOptions: {
-        type: 'password'
-      }
-    }
-  });
+        type: 'password',
+      },
+    },
+  })
 }

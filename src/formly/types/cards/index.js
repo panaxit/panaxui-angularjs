@@ -1,9 +1,10 @@
-import FormlyCardsCtrl from './formly.cards.controller';
+import angular from 'angular'
+import FormlyCardsCtrl from './formly.cards.controller'
 
 export default angular.module('app.main.form.formly.type.cards', [])
   .run(cards)
   .controller('FormlyCardsCtrl', FormlyCardsCtrl)
-  .name;
+  .name
 
 function cards(formlyConfig) {
   /*
@@ -13,6 +14,6 @@ function cards(formlyConfig) {
     name: 'cards',
     template: require('./template.html'),
     wrapper: ['panel', 'bootstrapHasError'],
-    controller: 'FormlyCardsCtrl as vm'
-  });
+    controller: 'FormlyCardsCtrl as vm',
+  })
 }

@@ -1,44 +1,42 @@
 //mport 'bootstrap/dist/css/bootstrap.css';
-import 'panaxui-bootstrap/css/bootstrap.min.css';
+import 'panaxui-bootstrap/css/bootstrap.min.css'
 //import 'panaxui-bootstrap/css/bootstrap-theme.css';
-import 'panaxui-bootstrap/css/roboto.css';
-import './app.css';
+import 'panaxui-bootstrap/css/roboto.css'
+import './app.css'
 
-import angular from 'angular';
-import uibootstrap from 'angular-ui-bootstrap';
-import uirouter from 'angular-ui-router';
-import azPromiseShow from  'az-promise-show';
+import angular from 'angular'
+import uibootstrap from 'angular-ui-bootstrap'
+import uirouter from 'angular-ui-router'
+import azPromiseShow from 'az-promise-show'
 
 // Core Components
-import CoreFilters from './core/filters';
+import CoreFilters from './core/filters'
 
 // Shell Components
-import Login from './shell/login';
-import Main from './shell/main';
-import Errors from './shell/error';
-import Auth from './shell/auth';
-import Loading from './shell/loading';
-import Session from './shell/session';
-import Alert from './shell/alert';
+import Login from './shell/login'
+import Main from './shell/main'
+import Errors from './shell/error'
+import Auth from './shell/auth'
+import Loading from './shell/loading'
+import Session from './shell/session'
+import Alert from './shell/alert'
 
-import routing from './app.routes';
-import AppCtrl from './app.controller';
+import AppCtrl from './app.controller'
 
 export default angular.module('app', [
-		uibootstrap,
-		uirouter,
-    azPromiseShow,
+  uibootstrap,
+  uirouter,
+  azPromiseShow,
 
-    CoreFilters,
+  CoreFilters,
 
-		Login,
-		Main,
-		Errors,
-		Auth,
-		Loading,
-		Session,
-		Alert
-	])
-	.config(routing)
-  .controller('AppCtrl', AppCtrl)
-	.name;
+  Login,
+  Main,
+  Errors,
+  Auth,
+  Loading,
+  Session,
+  Alert,
+])
+.controller('AppCtrl', AppCtrl)
+.name

@@ -4,7 +4,7 @@ export default function routes($stateProvider) {
    */
   $stateProvider
     .state('main.panel', {
-        template: require('./panel.html'),
-        controller: 'PanelCtrl as vm'
-    });
+      template: require('./panel.html'),
+      controller: 'PanelCtrl as vm',
+    })
 }

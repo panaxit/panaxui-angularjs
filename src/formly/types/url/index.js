@@ -1,6 +1,8 @@
+import angular from 'angular'
+
 export default angular.module('app.main.form.formly.type.url', [])
   .run(url)
-  .name;
+  .name
 
 function url(formlyConfig) {
   formlyConfig.setType({
@@ -8,8 +10,8 @@ function url(formlyConfig) {
     extends: 'input',
     defaultOptions: {
       templateOptions: {
-        type: 'url'
-      }
-    }
-  });
+        type: 'url',
+      },
+    },
+  })
 }

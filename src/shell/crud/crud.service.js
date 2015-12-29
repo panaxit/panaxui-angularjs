@@ -1,126 +1,119 @@
-import angular from 'angular';
+import angular from 'angular'
 
 class CRUDService {
   constructor($http, $q) {
-    var vm = this;
-    vm.$http = $http;
-    vm.$q = $q;
-    vm.base_url = '';
+    var vm = this
+    vm.$http = $http
+    vm.$q = $q
+    vm.baseUrl = ''
   }
 
-  /*
-  Set base URL if needed (ex. when testing)
-   */
+  // Set base URL if needed (ex. when testing)
   setBaseURL(url) {
-    var vm = this;
-    vm.base_url = url;
+    var vm = this
+    vm.baseUrl = url
   }
 
-  /**
-   * GET /api/read
-   */
+  // GET /api/read
   read(params) {
-    var vm = this;
-    var deferred = vm.$q.defer();
-    params.gui = 'ng';
-    params.output = params.output || 'json';
+    var vm = this
+    var deferred = vm.$q.defer()
+    params.gui = 'ng'
+    params.output = params.output || 'json'
 
     vm.$http
-      .get(vm.base_url + "/api/read", {params: params})
-      .then(function (response) {
-        deferred.resolve(response);
-      });
-    return deferred.promise;
+      .get(vm.baseUrl + '/api/read', {
+        params: params,
+      })
+      .then(function(response) {
+        deferred.resolve(response)
+      })
+    return deferred.promise
   }
 
-  /**
-   * GET /api/options
-   */
+  // GET /api/options
   options(params) {
-    var vm = this;
-    var deferred = vm.$q.defer();
-    params.gui = 'ng';
-    params.array = true;
+    var vm = this
+    var deferred = vm.$q.defer()
+    params.gui = 'ng'
+    params.array = true
 
-    if(params.foreignEntity && params.foreignKey && params.foreignValue)
-      params.filters = "["+params.foreignKey+"='"+params.foreignValue+"']";
+    if (params.foreignEntity && params.foreignKey && params.foreignValue) {
+      params.filters = '[' + params.foreignKey + "='" + params.foreignValue + "']"
+    }
 
     vm.$http
-      .get(vm.base_url + "/api/options", {params: params})
-      .then(function (response) {
-        deferred.resolve(response.data);
-      });
-    return deferred.promise;
+      .get(vm.baseUrl + '/api/options', {
+        params: params,
+      })
+      .then(function(response) {
+        deferred.resolve(response.data)
+      })
+    return deferred.promise
   }
 
-  /**
-   * POST /api/create
-   */
+  // POST /api/create
   create(payload) {
-    var vm = this;
-    var deferred = vm.$q.defer();
+    var vm = this
+    var deferred = vm.$q.defer()
 
     vm.$http
-      .post(vm.base_url + "/api/create", payload)
-      .then(function (response) {
-        deferred.resolve(response.data);
-      });
-    return deferred.promise;
+      .post(vm.baseUrl + '/api/create', payload)
+      .then(function(response) {
+        deferred.resolve(response.data)
+      })
+    return deferred.promise
   }
 
-  /**
-   * PUT /api/update
-   */
+  // PUT /api/update
   update(payload) {
-    var vm = this;
-    var deferred = vm.$q.defer();
+    var vm = this
+    var deferred = vm.$q.defer()
 
     vm.$http
-      .put(vm.base_url + "/api/update", payload)
-      .then(function (response) {
-        deferred.resolve(response.data);
-      });
-    return deferred.promise;
+      .put(vm.baseUrl + '/api/update', payload)
+      .then(function(response) {
+        deferred.resolve(response.data)
+      })
+    return deferred.promise
   }
 
-  /**
-   * DELETE /api/delete
-   */
+  // DELETE /api/delete
   delete(payload) {
-    var vm = this;
-    var deferred = vm.$q.defer();
+    var vm = this
+    var deferred = vm.$q.defer()
 
     // http://stackoverflow.com/questions/24829933/angularjs-delete-with-data-sets-wrong-content-type-header
     vm.$http({
-      url: vm.base_url + "/api/delete",
+      url: vm.baseUrl + '/api/delete',
       method: 'DELETE',
       data: payload,
-      headers: {'Content-Type': 'application/json'}
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-      .then(function (response) {
-        deferred.resolve(response.data);
-      });
-    return deferred.promise;
+      .then(function(response) {
+        deferred.resolve(response.data)
+      })
+    return deferred.promise
   }
 
-  /**
-   * POST /api/filters
-   */
+  // POST /api/filters
   filters(payload) {
-    var vm = this;
-    var deferred = vm.$q.defer();
+    var vm = this
+    var deferred = vm.$q.defer()
 
     vm.$http
-      .post(vm.base_url + "/api/filters", payload)
-      .then(function (response) {
-        deferred.resolve(response.data);
-      });
-    return deferred.promise;
+      .post(vm.baseUrl + '/api/filters', payload)
+      .then(function(response) {
+        deferred.resolve(response.data)
+      })
+    return deferred.promise
   }
 }
 
-CRUDService.$inject = ['$http', '$q'];
+CRUDService.$inject = ['$http', '$q']
 
 export default angular.module('app.crud.service', [])
   .service('CRUDService', CRUDService)
-  .name;
+  .name

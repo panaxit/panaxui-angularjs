@@ -2,31 +2,31 @@
  * Dependencies
  */
 
-import angular from 'angular';
-import dirPagination from 'angular-utils-pagination';
-import coreFilters from '../../core/filters';
+import angular from 'angular'
+import dirPagination from 'angular-utils-pagination'
+import coreFilters from '../../core/filters'
 
 /**
  * Resources
  */
 
-import style from './style.css';
-import template from './template.html';
-import dirPaginationTpl from 'ngtemplate!./dirPagination.tpl.html';
+import './style.css'
+import template from './template.html'
+import dirPaginationTpl from 'ngtemplate!./dirPagination.tpl.html'
 
 /**
  * Module
  */
 
 export default angular.module('app.directives.pxpagination', [
-    dirPagination,
-    coreFilters
-  ])
-  .config(function(paginationTemplateProvider) {
-      paginationTemplateProvider.setPath(dirPaginationTpl);
-  })
-  .directive('pxPagination', pxPagination)
-  .name;
+  dirPagination,
+  coreFilters,
+])
+.config(function(paginationTemplateProvider) {
+  paginationTemplateProvider.setPath(dirPaginationTpl)
+})
+.directive('pxPagination', pxPagination)
+.name
 
 /**
  * Directive
@@ -37,13 +37,13 @@ function pxPagination() {
     restrict: 'E',
     template: template,
     scope: {
-      pagination_options: '=options',
-      onPaginationChange: '&?'
+      paginationOptions: '=options',
+      onPaginationChange: '&?',
     },
     bindToController: true,
     controllerAs: 'vm',
-    controller: pxPaginationCtrl
-  };
+    controller: pxPaginationCtrl,
+  }
 }
 
 /**
@@ -51,33 +51,36 @@ function pxPagination() {
  */
 
 function pxPaginationCtrl($scope) {
-  var vm = this;
+  var vm = this
 
-  vm.getTotalPages = getTotalPages;
+  vm.getTotalPages = getTotalPages
 
-  $scope.$watch('vm.pagination_options.paginationCurrentPage + vm.pagination_options.paginationPageSize', (newValues, oldValues) => {
-    if (newValues === oldValues || oldValues === undefined) {
-      return;
-    }
-    if (!angular.isNumber(vm.pagination_options.paginationCurrentPage) || vm.pagination_options.paginationCurrentPage < 1) {
-      vm.pagination_options.paginationCurrentPage = 1;
-      return;
-    }
-    if (vm.pagination_options.totalItems > 0 && vm.pagination_options.paginationCurrentPage > vm.getTotalPages()) {
-      vm.pagination_options.paginationCurrentPage = vm.getTotalPages();
-      return;
-    }
+  $scope.$watch(
+    'vm.paginationOptions.paginationCurrentPage + vm.paginationOptions.paginationPageSize', (newValues, oldValues) => {
+      if (newValues === oldValues || oldValues === undefined) {
+        return
+      }
+      if (!angular.isNumber(vm.paginationOptions.paginationCurrentPage) ||
+          vm.paginationOptions.paginationCurrentPage < 1) {
+        vm.paginationOptions.paginationCurrentPage = 1
+        return
+      }
+      if (vm.paginationOptions.totalItems > 0 && vm.paginationOptions.paginationCurrentPage > vm.getTotalPages()) {
+        vm.paginationOptions.paginationCurrentPage = vm.getTotalPages()
+        return
+      }
 
-    vm.onPaginationChange({
-      newPage: vm.pagination_options.paginationCurrentPage,
-      newPageSize: vm.pagination_options.paginationPageSize
-    });
-  });
+      vm.onPaginationChange({
+        newPage: vm.paginationOptions.paginationCurrentPage,
+        newPageSize: vm.paginationOptions.paginationPageSize,
+      })
+    })
 
   function getTotalPages() {
-    if (!vm.pagination_options.totalItems) { // (!vm.pagination_options.enablePagination) {
-      return null;
+    const numPages = vm.paginationOptions.totalItems / vm.paginationOptions.paginationPageSize
+    if (!vm.paginationOptions.totalItems) { // (!vm.paginationOptions.enablePagination) {
+      return null
     }
-    return (vm.pagination_options.totalItems === 0) ? 1 : Math.ceil(vm.pagination_options.totalItems / vm.pagination_options.paginationPageSize);
+    return (vm.paginationOptions.totalItems === 0) ? 1 : Math.ceil(numPages)
   }
 }

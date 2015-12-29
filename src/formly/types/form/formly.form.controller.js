@@ -1,9 +1,11 @@
-import FormCtrl from '../../../shell/form/form.controller';
-import _ from 'lodash';
+import angular from 'angular'
+
+import FormCtrl from '../../../shell/form/form.controller'
+import _ from 'lodash'
 
 export default class FormlyFormCtrl extends FormCtrl {
   constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
-    super($scope, DebugService, $stateParams, CRUDService, AlertService);
+    super($scope, DebugService, $stateParams, CRUDService, AlertService)
   }
 
   openDebugModal() {
@@ -11,17 +13,17 @@ export default class FormlyFormCtrl extends FormCtrl {
   }
 
   loader() {
-    var vm = this;
+    var vm = this
     // Main `options' object
     // to be consumed by directive(s)
     vm.options = {
       metadata: vm.$scope.options.data.metadata,
       fields: vm.$scope.options.data.fields,
       data: vm.$scope.model[vm.$scope.options.key] || [],
-      opts: vm.getOpts()
-    };
-    if(!angular.isArray(vm.options.data)) { // If single record // ToDo: Fix in Backend
-      vm.options.data = [vm.options.data];
+      opts: vm.getOpts(),
+    }
+    if (!angular.isArray(vm.options.data)) { // If single record // ToDo: Fix in Backend
+      vm.options.data = [vm.options.data]
     }
   }
 
@@ -32,7 +34,7 @@ export default class FormlyFormCtrl extends FormCtrl {
       asyncPagination: false,
       showPaginationRow: true,
       showSaveRow: false,
-      showFilterRow: false
-    });
+      showFilterRow: false,
+    })
   }
 }

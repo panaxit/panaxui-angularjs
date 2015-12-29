@@ -5,10 +5,10 @@
     <!-- Server side pagination (with total-items)-->
     <div ng-switch-when="true">
 
-      <div dir-paginate="record in vm.options.data | itemsPerPage: vm.pagination_options.paginationPageSize"
-           total-items="vm.pagination_options.totalItems"
-           current-page="vm.pagination_options.paginationCurrentPage"
-           pagination-id="vm.pagination_options.paginationId">
+      <div dir-paginate="record in vm.options.data | itemsPerPage: vm.paginationOptions.paginationPageSize"
+           total-items="vm.paginationOptions.totalItems"
+           current-page="vm.paginationOptions.paginationCurrentPage"
+           pagination-id="vm.paginationOptions.paginationId">
 
         <ng-include src="'pxform-layout'" class="pxrecord"></ng-include>
 
@@ -18,9 +18,9 @@
     <!-- Client side pagination (without total-items)-->
     <div ng-switch-default>
 
-      <div dir-paginate="record in vm.options.data | itemsPerPage: vm.pagination_options.paginationPageSize"
-           current-page="vm.pagination_options.paginationCurrentPage"
-           pagination-id="vm.pagination_options.paginationId">
+      <div dir-paginate="record in vm.options.data | itemsPerPage: vm.paginationOptions.paginationPageSize"
+           current-page="vm.paginationOptions.paginationCurrentPage"
+           pagination-id="vm.paginationOptions.paginationId">
 
         <ng-include src="'pxform-layout'"></ng-include>
 
@@ -33,7 +33,7 @@
 <div class="panel-footer" ng-if="vm.options.opts.showPaginationRow">
 
   <px-pagination
-    options="vm.pagination_options"
+    options="vm.paginationOptions"
     ng-attr-on-pagination-change="vm.paginationChangeHandler({newPage: newPage, newPageSize: newPageSize})">
   </px-pagination>
 

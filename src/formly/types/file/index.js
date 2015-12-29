@@ -1,13 +1,15 @@
-import angularUpload from 'angular-upload';
-import 'angular-upload/src/directives/btnUpload.min.css';
+import angular from 'angular'
 
-import './style.css';
+import 'angular-upload'
+import 'angular-upload/src/directives/btnUpload.min.css'
+
+import './style.css'
 
 export default angular.module('app.main.form.formly.type.file', [
-    'lr.upload'
-  ])
+  'lr.upload',
+])
   .run(file)
-  .name;
+  .name
 
 function file(formlyConfig) {
   formlyConfig.setType({
@@ -34,34 +36,31 @@ function file(formlyConfig) {
       </div>
     `,
     controller: function($scope, $rootScope, SessionService) {
-      var catalogName = $rootScope.currentNavBranch.data.catalogName;
-      var fieldName = $scope.options.key;
-      // Set Upload URL
-      $scope.to.url = $scope.to.url || '/api/upload?catalogName=' + catalogName + '&fieldName=' + fieldName;
+      var catalogName = $rootScope.currentNavBranch.data.catalogName
+      var fieldName = $scope.options.key
+        // Set Upload URL
+      $scope.to.url = $scope.to.url || '/api/upload?catalogName=' + catalogName + '&fieldName=' + fieldName
 
       // Update upload path if model already set
-      $scope.to.uploadPath = $scope.to.uploadPath || getUploadPath($scope.model[$scope.options.key]);
+      $scope.to.uploadPath = $scope.to.uploadPath || getUploadPath($scope.model[$scope.options.key])
 
       function getUploadPath(filename) {
-        if(filename) {
-          return '/uploads/' + SessionService.panax_instance
-                              + '/' + catalogName
-                              + '/' + fieldName
-                              + '/' + filename;
+        if (filename) {
+          return '/uploads/' + SessionService.panaxInstance + '/' + catalogName + '/' + fieldName + '/' + filename
         }
       }
 
       // On Success Callback
       $scope.onSuccess = function(res) {
-        var originalname = res.data.data.file.originalname;
-        // Update model
-        $scope.model[$scope.options.key] = originalname;
-        // Set dirty
-        $scope.options.formControl.$setDirty();
-        // Update uploadPath
-        $scope.to.uploadPath = getUploadPath(originalname);
-        // Use AlertService. Maybe not since it's an external dependency?
-      };
-    }
-  });
+        var originalname = res.data.data.file.originalname
+          // Update model
+        $scope.model[$scope.options.key] = originalname
+          // Set dirty
+        $scope.options.formControl.$setDirty()
+          // Update uploadPath
+        $scope.to.uploadPath = getUploadPath(originalname)
+          // Use AlertService. Maybe not since it's an external dependency?
+      }
+    },
+  })
 }

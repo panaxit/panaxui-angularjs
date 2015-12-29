@@ -1,14 +1,14 @@
-import module from './panel.controller';
+import module from './panel.controller'
 
 describe('Controller: Panel', () => {
-  var PanelCtrl;
+  var PanelCtrl
 
-  beforeEach(angular.mock.module(module));
+  beforeEach(angular.mock.module(module))
 
   beforeEach(angular.mock.inject(function(_PanelCtrl_) {
-    PanelCtrl = _PanelCtrl_;
-  }));
+    PanelCtrl = _PanelCtrl_
+  }))
 
-  it('PENDING TESTS');
+  it('PENDING TESTS')
 
-});
+})

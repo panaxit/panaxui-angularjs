@@ -1,14 +1,14 @@
-import module from './category.controller';
+import module from './category.controller'
 
 describe('Controller: Category', () => {
-  var CategoryCtrl;
+  var CategoryCtrl
 
-  beforeEach(angular.mock.module(module));
+  beforeEach(angular.mock.module(module))
 
   beforeEach(angular.mock.inject(function(_CategoryCtrl_) {
-    CategoryCtrl = _CategoryCtrl_;
-  }));
+    CategoryCtrl = _CategoryCtrl_
+  }))
 
-  it('PENDING TESTS');
+  it('PENDING TESTS')
 
-});
+})

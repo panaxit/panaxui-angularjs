@@ -1,12 +1,14 @@
-import './style.css';
+import angular from 'angular'
+
+import './style.css'
 
 export default angular.module('app.main.form.formly.wrapper.image', [])
   .config(image)
-  .name;
+  .name
 
 function image(formlyConfigProvider) {
   formlyConfigProvider.setWrapper({
     name: 'image',
-    template: require('./template.html')
-  });
+    template: require('./template.html'),
+  })
 }

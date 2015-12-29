@@ -1,9 +1,11 @@
-import FormlyTemplateCtrl from './formly.template.controller';
+import angular from 'angular'
+
+import FormlyTemplateCtrl from './formly.template.controller'
 
 export default angular.module('app.main.form.formly.type.template', [])
   .run(template)
   .controller('FormlyTemplateCtrl', FormlyTemplateCtrl)
-  .name;
+  .name
 
 function template(formlyConfig) {
   /*
@@ -13,6 +15,6 @@ function template(formlyConfig) {
     name: 'template',
     template: require('./template.html'),
     wrapper: ['panel', 'bootstrapHasError'],
-    controller: 'FormlyTemplateCtrl as vm'
-  });
+    controller: 'FormlyTemplateCtrl as vm',
+  })
 }

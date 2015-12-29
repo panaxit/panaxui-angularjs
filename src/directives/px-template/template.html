@@ -15,10 +15,10 @@
 <div class="panel-body px-template">
 
   <div class="row clearfix"
-       dir-paginate="record in vm.content | filter:query | itemsPerPage: vm.pagination_options.paginationPageSize"
-       total-items="vm.pagination_options.totalItems"
-       current-page="vm.pagination_options.paginationCurrentPage"
-       pagination-id="vm.pagination_options.paginationId">
+       dir-paginate="record in vm.content | filter:query | itemsPerPage: vm.paginationOptions.paginationPageSize"
+       total-items="vm.paginationOptions.totalItems"
+       current-page="vm.paginationOptions.paginationCurrentPage"
+       pagination-id="vm.paginationOptions.paginationId">
 
     <div ng-bind-html="record" class="px-template-content"></div>
 
@@ -35,7 +35,7 @@
 <div class="panel-footer">
 
   <px-pagination
-    options="vm.pagination_options"
+    options="vm.paginationOptions"
     ng-attr-on-pagination-change="vm.paginationChangeHandler({newPage: newPage, newPageSize: newPageSize})">
   </px-pagination>
 

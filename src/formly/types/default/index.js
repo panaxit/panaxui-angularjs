@@ -1,12 +1,14 @@
+import angular from 'angular'
+
 export default angular.module('app.main.form.formly.type.default', [])
   .run(_default)
-  .name;
+  .name
 
 function _default(formlyConfig) {
   formlyConfig.setType({
     name: 'default',
     overwriteOk: true,
     extends: 'input',
-    template: require('./template.html')
-  });
+    template: require('./template.html'),
+  })
 }

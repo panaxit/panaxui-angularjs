@@ -1,9 +1,9 @@
-import module from './index';
-import _ from 'lodash';
+import module from './index'
+import _ from 'lodash'
 
 describe('Directive: pxCards', () => {
 
-  beforeEach(angular.mock.module(module));
+  beforeEach(angular.mock.module(module))
 
   var basicTemplate = `
     <px-cards
@@ -12,39 +12,39 @@ describe('Directive: pxCards', () => {
       next-handler="onNext(selected)"
       pagination-change-handler="onPaginationChange(newPage, newPageSize)">
     </px-cards>
-  `;
+  `
 
-  var $compile, scope, el, node, isolateScope, vm;
+  var $compile, scope, el, node, isolateScope, vm
 
   beforeEach(angular.mock.inject(function(_$compile_, $rootScope) {
-    $compile = _$compile_;
-    scope = $rootScope.$new();
-  }));
+    $compile = _$compile_
+    scope = $rootScope.$new()
+  }))
 
   it('should compile', function() {
-    compileAndSetupStuff();
-    expect(el).to.exist;
-    expect(node).to.exist;
-    expect(isolateScope).to.exist;
-    expect(vm).to.exist;
-  });
+    compileAndSetupStuff()
+    expect(el).to.exist
+    expect(node).to.exist
+    expect(isolateScope).to.exist
+    expect(vm).to.exist
+  })
 
   describe('Initialization', () => {
 
     it('should initialize pagination', () => {
-      compileAndSetupStuff();
-      expect(vm.pagination_options).to.exist;
-      expect(vm.pagination_options.paginationPageSizes).to.exist;
-      expect(vm.pagination_options.paginationId).to.exist;
-    });
+      compileAndSetupStuff()
+      expect(vm.paginationOptions).to.exist
+      expect(vm.paginationOptions.paginationPageSizes).to.exist
+      expect(vm.paginationOptions.paginationId).to.exist
+    })
 
     it('should initialize selectedRecords', () => {
-      compileAndSetupStuff();
-      expect(vm.selectedRecords).to.exist;
-      expect(vm.selectedRecords).to.have.length(0);
-    });
+      compileAndSetupStuff()
+      expect(vm.selectedRecords).to.exist
+      expect(vm.selectedRecords).to.have.length(0)
+    })
 
-  });
+  })
 
   describe('Metadata Initialization', () => {
 
@@ -55,39 +55,43 @@ describe('Directive: pxCards', () => {
           pageSize: 5,
           pageIndex: 1
         }
-      };
-      compileAndSetupStuff({options});
-      expect(vm.pagination_options.totalItems).to.equal(10);
-      expect(vm.pagination_options.paginationPageSize ).to.equal(5);
-      expect(vm.pagination_options.paginationCurrentPage).to.equal(1);
-    });
+      }
+      compileAndSetupStuff({
+        options
+      })
+      expect(vm.paginationOptions.totalItems).to.equal(10)
+      expect(vm.paginationOptions.paginationPageSize).to.equal(5)
+      expect(vm.paginationOptions.paginationCurrentPage).to.equal(1)
+    })
 
     it('should initialize client-side pagination', () => {
       let options = {
         metadata: {},
-        data: ["a", "b"]
-      };
-      compileAndSetupStuff({options});
-      expect(vm.pagination_options.totalItems).to.equal(2);
-      expect(vm.pagination_options.paginationPageSize ).to.equal(8);
-      expect(vm.pagination_options.paginationCurrentPage).to.equal(1);
-    });
+        data: ['a', 'b']
+      }
+      compileAndSetupStuff({
+        options
+      })
+      expect(vm.paginationOptions.totalItems).to.equal(2)
+      expect(vm.paginationOptions.paginationPageSize).to.equal(8)
+      expect(vm.paginationOptions.paginationCurrentPage).to.equal(1)
+    })
 
-  });
+  })
 
   describe('Handlers', () => {
 
-    it('PENDING');
+    it('PENDING')
 
-  });
+  })
 
   function compileAndSetupStuff(extraScopeProps, template) {
-    _.merge(scope, extraScopeProps);
-    el = $compile(template || basicTemplate)(scope);
-    scope.$digest();
-    node = el[0];
-    isolateScope = el.isolateScope();
-    vm = isolateScope.vm;
+    _.merge(scope, extraScopeProps)
+    el = $compile(template || basicTemplate)(scope)
+    scope.$digest()
+    node = el[0]
+    isolateScope = el.isolateScope()
+    vm = isolateScope.vm
   }
 
-});
+})

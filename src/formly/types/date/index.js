@@ -1,21 +1,23 @@
+import angular from 'angular'
+
 export default angular.module('app.main.form.formly.type.date', [])
   .run(date)
-  .name;
+  .name
 
 function date(formlyConfig) {
   /*
   ngModelAttrs stuff
    */
-  var ngModelAttrs = {};
+  var ngModelAttrs = {}
 
   function camelize(string) {
     string = string.replace(/[\-_\s]+(.)?/g, function(match, chr) {
-      return chr ? chr.toUpperCase() : '';
-    });
-    // Ensure 1st char is always lowercase
+      return chr ? chr.toUpperCase() : ''
+    })
+      // Ensure 1st char is always lowercase
     return string.replace(/^([A-Z])/, function(match, chr) {
-      return chr ? chr.toLowerCase() : '';
-    });
+      return chr ? chr.toLowerCase() : ''
+    })
   }
 
   /*
@@ -23,7 +25,7 @@ function date(formlyConfig) {
   (https://github.com/formly-js/angular-formly-website/issues/15#issuecomment-103467421)
    */
 
-  ngModelAttrs = {};
+  ngModelAttrs = {}
 
   // Attributes
   angular.forEach([
@@ -48,19 +50,23 @@ function date(formlyConfig) {
     'clear-text',
     'close-text',
     'close-on-date-selection',
-    'datepicker-append-to-body'
+    'datepicker-append-to-body',
   ], function(attr) {
-    ngModelAttrs[camelize(attr)] = {attribute: attr};
-  });
+    ngModelAttrs[camelize(attr)] = {
+      attribute: attr,
+    }
+  })
 
   // Bindings
   angular.forEach([
     'datepicker-mode',
     'min-date',
-    'max-date'
+    'max-date',
   ], function(binding) {
-    ngModelAttrs[camelize(binding)] = {bound: binding};
-  });
+    ngModelAttrs[camelize(binding)] = {
+      bound: binding,
+    }
+  })
 
   formlyConfig.setType({
     name: 'date',
@@ -73,15 +79,15 @@ function date(formlyConfig) {
         datepickerPopup: 'dd-MMMM-yyyy',
         addonLeft: {
           class: 'glyphicon glyphicon-calendar',
-          onClick: function(options, scope) {
-            options.templateOptions.isOpen = !options.templateOptions.isOpen;
-          }
+          onClick: function(options) {
+            options.templateOptions.isOpen = !options.templateOptions.isOpen
+          },
         },
         onFocus: function($viewValue, $modelValue, scope) {
-          scope.to.isOpen = !scope.to.isOpen;
+          scope.to.isOpen = !scope.to.isOpen
         },
-        datepickerOptions: {}
-      }
-    }
-  });
+        datepickerOptions: {},
+      },
+    },
+  })
 }

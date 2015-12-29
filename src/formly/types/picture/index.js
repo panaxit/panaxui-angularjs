@@ -1,18 +1,20 @@
-import angularUpload from 'angular-upload';
-import 'angular-upload/src/directives/btnUpload.min.css';
+import angular from 'angular'
 
-import './style.css';
+import 'angular-upload'
+import 'angular-upload/src/directives/btnUpload.min.css'
+
+import './style.css'
 
 export default angular.module('app.main.form.formly.type.picture', [
-    'lr.upload'
-  ])
+  'lr.upload',
+])
   .run(picture)
-  .name;
+  .name
 
 function picture(formlyConfig) {
   formlyConfig.setType({
     name: 'picture',
     extends: 'file',
-    wrapper: ['image']
-  });
+    wrapper: ['image'],
+  })
 }

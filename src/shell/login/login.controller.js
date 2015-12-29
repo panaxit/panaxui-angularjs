@@ -1,30 +1,30 @@
 export default class LoginCtrl {
   constructor($rootScope, AUTH_EVENTS, AuthService, md5) {
-  	var vm = this;
+    var vm = this
 
-    $rootScope.$watch('panax_instances', function (instances) {
-      if(instances) {
-        vm.panax_instances = instances;
-        vm.credentials.instance = instances[0];
+    $rootScope.$watch('panaxInstances', function(instances) {
+      if (instances) {
+        vm.panaxInstances = instances
+        vm.credentials.instance = instances[0]
       }
-    });
+    })
 
-		vm.credentials = {
-			username: '',
-			password: '',
-      instance: ''
-		};
+    vm.credentials = {
+      username: '',
+      password: '',
+      instance: '',
+    }
 
-		vm.login = function(credentials) {
-			AuthService.login({
-				username: credentials.username,
-				password: md5.createHash(credentials.password),
+    vm.login = function(credentials) {
+      AuthService.login({
+        username: credentials.username,
+        password: md5.createHash(credentials.password),
         instance: credentials.instance,
-			}).then(function(user) {
-				$rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
-			//}, function() {
-			//	$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
-			});
-		};
+      }).then(function() {
+        $rootScope.$broadcast(AUTH_EVENTS.loginSuccess)
+          //}, function() {
+          //	$rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+      })
+    }
   }
 }

@@ -37,10 +37,10 @@
       <div ng-switch-when="true" class="flexcontainer">
 
         <div class="px-card"
-             dir-paginate="record in vm.options.data | filter:query | itemsPerPage: vm.pagination_options.paginationPageSize"
-             total-items="vm.pagination_options.totalItems"
-             current-page="vm.pagination_options.paginationCurrentPage"
-             pagination-id="vm.pagination_options.paginationId">
+             dir-paginate="record in vm.options.data | filter:query | itemsPerPage: vm.paginationOptions.paginationPageSize"
+             total-items="vm.paginationOptions.totalItems"
+             current-page="vm.paginationOptions.paginationCurrentPage"
+             pagination-id="vm.paginationOptions.paginationId">
 
           <ng-include src="'pxcards-layout'"></ng-include>
 
@@ -51,9 +51,9 @@
       <div ng-switch-default class="flexcontainer">
 
         <div class="px-card"
-             dir-paginate="record in vm.options.data | filter:query | itemsPerPage: vm.pagination_options.paginationPageSize"
-             current-page="vm.pagination_options.paginationCurrentPage"
-             pagination-id="vm.pagination_options.paginationId">
+             dir-paginate="record in vm.options.data | filter:query | itemsPerPage: vm.paginationOptions.paginationPageSize"
+             current-page="vm.paginationOptions.paginationCurrentPage"
+             pagination-id="vm.paginationOptions.paginationId">
 
           <ng-include src="'pxcards-layout'"></ng-include>
 
@@ -69,7 +69,7 @@
 <div class="panel-footer" ng-if="vm.options.opts.showPaginationRow">
 
   <px-pagination
-    options="vm.pagination_options"
+    options="vm.paginationOptions"
     ng-attr-on-pagination-change="vm.paginationChangeHandler({newPage: newPage, newPageSize: newPageSize})">
   </px-pagination>
 

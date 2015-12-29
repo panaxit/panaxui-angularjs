@@ -11,8 +11,10 @@
     "build:watch": "webpack --progress --color --watch --config webpack.config.js",
     "test": "karma start",
     "test:live": "karma start --auto-watch --no-single-run",
-    "eslint": "node node_modules/.bin/eslint -c .eslintrc --ignore-pattern '!**/*.+(test|mock).js' src/",
-    "eslint:fix": "node node_modules/.bin/eslint --fix -c .eslintrc --ignore-pattern '!**/*.+(test|mock).js' src/"
+    "eslint": "node node_modules/.bin/eslint -c .eslintrc --ignore-pattern '**/*.+(test|mock).js' src/",
+    "eslint:fix": "node node_modules/.bin/eslint --fix -c .eslintrc --ignore-pattern '**/*.+(test|mock).js' src/",
+    "eslint:test": "node node_modules/.bin/eslint -c .eslintrc --ignore-pattern '!**/*.+(test|mock).js' src/",
+    "eslint:test:fix": "node node_modules/.bin/eslint --fix -c .eslintrc --ignore-pattern '!**/*.+(test|mock).js' src/"
   },
   "config": {
     "ghooks": {

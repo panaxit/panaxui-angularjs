@@ -1,14 +1,14 @@
-import angular from 'angular';
+import angular from 'angular'
 
-import DebugService from './debug.service';
-import DebugCtrl from './debug.controller';
+import DebugService from './debug.service'
+import DebugCtrl from './debug.controller'
 
-import jsonFormatter from 'jsonformatter';
-import 'jsonformatter/dist/json-formatter.css';
+import 'jsonformatter'
+import 'jsonformatter/dist/json-formatter.css'
 
 export default angular.module('app.debug', [
-    DebugService,
-    'jsonFormatter'
-  ])
+  DebugService,
+  'jsonFormatter',
+])
   .controller('DebugCtrl', DebugCtrl)
-  .name;
+  .name

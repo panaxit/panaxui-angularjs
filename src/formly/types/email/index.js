@@ -1,6 +1,8 @@
+import angular from 'angular'
+
 export default angular.module('app.main.form.formly.type.email', [])
   .run(email)
-  .name;
+  .name
 
 function email(formlyConfig) {
   formlyConfig.setType({
@@ -8,8 +10,8 @@ function email(formlyConfig) {
     extends: 'input',
     defaultOptions: {
       templateOptions: {
-        type: 'email'
-      }
-    }
-  });
+        type: 'email',
+      },
+    },
+  })
 }

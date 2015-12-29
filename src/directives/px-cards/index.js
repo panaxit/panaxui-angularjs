@@ -2,27 +2,27 @@
  * Dependencies
  */
 
-import angular from 'angular';
-import pxPagination from '../../directives/px-pagination';
-import coreFilters from '../../core/filters';
+import angular from 'angular'
+import pxPagination from '../../directives/px-pagination'
+import coreFilters from '../../core/filters'
 
 /**
  * Resources
  */
 
-import style from './style.css';
-import template from './template.html';
+import './style.css'
+import template from './template.html'
 
 /**
  * Module
  */
 
 export default angular.module('app.directives.pxcards', [
-    pxPagination,
-    coreFilters
-  ])
-  .directive('pxCards', pxCards)
-  .name;
+  pxPagination,
+  coreFilters,
+])
+.directive('pxCards', pxCards)
+.name
 
 /**
  * Directive
@@ -38,12 +38,12 @@ function pxCards() {
       newHandler: '&',
       deleteHandler: '&',
       nextHandler: '&',
-      paginationChangeHandler: '&?'
+      paginationChangeHandler: '&?',
     },
     bindToController: true,
     controllerAs: 'vm',
-    controller: pxCardsCtrl
-  };
+    controller: pxCardsCtrl,
+  }
 }
 
 /**
@@ -51,30 +51,30 @@ function pxCards() {
  */
 
 function pxCardsCtrl($scope) {
-  var vm = this;
+  var vm = this
 
   /*
   vm function assignments
    */
 
-  vm.onSelect = onSelect;
+  vm.onSelect = onSelect
 
   /*
   Sync initialization
    */
 
-  init();
+  init()
 
   /*
   Async initialization
    */
 
   $scope.$watch('vm.options', function(newOptions) {
-    if(newOptions) {
-      initData(newOptions.data);
-      initMetadata(newOptions.metadata);
+    if (newOptions) {
+      initData(newOptions.data)
+      initMetadata(newOptions.metadata)
     }
-  });
+  })
 
   /*
   function declarations
@@ -82,45 +82,47 @@ function pxCardsCtrl($scope) {
 
   function init() {
     // Default pagination options
-    vm.pagination_options = {};
-    vm.pagination_options.paginationPageSizes = [4, 8, 16, 32, 64, 128];
-    vm.pagination_options.paginationId = 'pagination' + (Math.floor(Math.random() * (1000 - 1)) + 1);
-    // Selected records
-    vm.selectedRecords = [];
+    vm.paginationOptions = {}
+    vm.paginationOptions.paginationPageSizes = [4, 8, 16, 32, 64, 128]
+    vm.paginationOptions.paginationId = 'pagination' + (Math.floor(Math.random() * (1000 - 1)) + 1)
+      // Selected records
+    vm.selectedRecords = []
   }
 
   function initData(data) {
-    if(data) {
-      vm.pagination_options.totalItems = data.length;
+    if (data) {
+      vm.paginationOptions.totalItems = data.length
     }
   }
 
   function initMetadata(metadata) {
-    if(!metadata) return;
+    if (!metadata) {
+      return
+    }
     // Default Upload Path (for Images)
-    if(metadata.customAttrs && metadata.customAttrs.iconField) {
-      vm.uploadPath = metadata.dbId + '/' + metadata.catalogName + '/' + metadata.customAttrs.iconField + '/';
+    if (metadata.customAttrs && metadata.customAttrs.iconField) {
+      vm.uploadPath = metadata.dbId + '/' + metadata.catalogName + '/' + metadata.customAttrs.iconField + '/'
     }
     // Pagination
-    if(metadata.totalItems) {
+    if (metadata.totalItems) {
       // Server-side Pagination
-      vm.pagination_options.totalItems = metadata.totalItems;
-      vm.pagination_options.paginationPageSize = metadata.pageSize;
-      vm.pagination_options.paginationCurrentPage = metadata.pageIndex;
+      vm.paginationOptions.totalItems = metadata.totalItems
+      vm.paginationOptions.paginationPageSize = metadata.pageSize
+      vm.paginationOptions.paginationCurrentPage = metadata.pageIndex
     } else {
       // Client-side Pagination
-      //vm.pagination_options.totalItems = data.length; // ToDo: Move back here?
-      vm.pagination_options.paginationPageSize = metadata.pageSize || 8;
-      vm.pagination_options.paginationCurrentPage = metadata.pageIndex || 1;
+      //vm.paginationOptions.totalItems = data.length; // ToDo: Move back here?
+      vm.paginationOptions.paginationPageSize = metadata.pageSize || 8
+      vm.paginationOptions.paginationCurrentPage = metadata.pageIndex || 1
     }
   }
 
   function onSelect(record) {
-    var index = vm.selectedRecords.indexOf(record);
-    if(index > -1) {
-      vm.selectedRecords.splice(index, 1);
+    var index = vm.selectedRecords.indexOf(record)
+    if (index > -1) {
+      vm.selectedRecords.splice(index, 1)
     } else {
-      vm.selectedRecords.push(record);
+      vm.selectedRecords.push(record)
     }
   }
 }

@@ -1,7 +1,7 @@
-import angular from 'angular';
+import angular from 'angular'
 
 export default angular.module('app.error.events', [])
   .constant('ERROR_EVENTS', {
-    internalServer: 'error-internal-server'
+    internalServer: 'error-internal-server',
   })
-  .name;
+  .name

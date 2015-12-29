@@ -27,66 +27,67 @@
  *  - angular-ui.github.io/bootstrap/#/timepicker
  */
 
-import formly from 'angular-formly';
+import angular from 'angular'
+import formly from 'angular-formly'
 
 // Wrappers
-import panel from './wrappers/panel';
-import image from './wrappers/image';
+import panel from './wrappers/panel'
+import image from './wrappers/image'
 
 // Types
-import tabpanel from './types/tabpanel';
-import input from './types/input';
-import _default from './types/default';
-import checkbox from './types/checkbox';
-import password from './types/password';
-import email from './types/email';
-import file from './types/file';
-import picture from './types/picture';
-import url from './types/url';
-import number from './types/number';
-import money from './types/money';
-import select from './types/select';
-import async_select from './types/async_select';
-import color from './types/color';
-import date from './types/date';
-import time from './types/time';
-import datetime from './types/datetime';
+import tabpanel from './types/tabpanel'
+import input from './types/input'
+import _default from './types/default'
+import checkbox from './types/checkbox'
+import password from './types/password'
+import email from './types/email'
+import file from './types/file'
+import picture from './types/picture'
+import url from './types/url'
+import number from './types/number'
+import money from './types/money'
+import select from './types/select'
+import asyncSelect from './types/asyncSelect'
+import color from './types/color'
+import date from './types/date'
+import time from './types/time'
+import datetime from './types/datetime'
 
 // Nested types
-import form from './types/form';
-import cards from './types/cards';
-import grid from './types/grid';
-import junction from './types/junction';
-import template from './types/template';
+import form from './types/form'
+import cards from './types/cards'
+import grid from './types/grid'
+import junction from './types/junction'
+import template from './types/template'
 
 export default angular.module('app.main.form.formly', [
-    formly,
+  formly,
 
-    panel,
-    image,
+  panel,
+  image,
 
-    tabpanel,
-    input,
-    _default,
-    checkbox,
-    password,
-    email,
-    file,
-    picture,
-    url,
-    number,
-    money,
-    select,
-    async_select,
-    color,
-    date,
-    time,
-    datetime,
+  tabpanel,
+  input,
+  _default,
+  checkbox,
+  password,
+  email,
+  file,
+  picture,
+  url,
+  number,
+  money,
+  select,
+  asyncSelect,
+  color,
+  date,
+  time,
+  datetime,
 
-    form,
-    cards,
-    grid,
-    junction,
-    template
-  ])
-  .name;
+  form,
+  cards,
+  grid,
+  junction,
+  template,
+])
+  .name

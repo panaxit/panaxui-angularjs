@@ -9,13 +9,13 @@ export default function routes($stateProvider) {
     'pageIndex',
     // Referrer Entity
     'ref',
-    'refId'
-  ].join('&');
+    'refId',
+  ].join('&')
 
   $stateProvider
     .state('main.panel.form', {
       url: 'form/{catalogName}/{mode}?' + queryParams,
       template: require('./form.html'),
-      controller: 'FormCtrl as vm'
-    });
+      controller: 'FormCtrl as vm',
+    })
 }
