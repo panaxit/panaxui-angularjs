@@ -1,0 +1,8 @@
+config
+node_modules
+build
+coverage
+bin
+public
+spec
+dist

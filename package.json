@@ -10,11 +10,13 @@
     "build": "webpack --progress --color --config webpack.config.js",
     "build:watch": "webpack --progress --color --watch --config webpack.config.js",
     "test": "karma start",
-    "test:live": "karma start --auto-watch --no-single-run"
+    "test:live": "karma start --auto-watch --no-single-run",
+    "eslint": "node node_modules/.bin/eslint -c .eslintrc --ignore-pattern '!**/*.+(test|mock).js' src/",
+    "eslint:fix": "node node_modules/.bin/eslint --fix -c .eslintrc --ignore-pattern '!**/*.+(test|mock).js' src/"
   },
   "config": {
     "ghooks": {
-      "pre-commit": "npm run test"
+      "pre-commit": "npm run eslint && npm run test"
     }
   },
   "repository": {
@@ -53,6 +55,7 @@
     "babel-runtime": "^5.8.24",
     "chai": "^3.3.0",
     "css-loader": "^0.15.5",
+    "eslint": "^1.10.3",
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
     "ghooks": "^0.3.2",
