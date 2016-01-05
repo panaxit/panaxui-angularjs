@@ -14,7 +14,8 @@
     "eslint": "node node_modules/.bin/eslint -c .eslintrc --ignore-pattern '**/*.+(test|mock).js' src/",
     "eslint:fix": "node node_modules/.bin/eslint --fix -c .eslintrc --ignore-pattern '**/*.+(test|mock).js' src/",
     "eslint:test": "node node_modules/.bin/eslint -c .eslintrc --ignore-pattern '!**/*.+(test|mock).js' src/",
-    "eslint:test:fix": "node node_modules/.bin/eslint --fix -c .eslintrc --ignore-pattern '!**/*.+(test|mock).js' src/"
+    "eslint:test:fix": "node node_modules/.bin/eslint --fix -c .eslintrc --ignore-pattern '!**/*.+(test|mock).js' src/",
+    "commit": "git-cz"
   },
   "config": {
     "ghooks": {
@@ -49,6 +50,9 @@
     "tinycolor2": "git+https://github.com/bgrins/TinyColor.git",
     "ui-select": "^0.11.2"
   },
+  "czConfig": {
+    "path": "node_modules/cz-conventional-changelog"
+  },
   "devDependencies": {
     "angular-mocks": "^1.5.0-beta.0",
     "autoprefixer": "^6.0.3",
@@ -56,7 +60,9 @@
     "babel-loader": "^5.3.2",
     "babel-runtime": "^5.8.24",
     "chai": "^3.3.0",
+    "commitizen": "^2.4.6",
     "css-loader": "^0.15.5",
+    "cz-conventional-changelog": "^1.1.5",
     "eslint": "^1.10.3",
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.4",
