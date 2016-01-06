@@ -156,9 +156,11 @@ export default class BaseCtrl {
 
   onPaginationChange(newPage, newPageSize) {
     var vm = this
-      // Avoid double call to `vm.loader()`
-      // when first page already loaded
-      // Apply for grid, form (w nested grid), master-detail
+    /*
+    Avoid double call to `vm.loader()`
+    when first page already loaded
+    Apply for grid, form (w nested grid), master-detail
+     */
     if (vm.loadedOnce === true) {
       vm.loadedOnce = false
       return

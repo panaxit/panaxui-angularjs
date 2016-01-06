@@ -35,10 +35,6 @@ export default class FormCtrl extends BaseCtrl {
           filters: 'Filters ',
         }[vm.$stateParams.mode]
       })() + vm.options.metadata.tableName)
-        // Set `vm.loaderOnce` at first `vm.loader()` call
-      if (vm.loadedOnce === undefined) {
-        vm.loadedOnce = true
-      }
     })
   }
 
