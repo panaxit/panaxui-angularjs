@@ -104,8 +104,8 @@ export default class BaseCtrl {
     var vm = this
     var idType = (!!vm.options.metadata.identityKey) ? 'identityKey' : 'primaryKey'
     var idKey = vm.options.metadata[idType]
-      // Get  id value from nested formly template
-    var idValue = vm.$scope.model[idKey]
+    // Get  id value from nested formly template (if that's the case)
+    var idValue = vm.$scope.model && vm.$scope.model[idKey] || undefined
     this.$scope.$emit('goToState', 'main.panel.form', {
       catalogName: catalogName,
       mode: 'insert',
