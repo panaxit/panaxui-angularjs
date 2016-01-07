@@ -19,36 +19,26 @@ import template from './template.html'
  * Module
  */
 
-export default angular.module('app.directives.pxform', [
+export default angular.module('app.components.pxform', [
   formly,
   formlyBootstrap,
   pxPagination,
   coreFilters,
 ])
-.directive('pxForm', pxForm)
+.component('pxForm', {
+  bindings: {
+    options: '=',
+    form: '=?',
+    paginationChangeHandler: '&?',
+  },
+  controller: pxFormCtrl,
+  controllerAs: 'vm',
+  template: template,
+})
 .name
 
 /**
- * Directive
- */
-
-function pxForm() {
-  return {
-    restrict: 'E',
-    template: template,
-    scope: {
-      options: '=',
-      form: '=?',
-      paginationChangeHandler: '&?',
-    },
-    bindToController: true,
-    controllerAs: 'vm',
-    controller: pxFormCtrl,
-  }
-}
-
-/**
- * Directive's Controller
+ * Component's Controller
  */
 
 function pxFormCtrl($scope) {
