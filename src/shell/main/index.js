@@ -26,9 +26,9 @@ import Template from '../../shell/template'
 import pxGrid from '../../components/px-grid'
 import pxCards from '../../components/px-cards'
 import pxForm from '../../components/px-form'
+import pxAgGrid from '../../components/px-ag-grid'
 
 // Panax Directives
-import pxAgGrid from '../../directives/px-ag-grid'
 import pxTemplate from '../../directives/px-template'
 
 import routing from './main.routes'

@@ -1,7 +1,7 @@
 import module from './index'
 import _ from 'lodash'
 
-describe('Directive: pxAgGrid', () => {
+describe('Component: pxAgGrid', () => {
 
   beforeEach(angular.mock.module(module))
 

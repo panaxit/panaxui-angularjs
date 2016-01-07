@@ -20,35 +20,25 @@ import template from './template.html'
  * Module
  */
 
-export default angular.module('app.directives.px-ag-grid', [
+export default angular.module('app.components.px-ag-grid', [
   'agGrid',
   uibootstrap,
   Alert,
 ])
-.directive('pxAgGrid', pxAgGrid)
+.component('pxAgGrid', {
+  bindings: {
+    options: '=',
+    rowSelectedHandler: '&',
+    rowDeselectedHandler: '&',
+  },
+  controller: pxAgGridCtrl,
+  controllerAs: 'vm',
+  template: template,
+})
 .name
 
 /**
- * Directive
- */
-
-function pxAgGrid() {
-  return {
-    restrict: 'E',
-    template: template,
-    scope: {
-      options: '=',
-      rowSelectedHandler: '&',
-      rowDeselectedHandler: '&',
-    },
-    bindToController: true,
-    controllerAs: 'vm',
-    controller: pxAgGridCtrl,
-  }
-}
-
-/**
- * Directive's Controller
+ * Component's Controller
  */
 
 function pxAgGridCtrl($scope, AlertService) {
