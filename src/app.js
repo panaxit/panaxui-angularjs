@@ -5,6 +5,7 @@ import 'panaxui-bootstrap/css/roboto.css'
 import './app.css'
 
 import angular from 'angular'
+import 'angular-component/dist/angular-component'
 import uibootstrap from 'angular-ui-bootstrap'
 import uirouter from 'angular-ui-router'
 import azPromiseShow from 'az-promise-show'

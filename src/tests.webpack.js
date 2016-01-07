@@ -3,6 +3,7 @@
 // https://github.com/Foxandxss/angular-webpack-workflow
 
 import 'angular'
+import 'angular-component/dist/angular-component'
 import 'angular-mocks/angular-mocks'
 
 var testsContext = require.context('.', true, /.test$/)
