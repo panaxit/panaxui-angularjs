@@ -20,7 +20,7 @@ import templateViewOptions from './template.view.options.html'
  * Module
  */
 
-export default angular.module('app.directives.pxgrid', [
+export default angular.module('app.components.pxgrid', [
   'ui.grid',
   //'ui.grid.autoResize',
   'ui.grid.pagination',
@@ -29,35 +29,25 @@ export default angular.module('app.directives.pxgrid', [
   'ui.grid.rowEdit',
   coreFilters,
 ])
-.directive('pxGrid', pxGrid)
+.component('pxGrid', {
+  bindings: {
+    options: '=',
+    openHandler: '&',
+    newHandler: '&',
+    deleteHandler: '&',
+    paginationChangeHandler: '&',
+    rowSelectionHandler: '&',
+    rowChangePromise: '&',
+    nextHandler: '&',
+  },
+  controller: pxGridCtrl,
+  controllerAs: 'vm',
+  template: template,
+})
 .name
 
 /**
- * Directive
- */
-
-function pxGrid() {
-  return {
-    restrict: 'E',
-    template: template,
-    scope: {
-      options: '=',
-      openHandler: '&',
-      newHandler: '&',
-      deleteHandler: '&',
-      paginationChangeHandler: '&',
-      rowSelectionHandler: '&',
-      rowChangePromise: '&',
-      nextHandler: '&',
-    },
-    bindToController: true,
-    controllerAs: 'vm',
-    controller: pxGridCtrl,
-  }
-}
-
-/**
- * Directive's Controller
+ * Component's Controller
  */
 
 function pxGridCtrl($scope, uiGridConstants) {

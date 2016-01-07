@@ -23,10 +23,10 @@ import MasterDetail from '../../shell/master-detail'
 import Template from '../../shell/template'
 
 // Panax Components
+import pxGrid from '../../components/px-grid'
 import pxCards from '../../components/px-cards'
 
 // Panax Directives
-import pxGrid from '../../directives/px-grid'
 import pxForm from '../../directives/px-form'
 import pxAgGrid from '../../directives/px-ag-grid'
 import pxTemplate from '../../directives/px-template'
