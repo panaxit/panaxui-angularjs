@@ -17,37 +17,27 @@ import template from './template.html'
  * Module
  */
 
-export default angular.module('app.directives.pxcards', [
+export default angular.module('app.components.pxcards', [
   pxPagination,
   coreFilters,
 ])
-.directive('pxCards', pxCards)
+.component('pxCards', {
+  bindings: {
+    options: '=',
+    openHandler: '&',
+    newHandler: '&',
+    deleteHandler: '&',
+    nextHandler: '&',
+    paginationChangeHandler: '&?',
+  },
+  controller: pxCardsCtrl,
+  controllerAs: 'vm',
+  template: template,
+})
 .name
 
 /**
- * Directive
- */
-
-function pxCards() {
-  return {
-    restrict: 'E',
-    template: template,
-    scope: {
-      options: '=',
-      openHandler: '&',
-      newHandler: '&',
-      deleteHandler: '&',
-      nextHandler: '&',
-      paginationChangeHandler: '&?',
-    },
-    bindToController: true,
-    controllerAs: 'vm',
-    controller: pxCardsCtrl,
-  }
-}
-
-/**
- * Directive's Controller
+ * Component's Controller
  */
 
 function pxCardsCtrl($scope) {

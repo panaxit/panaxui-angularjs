@@ -22,10 +22,12 @@ import Cards from '../../shell/cards'
 import MasterDetail from '../../shell/master-detail'
 import Template from '../../shell/template'
 
+// Panax Components
+import pxCards from '../../components/px-cards'
+
 // Panax Directives
 import pxGrid from '../../directives/px-grid'
 import pxForm from '../../directives/px-form'
-import pxCards from '../../directives/px-cards'
 import pxAgGrid from '../../directives/px-ag-grid'
 import pxTemplate from '../../directives/px-template'
 
