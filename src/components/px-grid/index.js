@@ -86,10 +86,10 @@ function pxGridCtrl($scope, uiGridConstants) {
   function init() {
     // UI Grid
     vm.uiGrid = {}
-      // On Register API callback
+    // On Register API callback
     vm.uiGrid.onRegisterApi = function(gridApi) {
       vm.gridApi = gridApi
-        // Row edit
+      // Row edit
       vm.gridApi.rowEdit.on.saveRow($scope, function(rowEntity) {
         vm.gridApi.rowEdit.setSavePromise(rowEntity, vm.rowChangePromise({
           rowEntity: rowEntity,
@@ -128,6 +128,10 @@ function pxGridCtrl($scope, uiGridConstants) {
       vm.uiGrid.totalItems = metadata.totalItems
       vm.uiGrid.paginationPageSize = metadata.pageSize
       vm.uiGrid.paginationCurrentPage = metadata.pageIndex
+    } else {
+      // Client-side Pagination
+      vm.uiGrid.paginationPageSize = metadata.pageSize || 25
+      vm.uiGrid.paginationCurrentPage = metadata.pageIndex || 1
     }
   }
 
