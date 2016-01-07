@@ -1,7 +1,7 @@
 import module from './index'
 import _ from 'lodash'
 
-describe('Directive: pxPagination', () => {
+describe('Component: pxPagination', () => {
 
   beforeEach(angular.mock.module(module))
 

@@ -5,7 +5,7 @@
 import angular from 'angular'
 import formly from 'angular-formly'
 import formlyBootstrap from 'angular-formly-templates-bootstrap'
-import pxPagination from '../../directives/px-pagination'
+import pxPagination from '../../components/px-pagination'
 import coreFilters from '../../core/filters'
 
 /**

@@ -9,7 +9,7 @@ import 'angular-tree-control/css/tree-control.css'
 import routing from './main.routes'
 import MainCtrl from './main.controller'
 
-// Shell Components
+// Shell
 import CRUD from '../../shell/crud'
 import Payload from '../../shell/payload'
 import Debug from '../../shell/debug'
@@ -37,7 +37,7 @@ export default angular.module('app.main', [
   ngUrlify,
   ngTreeControl,
 
-    // Shell Components
+  // Shell
   CRUD,
   Payload,
   Debug,
@@ -45,7 +45,7 @@ export default angular.module('app.main', [
   Category,
   Panel,
 
-    // Data Views
+  // Data Views
   Base,
   Grid,
   Form,
@@ -53,7 +53,7 @@ export default angular.module('app.main', [
   MasterDetail,
   Template,
 
-    // Panax Directives
+  // Panax Components
   pxGrid,
   pxForm,
   pxCards,

@@ -18,36 +18,26 @@ import dirPaginationTpl from 'ngtemplate!./dirPagination.tpl.html'
  * Module
  */
 
-export default angular.module('app.directives.pxpagination', [
+export default angular.module('app.components.pxpagination', [
   dirPagination,
   coreFilters,
 ])
 .config(function(paginationTemplateProvider) {
   paginationTemplateProvider.setPath(dirPaginationTpl)
 })
-.directive('pxPagination', pxPagination)
+.component('pxPagination', {
+  bindings: {
+    paginationOptions: '=options',
+    onPaginationChange: '&?',
+  },
+  controller: pxPaginationCtrl,
+  controllerAs: 'vm',
+  template: template,
+})
 .name
 
 /**
- * Directive
- */
-
-function pxPagination() {
-  return {
-    restrict: 'E',
-    template: template,
-    scope: {
-      paginationOptions: '=options',
-      onPaginationChange: '&?',
-    },
-    bindToController: true,
-    controllerAs: 'vm',
-    controller: pxPaginationCtrl,
-  }
-}
-
-/**
- * Directive's Controller
+ * Component's Controller
  */
 
 function pxPaginationCtrl($scope) {

@@ -3,7 +3,7 @@
  */
 
 import angular from 'angular'
-import pxPagination from '../../directives/px-pagination'
+import pxPagination from '../../components/px-pagination'
 import coreFilters from '../../core/filters'
 
 /**
