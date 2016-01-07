@@ -6,6 +6,9 @@ import ngUrlify from 'angular-urlify'
 import ngTreeControl from 'angular-tree-control'
 import 'angular-tree-control/css/tree-control.css'
 
+import routing from './main.routes'
+import MainCtrl from './main.controller'
+
 // Shell Components
 import CRUD from '../../shell/crud'
 import Payload from '../../shell/payload'
@@ -27,12 +30,7 @@ import pxGrid from '../../components/px-grid'
 import pxCards from '../../components/px-cards'
 import pxForm from '../../components/px-form'
 import pxAgGrid from '../../components/px-ag-grid'
-
-// Panax Directives
-import pxTemplate from '../../directives/px-template'
-
-import routing from './main.routes'
-import MainCtrl from './main.controller'
+import pxTemplate from '../../components/px-template'
 
 export default angular.module('app.main', [
   uirouter,

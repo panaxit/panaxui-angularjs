@@ -1,7 +1,7 @@
 import module from './index'
 import _ from 'lodash'
 
-describe('Directive: pxTemplate', () => {
+describe('Component: pxTemplate', () => {
 
   beforeEach(angular.mock.module(module))
 

@@ -17,33 +17,23 @@ import template from './template.html'
  * Module
  */
 
-export default angular.module('app.directives.pxtemplate', [
+export default angular.module('app.components.pxtemplate', [
   pxPagination,
   //coreFilters
 ])
-.directive('pxTemplate', pxTemplate)
+.component('pxTemplate', {
+  bindings: {
+    options: '=',
+    paginationChangeHandler: '&?',
+  },
+  controller: pxTemplateCtrl,
+  controllerAs: 'vm',
+  template: template,
+})
 .name
 
 /**
- * Directive
- */
-
-function pxTemplate() {
-  return {
-    restrict: 'E',
-    template: template,
-    scope: {
-      options: '=',
-      paginationChangeHandler: '&?',
-    },
-    bindToController: true,
-    controllerAs: 'vm',
-    controller: pxTemplateCtrl,
-  }
-}
-
-/**
- * Directive's Controller
+ * Component's Controller
  */
 
 function pxTemplateCtrl($scope, $window, $sce) {
