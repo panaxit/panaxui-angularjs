@@ -21,9 +21,9 @@ export default class FormCtrl extends BaseCtrl {
       // Main `options' object
       // to be consumed by directive(s)
       vm.options = {
-        metadata: res.data.data.metadata,
+        metadata: vm.setReferrerValue(res.data.data.metadata),
         fields: res.data.data.fields,
-        data: vm.setReferrerValue(res.data.data.model) || [],
+        data: res.data.data.model || [],
         opts: vm.getOpts(),
       }
 
@@ -38,15 +38,16 @@ export default class FormCtrl extends BaseCtrl {
     })
   }
 
-  setReferrerValue(model) {
+  setReferrerValue(metadata) {
     var vm = this
-      // Set Referrer property in model
+    // Set Referrer property in model
     var ref = vm.$stateParams.ref
     var refId = vm.$stateParams.refId
-    if (ref && refId && model[0][ref] !== undefined) {
-      model[0][ref] = refId
+    if (ref && refId) {
+      metadata.ref = ref
+      metadata.refId = refId
     }
-    return model
+    return metadata
   }
 
   getOpts() {
