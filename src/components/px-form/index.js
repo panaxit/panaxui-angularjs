@@ -41,7 +41,7 @@ export default angular.module('app.components.pxform', [
  * Component's Controller
  */
 
-function pxFormCtrl($scope) {
+function pxFormCtrl($scope, $timeout) {
   var vm = this
 
   /*
@@ -64,6 +64,8 @@ function pxFormCtrl($scope) {
     if (newOptions) {
       initMetadata(newOptions.metadata, newOptions.data)
       initFields(newOptions.fields, newOptions.data)
+      // deferred after form initialization
+      $timeout(initReferrerValue)
     }
   })
 
@@ -83,12 +85,12 @@ function pxFormCtrl($scope) {
     if (!fields || !data) {
       return
     }
-    // Not already initd? (as array)
+    // Not already initialized as array
     if (!(fields[0] && angular.isArray(fields[0]))) {
       // Fields array initialization
       // Based on: http://angular-formly.com/#/example/advanced/repeating-section
       vm.options.fields = []
-        // Get total number of records (multiple paginated), at least create One
+      // Get total number of records (multiple paginated), at least create One
       countRecords = data.length || 1
       for (index = 0; index < countRecords; index++) {
         vm.options.fields.push(copyFields(fields, index))
@@ -100,7 +102,7 @@ function pxFormCtrl($scope) {
     if (!metadata) {
       return
     }
-      // Pagination
+    // Pagination
     if (metadata.totalItems) {
       // Server-side Paginationa
       vm.paginationOptions.totalItems = metadata.totalItems
@@ -145,6 +147,16 @@ function pxFormCtrl($scope) {
 
   function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min
+  }
+
+  function initReferrerValue() {
+    var ref = vm.options.metadata.ref
+    var refId = vm.options.metadata.refId
+    var fieldName = Object.keys(vm.form).filter((x)=>x.startsWith(ref))[0]
+    if (ref && refId && fieldName && vm.form[fieldName]) {
+      vm.options.data[0][ref] = refId
+      vm.form[fieldName].$setDirty(true)
+    }
   }
 
   function isSubmitDisabled() {
