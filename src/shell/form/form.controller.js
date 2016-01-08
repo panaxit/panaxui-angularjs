@@ -85,15 +85,18 @@ export default class FormCtrl extends BaseCtrl {
 
   onSubmit(fields, data) {
     var vm = this
+    var idType = (!!vm.options.metadata.identityKey) ? 'identityKey' : 'primaryKey'
+    var idKey = vm.options.metadata[idType]
     var payload
+
     if (vm.form.$valid) {
       /**
        * Create payload to be sent
        */
       payload = vm.PayloadService.build(fields || vm.options.fields, data || vm.options.data, vm.options.metadata)
-        /**
-         * Perform Insert/Update in backend
-         */
+      /**
+       * Perform Insert/Update in backend
+       */
       if (vm.options.metadata.mode === 'insert') {
         /**
          * mode = INSERT
@@ -106,11 +109,11 @@ export default class FormCtrl extends BaseCtrl {
                 ' [statusId: ' + res.data[0].statusId + ']')
             } else if (res.data[0].status === 'success') {
               vm.AlertService.show('success', 'Saved', 'Record(s) successfully saved')
-                // Go to 'edit' mode of newly created record
+              // Go to 'edit' mode of newly created record
               vm.$scope.$emit('goToState', 'main.panel.form', {
                 catalogName: res.data[0].tableName,
                 mode: 'edit',
-                id: res.data[0].identity,
+                filters: `'${idKey}=${res.data[0].identity}'`,
               })
             }
           } else {
@@ -129,11 +132,11 @@ export default class FormCtrl extends BaseCtrl {
                 ' [statusId: ' + res.data[0].statusId + ']')
             } else if (res.data[0].status === 'success') {
               vm.AlertService.show('success', 'Saved', 'Record(s) successfully updated')
-                // Reset form to untouched & pristine
-                // vm.onReset
+              // Reset form to untouched & pristine
+              // vm.onReset
               vm.form.$setPristine()
               vm.form.$setUntouched()
-                // ToDo: Reload form? (to retrieve saved data and spot glitches via: vm.loader(); ?
+              // ToDo: Reload form? (to retrieve saved data and spot glitches via: vm.loader(); ?
             }
           } else {
             // Do nothing. HTTP 500 responses handled by ErrorInterceptor
