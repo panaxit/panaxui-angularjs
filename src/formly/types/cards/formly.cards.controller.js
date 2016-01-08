@@ -2,8 +2,8 @@ import CardsCtrl from '../../../shell/cards/cards.controller'
 import _ from 'lodash'
 
 export default class FormlyCardsCtrl extends CardsCtrl {
-  constructor($scope, DebugService, $stateParams, CRUDService) {
-    super($scope, DebugService, $stateParams, CRUDService)
+  constructor($scope, DebugService, $stateParams, CRUDService, AlertService) {
+    super($scope, DebugService, $stateParams, CRUDService, AlertService)
   }
 
   openDebugModal() {
