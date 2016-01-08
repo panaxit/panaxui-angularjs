@@ -1,5 +1,6 @@
 <px-grid
   options="{data: vm.options.dataGrid, metadata: vm.options.metadata, fields: vm.options.fieldsGrid, opts: vm.options.opts}"
+  new-handler="vm.onNew(catalogName)"
   pagination-change-handler="vm.onPaginationChange(newPage, pageSize)"
   row-selection-handler="vm.onSelectionChange(row)">
 </px-grid>
