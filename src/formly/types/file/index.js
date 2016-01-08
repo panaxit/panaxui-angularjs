@@ -35,10 +35,10 @@ function file(formlyConfig) {
         >Upload</div>
       </div>
     `,
-    controller: function($scope, $rootScope, SessionService) {
-      var catalogName = $rootScope.currentNavBranch.data.catalogName
+    controller: function($scope, $stateParams, SessionService) {
+      var catalogName = $stateParams.catalogName
       var fieldName = $scope.options.key
-        // Set Upload URL
+      // Set Upload URL
       $scope.to.url = $scope.to.url || '/api/upload?catalogName=' + catalogName + '&fieldName=' + fieldName
 
       // Update upload path if model already set
