@@ -12,8 +12,17 @@ export default class FormlyTemplateCtrl extends TemplateCtrl {
 
   loader() {
     var vm = this
-    // Override metadata from field's data
-    super.loader(undefined, undefined, vm.$scope.options.data.metadata)
+    /*
+    In contrast to other formly's controllers,
+    this one actually calls super's loader
+    to to get the template (xhr).
+    Nevertheless metadata must be overriden
+    from formly field's .data to set filters
+     */
+    const metadata = vm.$scope.options.data.metadata
+    const idValue = vm.$scope.model[metadata.foreignReference]
+    const filters = `'${metadata.foreignReference}=${idValue}'`
+    super.loader(_.extend(metadata, {filters}))
   }
 
   getOpts() {
