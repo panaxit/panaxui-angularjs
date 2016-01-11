@@ -44,6 +44,7 @@
     "api-check": "^7.5.0",
     "az-promise-show": "^1.1.2",
     "bootstrap": "^3.3.5",
+    "jquery": "^2.2.0",
     "jsonformatter": "^0.3.1",
     "lodash": "^3.10.1",
     "panaxui-bootstrap": "git+https://github.com/panaxit/panaxui-bootstrap.git",
