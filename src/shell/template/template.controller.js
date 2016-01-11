@@ -6,24 +6,22 @@ export default class TemplateCtrl extends BaseCtrl {
     super($scope, DebugService, $stateParams, CRUDService)
   }
 
-  loader(overrideMetadata = {}) {
+  loader(overrideParams = {}) {
     var vm = this
-    var params
 
-    const metadata = _.extend({}, vm.$stateParams, overrideMetadata)
+    const params = _.extend({}, vm.$stateParams, overrideParams)
 
-    params = {
-      catalogName: metadata.catalogName,
+    vm.CRUDService.read({
+      catalogName: params.catalogName,
       controlType: 'fileTemplate',
       mode: 'readonly', // Note: Treat templates as readonly
-      filters: metadata.filters || '',
+      filters: params.filters || '',
       getData: '1',
       getStructure: '1',
       output: 'pate', // Invoke node-pate in the backend
-      pageIndex: parseInt(metadata.pageIndex, 10) || 1,
-      pageSize: parseInt(metadata.pageSize, 10) || 1,
-    }
-    vm.CRUDService.read(params).then(function(res) {
+      pageIndex: parseInt(params.pageIndex, 10) || 1,
+      pageSize: parseInt(params.pageSize, 10) || 1,
+    }).then(function(res) {
       // Main `options' object
       // to be consumed by directive(s)
       vm.options = {
@@ -33,12 +31,13 @@ export default class TemplateCtrl extends BaseCtrl {
         opts: vm.getOpts(),
       }
 
-      if (!metadata.catalogName) { // Hacky way to know if directed is not nested
+      if (!overrideParams.catalogName) { // Hacky way to know if directed is not nested
         vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label)
-      }
-      // Set `vm.loaderOnce` at first `vm.loader()` call
-      if (vm.loadedOnce === undefined) {
-        vm.loadedOnce = true
+      } else {
+        // Set `vm.loadedOnce` at first `vm.loader()` call
+        if (vm.loadedOnce === undefined) {
+          vm.loadedOnce = true
+        }
       }
     })
   }

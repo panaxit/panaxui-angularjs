@@ -1,23 +1,26 @@
 import BaseCtrl from '../base/base.controller'
+import _ from 'lodash'
 
 export default class GridCtrl extends BaseCtrl {
   constructor($scope, DebugService, $stateParams, CRUDService, AlertService, $q) {
     super($scope, DebugService, $stateParams, CRUDService, AlertService, $q)
   }
 
-  loader(pageIndex, pageSize) {
+  loader(overrideParams = {}) {
     var vm = this
-    var params = {
-      catalogName: vm.$stateParams.catalogName,
+
+    const params = _.extend({}, vm.$stateParams, overrideParams)
+
+    vm.CRUDService.read({
+      catalogName: params.catalogName,
       controlType: 'gridView',
-      mode: vm.$stateParams.mode,
-      filters: vm.$stateParams.filters || '',
+      mode: params.mode,
+      filters: params.filters || '',
       getData: '1',
       getStructure: '1',
-      pageIndex: pageIndex || parseInt(vm.$stateParams.pageIndex, 10) || 1,
-      pageSize: pageSize || parseInt(vm.$stateParams.pageSize, 10) || 25,
-    }
-    vm.CRUDService.read(params).then(function(res) {
+      pageIndex: parseInt(params.pageIndex, 10) || 1,
+      pageSize: parseInt(params.pageSize, 10) || 25,
+    }).then(function(res) {
       // Main `options' object
       // to be consumed by directive(s)
       vm.options = {
@@ -28,7 +31,7 @@ export default class GridCtrl extends BaseCtrl {
       }
 
       vm.$scope.$emit('setPanelTitle', vm.$scope.currentNavBranch.label)
-        // Set `vm.loaderOnce` at first `vm.loader()` call
+      // Set `vm.loadedOnce` at first `vm.loader()` call
       if (vm.loadedOnce === undefined) {
         vm.loadedOnce = true
       }

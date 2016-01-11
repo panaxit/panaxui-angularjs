@@ -1,23 +1,26 @@
 import BaseCtrl from '../base/base.controller'
+import _ from 'lodash'
 
 export default class FormCtrl extends BaseCtrl {
   constructor($scope, DebugService, $stateParams, CRUDService, AlertService, PayloadService) {
     super($scope, DebugService, $stateParams, CRUDService, AlertService, undefined, PayloadService)
   }
 
-  loader(pageIndex, pageSize) {
+  loader(overrideParams = {}) {
     var vm = this
-    var params = {
-      catalogName: vm.$stateParams.catalogName,
+
+    const params = _.extend({}, vm.$stateParams, overrideParams)
+
+    vm.CRUDService.read({
+      catalogName: params.catalogName,
       controlType: 'formView',
-      mode: vm.$stateParams.mode,
-      filters: vm.$stateParams.filters || '',
+      mode: params.mode,
+      filters: params.filters || '',
       getData: '1',
       getStructure: '1',
-      pageIndex: pageIndex || parseInt(vm.$stateParams.pageIndex, 10) || 1,
-      pageSize: pageSize || parseInt(vm.$stateParams.pageSize, 10) || 1,
-    }
-    vm.CRUDService.read(params).then(function(res) {
+      pageIndex: parseInt(params.pageIndex, 10) || 1,
+      pageSize: parseInt(params.pageSize, 10) || 1,
+    }).then(function(res) {
       // Main `options' object
       // to be consumed by directive(s)
       vm.options = {
@@ -33,7 +36,7 @@ export default class FormCtrl extends BaseCtrl {
           edit: 'Edit ',
           readonly: 'View ',
           filters: 'Filters ',
-        }[vm.$stateParams.mode]
+        }[params.mode]
       })() + vm.options.metadata.tableName)
     })
   }

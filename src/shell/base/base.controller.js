@@ -165,6 +165,6 @@ export default class BaseCtrl {
       vm.loadedOnce = false
       return
     }
-    vm.loader(newPage, newPageSize)
+    vm.loader({pageIndex: newPage, pageSize: newPageSize})
   }
 }
