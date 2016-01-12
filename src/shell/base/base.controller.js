@@ -117,16 +117,13 @@ export default class BaseCtrl {
 
   onOpen(selected) {
     var vm = this
-    var idType = (!!vm.options.metadata.identityKey) ? 'identityKey' : 'primaryKey'
-    var idKey = vm.options.metadata[idType]
-    var idValue = selected[idKey]
-    var filters = `'${idKey}=${idValue}'`
+    const id = vm.getIdentityValues(vm.options.metadata, selected)
     vm.$scope.$emit('goToState', 'main.panel.form', {
       catalogName: vm.options.metadata.catalogName,
       mode: vm.options.metadata.mode,
-      filters: filters,
+      filters: id.filters,
       ref: vm.options.metadata.foreignReference || undefined,
-      //refId: idValue || undefined
+      //refId: id.value || undefined
     })
   }
 
