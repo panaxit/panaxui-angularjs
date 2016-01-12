@@ -102,16 +102,16 @@ export default class BaseCtrl {
 
   onNew(catalogName) {
     var vm = this
-    var idType = (!!vm.options.metadata.identityKey) ? 'identityKey' : 'primaryKey'
-    var idKey = vm.options.metadata[idType]
-    // Get  id value from nested formly template (if that's the case)
-    var idValue = vm.$scope.model && vm.$scope.model[idKey] || undefined
+    /*
+    Get id value from nested formly template (if that's the case)
+     */
+    const id = vm.getIdentityValues(vm.options.metadata, vm.$scope.model)
     this.$scope.$emit('goToState', 'main.panel.form', {
       catalogName: catalogName,
       mode: 'insert',
-      id: undefined,
-      ref: vm.options.metadata.foreignReference || undefined,
-      refId: idValue || undefined,
+      filters: undefined, // force no filters
+      ref: id.reference || undefined,
+      refId: id.value || undefined,
     })
   }
 
@@ -123,7 +123,7 @@ export default class BaseCtrl {
       mode: vm.options.metadata.mode,
       filters: id.filters,
       ref: vm.options.metadata.foreignReference || undefined,
-      //refId: id.value || undefined
+      refId: undefined, // force no refId
     })
   }
 
@@ -169,7 +169,7 @@ export default class BaseCtrl {
   Support methods
    */
 
-  getIdentityValues(metadata, selected) {
+  getIdentityValues(metadata, model) {
     /*
     Get type of identity, then get id key
     or fallback to 'id' || 'Id' || 'ID'
@@ -179,18 +179,20 @@ export default class BaseCtrl {
     let key
     if (metadata[type]) {
       key = metadata[type]
-    } else if (selected['id']) { // eslint-disable-line dot-notation
+    } else if (model['id']) { // eslint-disable-line dot-notation
       key = 'id'
-    } else if (selected['Id']) { // eslint-disable-line dot-notation
+    } else if (model['Id']) { // eslint-disable-line dot-notation
       key = 'Id'
-    } else if (selected['ID']) { // eslint-disable-line dot-notation
+    } else if (model['ID']) { // eslint-disable-line dot-notation
       key = 'ID'
     }
-    const value = selected[key]
+    const value = model && model[key] || undefined
+    const reference = metadata.foreignReference || undefined
     return {
       type,
       key,
       value,
+      reference,
       filters: `'${key}=${value}'`,
     }
   }
