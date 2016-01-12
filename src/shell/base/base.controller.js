@@ -167,4 +167,35 @@ export default class BaseCtrl {
     }
     vm.loader({pageIndex: newPage, pageSize: newPageSize})
   }
+
+  /*
+  Support methods
+   */
+
+  getIdentityValues(metadata, selected) {
+    /*
+    Get type of identity, then get id key
+    or fallback to 'id' || 'Id' || 'ID'
+    finally get value & craft filters
+     */
+    const type = !!metadata.identityKey ? 'identityKey' : 'primaryKey'
+    let key
+    if (metadata[type]) {
+      key = metadata[type]
+    } else if (selected['id']) { // eslint-disable-line dot-notation
+      key = 'id'
+    } else if (selected['Id']) { // eslint-disable-line dot-notation
+      key = 'Id'
+    } else if (selected['ID']) { // eslint-disable-line dot-notation
+      key = 'ID'
+    }
+    const value = selected[key]
+    return {
+      type,
+      key,
+      value,
+      filters: `'${key}=${value}'`,
+    }
+  }
+
 }
