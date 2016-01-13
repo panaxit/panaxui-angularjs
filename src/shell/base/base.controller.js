@@ -173,12 +173,13 @@ export default class BaseCtrl {
      */
     if (metadata[type]) {
       key = metadata[type]
-    } else if (model['id']) { // eslint-disable-line dot-notation
-      key = 'id'
-    } else if (model['Id']) { // eslint-disable-line dot-notation
-      key = 'Id'
-    } else if (model['ID']) { // eslint-disable-line dot-notation
-      key = 'ID'
+    } else {
+      // test every possible name
+      // http://stackoverflow.com/a/6260865/171809
+      ['id', 'Id', 'ID'].every((name) => {
+        key = model[name] && name
+        return !key
+      })
     }
 
     /*
