@@ -129,25 +129,14 @@ export default class BaseCtrl {
 
   onNext(selected) {
     var vm = this
-    var len = selected.length
-    var idType = (!!vm.options.metadata.identityKey) ? 'identityKey' : 'primaryKey'
-    var idKey = vm.options.metadata[idType]
-    var idValue = vm.options.metadata[idKey]
-    var filters = '[' + idKey + ' IN ('
-    angular.forEach(selected, function(row, index) {
-      filters += `'${row[idKey]}'`
-      if (index !== len - 1) {
-        filters += ', '
-      }
-    })
-    filters += ')]'
-      // ToDo: PanaxDB Routes
+    const id = vm.getIdentityValues(vm.options.metadata, selected)
+    // ToDo: PanaxDB Routes
     vm.$scope.$emit('goToState', 'main.panel.form', {
       catalogName: vm.options.metadata.catalogName,
-      mode: 'edit',
-      filters: filters,
-      ref: vm.options.metadata.foreignReference || undefined,
-      refId: idValue || undefined,
+      mode: 'edit', // force edit mode
+      filters: id.filters,
+      ref: undefined, // force no reference
+      refId: undefined, // force no refId
     })
   }
 
@@ -170,13 +159,18 @@ export default class BaseCtrl {
    */
 
   getIdentityValues(metadata, model) {
+    let type, key, value, reference, filters
     /*
-    Get type of identity, then get id key
-    or fallback to 'id' || 'Id' || 'ID'
-    finally get value & craft filters
+    Get type of identity
+    and reference if present
      */
-    const type = !!metadata.identityKey ? 'identityKey' : 'primaryKey'
-    let key
+    type = !!metadata.identityKey ? 'identityKey' : 'primaryKey'
+    reference = metadata.foreignReference || undefined
+
+    /*
+    then get identity key
+    or fallback to 'id' || 'Id' || 'ID'
+     */
     if (metadata[type]) {
       key = metadata[type]
     } else if (model['id']) { // eslint-disable-line dot-notation
@@ -186,14 +180,33 @@ export default class BaseCtrl {
     } else if (model['ID']) { // eslint-disable-line dot-notation
       key = 'ID'
     }
-    const value = model && model[key] || undefined
-    const reference = metadata.foreignReference || undefined
+
+    /*
+    finally get value & craft filters
+     */
+    if (angular.isArray(model)) {
+      value = metadata[key] || undefined
+
+      filters = '[' + key + ' IN ('
+      angular.forEach(model, function(row, index, arr) {
+        filters += `'${row[key]}'`
+        if (index !== arr.length - 1) {
+          filters += ', '
+        }
+      })
+      filters += ')]'
+    } else {
+      value = model && model[key] || undefined
+
+      filters = `'${key}=${value}'`
+    }
+
     return {
       type,
       key,
       value,
       reference,
-      filters: `'${key}=${value}'`,
+      filters,
     }
   }
 
