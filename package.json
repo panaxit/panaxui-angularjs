@@ -4,7 +4,6 @@
   "author": "Benjamin Orozco <benoror@gmail.com>",
   "description": "PanaxUI GUI Frontend - AngularJS",
   "main": "app/index.html",
-  "private": true,
   "license": "Apache-2.0",
   "scripts": {
     "build": "webpack --progress --color --config webpack.config.js",
