@@ -5,7 +5,7 @@
   "description": "PanaxUI GUI Frontend - AngularJS",
   "main": "app/index.html",
   "private": true,
-  "license": "Copyright 2015 PanaxIT (R)",
+  "license": "Apache-2.0",
   "scripts": {
     "build": "webpack --progress --color --config webpack.config.js",
     "build:watch": "webpack --progress --color --watch --config webpack.config.js",
