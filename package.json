@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://benoror@bitbucket.org/benoror/panaxui-angularjs.git"
+    "url": "https://github.com/panaxit/panaxui-angularjs.git"
   },
   "dependencies": {
     "ag-grid": "git+https://github.com/benoror/ag-grid.git",
@@ -46,7 +46,7 @@
     "bootstrap": "^3.3.5",
     "jsonformatter": "^0.3.1",
     "lodash": "^3.10.1",
-    "panaxui-bootstrap": "git+https://benoror@bitbucket.org/panaxit/panaxui-bootstrap.git",
+    "panaxui-bootstrap": "git+https://github.com/panaxit/panaxui-bootstrap.git",
     "tinycolor2": "git+https://github.com/bgrins/TinyColor.git",
     "ui-select": "^0.11.2"
   },
