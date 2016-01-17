@@ -42,7 +42,7 @@ function file(formlyConfig) {
       $scope.to.url = $scope.to.url || '/api/upload?catalogName=' + catalogName + '&fieldName=' + fieldName
 
       // Update upload path if model already set
-      $scope.to.uploadPath = $scope.to.uploadPath || getUploadPath($scope.model[$scope.options.key])
+      $scope.to.uploadPath = getUploadPath($scope.model[$scope.options.key])
 
       function getUploadPath(filename) {
         if (filename) {
@@ -53,13 +53,13 @@ function file(formlyConfig) {
       // On Success Callback
       $scope.onSuccess = function(res) {
         var originalname = res.data.data.file.originalname
-          // Update model
+        // Update model
         $scope.model[$scope.options.key] = originalname
-          // Set dirty
+        // Set dirty
         $scope.options.formControl.$setDirty()
-          // Update uploadPath
+        // Update uploadPath
         $scope.to.uploadPath = getUploadPath(originalname)
-          // Use AlertService. Maybe not since it's an external dependency?
+        // Use AlertService. Maybe not since it's an external dependency?
       }
     },
   })
