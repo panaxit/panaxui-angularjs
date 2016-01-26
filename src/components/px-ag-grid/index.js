@@ -75,7 +75,7 @@ function pxAgGridCtrl($scope, AlertService) {
     if (!data) {
       return
     }
-      // Row Data
+    // Row Data
     if (!opts.isJunctionTable) { // Re-Load it later for junction tables
       vm.gridOptions.api.setRowData(data)
     }
@@ -95,21 +95,23 @@ function pxAgGridCtrl($scope, AlertService) {
     if (!opts) {
       return
     }
-      // Header
+    // Header
     if (opts.headerHeight) {
       vm.gridOptions.api.setHeaderHeight(opts.headerHeight)
       vm.gridOptions.api.sizeColumnsToFit()
     }
+    // No circular-structures
+    vm.gridOptions.suppressParentsInRowNodes = true
     // Selection
     vm.gridOptions.rowSelection = opts.rowSelection
     vm.gridOptions.suppressRowClickSelection = true
-      // Junction table specifics
+    // Junction table specifics
     if (opts.isJunctionTable) {
       // Set rows grouping & Reload data
       // https://github.com/ceolter/ag-grid/issues/483
       vm.gridOptions.rowsAlreadyGrouped = true
       vm.gridOptions.api.setRowData(vm.options.data)
-        // Select junction rows
+      // Select junction rows
       vm.gridOptions.api.forEachNode((node) => {
         const isMulti = (opts.rowSelection === 'multiple')
         if (!!node.data[metadata.primaryKey]) {
