@@ -2,6 +2,7 @@
 
 // Modules
 var webpack = require('webpack');
+var path = require('path');
 var autoprefixer = require('autoprefixer');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -51,7 +52,12 @@ module.exports = function makeWebpackConfig (options) {
 
       // Output path from the view of the page
       // Uses webpack-dev-server in development
-      publicPath: BUILD ? '/' : 'http://10.1.1.114:3000/gui/ng/',
+      /**
+       * ATTENTION!!!
+       * Hardcoded publicPath. Change accordingly
+       * More info: https://github.com/panaxit/panaxui-angularjs/issues/107
+       */
+      publicPath: BUILD ? '/' : 'http://192.168.112.130:3000/gui/ng/',
 
       // Filename for entry points
       // Only adds hash in build mode
@@ -93,7 +99,10 @@ module.exports = function makeWebpackConfig (options) {
       // Compiles ES6 and ES7 into ES5 code
       test: /\.js$/,
       loader: 'ng-annotate!babel?optional[]=runtime',
-      exclude: /node_modules/
+      exclude: [
+        /node_modules/,
+        /vendor\/kendo.ui/
+      ]
     }, {
       // ASSET LOADER
       // Reference: https://github.com/webpack/file-loader
@@ -101,7 +110,7 @@ module.exports = function makeWebpackConfig (options) {
       // Rename the file using the asset hash
       // Pass along the updated reference to your code
       // You can add here any file extension you want to get copied to your output
-      test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+      test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?.*)?$/,
       loader: 'file?name=assets/[hash][name].[ext]'
     }, {
       // HTML LOADER
@@ -112,11 +121,6 @@ module.exports = function makeWebpackConfig (options) {
     }]
   };
 
-  // https://github.com/webpack/webpack/issues/111#issuecomment-26786614
-  resolveLoader: {
-    fallback: __dirname + "/node_modules"
-  }
-
   // ISPARTA LOADER
   // Reference: https://github.com/ColCh/isparta-instrumenter-loader
   // Instrument JS files with Isparta for subsequent code coverage reporting
@@ -126,6 +130,7 @@ module.exports = function makeWebpackConfig (options) {
       test: /\.js$/,
       exclude: [
         /node_modules/,
+        /vendor\/kendo.ui/,
         /\.test\.js$/
       ],
       loader: 'isparta-instrumenter'
@@ -180,6 +185,13 @@ module.exports = function makeWebpackConfig (options) {
     // Disabled when in test mode or not in build mode
     new ExtractTextPlugin('[name].[hash].css', {
       disable: !BUILD || TEST
+    }),
+    // Reference: https://webpack.github.io/docs/shimming-modules.html#plugin-provideplugin
+    // jQuery globals
+    new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery"
     })
   ];
 

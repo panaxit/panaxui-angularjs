@@ -6,6 +6,13 @@ import './app.css'
 
 import angular from 'angular'
 import 'angular-component/dist/angular-component'
+
+import '../vendor/kendo.ui/js/kendo.core.min.js'
+import '../vendor/kendo.ui/js/kendo.angular.min.js'
+import '../vendor/kendo.ui/styles/kendo.common.min.css'
+import '../vendor/kendo.ui/styles/kendo.bootstrap.min.css'
+//import '../vendor/kendo.ui/styles/kendo.bootstrap.mobile.min.css'
+
 import uibootstrap from 'angular-ui-bootstrap'
 import uirouter from 'angular-ui-router'
 import azPromiseShow from 'az-promise-show'
