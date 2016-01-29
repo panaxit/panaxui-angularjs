@@ -31,6 +31,7 @@ import pxCards from '../../components/px-cards'
 import pxForm from '../../components/px-form'
 import pxAgGrid from '../../components/px-ag-grid'
 import pxTemplate from '../../components/px-template'
+import pxKendoGrid from '../../components/px-kendo-grid'
 
 export default angular.module('app.main', [
   uirouter,
@@ -59,6 +60,7 @@ export default angular.module('app.main', [
   pxCards,
   pxAgGrid,
   pxTemplate,
+  pxKendoGrid,
 ])
   .config(routing)
   .controller('MainCtrl', MainCtrl)
